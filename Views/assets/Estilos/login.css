@@ -1,0 +1,140 @@
+/* ---------------------------------------------------------------------
+  CSS for Login Section
+  --------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Elimina el margen y el relleno predeterminados, y usa el modelo de caja border-box para todos los elementos. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Establece la imagen de fondo del body con un efecto oscuro usando un overlay. */
+body {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../Imagenes/farmacia_fondo_hd.jpg") top center no-repeat;
+  background-size: contain;
+  background-color: #f4f4f4;
+  background-attachment: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor {
+  width: 900px;
+  height: 500px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel {
+  width: 50%;
+  padding: 40px;
+  transition: all 0.5s ease;
+}
+
+.panel.izquierdo {
+  background: #fff;
+  z-index: 2;
+}
+
+.panel.derecho {
+  background: #003366;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel.derecho h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.panel.derecho p {
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.panel.derecho button {
+  padding: 10px 20px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario h2 {
+  color: #003366;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formulario input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.formulario button {
+  padding: 10px;
+  background: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contenedor.mover .panel.izquierdo {
+  transform: translateX(100%);
+}
+
+.contenedor.mover .panel.derecho {
+  transform: translateX(-100%);
+}
+
+.formulario.registro {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
+  }
+
+  .panel {
+    width: 100%;
+    transform: none !important;
+  }
+
+  .contenedor.mover .panel.izquierdo,
+  .contenedor.mover .panel.derecho {
+    transform: none;
+  }
+}
