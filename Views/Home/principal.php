@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FoodLover | Home</title>
+    <title>Farmacia | Home</title>
     <!-- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,8 +35,8 @@
     <header class="header">
       <div class="header__container">
         <img
-          src="assets/img/logo.png"
-          alt="foodlover logo"
+          src="../assets/Imagenes/logo.jpg"
+          alt="logo"
           class="header__logo-image"
         />
         <nav class="header__nav">
@@ -60,18 +60,14 @@
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero__container">
-          <div class="image-container">
-            <img
-              src="assets/img/hero__left.jpg"
-              alt="Mujer desayunando"
-              class="hero__image"
-            />
+     <section class="hero">
+  <div class="hero__container">
+    <div class="image-container">
+      <img src="../assets/Imagenes/farmacia2.jpg" alt="Imagen de pastillas" class="hero__image" />
           </div>
           <div class="hero__info">
           <h1 class="hero__title">
-  Bienvenido a <span>Farmacia Salud</span>, tu bienestar es nuestra prioridad.
+  Bienvenido a <span>Farmacia</span>, tu bienestar es nuestra prioridad.
 </h1>
 <p class="hero__legend">
   Ofrecemos atención personalizada, productos de calidad y el compromiso de cuidar tu salud en todo momento.
@@ -88,8 +84,8 @@
       <section class="about">
         <div class="about__container">
           <img
-            src="assets/img/about.jpg"
-            alt="foodlover store"
+            src="../assets/Imagenes/farmacia4.jpg"
+            alt="Foto farmacia"
             class="about__image"
           />
           <div class="about__info">
@@ -104,25 +100,6 @@
    orientación profesional y productos de calidad. Queremos que te sientas acompañado desde el primer momento.
 </p>
 
-          </div>
-        </div>
-      </section>
-      <section class="promise">
-        <div class="promise__container">
-          <img
-            src="assets/img/promise2.png"
-            alt="foodlover store"
-            class="promise__image"
-          />
-         <div class="promise__info">
-  <h2 class="promise__title">Compromiso con tu Salud</h2>
-  <p class="promise__text">
-    Seleccionamos cuidadosamente cada uno de nuestros productos, priorizando la calidad, 
-    seguridad y respaldo de marcas confiables. Trabajamos con proveedores certificados para asegurar que los medicamentos, 
-    suplementos y artículos de cuidado personal cumplan con los más altos estándares.
-  </p>
-</div>
-
         </div>
       </section>
       <div class="banner">
@@ -130,25 +107,23 @@
       </div>
       <section class="menu">
         <div class="menu__container">
-          <h2 class="menu__title">Nuestras delicias</h2>
+          <h2 class="menu__title">Algunos Productos</h2>
           <div class="menu__content">
             <div class="card">
               <img
-                class="card__image"
-                src="assets/img/gallery1.png"
-                alt="Huevo Primavera"
+                class="acetaminofen__image"
+                src="../assets/Imagenes/acetaminofen.jpg"
+                alt="acetaminofen"
               />
 
-            <!-- Quitar esto cambiarlo a productos de la farmacia  -->
+            <!-- Productos de la farmacia  -->
               <div class="menu__info">
-                <h3 class="card__title">Huevo Primavera</h3>
+                <h3 class="card__title">Pastilla Acetaminofen</h3>
                 <p class="card__text">
-                  Dos huevos al vapor servidos sobre una cama de lechuga fresca
-                  y tomates cherry cortados por la mitad, acompañados de una
-                  salsa especial de la casa.
+                  La acetaminofén, también conocido como paracetamol, es un medicamento ampliamente utilizado por sus propiedades analgésicas y antipiréticas.
                 </p>
                 <div class="cart__price">
-                  <p class="price">$20.000</p>
+                  <p class="price"> ₡1.350</p>
                   <i class="fa-solid fa-cart-plus"></i>
                 </div>
               </div>
@@ -157,18 +132,16 @@
             <div class="card">
               <img
                 class="card__image"
-                src="assets/img/gallery2.png"
-                alt="Huevo Primavera"
+                src="../assets/Imagenes/colgate2.jpg"
+                alt="COLGATE"
               />
               <div class="menu__info">
-                <h3 class="card__title">Mieli Waffles</h3>
+                <h3 class="card__title">Pasta Dental Colgate Triple Acción</h3>
                 <p class="card__text">
-                  Deliciosos waffles caseros acompañados de uvas Isabel y fresas
-                  frescas, bañados en miel dorada para un toque de dulzura
-                  irresistible.
+                  Ayuda a prevenir las caries, combate el mal aliento y deja una sensación de frescura.
                 </p>
                 <div class="cart__price">
-                  <p class="price">$22.000</p>
+                  <p class="price">₡2.050</p>
                   <i class="fa-solid fa-cart-plus"></i>
                 </div>
               </div>
@@ -177,84 +150,24 @@
             <div class="card">
               <img
                 class="card__image"
-                src="assets/img/gallery3.png"
-                alt="Huevo Primavera"
+                src="../assets/Imagenes/dolo.jpg"
+                alt="DOLO-NEUROBIÓN"
               />
               <div class="menu__info">
-                <h3 class="card__title">Desayuno Tradicional</h3>
+                <h3 class="card__title">DOLO-NEUROBIÓN N TABLETAS</h3>
                 <p class="card__text">
-                  Un clásico desayuno con un toque gourmet: huevo al vapor
-                  servido con pan tostado crujiente y una taza humeante de café
-                  recién hecho.
+                  Se usa para aliviar el dolor e
+                  inflamación asociados a problemas musculares, articulares
+                  o nerviosos, como lumbalgias o ciática. Ayuda a reducir 
+                  el dolor y a mejorar la función nerviosa.
                 </p>
                 <div class="cart__price">
-                  <p class="price">$15.000</p>
+                  <p class="price">₡1.500</p>
                   <i class="fa-solid fa-cart-plus"></i>
                 </div>
               </div>
             </div>
             <!-- end card -->
-            <div class="card">
-              <img
-                class="card__image"
-                src="assets/img/gallery4.png"
-                alt="Huevo Primavera"
-              />
-              <div class="menu__info">
-                <h3 class="card__title">Waffles Frutales</h3>
-                <p class="card__text">
-                  Waffles esponjosos acompañados de uvas Isabel y fresas
-                  frescas, una combinación refrescante y dulce para empezar el
-                  día con energía.
-                </p>
-                <div class="cart__price">
-                  <p class="price">$19.000</p>
-                  <i class="fa-solid fa-cart-plus"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end card -->
-            <div class="card">
-              <img
-                class="card__image"
-                src="assets/img/gallery5.png"
-                alt="Huevo Primavera"
-              />
-              <div class="menu__info">
-                <h3 class="card__title">Desayuno Mediterráneo</h3>
-                <p class="card__text">
-                  Dos huevos al vapor acompañados de espárragos frescos, tomates
-                  cherry, y pan árabe integral, todo bañado en nuestras salsas
-                  caseras para una explosión de sabores.
-                </p>
-                <div class="cart__price">
-                  <p class="price">$25.000</p>
-                  <i class="fa-solid fa-cart-plus"></i>
-                </div>
-              </div>
-            </div>
-            <!-- end card -->
-            <div class="card">
-              <img
-                class="card__image"
-                src="assets/img/gallery6.png"
-                alt="Huevo Primavera"
-              />
-              <div class="menu__info">
-                <h3 class="card__title">Pancake Fiesta</h3>
-                <p class="card__text">
-                  Pancakes esponjosos servidos con uvas Isabel, frijoles en
-                  salsa de la casa y verduras frescas bañadas en crema casera,
-                  una combinación única y deliciosa.
-                </p>
-                <div class="cart__price">
-                  <p class="price">$23.000</p>
-                  <i class="fa-solid fa-cart-plus"></i>
-                </div>
-              </div>
-            </div>
-
-
             <!-- Termina la categoria de productos q se ven :)-->
             <!-- end card -->
           </div>
@@ -285,57 +198,52 @@
           </div>
         </div>
       </section>
-      <section class="blog">
-        <div class="blog__container">
-          <h2 class="blog__title">Nuestros últimos blogs</h2>
-          <div class="blog__content">
-            <article class="entry">
-              <div class="entry__img-container">
-                <img
-                  src="assets/img/blog1.jpg"
-                  alt="Imagen de desayuno saludable"
-                  class="entry__image"
-                />
-              </div>
-              <div class="entry__info">
-                <p class="entry__date">Febrero 5, 2024</p>
-                <h3 class="entry__title">
-                  Los Beneficios de un Desayuno Saludable
-                </h3>
-                <p class="entry__description">
-                  Exploramos los numerosos beneficios para la salud de comenzar
-                  el día con un desayuno nutritivo y equilibrado. Desde aumentar
-                  la energía y la concentración hasta controlar el peso y
-                  mejorar el estado de ánimo, descubrirás por qué el desayuno es
-                  la comida más importante del día.
-                </p>
-                <a href="#" class="entry__btn"
-                  >Continua leyendo...<i
-                    class="fa-solid fa-book-open-reader"
-                  ></i
-                ></a>
-              </div>
-            </article>
+       
+   <section class="Enfermedades">
+  <div class="Enfermedades__container">
+    <h2 class="Enfermedades__title">Enfermedades actuales</h2>
+    <div class="Enfermedades__content">
+      <article class="entry">
+        <div class="entry__img-container">
+          <img
+            src="../assets/Imagenes/virus.jpg"
+            alt="Imagen de virus"
+            class="entry__image"
+          />
+        </div>
+        <div class="entry__info">
+          <p class="entry__date">Junio 1, 2025</p>
+          <h3 class="entry__title">
+            ¿Hay riesgo de pandemia por gripe aviar en 2025?
+          </h3>
+          <p class="entry__description">
+            Virus de la gripe: Es un virus ARN, como el del COVID-19, el SIDA, el Ébola o la hepatitis C. Tiene su genoma dividido en 8 fragmentos, lo que aumenta su capacidad de mutación. La gripe aviar es una enfermedad respiratoria que generalmente afecta a las aves. La variante D1 fue identificada por primera vez en el sudeste asiático en 1996 y ha sido responsable de la epidemia más grave registrada, afectando a poblaciones de aves en todo el mundo.
+          </p>
+          <a href="#" class="entry__btn">
+            Continua leyendo...<i class="fa-solid fa-book-open-reader"></i>
+          </a>
+        </div>
+      </article>
+
+
             <!-- blog entry-->
             <article class="entry">
               <div class="entry__img-container">
                 <img
-                  src="assets/img/blog2.jpg"
-                  alt="Imagen de desayuno saludable"
+                  src="../assets/Imagenes/coronavirus.jpg"
+                  alt="Imagen coronavirus"
                   class="entry__image"
                 />
               </div>
               <div class="entry__info">
-                <p class="entry__date">Febrero 10, 2024</p>
+                <p class="entry__date">Junio 1, 2025</p>
                 <h3 class="entry__title">
-                  Explorando Nuevas Tendencias en Desayunos
+                  ¿Habrá una pandemia en 2025? Esta es la enfermedad que más preocupa a los expertos
                 </h3>
                 <p class="entry__description">
-               Exploramos las últimas tendencias en salud y bienestar.
-                Desde nuevas alternativas en suplementos y medicina natural,
-                 hasta recomendaciones prácticas para mejorar tu calidad de vida. 
-                 Inspirate a cuidar de vos mismo con información confiable y actualizada.
-
+               La COVID-19 surgió de repente, se propagó rápidamente y mató a millones de personas en todo el mundo. Desde entonces,
+               es justo decir que la mayoría de la gente se ha puesto nerviosa ante la aparición de la próxima gran enfermedad infecciosa,
+               ya sea un virus, una bacteria, un hongo o un parásito.
                 </p>
                 <a href="#" class="entry__btn"
                   >Continua leyendo...
@@ -347,22 +255,25 @@
             <article class="entry">
               <div class="entry__img-container">
                 <img
-                  src="assets/img/blog3.jpg"
+                  src="../assets/Imagenes/fiebre.jpg"
                   alt="Imagen de desayuno saludable"
                   class="entry__image"
                 />
               </div>
               <div class="entry__info">
-                <p class="entry__date">Febrero 15, 2024</p>
+                <p class="entry__date">Junio 1, 2025</p>
                 <h3 class="entry__title">
-                  Secretos de la mejor farmacia del mundo 
+                  OPS emite nueva alerta epidemiológica ante el aumento de los casos de fiebre amarilla en las Américas
                 </h3>
                 <p class="entry__description">
-              Recorremos el mundo para descubrir las prácticas de salud más destacadas en distintas culturas.  
-Desde el uso ancestral de plantas medicinales hasta los hábitos modernos de autocuidado,  
-te sorprenderá la diversidad de enfoques para mantenerse sano, prevenir enfermedades y vivir con bienestar en cada rincón del planeta.
-
-
+               Washington, D.C., 31 de marzo de 2025 (OPS) – La Organización Panamericana de la Salud 
+                (OPS) ha emitido una nueva alerta epidemiológica debido al incremento de casos de fiebre amarilla en las Américas 
+               durante los primeros meses de 2025. El número de casos humanos confirmados hasta el 22 de marzo ha más que duplicado 
+               el total registrado en todo 2024, lo que genera preocupación por una posible expansión de la enfermedad.
+                En los primeros casi tres meses de 2025, se han confirmado 131 casos humanos, con 53 fallecimientos. En comparación, en todo 
+               el 2024 se reportaron 61 casos, de los cuales 30 fueron fatales. Los casos se reportaron en Bolivia (1 caso, 1 fallecimiento), 
+               Brasil (81 casos, 31 fatales), Colombia (31 casos, 13 fallecimientos) y Perú (18 casos, 8 fatales), con casos notificados fuera de la región 
+               amazónica, tradicionalmente afectada.
                 </p>
                 <a href="#" class="entry__btn"
                   >Continua leyendo...
@@ -380,7 +291,7 @@ te sorprenderá la diversidad de enfoques para mantenerse sano, prevenir enferme
       <div class="footer__container">
         <div class="footer__content">
           <div class="footer__logo">
-            <img src="assets/img/footerlogo.png" alt="foodlover logo" />
+            <img src="../assets/Imagenes/logo.jpg" alt="foodlover logo" />
             <p class="footer__legend">Síguenos en nuestras redes:</p>
             <div class="footer__social">
               <i class="fa-brands fa-facebook"></i>
@@ -393,7 +304,7 @@ te sorprenderá la diversidad de enfoques para mantenerse sano, prevenir enferme
             </div>
           </div>
           <div class="footer__col f__about-us">
-            <h3>Restaurante</h3>
+            <h3>Farmacia GRUPO 4</h3>
             <a href="#">Sobre la Farmacia</a>
             <a href="#">Trabaja con nosotros</a>
           </div>
@@ -412,8 +323,8 @@ te sorprenderá la diversidad de enfoques para mantenerse sano, prevenir enferme
         <div class="footer__copyright">
           <p>Gaining hands-on coding experience.</p>
           <p>
-            <span>&copy; 2024 FoodLover.</span> Code and Design by
-            JCodeCraftsman. All rights reserved.
+            <span>&copy; 2025 Farmacia Grupo 4.</span> Code and Design by
+            Grupo 4. All rights reserved.
           </p>
         </div>
       </div>

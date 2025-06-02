@@ -2,7 +2,7 @@
   --title-font:"Fredoka", sans-serif;
   --text-font: "Outfit", sans-serif;
 
-  --primary-color: #003366;
+  --primary-color: #0050a0;
   --secondary-color: #ffffff;
   --text-color: #000000;
 }
@@ -237,7 +237,7 @@ h3{
   bottom: 0;
   left: 0;
   z-index: 1;
-  background-color: rgba(194, 196, 206, 0.9);
+  background-color: rgba(236, 235, 235, 0.9);
 }
 
 .hero__container{
@@ -387,7 +387,7 @@ h3{
 
 
 /* ==================== banner ====================*/
-.banner{
+/*.banner{
   background-image: url(../img/banner.png);
   height: 30rem;
   background-repeat: no-repeat;
@@ -403,7 +403,7 @@ h3{
   .banner{
     height: 60rem;
   }
-}
+} 
 /* ==================== banner ====================*/
 
 
@@ -430,7 +430,8 @@ h3{
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
-  box-shadow: 0px .4rem .8rem #000000;
+  /*Color de fondo de productos*/
+  box-shadow: 0px .4rem .8rem #140158;
   transition: all 0.5s ease;
 }
 @media screen and (min-width: 950px){
@@ -448,7 +449,7 @@ h3{
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(176, 174, 174, 0.5);
+  background-color: rgba(26, 26, 26, 0.438);
   padding: 2rem;
   transition: all 0.5s ease;
 }
@@ -459,9 +460,10 @@ h3{
 }
 
 .card__title {
+
   margin: 0;
   color: var(--primary-color);
-  text-shadow: 0px 0px 1.5rem #000000;
+  text-shadow: 0px 0px 1.5rem #bebebe;
   font-size: 2.5rem;
 }
 
@@ -590,6 +592,7 @@ h3{
 
 
 /* ==================== blog ====================*/
+
 .blog__container{
   padding: 10.6rem 0;
 }
@@ -688,7 +691,7 @@ h3{
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgb(0 0 0 / 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .footer__container{
