@@ -43,10 +43,11 @@
 
     <link rel="stylesheet" href="../assets/Estilos/login.css">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">  
 </head>
 
 <body>
-
     <div class="contenedor" id="contenedor">
         <!-- Panel Izquierdo: Formularios -->
         <div class="panel izquierdo">
@@ -56,6 +57,10 @@
                 <input type="password" name="contrasena" placeholder="Contraseña" required>
                 <button type="submit" name="login">Entrar</button>
             </form>
+
+            <button type="button" class="btn btn-success" onclick="window.location.href='../Home/principal.php'">
+                Iniciar Sesión </i>
+            </button>
 
             <form class="formulario registro" id="form-register" method="POST">
                 <h2>Registrarse</h2>
@@ -77,5 +82,5 @@
 
     <script src="../assets/Funciones/login.js"></script>
 </body>
-
+ 
 </html>

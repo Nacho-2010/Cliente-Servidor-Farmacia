@@ -24,12 +24,20 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- Bootstrap CSS -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+   
     <!-- custom css link -->
     <link rel="stylesheet" type="text/css" href="assets/Estilos/normalize.css" />
    <link rel="stylesheet" href="../assets/Estilos/principal.css" />
 
+  
+
+
     <!-- script scrollreveal -->
     <script src="../assets/Funciones/scrollReveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
     <header class="header">
@@ -105,6 +113,8 @@
       <div class="banner">
         <div class="banner__content"></div>
       </div>
+
+      <!-- Buscador de productos -->
       <section class="menu">
         <div class="menu__container">
           <h2 class="menu__title">Algunos Productos</h2>
@@ -175,10 +185,18 @@
             Conoce más <i class="fa-solid fa-cookie-bite"></i>
           </button>
         </div>
+        <nav class="navbar bg-body-tertiary mb-4">
+            <div class="container d-flex justify-content-center">
+              <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">BUSCAR</button>
+              </form>
+            </div>
+        </nav>
       </section>
       <section class="booking">
         <div class="booking__container">
-         <h2 class="booking__title">Encuentra lo que necesitas</h2>
+         <h2 class="booking__title">Encuentra lo que necesitas</h2>        
 <p class="booking__text">
   Visitá cualquiera de nuestras 3 sucursales para adquirir tus medicamentos,
    productos de cuidado personal o recibir atención farmacéutica. 
@@ -224,7 +242,6 @@
           </a>
         </div>
       </article>
-
 
             <!-- blog entry-->
             <article class="entry">
