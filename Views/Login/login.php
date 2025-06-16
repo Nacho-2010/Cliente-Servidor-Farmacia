@@ -31,7 +31,7 @@
 //     } else {
 //         echo "<script>alert('Correo no registrado');</script>";
 //     }
-// }
+// }                          
 ?>
 <!DOCTYPE html>
 <html lang="es">
