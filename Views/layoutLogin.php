@@ -2,7 +2,7 @@
 // ==================== HEAD ====================
 function añadirCSS()
 {
-    echo '
+  echo '
  
  <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@ function añadirCSS()
 // ==================== SCRIPTS ====================
 function añadirScripts()
 {
-    echo '
+  echo '
   <script src="../assets/Funciones/login.js"></script>
   ';
 }

@@ -1,5 +1,4 @@
 <?php
-
 // ==================== HEAD ====================
 function añadirCSS()
 {
@@ -23,58 +22,110 @@ function añadirCSS()
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" type="text/css" href="assets/Estilos/normalize.css" />
     <link rel="stylesheet" href="../assets/Estilos/principal.css" />
   </head>  ';
 }
-
 // ==================== HEADER ====================
 function verheader()
 {
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+
+  $usuarioLogueado = isset($_SESSION['usuario']);
+
   echo '
   <header class="header">
     <div class="header__container">
       <img src="../assets/Imagenes/logo.jpg" alt="logo" class="header__logo-image" />
       <nav class="header__nav">
         <ul class="header__nav-links">
-          <li><a href="#" class="header__nav-link">Inicio</a></li>
+          <li><a href="../Home/principal.php" class="header__nav-link">Inicio</a></li>
           <li><a href="#" class="header__nav-link">Productos</a></li>
           <li><a href="#" class="header__nav-link">Quiénes somos</a></li>
           <li><a href="#" class="header__nav-link">Pide en línea</a></li>
           <li><a href="#" class="header__nav-link">Contacto</a></li>
         </ul>
       </nav>
-      <div class="header__right">
-        <!-- Botón Login -->
+      <div class="header__right">';
+
+  if ($usuarioLogueado) {
+    echo '
+        <div class="profile-dis scrollable">
+          <span class="user-name">Hola, ' . htmlspecialchars($_SESSION['usuario']) . '</span>
+          <a class="dropdown-item" href="#">
+            <i class="ti-user m-r-5 m-1-5"></i> Mi Perfil
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="ti-settings m-r-5 m-1-5"></i> Configuración
+          </a>
+          <a class="dropdown-item" href="?logout=true">
+            <i class="ti-power-off m-r-5 m-1-5"></i> Cerrar Sesión
+          </a>
+        </div>';
+  } else {
+    echo '
         <button class="btn btn__reserve" onclick="openModal()">
           Login <i class="fa-solid fa-capsules"></i>
         </button>
 
         <!-- Modal -->
         <div id="modalOverlay" class="overlay default" onclick="closeModal()"></div>
-
         <div id="modalDialog" class="dialog default" onclick="event.stopPropagation()">
-          <header>
-            <h2>Sign Up</h2>
-            <h3>Try Hologram today.</h3>
-          </header>
-          <form class="modal__form">
-            <input type="email" placeholder="Email" class="modal__input" />
-            <input type="password" placeholder="Password" class="modal__input" />
-            <button type="submit" class="modal__submit">
-              Sign up free <i class="fa-solid fa-arrow-right"></i>
-            </button>
-            <p class="modal__info">No credit card information required</p>
-          </form>
-        </div>
+        
+          <!-- Login -->
+          <div id="formulario-login" style="display: block;">
+            <header>
+              <h2>Iniciar Sesión</h2>
+            </header>
+            <form class="modal__form" method="POST" action="/Cliente-Servidor-Farmacia/Views/Home/principal.php">
+              <input type="email" name="correo" placeholder="Correo Electrónico" class="modal__input" required />
+              <input type="password" name="contrasena" placeholder="Contraseña" class="modal__input" required />
+              <button type="submit" name="login" class="modal__submit">
+                Entrar <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+            <p class="modal__info">¿No tenés cuenta? <a href="#" onclick="mostrarRegistro()">Registrarse</a></p>
+          </div>
 
-        <i class="fa-solid fa-bars" id="menu__icon"></i>
+          <!-- Registro -->
+          <div id="formulario-registro" style="display: none;">
+            <header>
+              <h2>Registrarse</h2>
+            </header>
+            <form class="modal__form" method="POST" action="/Cliente-Servidor-Farmacia/Views/Home/principal.php">
+              <input type="text" name="nombre" placeholder="Nombre completo" class="modal__input" required />
+              <input type="email" name="correo" placeholder="Correo Electrónico" class="modal__input" required />
+              <input type="text" name="usuario" placeholder="Usuario" class="modal__input" required />
+              <input type="password" name="contrasena" placeholder="Contraseña" class="modal__input" required />
+              <button type="submit" name="registro" class="modal__submit">
+                Registrarse
+              </button>
+            </form>
+            <p class="modal__info">¿Ya tenés cuenta? <a href="#" onclick="mostrarLogin()">Iniciar Sesión</a></p>
+          </div>
+        </div>';
+  }
+  echo '
+  <script>
+function mostrarRegistro() {
+  document.getElementById("formulario-login").style.display = "none";
+  document.getElementById("formulario-registro").style.display = "block";
+}
+
+function mostrarLogin() {
+  document.getElementById("formulario-login").style.display = "block";
+  document.getElementById("formulario-registro").style.display = "none";
+}
+  </script>
+  ';
+
+  echo '
       </div>
     </div>
   </header>
-  ';
+';
 }
-
 // ==================== FOOTER ====================
 function verfooter()
 {
@@ -127,7 +178,6 @@ function verfooter()
   </footer>
   ';
 }
-
 // ==================== SCRIPTS ====================
 function añadirScripts()
 {
@@ -142,5 +192,4 @@ function añadirScripts()
   <script src="../assets/Funciones/principal.js"></script>
   ';
 }
-
 ?>

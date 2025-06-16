@@ -14,7 +14,7 @@ añadirCSS(); //<head> con CSS
 <body>
 
   <?php
-  verheader(); // Menú y modal de login
+  verheader();
   ?>
 
   <main>
@@ -177,6 +177,7 @@ añadirCSS(); //<head> con CSS
   </main>
 
   <?php
+
   verfooter();
   ?>
 

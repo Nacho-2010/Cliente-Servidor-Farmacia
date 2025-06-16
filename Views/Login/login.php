@@ -13,7 +13,7 @@ añadirCSS(); //<head> con CSS
 ?>
 
 <?php
-session_start();
+// session_start();
 ?>
 
 <body>
