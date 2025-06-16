@@ -1,7 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layout.php';
 ?>
-
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/homeController.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
