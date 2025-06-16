@@ -1,6 +1,6 @@
 <?php
 
-function validarInicioSesionModel()
+function validarInicioSesionModel($USUARIO, $CONTRASENA)
 {
 
 
@@ -21,7 +21,7 @@ function validarInicioSesionModel()
 }
 
 
-function registrarUsuarioModel()
+function registrarUsuarioModel($NOMBRE, $CORREO, $USUARIO, $CONTRASENA)
 {
 
     // ABRIR BD
@@ -36,6 +36,7 @@ function registrarUsuarioModel()
     // CERRAR BD
     mysql_close($conexion);
 
+    
 
 
 }
