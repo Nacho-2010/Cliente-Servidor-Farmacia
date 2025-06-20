@@ -1,44 +1,71 @@
 <?php
 
-function validarInicioSesionModel($USUARIO, $CONTRASENA)
-{
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Proyecto/Models/connect.php';
+function ValidarInicioSesionModel($correo, $contrasena)
+ {
+        try
+        {
+            $context = OpenDB();
+
+            $sp = "CALL ValidarInicioSesion('$correo', '$contrasena')";
+            $respuesta = $context -> query($sp);
+
+            CloseDB($context);            
+            return $respuesta;
+        }
+        catch(Exception $error)
+        {
+            RegistrarError($error);
+            return null;
+        }
+    }
 
 
-    // ABRIR BD
-    $conexion = mysql_connect("127.0.0.1:3307", "root", "", "FARMACIABD");
+     function RegistrarUsuarioModel($nombre, $correo, $identificacion, $contrasena)
+    {
+        try
+        {
+            $context = OpenDB();
+
+            $sp = "CALL RegistrarUsuario('$nombre', '$correo', '$identificacion', '$contrasena')";
+            $respuesta = $context -> query($sp);
+
+            CloseDB($context);            
+            return $respuesta;
+        }
+        catch(Exception $error)
+        {
+            RegistrarError($error);
+            return false;
+        }
+    }
 
 
 
-    //INTERACTUAR CON BD
+     function ValidarCorreoModel($correo)
+    {
+        try
+        {
+            $context = OpenDB();
 
+            $sp = "CALL ValidarCorreo('$correo')";
+            $respuesta = $context -> query($sp);
 
-
-    // CERRAR BD
-    mysql_close($conexion);
-
-
-
-}
-
-
-function registrarUsuarioModel($NOMBRE, $CORREO, $USUARIO, $CONTRASENA)
-{
-
-    // ABRIR BD
-    $conexion = mysql_connect("127.0.0.1:3307", "root", "", "FARMACIABD");
-
-
-
-    //INTERACTUAR CON BD
-
-
-
-    // CERRAR BD
-    mysql_close($conexion);
-
-    
-
-
-}
+            CloseDB($context);            
+            return $respuesta;
+        }
+        catch(Exception $error)
+        {
+            RegistrarError($error);
+            return null;
+        }
+    }
 
 ?>
+
+
+
+
+
+
+
