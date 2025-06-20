@@ -1,29 +1,23 @@
 <?php
-
-
-
-
-// ==================== CONEXIÓN A LA BASE DE DATOS ====================
-
-
-
-
-
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 
 
 session_start();
 $_SESSION['error_login'] = null;
 $_SESSION['error_registro'] = null;
 
+$conexion = OpenDB(); // 🚨 Aquí se abre la conexión correctamente
+
 if (isset($_POST['login'])) {
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
-    $query = $conexion->query("SELECT * FROM usuarios WHERE correo='$correo'");
+    $query = $conexion->query("SELECT * FROM USUARIO WHERE CORREO='$correo'");
 
-    if ($query->num_rows > 0) {
+    if ($query && $query->num_rows > 0) {
         $row = $query->fetch_assoc();
-        if (password_verify($contrasena, $row['contrasena'])) {
-            $_SESSION['usuario'] = $row['usuario'];
+        if (password_verify($contrasena, $row['CONTRASENA'])) {
+            $_SESSION['usuario'] = $row['USUARIO'];
+            $_SESSION['nombre'] = $row['NOMBRE'];
             header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
             exit();
         } else {
@@ -43,8 +37,8 @@ if (isset($_POST['registro'])) {
     $usuario = $_POST['usuario'];
     $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO usuarios(nombre, correo, usuario, contrasena)
-          VALUES('$nombre','$correo','$usuario','$contrasena')";
+    $sql = "INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
+            VALUES('$nombre','$correo','$usuario','$contrasena')";
 
     if ($conexion->query($sql)) {
         $_SESSION['usuario'] = $usuario;
@@ -58,6 +52,5 @@ if (isset($_POST['registro'])) {
     }
 }
 
-
-
+CloseDB($conexion); // Cerrar la conexión al final del script
 ?>
