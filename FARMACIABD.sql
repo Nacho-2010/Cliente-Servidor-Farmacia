@@ -18,8 +18,10 @@ GRANT ALL PRIVILEGES ON FARMACIABD.* TO 'usuario_farmacia'@'%';
 USE FARMACIABD;
 
 -- ===========================
--- TABLA USUARIO (para autenticación general)
+-- TABLAS
 -- ===========================
+
+-- Tabla USUARIO
 CREATE TABLE USUARIO (
     ID BIGINT AUTO_INCREMENT PRIMARY KEY,
     NOMBRE VARCHAR(255) NOT NULL,
@@ -28,17 +30,13 @@ CREATE TABLE USUARIO (
     CONTRASENA VARCHAR(100) NOT NULL
 );
 
--- ===========================
--- TABLA ROL
--- ===========================
+-- Tabla ROL
 CREATE TABLE ROL (
     ID BIGINT AUTO_INCREMENT PRIMARY KEY,
     NOMBRE VARCHAR(50) NOT NULL
 );
 
--- ===========================
--- TABLA INTERMEDIA USUARIO_ROL (muchos a muchos)
--- ===========================
+-- Tabla intermedia USUARIO_ROL
 CREATE TABLE USUARIO_ROL (
     USUARIO_ID BIGINT,
     ROL_ID BIGINT,
@@ -47,37 +45,7 @@ CREATE TABLE USUARIO_ROL (
     FOREIGN KEY (ROL_ID) REFERENCES ROL(ID) ON DELETE CASCADE
 );
 
--- ===========================
--- ROLES PREDEFINIDOS
--- ===========================
-INSERT INTO ROL (ID, NOMBRE) VALUES (1, 'CLIENTE');
-INSERT INTO ROL (ID, NOMBRE) VALUES (2, 'ADMIN');
-
-
-
--- ===========================
--- USUARIOS DE EJEMPLO
--- ===========================
-INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
-VALUES ('Josue', 'josue@email.com', 'josue', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92');
-
-INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
-VALUES ('Abraham', 'abraham@email.com', 'abraham', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92');
-
-
-
-INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (1, 2); -- AGREGAMOS A Josue COMO ADMIN DESDE LA BASE DATOS 
-
-
--- VERIFICACIÓN:
-SELECT U.NOMBRE AS NOMBRE_USUARIO, R.NOMBRE AS TIPO
-FROM USUARIO U 
-JOIN USUARIO_ROL UR ON UR.USUARIO_ID = U.ID
-JOIN ROL R ON R.ID = UR.ROL_ID;
-
--- ===========================
--- TABLA CLIENTE (perfil extendido para pacientes)
--- ===========================
+-- Tabla CLIENTE
 CREATE TABLE CLIENTE (
     ID_CLIENTE BIGINT AUTO_INCREMENT PRIMARY KEY,
     ID_USUARIO BIGINT NOT NULL,
@@ -90,11 +58,136 @@ CREATE TABLE CLIENTE (
     FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID) ON DELETE CASCADE
 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- ===========================
--- PROCEDIMIENTO: Convertir un usuario en cliente
+-- INSERCIONES INICIALES
 -- ===========================
+
+USE FARMACIABD;
+
+-- Roles predefinidos
+INSERT INTO ROL (ID, NOMBRE) VALUES (1, 'CLIENTE');
+INSERT INTO ROL (ID, NOMBRE) VALUES (2, 'ADMIN');
+
+-- Usuarios de ejemplo
+INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
+VALUES 
+('Josue', 'josue@email.com', 'josue', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92'),
+('Abraham', 'abraham@email.com', 'abraham', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92');
+
+-- Asignar rol ADMIN a Josue
+INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (1, 2);
+
+-- Verificación
+SELECT U.NOMBRE AS NOMBRE_USUARIO, R.NOMBRE AS TIPO
+FROM USUARIO U 
+JOIN USUARIO_ROL UR ON UR.USUARIO_ID = U.ID
+JOIN ROL R ON R.ID = UR.ROL_ID;
+
+
+select * from usuario
+
+-- ===========================
+-- INSERCIONES INICIALES
+-- ===========================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ========================================
+-- PROCEDIMIENTO: procedimientos
+-- ========================================
+USE FARMACIABD
 DELIMITER $$
 
+-- ========================================
+-- PROCEDIMIENTO: Registrar Usuario
+-- ========================================
+DELIMITER $$
+
+CREATE PROCEDURE RegistrarUsuario(
+    IN pnombre VARCHAR(255),
+    IN pcorreo VARCHAR(100),
+    IN pusuario VARCHAR(50),
+    IN pcontrasena VARCHAR(100)
+)
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM USUARIO
+        WHERE CORREO = pcorreo OR USUARIO = pusuario
+    ) THEN
+        INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
+        VALUES (pnombre, pcorreo, pusuario, pcontrasena);
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+-- ========================================
+-- PROCEDIMIENTO: Validar Correo
+-- ========================================
+DELIMITER $$
+
+CREATE PROCEDURE ValidarCorreo(IN pcorreo VARCHAR(100))
+BEGIN
+    SELECT * 
+    FROM USUARIO
+    WHERE CORREO = pcorreo;
+END $$
+
+DELIMITER ;
+
+-- ========================================
+-- PROCEDIMIENTO: Validar Inicio de Sesión
+-- ========================================
+DELIMITER $$
+CREATE PROCEDURE ValidarInicioSesion(
+    IN pcorreo VARCHAR(100),
+    IN pcontrasena VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        ID,
+        NOMBRE,
+        CORREO,
+        USUARIO,
+        CONTRASENA
+    FROM USUARIO
+    WHERE CORREO = pcorreo
+      AND CONTRASENA = pcontrasena;
+END $$
+DELIMITER ;
+-- ========================================
+-- PROCEDIMIENTO: Convertir Usuario en Cliente
+-- ========================================
+DELIMITER $$
 CREATE PROCEDURE convertir_usuario_en_cliente(
     IN p_usuario VARCHAR(50),
     IN p_cedula VARCHAR(20),
@@ -106,11 +199,10 @@ CREATE PROCEDURE convertir_usuario_en_cliente(
 )
 BEGIN
     DECLARE v_usuario_id BIGINT;
-    DECLARE v_rol_cliente_id BIGINT DEFAULT 1; -- ID del rol CLIENTE
-    DECLARE v_rol_admin_id BIGINT DEFAULT 2;   -- ID del rol ADMIN
+    DECLARE v_rol_cliente_id BIGINT DEFAULT 1;
+    DECLARE v_rol_admin_id BIGINT DEFAULT 2;
     DECLARE v_existente INT;
 
-    -- Verificar que el usuario existe
     SELECT COUNT(*) INTO v_existente
     FROM USUARIO
     WHERE USUARIO = p_usuario;
@@ -119,12 +211,10 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El usuario no existe.';
     END IF;
 
-    -- Obtener el ID del usuario
     SELECT ID INTO v_usuario_id
     FROM USUARIO
     WHERE USUARIO = p_usuario;
 
-    -- Verificar si ya es ADMIN
     SELECT COUNT(*) INTO v_existente
     FROM USUARIO_ROL
     WHERE USUARIO_ID = v_usuario_id AND ROL_ID = v_rol_admin_id;
@@ -133,7 +223,6 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El usuario tiene rol ADMIN. No puede convertirse en CLIENTE.';
     END IF;
 
-    -- Asignar rol CLIENTE si no lo tiene
     SELECT COUNT(*) INTO v_existente
     FROM USUARIO_ROL
     WHERE USUARIO_ID = v_usuario_id AND ROL_ID = v_rol_cliente_id;
@@ -143,7 +232,6 @@ BEGIN
         VALUES (v_usuario_id, v_rol_cliente_id);
     END IF;
 
-    -- Insertar en CLIENTE si aún no existe
     SELECT COUNT(*) INTO v_existente
     FROM CLIENTE
     WHERE ID_USUARIO = v_usuario_id;
@@ -171,24 +259,7 @@ END $$
 
 DELIMITER ;
 
--- USO:
-CALL convertir_usuario_en_cliente(
-    'Abraham',              -- nombre de usuario
-    '117890123',          -- cédula
-    '88889999',           -- teléfono
-    'San Marcos',   -- dirección
-    '1990-04-10',         -- fecha nacimiento
-    'M',                  -- sexo
-    'Ninguna'             -- alergias
-);
 
-
-
-
--- VERIFICACIÓN:
-SELECT u.*, c.*, r.NOMBRE AS ROL
-FROM USUARIO u
-JOIN USUARIO_ROL ur ON ur.USUARIO_ID = u.ID
-JOIN ROL r ON r.ID = ur.ROL_ID
-LEFT JOIN CLIENTE c ON c.ID_USUARIO = u.ID
-WHERE u.USUARIO = 'Abraham';
+-- ========================================
+-- PROCEDIMIENTO: procedimientos
+-- ========================================
