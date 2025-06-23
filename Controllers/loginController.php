@@ -1,56 +1,60 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
-
-
 session_start();
-$_SESSION['error_login'] = null;
-$_SESSION['error_registro'] = null;
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/loginModel.php';
+$_SESSION['error_btnRegistrarUsuario'] = null;
 
-$conexion = OpenDB(); // 🚨 Aquí se abre la conexión correctamente
-
-if (isset($_POST['login'])) {
+if (isset($_POST['btnIniciarSesion'])) {
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
-    $query = $conexion->query("SELECT * FROM USUARIO WHERE CORREO='$correo'");
 
-    if ($query && $query->num_rows > 0) {
-        $row = $query->fetch_assoc();
-        if (password_verify($contrasena, $row['CONTRASENA'])) {
-            $_SESSION['usuario'] = $row['USUARIO'];
-            $_SESSION['nombre'] = $row['NOMBRE'];
-            header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
-            exit();
-        } else {
-            $_SESSION['error_login'] = "⚠️ Contraseña incorrecta.";
-        }
+    // Validar inicio de sesión
+    $resultado = ValidarInicioSesionModel($correo, $contrasena);
+
+
+    if ($resultado != null && $resultado->num_rows > 0) {
+        header("Location: ../Views/Home/principal.php");
     } else {
-        $_SESSION['error_login'] = "⚠️ El correo no está registrado.";
+        $_POST['mensaje'] = "⚠️ Usuario o contraseña incorrectos.";
     }
 
-    header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php#login");
-    exit();
 }
+//-----------------------------------------------------------------//
 
-if (isset($_POST['registro'])) {
+if (isset($_POST['btnRegistrarUsuario'])) {
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $usuario = $_POST['usuario'];
-    $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
+    $contrasena = $_POST['contrasena'];
 
-    $sql = "INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
-            VALUES('$nombre','$correo','$usuario','$contrasena')";
+    // Validar que el correo no exista antes de registrar
+    $correoExistente = ValidarCorreoModel($correo);
 
-    if ($conexion->query($sql)) {
-        $_SESSION['usuario'] = $usuario;
-        $_SESSION['nombre'] = $nombre;
-        header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
-        exit();
-    } else {
-        $_SESSION['error_registro'] = "⚠️ Error al registrar. Puede que el correo ya exista.";
-        header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php#registro");
+    if ($correoExistente && $correoExistente->num_rows > 0) {
+        $_SESSION['error_btnRegistrarUsuario'] = "⚠️ El correo ya está registrado.";
+        header("Location: ../Views/Login/login.php");
         exit();
     }
-}
 
-CloseDB($conexion); // Cerrar la conexión al final del script
+    // Registrar usuario
+    $resultado = RegistrarUsuarioModel($nombre, $correo, $usuario, $contrasena);
+
+    if ($resultado) {
+        $_SESSION['usuario'] = $correo;
+        $_SESSION['nombre'] = $nombre;
+        header("Location: ../Views/Home/principal.php");
+        exit();
+    } else {
+        $_SESSION['error_btnRegistrarUsuario'] = "⚠️ Error al registrar el usuario.";
+        header("Location: ../Views/Login/login.php");
+        exit();
+    }
+
+    if (isset($_POST['btnRegistrarUsuario'])) {
+        error_log("✔ Llegó al controlador");
+    } else {
+        error_log("❌ No llegó al controlador");
+    }
+
+
+}
 ?>
