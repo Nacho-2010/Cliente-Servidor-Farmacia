@@ -5,12 +5,12 @@ function ValidarInicioSesionModel($correo, $contrasena)
  {
         try
         {
-            $context = OpenDB();
+            $conexion = OpenDB();
 
             $sp = "CALL ValidarInicioSesion('$correo', '$contrasena')";
-            $respuesta = $context -> query($sp);
+            $respuesta = $conexion -> query($sp);
 
-            CloseDB($context);            
+            CloseDB($conexion);            
             return $respuesta;
         }
         catch(Exception $error)
@@ -25,12 +25,12 @@ function ValidarInicioSesionModel($correo, $contrasena)
     {
         try
         {
-            $context = OpenDB();
+            $conexion = OpenDB();
 
             $sp = "CALL RegistrarUsuario('$nombre', '$correo', '$identificacion', '$contrasena')";
-            $respuesta = $context -> query($sp);
+            $respuesta = $conexion -> query($sp);
 
-            CloseDB($context);            
+            CloseDB($conexion);            
             return $respuesta;
         }
         catch(Exception $error)
@@ -46,12 +46,12 @@ function ValidarInicioSesionModel($correo, $contrasena)
     {
         try
         {
-            $context = OpenDB();
+            $conexion = OpenDB();
 
             $sp = "CALL ValidarCorreo('$correo')";
-            $respuesta = $context -> query($sp);
+            $respuesta = $conexion -> query($sp);
 
-            CloseDB($context);            
+            CloseDB($conexion);            
             return $respuesta;
         }
         catch(Exception $error)

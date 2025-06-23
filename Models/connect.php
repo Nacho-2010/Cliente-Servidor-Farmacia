@@ -5,21 +5,21 @@
         return mysqli_connect("127.0.0.1:3307","root","","FARMACIABD");
     }
 
-    function CloseDB($context)
+    function CloseDB($conexion)
     {
-        mysqli_close($context);
+        mysqli_close($conexion);
     }
 
     function RegistrarError($error)
     {
-        $context = OpenDB();
+        $conexion = OpenDB();
            
-        $message = mysqli_real_escape_string($context, $error -> getMessage());
+        $message = mysqli_real_escape_string($conexion, $error -> getMessage());
 
         $sp = "CALL RegistrarError('$message')";
-        $context -> query($sp);
+        $conexion -> query($sp);
 
-        CloseDB($context);
+        CloseDB($conexion);
     }
 
 ?>
