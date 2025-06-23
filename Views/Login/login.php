@@ -30,7 +30,7 @@ añadirCSS(); //<head> con CSS
                 <h2>Iniciar Sesión</h2>
                 <input type="email" name="correo" placeholder="Correo Electrónico" required>
                 <input type="password" name="contrasena" placeholder="Contraseña" required>
-                <button type="submit" name="login">Entrar</button>
+                <button id="btnIniciarSesion" type="submit" name="btnIniciarSesion">Entrar</button>
             </form>
 
 
@@ -40,7 +40,7 @@ añadirCSS(); //<head> con CSS
                 <input type="email" name="correo" placeholder="Correo Electrónico" required>
                 <input type="text" name="usuario" placeholder="Usuario" required>
                 <input type="password" name="contrasena" placeholder="Contraseña" required>
-                <button type="submit" name="registro">Registrarse</button>
+                <button id="btnRegistrarUsuario" name="btnRegistrarUsuario" type="submit">Registrarse</button>
             </form>
         </div>
 
