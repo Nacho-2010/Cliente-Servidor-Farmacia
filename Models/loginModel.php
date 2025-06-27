@@ -52,4 +52,27 @@ function ValidarCorreoModel($correo)
     }
 }
 
+function ObtenerRolesDelUsuario($usuarioId) {
+    $conn = OpenDB();
+
+    $sql = "SELECT R.NOMBRE 
+            FROM USUARIO_ROL UR 
+            INNER JOIN ROL R ON UR.ROL_ID = R.ID 
+            WHERE UR.USUARIO_ID = ?";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $usuarioId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $roles = [];
+    while ($row = $result->fetch_assoc()) {
+        $roles[] = $row['NOMBRE'];
+    }
+
+    CloseDB($conn);
+    return $roles;
+}
+
+
 ?>

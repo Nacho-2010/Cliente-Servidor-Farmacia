@@ -12,7 +12,17 @@ if (isset($_POST['btnIniciarSesion'])) {
 
 
     if ($resultado != null && $resultado->num_rows > 0) {
-        header("Location: ../Views/Home/principal.php");
+        $usuario = $resultado->fetch_assoc();
+
+        $_SESSION['usuario_id'] = $usuario['ID'];
+        $_SESSION['usuario'] = $usuario['USERNAME'];
+        $_SESSION['nombre'] = $usuario['NOMBRE'];
+
+        // Obtener roles desde la base de datos
+        $roles = ObtenerRolesDelUsuario($usuario['ID']); // crea esta función en loginModel.php
+        $_SESSION['roles'] = $roles;
+
+        header("Location: ../../Views/Home/principal.php");
     } else {
         $_POST['mensaje'] = "⚠️ Usuario o contraseña incorrectos.";
     }
