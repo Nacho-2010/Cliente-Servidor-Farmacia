@@ -17,8 +17,23 @@ añadirCSS(); //<head> con CSS
   verheader();
   ?>
 
-  <main>
+  
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <i class="fa-solid fa-prescription-bottle-medical"></i>
+      <h2>Sistema Administrador</h2>
+    </div>
+    <nav class="sidebar__nav">
+      <ul>
+        <li><a href="#"><i></i> Manejo de Usuario</a></li>
+        <li><a href="#"><i></i> Kardex</a></li>
+        <li><a href="#"><i></i> Reportes</a></li>
+      </ul>
+    </nav>
+  </aside>
 
+  <main style="margin-left: 13%">
+   
     <!-- Sección Hero -->
     <section class="hero">
       <div class="hero__container">
@@ -173,7 +188,6 @@ añadirCSS(); //<head> con CSS
             </div>
           </div>
         </section>
-
   </main>
 
   <?php

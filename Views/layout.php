@@ -23,6 +23,7 @@ function añadirCSS()
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="../assets/Estilos/principal.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
   </head>  ';
 }
 // ==================== HEADER ====================
