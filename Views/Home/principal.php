@@ -20,9 +20,9 @@ añadirCSS(); //<head> con CSS
   <?php
   sidebar();
   ?>
-  
+
   <main style="margin-left: 13%">
-   
+
     <!-- Sección Hero -->
     <section class="hero">
       <div class="hero__container">

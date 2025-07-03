@@ -184,18 +184,18 @@ function verfooter()
 // ==================== SIDEBAR ====================
 function sidebar()
 {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+  // if (session_status() === PHP_SESSION_NONE) {
+  //     session_start();
+  // }
+  //
+  // $usuarioLogueado = isset($_SESSION['usuario']);
+  // $roles = $_SESSION['roles'] ?? [];
+  //
+  // if (!($usuarioLogueado && in_array('ADMIN', $roles))) {
+  //     return; // No mostrar nada si no es admin
+  // }
 
-    $usuarioLogueado = isset($_SESSION['usuario']);
-    $roles = $_SESSION['roles'] ?? [];
-
-    if (!($usuarioLogueado && in_array('ADMIN', $roles))) {
-        return; // No mostrar nada si no es admin
-    }
-
-    echo '
+  echo '
     <aside class="sidebar">
       <div class="sidebar__logo">
         <i class="fa-solid fa-prescription-bottle-medical"></i>
@@ -204,8 +204,21 @@ function sidebar()
 
       <nav class="sidebar__nav">
         <ul>
-          <li><a href="#"><i class="fa-solid fa-user-gear"></i> <span class="texto-menu">Manejo de Usuario</span></a></li>
-          <li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>
+          <li><a href="#"><i class="fa-solid fa-user-gear"></i> <span class="texto-menu">Manejo de Usuario</span></a></li>';
+
+
+
+
+  if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'ADMIN') {
+    echo '
+                          <li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>';
+  }
+
+  echo '
+
+
+
+      
           <li><a href="#"><i class="fa-solid fa-chart-bar"></i> <span class="texto-menu">Reportes</span></a></li>
         </ul>
       </nav>

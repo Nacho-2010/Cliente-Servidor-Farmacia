@@ -84,10 +84,11 @@ USE FARMACIABD;
 INSERT INTO ROL (ID, NOMBRE) VALUES (1, 'CLIENTE');
 INSERT INTO ROL (ID, NOMBRE) VALUES (2, 'ADMIN');
 
+
 -- Usuarios de ejemplo
 INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
 VALUES 
-('Josue', 'josue@email.com', 'josue', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92'),
+('Josue', 'josue@email.com', 'josue', '$2y$10$Is2EkNLcar14RX5pGv9pLOQ7awuLIM.J6me350nvgpZNEi78Eli9y'),
 ('Abraham', 'abraham@email.com', 'abraham', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92');
 
 -- Asignar rol ADMIN a Josue
