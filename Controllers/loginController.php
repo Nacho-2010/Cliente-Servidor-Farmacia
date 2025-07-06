@@ -1,70 +1,85 @@
 <?php
 session_start();
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/loginModel.php';
-$_SESSION['error_btnRegistrarUsuario'] = null;
-
-if (isset($_POST['btnIniciarSesion'])) {
-    $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
-
-    // Validar inicio de sesión
-    $resultado = ValidarInicioSesionModel($correo, $contrasena);
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/utilitariosController.php';
 
 
-    if ($resultado != null && $resultado->num_rows > 0) {
-        $usuario = $resultado->fetch_assoc();
 
-        $_SESSION['usuario_id'] = $usuario['ID'];
-        $_SESSION['usuario'] = $usuario['USERNAME'];
-        $_SESSION['nombre'] = $usuario['NOMBRE'];
-
-        // Obtener roles desde la base de datos
-        $roles = ObtenerRolesDelUsuario($usuario['ID']); // crea esta función en loginModel.php
-        $_SESSION['roles'] = $roles;
-
-        header("Location: ../../Views/Home/principal.php");
-    } else {
-        $_POST['mensaje'] = "⚠️ Usuario o contraseña incorrectos.";
-    }
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
+
+
 //-----------------------------------------------------------------//
 
-if (isset($_POST['btnRegistrarUsuario'])) {
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
 
-    // Validar que el correo no exista antes de registrar
-    $correoExistente = ValidarCorreoModel($correo);
+if (isset($_POST["btnIniciarSesion"])) {
+    $correo = $_POST["txtCorreo"];
+    $contrasenna = $_POST["txtContrasenna"];
 
-    if ($correoExistente && $correoExistente->num_rows > 0) {
-        $_SESSION['error_btnRegistrarUsuario'] = "⚠️ El correo ya está registrado.";
-        header("Location: ../Views/Login/login.php");
-        exit();
-    }
+    $respuesta = ValidarInicioSesionModel($correo, $contrasenna);
 
-    // Registrar usuario
-    $resultado = RegistrarUsuarioModel($nombre, $correo, $usuario, $contrasena);
-
-    if ($resultado) {
-        $_SESSION['usuario'] = $correo;
-        $_SESSION['nombre'] = $nombre;
-        header("Location: ../Views/Home/principal.php");
-        exit();
+    if ($respuesta != null && $respuesta->num_rows > 0) {
+        $datos = mysqli_fetch_array($respuesta);
+        $_SESSION["NOMBRE"] = $datos["NOMBRE"];
+        $_SESSION["ID"] = $datos["ID"];
+        header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
     } else {
-        $_SESSION['error_btnRegistrarUsuario'] = "⚠️ Error al registrar el usuario.";
-        header("Location: ../Views/Login/login.php");
-        exit();
+        $_POST["txtMensaje"] = "Su información no fue validada correctamente.";
     }
-
-    if (isset($_POST['btnRegistrarUsuario'])) {
-        error_log("✔ Llegó al controlador");
-    } else {
-        error_log("❌ No llegó al controlador");
-    }
-
-
 }
+
+
+//-----------------------------------------------------------------//
+
+
+if (isset($_POST["btnRegistrarUsuario"])) {
+    $nombre = $_POST["txtNombre"];
+    $correo = $_POST["txtCorreo"];
+    $usuario = $_POST["txtUsuario"];
+    $contrasenna = $_POST["txtContrasenna"];
+
+    $respuesta = RegistrarUsuarioModel($nombre, $correo, $usuario, $contrasenna);
+
+    if ($respuesta) {
+        header("Location: /Cliente-Servidor-Farmacia/Views/Login/login.php");
+        exit();
+    } else {
+        $_POST["txtMensaje"] = "Su información no fue registrada correctamente.";
+    }
+}
+
+//-----------------------------------------------------------------//
+
+
+if (isset($_POST["btnRecuperarAcceso"])) {
+    $correo = $_POST["txtCorreo"];
+
+    $respuesta = ValidarCorreoModel($correo);
+
+    if ($respuesta != null && $respuesta->num_rows > 0) {
+        $datos = mysqli_fetch_array($respuesta);
+
+        $contrasenna = generarContrasena();
+
+        $respuestaActualizacion = ActualizarContrasennaModel($datos["ID"], $contrasenna);
+
+        if ($respuestaActualizacion) {
+            $mensaje = "<html><body>
+                Estimado(a) " . $datos["NOMBRE"] . "<br><br>
+                Se ha generado el siguiente código de seguridad:" . $contrasenna . "<br>
+                Recuerde realizar el cambio de contraseña una vez que ingrese al sistema.
+                </body></html>";
+
+            $respuestaCorreo = EnviarCorreo('Recuperar Acceso', $mensaje, $correo);
+
+            if ($respuestaCorreo) {
+                header("location: ../Views/Login/login.php");
+            }
+        }
+    }
+
+    $_POST["txtMensaje"] = "Su acceso no fue recuperado correctamente.";
+}
+
 ?>

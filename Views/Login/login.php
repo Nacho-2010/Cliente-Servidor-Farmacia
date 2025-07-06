@@ -25,24 +25,53 @@ añadirCSS(); //<head> con CSS
             Iniciar Sesión sin registrarme</i>
         </button>
 
+
+
+
         <div class="panel izquierdo">
             <form class="formulario login" id="form-login" method="POST">
+                <?php
+                if (isset($_POST["txtMensaje"])) {
+                    echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
+                }
+                ?>
                 <h2>Iniciar Sesión</h2>
-                <input type="email" name="correo" placeholder="Correo Electrónico" required>
-                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <input id="txtCorreo" name="txtCorreo" type="text" class="form-control form-control-lg"
+                    placeholder="Correo">
+                <input id="txtContrasenna" name="txtContrasenna" type="password" class="form-control form-control-lg"
+                    placeholder="Contraseña">
                 <button id="btnIniciarSesion" type="submit" name="btnIniciarSesion">Entrar</button>
             </form>
 
 
+
+
+
             <form class="formulario registro" id="form-register" method="POST">
+                <?php
+                if (isset($_POST["txtMensaje"])) {
+                    echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
+                }
+                ?>
+
                 <h2>Registrarse</h2>
-                <input type="text" name="nombre" placeholder="Nombre completo" required>
-                <input type="email" name="correo" placeholder="Correo Electrónico" required>
-                <input type="text" name="usuario" placeholder="Usuario" required>
-                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <input id="txtNombre" name="txtNombre" type="text" class="form-control form-control-lg"
+                    placeholder="Nombre">
+                <input id="txtCorreo" name="txtCorreo" type="email" class="form-control form-control-lg"
+                    placeholder="Correo">
+                <input id="txtUsuario" name="txtUsuario" type="text" class="form-control form-control-lg"
+                    placeholder="Usuario">
+                <input id="txtContrasenna" name="txtContrasenna" type="password" class="form-control form-control-lg"
+                    placeholder="Contraseña">
                 <button id="btnRegistrarUsuario" name="btnRegistrarUsuario" type="submit">Registrarse</button>
             </form>
         </div>
+
+
+
+
+
+
 
         <!-- Panel Derecho: Botón de cambio -->
         <div class="panel derecho">
@@ -51,6 +80,10 @@ añadirCSS(); //<head> con CSS
             <button id="btn-cambiar">Registrarse</button>
         </div>
     </div>
+
+
+
+
 
     <?php
     añadirScripts(); //scripts

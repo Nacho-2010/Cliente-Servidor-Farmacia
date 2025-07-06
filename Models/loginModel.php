@@ -1,6 +1,9 @@
 <?php
 
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
+
+
+
 function ValidarInicioSesionModel($correo, $contrasena)
 {
     try {
@@ -35,7 +38,6 @@ function RegistrarUsuarioModel($nombre, $correo, $usuario, $contrasena)
 }
 
 
-
 function ValidarCorreoModel($correo)
 {
     try {
@@ -52,26 +54,21 @@ function ValidarCorreoModel($correo)
     }
 }
 
-function ObtenerRolesDelUsuario($usuarioId) {
-    $conn = OpenDB();
 
-    $sql = "SELECT R.NOMBRE 
-            FROM USUARIO_ROL UR 
-            INNER JOIN ROL R ON UR.ROL_ID = R.ID 
-            WHERE UR.USUARIO_ID = ?";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $usuarioId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+function ActualizarContrasennaModel($idUsuario, $contrasenna)
+{
+    try {
+        $context = OpenDB();
 
-    $roles = [];
-    while ($row = $result->fetch_assoc()) {
-        $roles[] = $row['NOMBRE'];
+        $sp = "CALL ActualizarContrasenna('$idUsuario', '$contrasenna')";
+        $respuesta = $context->query($sp);
+
+        CloseDB($context);
+        return $respuesta;
+    } catch (Exception $error) {
+        RegistrarError($error);
+        return false;
     }
-
-    CloseDB($conn);
-    return $roles;
 }
 
 
