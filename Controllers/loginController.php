@@ -23,6 +23,7 @@ if (isset($_POST["btnIniciarSesion"])) {
         $datos = mysqli_fetch_array($respuesta);
         $_SESSION["NOMBRE"] = $datos["NOMBRE"];
         $_SESSION["ID"] = $datos["ID"];
+        $_SESSION["ROL"] = $datos["ROL"];
         header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
     } else {
         $_POST["txtMensaje"] = "Su información no fue validada correctamente.";

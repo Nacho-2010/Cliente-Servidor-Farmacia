@@ -21,13 +21,6 @@ añadirCSS(); //<head> con CSS
         <!-- Panel Izquierdo: Formularios -->
 
 
-        <button type="button" class="btn btn-success" onclick="window.location.href='../Home/principal.php'">
-            Iniciar Sesión sin registrarme</i>
-        </button>
-
-
-
-
         <div class="panel izquierdo">
             <form class="formulario login" id="form-login" method="POST">
                 <?php
@@ -41,6 +34,14 @@ añadirCSS(); //<head> con CSS
                 <input id="txtContrasenna" name="txtContrasenna" type="password" class="form-control form-control-lg"
                     placeholder="Contraseña">
                 <button id="btnIniciarSesion" type="submit" name="btnIniciarSesion">Entrar</button>
+                <div class="form-group m-b-0 m-t-10">
+
+                    <br>
+                    <div class="col-sm-12 text-center">
+                        Si olvidaste la contraseña <a href="recuperarAcceso.php" class="text-info m-l-5"><b>Recupera el
+                                Acceso</b></a>
+                    </div>
+                </div>
             </form>
 
 
@@ -64,6 +65,7 @@ añadirCSS(); //<head> con CSS
                 <input id="txtContrasenna" name="txtContrasenna" type="password" class="form-control form-control-lg"
                     placeholder="Contraseña">
                 <button id="btnRegistrarUsuario" name="btnRegistrarUsuario" type="submit">Registrarse</button>
+
             </form>
         </div>
 

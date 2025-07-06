@@ -16,8 +16,10 @@ class GeneradorHash
     }
 }
 
+// meterse en esta direccion en el navegador para ver el resultado
+// http://localhost:81/Cliente-Servidor-Farmacia/Utilidades/GeneradorHash.php
 
-$miClave = "admin123";
+$miClave = "123";
 
 $generador = new GeneradorHash($miClave);
 $hashGenerado = $generador->generarHash();

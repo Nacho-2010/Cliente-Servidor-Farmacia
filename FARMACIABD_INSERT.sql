@@ -173,12 +173,13 @@ INSERT INTO ROL (ID, NOMBRE) VALUES
 -- Usuarios de ejemplo
 INSERT INTO USUARIO (ID, NOMBRE, CORREO, USUARIO, CONTRASENA)
 VALUES 
-(1, 'Josue', 'josue@email.com', 'josue', '$2y$10$Is2EkNLcar14RX5pGv9pLOQ7awuLIM.J6me350nvgpZNEi78Eli9y'),
-(2, 'Abraham', 'abraham@email.com', 'abraham', '$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92');
+(1, 'Josue', 'josueadmin@email.com', 'josue', '123'), /* 123 */
+(2, 'Abraham', 'abrahamcliente@email.com', 'abraham', '123');/* 123 */
 
 -- Asignar rol ADMIN a Josue
 INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (1, 2);
-
+-- Asignar rol CLIENTE a Abraham
+INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (2, 1);
 
 
 

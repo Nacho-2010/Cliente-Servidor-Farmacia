@@ -41,15 +41,20 @@ CREATE PROCEDURE ValidarInicioSesion(
 )
 BEGIN
     SELECT 
-        ID,
-        NOMBRE,
-        CORREO,
-        USUARIO,
-        CONTRASENA
-    FROM USUARIO
-    WHERE CORREO = pcorreo
-      AND CONTRASENA = pcontrasena;
+        u.ID,
+        u.NOMBRE,
+        u.CORREO,
+        u.USUARIO,
+        u.CONTRASENA,
+        r.NOMBRE AS ROL
+    FROM USUARIO u
+    JOIN USUARIO_ROL ur ON u.ID = ur.USUARIO_ID
+    JOIN ROL r ON r.ID = ur.ROL_ID
+    WHERE u.CORREO = pcorreo
+      AND u.CONTRASENA = pcontrasena;
 END $$
+
+
 
 -- ========================================
 -- PROCEDIMIENTO: Actualizar Contrasenna
@@ -64,7 +69,7 @@ BEGIN
     WHERE 	ID = pIdUsuario;
 
 END $$
-
+
 
 
 

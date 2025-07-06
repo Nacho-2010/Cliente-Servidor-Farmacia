@@ -321,7 +321,7 @@ CREATE TABLE `terror` (
   `DESCRIPCION` text NOT NULL,
   `FECHAHORA` datetime NOT NULL,
   PRIMARY KEY (`ID_ERROR`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +330,6 @@ CREATE TABLE `terror` (
 
 LOCK TABLES `terror` WRITE;
 /*!40000 ALTER TABLE `terror` DISABLE KEYS */;
-INSERT INTO `terror` VALUES (1,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:22:27'),(2,'Duplicate entry \'abraham\' for key \'USUARIO\'','2025-07-06 13:22:53'),(3,'Duplicate entry \'abrahamprue\' for key \'USUARIO\'','2025-07-06 13:24:13'),(4,'Duplicate entry \'abrahamprue\' for key \'USUARIO\'','2025-07-06 13:30:58'),(5,'Duplicate entry \'abrahamprue\' for key \'USUARIO\'','2025-07-06 13:31:00'),(6,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:41:33'),(7,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:45:36'),(8,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:45:52'),(9,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:46:53'),(10,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:48:25'),(11,'Duplicate entry \'josue13398\' for key \'USUARIO\'','2025-07-06 13:48:31');
 /*!40000 ALTER TABLE `terror` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,7 +374,7 @@ CREATE TABLE `usuario` (
   `CONTRASENA` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `USUARIO` (`USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +383,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Josue','josue@email.com','josue','$2y$10$Is2EkNLcar14RX5pGv9pLOQ7awuLIM.J6me350nvgpZNEi78Eli9y'),(2,'Abraham','abraham@email.com','abraham','$2a$10$xaaReEFEh8.ulnY5QIKwFeTnaWcLmY7Zc128wdKq3jcOjcer1Sf92'),(3,'josue','josue13398@icloud.com','josue13398','123'),(6,'abraha','abraham@icloud.com','abrahamprue','123'),(10,'otro ','prueba@email.com','prueba','123'),(11,'otro ','cccc@email.com','cccccc','123'),(13,'yayaay','yayaya@icloud.com','yayaya','123'),(14,'','','','');
+INSERT INTO `usuario` VALUES (1,'Josue','josueadmin@email.com','josue','123'),(2,'Abraham','abrahamcliente@email.com','abraham','123');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +410,7 @@ CREATE TABLE `usuario_rol` (
 
 LOCK TABLES `usuario_rol` WRITE;
 /*!40000 ALTER TABLE `usuario_rol` DISABLE KEYS */;
-INSERT INTO `usuario_rol` VALUES (1,2);
+INSERT INTO `usuario_rol` VALUES (1,2),(2,1);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -610,14 +609,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ValidarInicioSesion`(
 )
 BEGIN
     SELECT 
-        ID,
-        NOMBRE,
-        CORREO,
-        USUARIO,
-        CONTRASENA
-    FROM USUARIO
-    WHERE CORREO = pcorreo
-      AND CONTRASENA = pcontrasena;
+        u.ID,
+        u.NOMBRE,
+        u.CORREO,
+        u.USUARIO,
+        u.CONTRASENA,
+        r.NOMBRE AS ROL
+    FROM USUARIO u
+    JOIN USUARIO_ROL ur ON u.ID = ur.USUARIO_ID
+    JOIN ROL r ON r.ID = ur.ROL_ID
+    WHERE u.CORREO = pcorreo
+      AND u.CONTRASENA = pcontrasena;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -634,4 +636,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-06 13:52:03
+-- Dump completed on 2025-07-06 15:46:44
