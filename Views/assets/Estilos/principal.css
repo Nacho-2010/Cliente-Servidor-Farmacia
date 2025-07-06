@@ -741,7 +741,6 @@ h3 {
   transition: transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-
 .btn__place:hover .fa-location-dot {
   background-color: var(--secondary-color);
   color: #fff;
@@ -836,10 +835,10 @@ h3 {
 .footer {
   background-image: url(../Imagenes/footer_background.jpg);
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
   background-size: cover;
   position: relative;
-  min-height: 400px; 
+  min-height: 400px;
 }
 
 .footer::after {
@@ -849,7 +848,7 @@ h3 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .footer__container {
@@ -890,7 +889,7 @@ h3 {
 .footer__social i {
   cursor: pointer;
   transition: all 0.4s ease;
-  color: #000; 
+  color: #000;
 }
 
 .footer__social i:hover {
@@ -921,7 +920,7 @@ h3 {
 .footer__copyright {
   text-align: center;
   font-size: 1.4rem;
-  color: #666; 
+  color: #666;
 }
 
 .footer__copyright span {
@@ -939,8 +938,8 @@ h3 {
   color: white;
   display: flex;
   flex-direction: column;
-  padding-top: 150px; 
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  padding-top: 150px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
 
@@ -970,8 +969,8 @@ h3 {
 .sidebar__nav ul li a {
   color: white;
   text-decoration: none;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 24px; 
+  font-family: "Segoe UI", sans-serif;
+  font-size: 24px;
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
@@ -988,5 +987,5 @@ h3 {
 }
 
 footer {
-  margin-left: 13%; 
+  margin-left: 13%;
 }
