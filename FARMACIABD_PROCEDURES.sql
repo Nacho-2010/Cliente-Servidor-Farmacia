@@ -14,28 +14,27 @@ CREATE PROCEDURE RegistrarUsuario(
     IN pcontrasena VARCHAR(100)
 )
 BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM USUARIO
-        WHERE CORREO = pcorreo OR USUARIO = pusuario
-    ) THEN
         INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
         VALUES (pnombre, pcorreo, pusuario, pcontrasena);
-    END IF;
 END $$
 
 -- ========================================
 -- PROCEDIMIENTO: Validar Correo
 -- ========================================
-CREATE PROCEDURE ValidarCorreo(IN pcorreo VARCHAR(100))
+
+CREATE PROCEDURE ValidarCorreo(pcorreo VARCHAR(100))
 BEGIN
-    SELECT * 
-    FROM USUARIO
-    WHERE CORREO = pcorreo;
+    SELECT NOMBRE
+           ID
+    FROM   USUARIO
+    WHERE  CORREO = pcorreo;
 END $$
+
 
 -- ========================================
 -- PROCEDIMIENTO: Validar Inicio de Sesión
 -- ========================================
+
 CREATE PROCEDURE ValidarInicioSesion(
     IN pcorreo VARCHAR(100),
     IN pcontrasena VARCHAR(100)
@@ -53,8 +52,43 @@ BEGIN
 END $$
 
 -- ========================================
+-- PROCEDIMIENTO: Actualizar Contrasenna
+-- ========================================
+
+CREATE PROCEDURE ActualizarContrasenna(pIdUsuario bigint(11),
+     pContrasenna varchar(10))
+BEGIN
+
+	UPDATE 	USUARIO
+	SET 	CONTRASENA = pContrasenna
+    WHERE 	ID = pIdUsuario;
+
+END $$
+
+
+
+
+-- ========================================
+-- PROCEDIMIENTO: Almacenar errores
+-- ========================================
+
+
+
+CREATE PROCEDURE RegistrarError (
+    IN pDescripcion VARCHAR(5000)
+)
+BEGIN
+    INSERT INTO TERROR (DESCRIPCION, FECHAHORA)
+    VALUES (pDescripcion, NOW());
+END $$
+
+
+
+
+-- ========================================
 -- PROCEDIMIENTO: Convertir Usuario en Cliente
 -- ========================================
+
 CREATE PROCEDURE convertir_usuario_en_cliente(
     IN p_usuario VARCHAR(50),
     IN p_cedula VARCHAR(20),
