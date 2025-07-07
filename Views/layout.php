@@ -69,55 +69,10 @@ function verheader()
     echo '
         <div class="profile-dis scrollable">
           <span class="user-name">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
-          <a class="dropdown-item" href="#"><i class="ti-user m-r-5 m-1-5"></i> Mi Perfil</a>
-          <a class="dropdown-item" href="#"><i class="ti-settings m-r-5 m-1-5"></i> Configuración</a>
+
           <a class="dropdown-item" href="?logout=true"><i class="ti-power-off m-r-5 m-1-5"></i> Cerrar Sesión</a>
         </div>';
-  } else {
-    echo '
-        <button class="btn btn__reserve" onclick="openModal()">Login <i class="fa-solid fa-capsules"></i></button>
-
-        <!-- Modal -->
-        <div id="modalOverlay" class="overlay default" onclick="closeModal()"></div>
-        <div id="modalDialog" class="dialog default" onclick="event.stopPropagation()">
-
-          <!-- Login -->
-          <div id="formulario-login" style="display: block;">
-            <header><h2>Iniciar Sesión</h2></header>
-            <form class="modal__form" method="POST" action="/Cliente-Servidor-Farmacia/Views/Home/principal.php">
-              <input type="email" name="correo" placeholder="Correo Electrónico" class="modal__input" required />
-              <input type="password" name="contrasena" placeholder="Contraseña" class="modal__input" required />
-              <button type="submit" name="login" class="modal__submit">Entrar <i class="fa-solid fa-arrow-right"></i></button>
-            </form>
-            <p class="modal__info">¿No tenés cuenta? <a href="#" onclick="mostrarRegistro()">Registrarse</a></p>
-          </div>
-
-          <!-- Registro -->
-          <div id="formulario-registro" style="display: none;">
-            <header><h2>Registrarse</h2></header>
-            <form class="modal__form" method="POST" action="/Cliente-Servidor-Farmacia/Views/Home/principal.php">
-              <input type="text" name="nombre" placeholder="Nombre completo" class="modal__input" required />
-              <input type="email" name="correo" placeholder="Correo Electrónico" class="modal__input" required />
-              <input type="text" name="usuario" placeholder="Usuario" class="modal__input" required />
-              <input type="password" name="contrasena" placeholder="Contraseña" class="modal__input" required />
-              <button type="submit" name="registro" class="modal__submit">Registrarse</button>
-            </form>
-            <p class="modal__info">¿Ya tenés cuenta? <a href="#" onclick="mostrarLogin()">Iniciar Sesión</a></p>
-          </div>
-        </div>
-
-        <script>
-          function mostrarRegistro() {
-            document.getElementById("formulario-login").style.display = "none";
-            document.getElementById("formulario-registro").style.display = "block";
-          }
-          function mostrarLogin() {
-            document.getElementById("formulario-login").style.display = "block";
-            document.getElementById("formulario-registro").style.display = "none";
-          }
-        </script>';
   }
-
   echo '</div></div></header>';
 }
 
@@ -172,11 +127,19 @@ function sidebar()
     session_start();
   }
 
+  $nombreUsuario = isset($_SESSION["NOMBRE"]) ? $_SESSION["NOMBRE"] : "Invitado";
+
   echo '
   <aside class="sidebar">
     <div class="sidebar__logo">
-      <i class="fa-solid fa-prescription-bottle-medical"></i>
-      <h2>Sistema Administrador</h2>
+      <i class="fa-solid fa-prescription-bottle-medical"></i>';
+
+  if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
+    echo '<h2>Sistema Administrador</h2>';
+    echo '<small class="nombre-usuario">👤 ' . htmlspecialchars($nombreUsuario) . '</small>';
+  }
+
+  echo '
     </div>
 
     <nav class="sidebar__nav">
@@ -193,6 +156,8 @@ function sidebar()
     </nav>
   </aside>';
 }
+
+
 
 // ==================== FUNCIÓN: SCRIPTS ====================
 function añadirScripts()
