@@ -8,13 +8,14 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layou
 <!DOCTYPE html>
 <html lang="es">
 
-<?php
-añadirCSS(); //<head> con CSS
-?>
-
-<?php
-// session_start();
-?>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farmacia | Login</title>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../assets/Estilos/login.css" />
+</head>
 
 <body>
     <div class="contenedor" id="contenedor">
@@ -37,16 +38,12 @@ añadirCSS(); //<head> con CSS
                 <div class="form-group m-b-0 m-t-10">
 
                     <br>
-                    <div class="col-sm-12 text-center">
-                        Si olvidaste la contraseña <a href="recuperarAcceso.php" class="text-info m-l-5"><b>Recupera el
-                                Acceso</b></a>
+                    <div class="link-recuperar">
+                        <a href="recuperarAcceso.php">¿Olvidaste tu contraseña?</a>
                     </div>
+
                 </div>
             </form>
-
-
-
-
 
             <form class="formulario registro" id="form-register" method="POST">
                 <?php
@@ -70,11 +67,6 @@ añadirCSS(); //<head> con CSS
         </div>
 
 
-
-
-
-
-
         <!-- Panel Derecho: Botón de cambio -->
         <div class="panel derecho">
             <h3 id="titulo-panel">¿Aún no tienes una cuenta?</h3>
@@ -82,9 +74,6 @@ añadirCSS(); //<head> con CSS
             <button id="btn-cambiar">Registrarse</button>
         </div>
     </div>
-
-
-
 
 
     <?php

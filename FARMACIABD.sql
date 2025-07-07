@@ -1,8 +1,9 @@
--- ARCHIVO DEPURADO: FARMACIABD SOLO CON ESTRUCTURA Y USUARIO
+-- ARCHIVO DEPURADO: FARMACIABD SOLO CON ESTRUCTURA Y USUARIO.
 
 -- ===========================================
 -- BLOQUE 01: ELIMINACIÓN Y CREACIÓN DE BASE Y USUARIO
 -- ===========================================
+
 DROP DATABASE IF EXISTS FARMACIABD;
 DROP USER IF EXISTS 'usuario_farmacia'@'%';
 

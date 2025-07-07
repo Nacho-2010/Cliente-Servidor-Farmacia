@@ -1,5 +1,5 @@
 -- ========================================
--- PROCEDIMIENTO: procedimientos
+-- PROCEDIMIENTO: procedimientos.
 -- ========================================
 USE FARMACIABD;
 DELIMITER $$
