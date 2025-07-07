@@ -11,8 +11,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 //-----------------------------------------------------------------//
-
-
 if (isset($_POST["btnIniciarSesion"])) {
     $correo = $_POST["txtCorreo"];
     $contrasenna = $_POST["txtContrasenna"];
@@ -30,9 +28,7 @@ if (isset($_POST["btnIniciarSesion"])) {
     }
 }
 
-
 //-----------------------------------------------------------------//
-
 
 if (isset($_POST["btnRegistrarUsuario"])) {
     $nombre = $_POST["txtNombre"];
@@ -52,10 +48,8 @@ if (isset($_POST["btnRegistrarUsuario"])) {
 
 //-----------------------------------------------------------------//
 
-
 if (isset($_POST["btnRecuperarAcceso"])) {
     $correo = $_POST["txtCorreo"];
-
     $respuesta = ValidarCorreoModel($correo);
 
     if ($respuesta != null && $respuesta->num_rows > 0) {
@@ -66,21 +60,27 @@ if (isset($_POST["btnRecuperarAcceso"])) {
         $respuestaActualizacion = ActualizarContrasennaModel($datos["ID"], $contrasenna);
 
         if ($respuestaActualizacion) {
+            $nombreUsuario = isset($datos["NOMBRE"]) ? $datos["NOMBRE"] : "usuario";
+
             $mensaje = "<html><body>
-                Estimado(a) " . $datos["NOMBRE"] . "<br><br>
-                Se ha generado el siguiente código de seguridad:" . $contrasenna . "<br>
+                Estimado(a) " . htmlspecialchars($nombreUsuario) . ",<br><br>
+                Se ha generado el siguiente código de seguridad: <b>" . $contrasenna . "</b><br>
                 Recuerde realizar el cambio de contraseña una vez que ingrese al sistema.
                 </body></html>";
 
             $respuestaCorreo = EnviarCorreo('Recuperar Acceso', $mensaje, $correo);
 
             if ($respuestaCorreo) {
-                header("location: ../Views/Login/login.php");
+                header("Location: /Cliente-Servidor-Farmacia/Views/Login/login.php");
+                exit();
+            } else {
+                $_POST["txtMensaje"] = "No se pudo enviar el correo. Intente más tarde.";
             }
+        } else {
+            $_POST["txtMensaje"] = "No se pudo actualizar la contraseña. Intente más tarde.";
         }
+    } else {
+        $_POST["txtMensaje"] = "El correo ingresado no está registrado.";
     }
-
-    $_POST["txtMensaje"] = "Su acceso no fue recuperado correctamente.";
 }
-
 ?>

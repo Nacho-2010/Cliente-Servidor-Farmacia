@@ -1,6 +1,10 @@
 <?php
 
-function generarContrasena($longitud = 8)
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/PHPMailer/src/PHPMailer.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/PHPMailer/src/SMTP.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/PHPMailer/src/Exception.php';
+
+function generarContrasena($longitud = 8) 
 {
     $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $contrasena = '';
@@ -13,38 +17,38 @@ function generarContrasena($longitud = 8)
 
 function EnviarCorreo($asunto, $contenido, $destinatario)
 {
-    require 'PHPMailer/src/PHPMailer.php';
-    require 'PHPMailer/src/SMTP.php';
+    $correoSalida = "nacugamer20@gmail.com";
+    $contrasennaSalida = "cthildscsooaqsxv";
 
-    $correoSalida = "jvega00898@ufide.ac.cr";
-    $contrasennaSalida = "XXXXXXXXXXXX";
-
-    $mail = new PHPMailer();
-    $mail->CharSet = 'UTF-8';
-
-    $mail->IsSMTP();
-    $mail->IsHTML(true);
-    $mail->Host = 'smtp.office365.com';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
-    $mail->SMTPAuth = true;
-    $mail->Username = $correoSalida;
-    $mail->Password = $contrasennaSalida;
-
-    $mail->SetFrom($correoSalida);
-    $mail->Subject = $asunto;
-    $mail->MsgHTML($contenido);
-    $mail->AddAddress($destinatario);
+    $mail = new PHPMailer(true);
 
     try {
-        if ($mail->send()) {
-            return true; // Envío exitoso
-        } else {
-            return true; // Falló el envío
-        }
+        $mail->CharSet = 'UTF-8';
+        $mail->isSMTP();
+        $mail->isHTML(true);
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+        $mail->SMTPAuth = true;
+        $mail->Username = $correoSalida;
+        $mail->Password = $contrasennaSalida;
+
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ]
+        ];
+
+        $mail->setFrom($correoSalida, 'Soporte Farmacia');
+        $mail->Subject = $asunto;
+        $mail->MsgHTML($contenido);
+        $mail->addAddress($destinatario);
+
+        return $mail->send();
     } catch (Exception $e) {
+        // log error si lo deseas
         return false;
     }
 }
-
-?>
