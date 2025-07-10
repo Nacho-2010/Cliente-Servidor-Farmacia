@@ -21,7 +21,7 @@ añadirCSS(); //<head> con CSS
 
   <main style="margin-left: 13%">
 
-  
+
 
     <!-- Sección Hero -->
     <section class="hero">
@@ -129,54 +129,50 @@ añadirCSS(); //<head> con CSS
           </div>
         </section>
 
-        <!-- Enfermedades -->
+        <!-- Enfermedades - Estilo Aporte JD mejorado -->
         <section class="Enfermedades">
-          <div class="Enfermedades__container">
-            <h2 class="Enfermedades__title">Enfermedades actuales</h2>
-            <div class="Enfermedades__content">
+          <h2 class="titulo-enfermedades">Enfermedades actuales</h2>
+          <div class="wrapper">
+            <div class="container-cartas">
+              <input type="radio" name="slide" id="c1" checked>
+              <label for="c1" class="card-info virus">
+                <div class="vertical-title">Virus</div>
+                <div class="row">
+                  <div class="icon">1</div>
+                  <div class="description">
+                    <h4>Virus</h4>
+                    <p>¿Hay riesgo de pandemia por gripe aviar en 2025?</p>
+                  </div>
+                </div>
+              </label>
 
-              <!-- Artículo 1 -->
-              <article class="entry">
-                <div class="entry__img-container">
-                  <img src="../assets/Imagenes/virus.jpg" alt="Imagen de virus" class="entry__image" />
+              <input type="radio" name="slide" id="c2">
+              <label for="c2" class="card-info coronavirus">
+                <div class="vertical-title">Coronavirus</div>
+                <div class="row">
+                  <div class="icon">2</div>
+                  <div class="description">
+                    <h4>Coronavirus</h4>
+                    <p>¿Habrá una pandemia en 2025?</p>
+                  </div>
                 </div>
-                <div class="entry__info">
-                  <p class="entry__date">Junio 1, 2025</p>
-                  <h3 class="entry__title">¿Hay riesgo de pandemia por gripe aviar en 2025?</h3>
-                  <p class="entry__description">Virus de la gripe: Es un virus ARN...</p>
-                  <a href="#" class="entry__btn">Continua leyendo... <i class="fa-solid fa-book-open-reader"></i></a>
-                </div>
-              </article>
+              </label>
 
-              <!-- Artículo 2 -->
-              <article class="entry">
-                <div class="entry__img-container">
-                  <img src="../assets/Imagenes/coronavirus.jpg" alt="Imagen coronavirus" class="entry__image" />
+              <input type="radio" name="slide" id="c3">
+              <label for="c3" class="card-info fiebre">
+                <div class="vertical-title">Fiebre</div>
+                <div class="row">
+                  <div class="icon">3</div>
+                  <div class="description">
+                    <h4>Fiebre Amarilla</h4>
+                    <p>OPS emite nueva alerta por fiebre amarilla</p>
+                  </div>
                 </div>
-                <div class="entry__info">
-                  <p class="entry__date">Junio 1, 2025</p>
-                  <h3 class="entry__title">¿Habrá una pandemia en 2025?</h3>
-                  <p class="entry__description">La COVID-19 surgió de repente, se propagó rápidamente...</p>
-                  <a href="#" class="entry__btn">Continua leyendo... <i class="fa-solid fa-book-open-reader"></i></a>
-                </div>
-              </article>
-
-              <!-- Artículo 3 -->
-              <article class="entry">
-                <div class="entry__img-container">
-                  <img src="../assets/Imagenes/fiebre.jpg" alt="Imagen fiebre amarilla" class="entry__image" />
-                </div>
-                <div class="entry__info">
-                  <p class="entry__date">Junio 1, 2025</p>
-                  <h3 class="entry__title">OPS emite nueva alerta por fiebre amarilla</h3>
-                  <p class="entry__description">La OPS ha emitido una nueva alerta debido al incremento de casos...</p>
-                  <a href="#" class="entry__btn">Continua leyendo... <i class="fa-solid fa-book-open-reader"></i></a>
-                </div>
-              </article>
-
+              </label>
             </div>
           </div>
         </section>
+
   </main>
 
   <?php

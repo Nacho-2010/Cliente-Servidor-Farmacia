@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
 :root {
   --title-font: "Fredoka", sans-serif;
   --text-font: "Outfit", sans-serif;
@@ -844,4 +846,160 @@ h3 {
 
 footer {
   margin-left: 13%;
+}
+
+/* ======== Sección Enfermedades generales ======== */
+.Enfermedades {
+  min-height: calc(100vh - 200px); /* Auto ajuste depende de si se mueva algo en la sección de arriba y el footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.titulo-enfermedades {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 5rem;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+/* ======== Enfermedades - Cartas estilo Aporte JD ======== */
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-cartas {
+  height: 400px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-info {
+  width: 80px;
+  min-height: 400px;
+  border-radius: 2rem;
+  background-color: #275f9e;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition: .6s cubic-bezier(.28,-0.03,0,.99);
+  box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+.card-info > .row {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.card-info > .row > .icon {
+  background: #223;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-info > .row > .description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  height: 80px;
+  width: 520px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition-delay: .3s;
+  transition: all .3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card-info .description p {
+  color: white;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+.card-info .description h4 {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + label {
+  width: 600px;
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+input[type="radio"]:checked + label .description {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Título vertical en tarjetas cerradas */
+.card-info .vertical-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  text-align: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+input[type="radio"]:checked + label .vertical-title {
+  opacity: 0;
+}
+
+/* Mostrar imagen solo cuando está estirada la vara */
+input#c1:checked + label.virus {
+  background-image: url('../../assets/Imagenes/virus.jpg');
+}
+
+input#c2:checked + label.coronavirus {
+  background-image: url('../../assets/Imagenes/coronavirus.jpg');
+}
+
+input#c3:checked + label.fiebre {
+  background-image: url('../../assets/Imagenes/fiebre.jpg');
 }
