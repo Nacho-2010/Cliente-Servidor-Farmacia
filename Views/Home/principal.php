@@ -129,7 +129,7 @@ añadirCSS(); //<head> con CSS
           </div>
         </section>
 
-        <!-- Enfermedades - Estilo Aporte JD mejorado -->
+        <!-- Enfermedades - Estilo Aporte JD -->
         <section class="Enfermedades">
           <h2 class="titulo-enfermedades">Enfermedades actuales</h2>
           <div class="wrapper">
