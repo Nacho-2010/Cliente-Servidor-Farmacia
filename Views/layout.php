@@ -147,7 +147,10 @@ function sidebar()
         <li><a href="#"><i class="fa-solid fa-user-gear"></i> <span class="texto-menu">Manejo de Usuario</span></a></li>';
 
   if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
-    echo '<li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>';
+    echo '<li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>
+    <li> <a href="/Cliente-Servidor-Farmacia/Views/Productos/producto.php"> <i class="fa-solid fa-plus"></i>
+         <span class="texto-menu">Registrar Producto</span></a>
+        </li>';
   }
 
   echo '
