@@ -18,6 +18,19 @@ USE `farmaciabd`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Temporary view structure for view `categoria_producto_activa_v`
+--
+
+DROP TABLE IF EXISTS `categoria_producto_activa_v`;
+/*!50001 DROP VIEW IF EXISTS `categoria_producto_activa_v`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `categoria_producto_activa_v` AS SELECT 
+ 1 AS `ID_CATEGORIA_PRODUCTO`,
+ 1 AS `NOMBRE`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `cliente`
 --
 
@@ -360,6 +373,19 @@ LOCK TABLES `tipo_alerta` WRITE;
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `unidad_medida_activa_v`
+--
+
+DROP TABLE IF EXISTS `unidad_medida_activa_v`;
+/*!50001 DROP VIEW IF EXISTS `unidad_medida_activa_v`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `unidad_medida_activa_v` AS SELECT 
+ 1 AS `ID_UNIDAD_MEDIDA`,
+ 1 AS `NOMBRE`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -413,6 +439,10 @@ LOCK TABLES `usuario_rol` WRITE;
 INSERT INTO `usuario_rol` VALUES (1,2),(2,1);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'farmaciabd'
+--
 
 --
 -- Dumping routines for database 'farmaciabd'
@@ -524,6 +554,39 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_PRODUCTO_INSERTAR_SP` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_PRODUCTO_INSERTAR_SP`(
+    IN p_NOMBRE VARCHAR(100),
+    IN p_CODIGO VARCHAR(20),
+    IN p_PRECIO_UNITARIO DECIMAL(10,2),
+    IN p_ID_CATEGORIA_PRODUCTO INT,
+    IN p_ID_UNIDAD_MEDIDA INT,
+    IN p_ID_ESTADO INT
+)
+BEGIN
+    INSERT INTO FIDE_PRODUCTO_TB (
+        NOMBRE, CODIGO, PRECIO_UNITARIO,
+        ID_CATEGORIA_PRODUCTO, ID_UNIDAD_MEDIDA, ID_ESTADO
+    )
+    VALUES (
+        p_NOMBRE, p_CODIGO, p_PRECIO_UNITARIO,
+        p_ID_CATEGORIA_PRODUCTO, p_ID_UNIDAD_MEDIDA, p_ID_ESTADO
+    );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RegistrarError` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -626,6 +689,42 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `categoria_producto_activa_v`
+--
+
+/*!50001 DROP VIEW IF EXISTS `categoria_producto_activa_v`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `categoria_producto_activa_v` AS select `fide_categoria_producto_tb`.`ID_CATEGORIA_PRODUCTO` AS `ID_CATEGORIA_PRODUCTO`,`fide_categoria_producto_tb`.`NOMBRE` AS `NOMBRE` from `fide_categoria_producto_tb` where `fide_categoria_producto_tb`.`ID_ESTADO` = 1 */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `unidad_medida_activa_v`
+--
+
+/*!50001 DROP VIEW IF EXISTS `unidad_medida_activa_v`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `unidad_medida_activa_v` AS select `fide_unidad_medida_tb`.`ID_UNIDAD_MEDIDA` AS `ID_UNIDAD_MEDIDA`,`fide_unidad_medida_tb`.`NOMBRE` AS `NOMBRE` from `fide_unidad_medida_tb` where `fide_unidad_medida_tb`.`ID_ESTADO` = 1 */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -636,4 +735,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-06 15:46:44
+-- Dump completed on 2025-07-12 17:39:53

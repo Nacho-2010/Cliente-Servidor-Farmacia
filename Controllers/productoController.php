@@ -11,7 +11,7 @@ if (isset($_POST["btnRegistrarProducto"])) {
 
     InsertarProducto($nombre, $codigo, $precio, $idCategoria, $idUnidad, $idEstado);
 
-    header("Location: /Cliente-Servidor-Farmacia/Views/Producto/registrar.php?mensaje=Producto registrado correctamente");
+    header("Location: /Cliente-Servidor-Farmacia/Views/pages/producto.php?mensaje=Producto registrado correctamente");
     exit(); //se detiene la ejecucion
 }
 ?>
