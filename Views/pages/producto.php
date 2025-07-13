@@ -9,9 +9,16 @@ $unidades = ObtenerUnidadesMedida();
 <!DOCTYPE html>
 <html lang="es">
 <?php añadirCSS(); ?>
+<head>
+  <link rel="stylesheet" href="/Cliente-Servidor-Farmacia/Views/assets/Estilos/registroProductos.css">
+</head>
 
 <body>
 
+<a href="/Cliente-Servidor-Farmacia/Views/Home/principal.php"
+   class="btn btn-dark border-0 shadow-none boton-salir">
+  Salir
+</a>
 
   <main class="main-content container mt-5">
     <h2 class="text-center mb-4">Registrar Producto</h2>
@@ -36,7 +43,7 @@ $unidades = ObtenerUnidadesMedida();
 
       <div class="mb-3">
         <label for="txtPrecio" class="form-label">Precio Unitario</label>
-        <input type="number" id="txtPrecio" name="txtPrecio" step="0.01" class="form-control" required>
+        <input type="number" id="txtPrecio" name="txtPrecio" step="100" class="form-control" required>
       </div>
 
       <div class="mb-3">
@@ -63,10 +70,13 @@ $unidades = ObtenerUnidadesMedida();
         </select>
       </div>
 
-      <div class="text-center">
-        <button type="submit" name="btnRegistrarProducto" class="btn btn-primary">Registrar Producto</button>
-      </div>
-    </form>
+    <div class="text-center">
+  <button type="submit" name="btnRegistrarProducto" class="btn btn-primary border-0">
+    Registrar Producto
+  </button>
+</div>
+
+</form>
   </main>
 </body>
 
