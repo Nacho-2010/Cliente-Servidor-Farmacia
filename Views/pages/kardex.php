@@ -12,11 +12,13 @@ $id_farmacia = ObtenerFarmaciasActivas();
 <body>
     <?php verheader(); ?>
     <?php sidebar(); ?>
-
+    <br>
+    <br>
+    <br>
     <main class="main-kardex">
         <section class="kardex-container">
 
-            <!-- Formulario de búsqueda por código -->
+            <!-- 1. COLUMNA: BÚSQUEDA DE PRODUCTO -->
             <div class="formulario-kardex">
                 <h2>Consultar Producto</h2>
                 <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
@@ -35,8 +37,11 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 </form>
             </div>
 
+            <!-- 2. COLUMNA: INFO + FORMULARIOS DINÁMICOS -->
             <?php if (isset($_SESSION["CODIGO_BUSCADO"])): ?>
                 <div class="formulario-kardex">
+
+                    <!-- INFORMACIÓN DEL PRODUCTO -->
                     <div class="info-producto">
                         <h3><?= $_SESSION["NOMBRE_PRODUCTO"] ?? "Producto Desconocido" ?></h3>
                         <p><strong>Unidad de medida:</strong> <?= $_SESSION["UNIDAD_MEDIDA"] ?? "No definida" ?></p>
@@ -57,16 +62,17 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         </p>
                     </div>
 
-                    <!-- Formulario de movimiento -->
+                    <!-- FORMULARIO DE INGRESO -->
                     <h2>Registrar Ingreso</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
                         <input type="text" name="txtLote" placeholder="Número de lote" required>
-                        <h4>Ingrese fecha de movimiento</h4>
-                        <input type="date" name="txtFecha" required>
-                        <h4>Ingrese fecha de vencimiento del producto</h4>
-                        <input type="date" name="txtFechaVencimiento" required>
 
+                        <h4>Fecha del movimiento</h4>
+                        <input type="date" name="txtFecha" required>
+
+                        <h4>Fecha de vencimiento</h4>
+                        <input type="date" name="txtFechaVencimiento" required>
 
                         <input type="number" name="txtCantidad" placeholder="Cantidad" required>
 
@@ -94,14 +100,13 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         <button type="submit" name="btnRegistrarMovimiento">Registrar</button>
                     </form>
 
-                    <!-- Formulario para salida automática por lotes -->
+                    <!-- FORMULARIO SALIDA AUTOMÁTICA -->
                     <h2>Salida Automática por Lotes</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
 
-                        <h4>Ingrese la cantidad que desea retirar</h4>
-                        <input type="number" name="txtCantidad" placeholder="Cantidad total a retirar" required>
-
+                        <h4>Cantidad total a retirar</h4>
+                        <input type="number" name="txtCantidad" placeholder="Cantidad" required>
 
                         <label>
                             <input type="checkbox" id="chkDescripcionLotes" data-target="txtDescripcionLotes">
@@ -123,10 +128,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         </button>
                     </form>
 
-
-
-
-
+                    <!-- MENSAJE -->
                     <?php if (isset($_SESSION["txtMensaje"])): ?>
                         <div class="mensaje-sistema">
                             <?= $_SESSION["txtMensaje"];
@@ -134,41 +136,42 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         </div>
                     <?php endif; ?>
                 </div>
+            <?php endif; ?>
 
-                <!-- Historial dinámico -->
-                <?php
-                $historial = $_SESSION["MOVIMIENTOS"] ?? [];
-                ?>
-                <?php if (!empty($historial)): ?>
-                    <div class="historial-kardex">
-                        <h2>Historial de Movimientos</h2>
-                        <table>
-                            <thead>
+            <!-- 3. COLUMNA: HISTORIAL -->
+            <?php
+            $historial = $_SESSION["MOVIMIENTOS"] ?? [];
+            ?>
+            <?php if (!empty($historial)): ?>
+                <div class="historial-kardex">
+                    <h2>Historial de Movimientos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Cantidad</th>
+                                <th>Lotes Afectados</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($historial as $mov): ?>
                                 <tr>
-                                    <th>Fecha</th>
-                                    <th>Tipo</th>
-                                    <th>Cantidad</th>
-                                    <th>Lotes Afectados</th>
-                                    <th>Saldo</th>
+                                    <td><?= $mov["FECHA_MOVIMIENTO"] ?></td>
+                                    <td><?= $mov["TIPO_MOVIMIENTO"] ?></td>
+                                    <td><?= $mov["CANTIDAD"] ?></td>
+                                    <td><?= $mov["LOTES_AFECTADOS"] ?? '-' ?></td>
+                                    <td><?= $mov["SALDO"] ?></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($historial as $mov): ?>
-                                    <tr>
-                                        <td><?= $mov["FECHA_MOVIMIENTO"] ?></td>
-                                        <td><?= $mov["TIPO_MOVIMIENTO"] ?></td>
-                                        <td><?= $mov["CANTIDAD"] ?></td>
-                                        <td><?= $mov["LOTES_AFECTADOS"] ?? '-' ?></td>
-                                        <td><?= $mov["SALDO"] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif; ?>
         </section>
     </main>
+
 
     <script>
         document.querySelectorAll('input[type="checkbox"][data-target]').forEach(function (checkbox) {
