@@ -352,7 +352,10 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS BuscarProductoPorCodigo;
 DELIMITER $$
 
-CREATE PROCEDURE BuscarProductoPorCodigo(IN p_codigo VARCHAR(20))
+CREATE PROCEDURE BuscarProductoPorCodigo(
+    IN p_codigo VARCHAR(20),
+    IN p_id_farmacia INT
+)
 BEGIN
     SELECT 
         P.CODIGO, 
@@ -362,9 +365,12 @@ BEGIN
     FROM FIDE_PRODUCTO_TB P
     JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
     JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
-    WHERE P.CODIGO = p_codigo;
+    WHERE P.CODIGO = p_codigo
+      AND I.ID_FARMACIA = p_id_farmacia
+    LIMIT 1;
 END $$
 DELIMITER ;
+
 
 
 -- ========================================
@@ -444,6 +450,7 @@ BEGIN
     DECLARE v_fecha_venc DATE;
     DECLARE v_cantidad_en_lote INT;
     DECLARE v_stock_fecha INT;
+    DECLARE v_total_retirado INT DEFAULT 0; -- 👈 NUEVO
 
     -- Cursor y handler deben declararse ANTES de cualquier otra lógica
     DECLARE lote_cursor CURSOR FOR
@@ -464,10 +471,9 @@ BEGIN
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_id_lote = NULL;
 
-    -- Inicializamos valor restante
     SET v_cantidad_restante = p_cantidad_total;
 
-    -- Validación previa: stock hasta la fecha del movimiento
+    -- Validación previa
     SELECT 
         IFNULL(SUM(CASE 
             WHEN TIPO_MOVIMIENTO = 'Entrada' THEN CANTIDAD
@@ -486,13 +492,11 @@ BEGIN
         SET MESSAGE_TEXT = 'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.';
     END IF;
 
-    -- Obtener ID_INVENTARIO
     SELECT ID_INVENTARIO INTO v_id_inventario
     FROM FIDE_INVENTARIO_TB
     WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
     LIMIT 1;
 
-    -- Cursor para aplicar la salida por lotes disponibles
     OPEN lote_cursor;
 
     lote_loop: LOOP
@@ -511,10 +515,7 @@ BEGIN
                 'Salida', v_cantidad_restante, p_descripcion, p_empresa, p_id_farmacia
             );
 
-            UPDATE FIDE_INVENTARIO_TB
-            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_restante
-            WHERE ID_INVENTARIO = v_id_inventario;
-
+            SET v_total_retirado = v_total_retirado + v_cantidad_restante; -- 👈 NUEVO
             SET v_cantidad_restante = 0;
         ELSE
             INSERT INTO FIDE_MOVIMIENTO_TB (
@@ -525,17 +526,20 @@ BEGIN
                 'Salida', v_cantidad_en_lote, p_descripcion, p_empresa, p_id_farmacia
             );
 
-            UPDATE FIDE_INVENTARIO_TB
-            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_en_lote
-            WHERE ID_INVENTARIO = v_id_inventario;
-
+            SET v_total_retirado = v_total_retirado + v_cantidad_en_lote; -- 👈 NUEVO
             SET v_cantidad_restante = v_cantidad_restante - v_cantidad_en_lote;
         END IF;
     END LOOP;
 
     CLOSE lote_cursor;
+
+    -- 👇 NUEVO: actualizar solo una vez el saldo
+    UPDATE FIDE_INVENTARIO_TB
+    SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_total_retirado
+    WHERE ID_INVENTARIO = v_id_inventario;
 END $$
 DELIMITER ;
+
 
 
 
@@ -557,5 +561,10 @@ WHERE M.TIPO_MOVIMIENTO = 'Salida'
   AND M.ID_FARMACIA = 1;
 
 
+CALL ObtenerStockDisponible('110010204', 1);
 
 CALL ObtenerLotesDisponiblesPorProducto('110010204', 1);
+
+
+
+

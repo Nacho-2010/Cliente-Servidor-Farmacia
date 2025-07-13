@@ -58,20 +58,15 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     </div>
 
                     <!-- Formulario de movimiento -->
-                    <h2>Registrar Movimiento Ingreso</h2>
+                    <h2>Registrar Ingreso</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
                         <input type="text" name="txtLote" placeholder="Número de lote" required>
-                        <h4>Ingrese fecha de vencimiento del producto</h4>
-                        <input type="date" name="txtFechaVencimiento" required>
                         <h4>Ingrese fecha de movimiento</h4>
                         <input type="date" name="txtFecha" required>
+                        <h4>Ingrese fecha de vencimiento del producto</h4>
+                        <input type="date" name="txtFechaVencimiento" required>
 
-                        <select name="ddlTipo" required>
-                            <option value="">Seleccione tipo</option>
-                            <option value="Entrada">Entrada</option>
-                            <option value="Salida">Salida</option>
-                        </select>
 
                         <input type="number" name="txtCantidad" placeholder="Cantidad" required>
 
@@ -107,8 +102,6 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         <h4>Ingrese la cantidad que desea retirar</h4>
                         <input type="number" name="txtCantidad" placeholder="Cantidad total a retirar" required>
 
-                        <h4>Ingrese fecha de movimiento</h4>
-                        <input type="date" name="txtFecha" required>
 
                         <label>
                             <input type="checkbox" id="chkDescripcionLotes" data-target="txtDescripcionLotes">

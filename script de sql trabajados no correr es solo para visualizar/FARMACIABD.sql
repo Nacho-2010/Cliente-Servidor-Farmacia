@@ -170,9 +170,6 @@ CREATE TABLE FIDE_MOVIMIENTO_TB (
 );
 
 
-
-
-
 -- ===========================================
 -- BLOQUE 06: TABLA DE REGISTRO DE ERRORES
 -- ===========================================

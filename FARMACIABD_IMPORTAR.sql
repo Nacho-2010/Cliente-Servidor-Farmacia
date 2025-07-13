@@ -215,7 +215,7 @@ CREATE TABLE `fide_inventario_tb` (
 
 LOCK TABLES `fide_inventario_tb` WRITE;
 /*!40000 ALTER TABLE `fide_inventario_tb` DISABLE KEYS */;
-INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',4,0,0,10,1),(2,'110010204',-2,0,0,5,1),(3,'110010204',40,0,0,1,1),(4,'110010205',8,0,0,1,1),(5,'110010205',4,0,0,3,1);
+INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',0,0,0,10,1),(2,'110010204',0,0,0,5,1),(3,'110010204',4,0,0,1,1),(4,'110010205',0,0,0,1,1),(5,'110010205',0,0,0,3,1);
 /*!40000 ALTER TABLE `fide_inventario_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +238,7 @@ CREATE TABLE `fide_lote_tb` (
   KEY `FK_LOTE_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `fide_lote_tb` (
 
 LOCK TABLES `fide_lote_tb` WRITE;
 /*!40000 ALTER TABLE `fide_lote_tb` DISABLE KEYS */;
-INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1);
+INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1),(22,'110010204','9999','2025-07-13','2025-08-08',1),(23,'110010204','88888','2025-07-13','2025-08-07',1),(24,'110010204','888','2025-07-14','2025-08-09',1),(25,'110010204','888','2025-07-13','2025-08-23',1),(26,'110010204','88888','2025-07-13','2025-08-16',1),(27,'110010204','88888','2025-07-13','2025-08-29',1),(28,'110010204','9999','2025-07-13','2025-08-09',1),(29,'110010204','8888','2025-07-13','2025-08-24',1),(30,'110010204','9999','2025-07-13','2025-08-06',1),(31,'110010204','9999','2025-07-13','2025-07-25',1),(32,'110010204','8888888','2025-07-13','2025-08-01',1);
 /*!40000 ALTER TABLE `fide_lote_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +276,7 @@ CREATE TABLE `fide_movimiento_tb` (
   CONSTRAINT `FK_MOVIMIENTO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
   CONSTRAINT `FK_MOVIMIENTO_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
   CONSTRAINT `FK_MOVIMIENTO_LOTE` FOREIGN KEY (`ID_LOTE`) REFERENCES `fide_lote_tb` (`ID_LOTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +285,7 @@ CREATE TABLE `fide_movimiento_tb` (
 
 LOCK TABLES `fide_movimiento_tb` WRITE;
 /*!40000 ALTER TABLE `fide_movimiento_tb` DISABLE KEYS */;
-INSERT INTO `fide_movimiento_tb` VALUES (1,3,19,'2025-07-13','2025-08-22','Entrada',5,'','',1),(2,3,20,'2025-07-13','2025-08-07','Entrada',2,'','',1),(3,3,21,'2025-07-14','2025-08-08','Entrada',4,'','',1),(4,3,20,'2025-07-13','2025-08-07','Salida',2,'','',1),(5,3,19,'2025-07-13','2025-08-22','Salida',1,'','',1),(6,3,21,'2025-07-14','2025-08-08','Salida',4,'','',1),(7,3,19,'2025-07-14','2025-08-22','Salida',1,'','',1);
+INSERT INTO `fide_movimiento_tb` VALUES (25,3,22,'2025-07-13','2025-08-08','Entrada',4,'','',1),(26,3,7,'2025-07-13','2025-08-03','Entrada',5,'','',1),(27,3,7,'2025-07-13','2025-08-03','Salida',5,'','',1);
 /*!40000 ALTER TABLE `fide_movimiento_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +406,7 @@ CREATE TABLE `terror` (
   `DESCRIPCION` text NOT NULL,
   `FECHAHORA` datetime NOT NULL,
   PRIMARY KEY (`ID_ERROR`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +415,7 @@ CREATE TABLE `terror` (
 
 LOCK TABLES `terror` WRITE;
 /*!40000 ALTER TABLE `terror` DISABLE KEYS */;
-INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49'),(5,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:04:41'),(6,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:22:09'),(7,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:23'),(8,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:37'),(9,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:44'),(10,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:43:21'),(11,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:44:12'),(12,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:48:53'),(13,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:05:47'),(14,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:09:04'),(15,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:25:54'),(16,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:29:58'),(17,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:44:33'),(18,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:51:35'),(19,'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.','2025-07-13 15:54:01'),(20,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:58:23');
+INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49'),(5,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:04:41'),(6,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:22:09'),(7,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:23'),(8,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:37'),(9,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:44'),(10,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:43:21'),(11,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:44:12'),(12,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:48:53'),(13,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:05:47'),(14,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:09:04'),(15,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:25:54'),(16,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:29:58'),(17,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:44:33'),(18,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:51:35'),(19,'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.','2025-07-13 15:54:01'),(20,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:58:23'),(21,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:41:34'),(22,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:46:17'),(23,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:49:29'),(24,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:54:05'),(25,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:56:28'),(26,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:58:35'),(27,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 17:00:46');
 /*!40000 ALTER TABLE `terror` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -554,7 +554,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoPorCodigo`(IN p_codigo VARCHAR(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoPorCodigo`(
+    IN p_codigo VARCHAR(20),
+    IN p_id_farmacia INT
+)
 BEGIN
     SELECT 
         P.CODIGO, 
@@ -564,7 +567,9 @@ BEGIN
     FROM FIDE_PRODUCTO_TB P
     JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
     JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
-    WHERE P.CODIGO = p_codigo;
+    WHERE P.CODIGO = p_codigo
+      AND I.ID_FARMACIA = p_id_farmacia
+    LIMIT 1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -713,6 +718,7 @@ BEGIN
     DECLARE v_fecha_venc DATE;
     DECLARE v_cantidad_en_lote INT;
     DECLARE v_stock_fecha INT;
+    DECLARE v_total_retirado INT DEFAULT 0; -- 👈 NUEVO
 
     -- Cursor y handler deben declararse ANTES de cualquier otra lógica
     DECLARE lote_cursor CURSOR FOR
@@ -733,10 +739,9 @@ BEGIN
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_id_lote = NULL;
 
-    -- Inicializamos valor restante
     SET v_cantidad_restante = p_cantidad_total;
 
-    -- Validación previa: stock hasta la fecha del movimiento
+    -- Validación previa
     SELECT 
         IFNULL(SUM(CASE 
             WHEN TIPO_MOVIMIENTO = 'Entrada' THEN CANTIDAD
@@ -755,13 +760,11 @@ BEGIN
         SET MESSAGE_TEXT = 'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.';
     END IF;
 
-    -- Obtener ID_INVENTARIO
     SELECT ID_INVENTARIO INTO v_id_inventario
     FROM FIDE_INVENTARIO_TB
     WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
     LIMIT 1;
 
-    -- Cursor para aplicar la salida por lotes disponibles
     OPEN lote_cursor;
 
     lote_loop: LOOP
@@ -780,10 +783,7 @@ BEGIN
                 'Salida', v_cantidad_restante, p_descripcion, p_empresa, p_id_farmacia
             );
 
-            UPDATE FIDE_INVENTARIO_TB
-            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_restante
-            WHERE ID_INVENTARIO = v_id_inventario;
-
+            SET v_total_retirado = v_total_retirado + v_cantidad_restante; -- 👈 NUEVO
             SET v_cantidad_restante = 0;
         ELSE
             INSERT INTO FIDE_MOVIMIENTO_TB (
@@ -794,15 +794,17 @@ BEGIN
                 'Salida', v_cantidad_en_lote, p_descripcion, p_empresa, p_id_farmacia
             );
 
-            UPDATE FIDE_INVENTARIO_TB
-            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_en_lote
-            WHERE ID_INVENTARIO = v_id_inventario;
-
+            SET v_total_retirado = v_total_retirado + v_cantidad_en_lote; -- 👈 NUEVO
             SET v_cantidad_restante = v_cantidad_restante - v_cantidad_en_lote;
         END IF;
     END LOOP;
 
     CLOSE lote_cursor;
+
+    -- 👇 NUEVO: actualizar solo una vez el saldo
+    UPDATE FIDE_INVENTARIO_TB
+    SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_total_retirado
+    WHERE ID_INVENTARIO = v_id_inventario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1183,7 +1185,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `historial_kardex_v` AS select `m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,concat('+',sum(`m`.`CANTIDAD`)) AS `CANTIDAD`,group_concat(concat(`m`.`CANTIDAD`,' lot ',`m`.`NUMERO_LOTE`) separator ', ') AS `LOTES_AFECTADOS`,(select ifnull(sum(case when `m2`.`TIPO_MOVIMIENTO` = 'Entrada' then `m2`.`CANTIDAD` when `m2`.`TIPO_MOVIMIENTO` = 'Salida' then -`m2`.`CANTIDAD` else 0 end),0) from `fide_movimiento_tb` `m2` where `m2`.`ID_INVENTARIO` = `m`.`ID_INVENTARIO` and `m2`.`ID_FARMACIA` = `m`.`ID_FARMACIA` and (`m2`.`FECHA_MOVIMIENTO` < `m`.`FECHA_MOVIMIENTO` or `m2`.`FECHA_MOVIMIENTO` = `m`.`FECHA_MOVIMIENTO` and `m2`.`ID_MOVIMIENTO` <= max(`m`.`ID_MOVIMIENTO`))) AS `SALDO`,`m`.`CODIGO` AS `CODIGO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO` from (select `m`.`ID_MOVIMIENTO` AS `ID_MOVIMIENTO`,`m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,`m`.`CANTIDAD` AS `CANTIDAD`,`l`.`NUMERO_LOTE` AS `NUMERO_LOTE`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`i`.`CODIGO` AS `CODIGO` from ((`fide_movimiento_tb` `m` join `fide_lote_tb` `l` on(`m`.`ID_LOTE` = `l`.`ID_LOTE`)) join `fide_inventario_tb` `i` on(`m`.`ID_INVENTARIO` = `i`.`ID_INVENTARIO`))) `m` group by case when `m`.`TIPO_MOVIMIENTO` = 'Entrada' then `m`.`FECHA_MOVIMIENTO` else `m`.`ID_MOVIMIENTO` end,`m`.`TIPO_MOVIMIENTO`,`m`.`ID_INVENTARIO`,`m`.`ID_FARMACIA`,`m`.`CODIGO` */;
+/*!50001 VIEW `historial_kardex_v` AS select `m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,case when `m`.`TIPO_MOVIMIENTO` = 'Entrada' then concat('+',`m`.`CANTIDAD`) when `m`.`TIPO_MOVIMIENTO` = 'Salida' then concat('-',`m`.`CANTIDAD`) else concat('',`m`.`CANTIDAD`) end AS `CANTIDAD`,concat(`m`.`CANTIDAD`,' lot ',`l`.`NUMERO_LOTE`) AS `LOTES_AFECTADOS`,(select ifnull(sum(case when `m2`.`TIPO_MOVIMIENTO` = 'Entrada' then `m2`.`CANTIDAD` when `m2`.`TIPO_MOVIMIENTO` = 'Salida' then -`m2`.`CANTIDAD` else 0 end),0) from `fide_movimiento_tb` `m2` where `m2`.`ID_INVENTARIO` = `m`.`ID_INVENTARIO` and `m2`.`ID_FARMACIA` = `m`.`ID_FARMACIA` and (`m2`.`FECHA_MOVIMIENTO` < `m`.`FECHA_MOVIMIENTO` or `m2`.`FECHA_MOVIMIENTO` = `m`.`FECHA_MOVIMIENTO` and `m2`.`ID_MOVIMIENTO` <= `m`.`ID_MOVIMIENTO`)) AS `SALDO`,`i`.`CODIGO` AS `CODIGO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO` from ((`fide_movimiento_tb` `m` join `fide_lote_tb` `l` on(`m`.`ID_LOTE` = `l`.`ID_LOTE`)) join `fide_inventario_tb` `i` on(`m`.`ID_INVENTARIO` = `i`.`ID_INVENTARIO`)) order by `m`.`FECHA_MOVIMIENTO`,`m`.`ID_MOVIMIENTO` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1215,4 +1217,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-13 16:05:31
+-- Dump completed on 2025-07-13 17:44:17

@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/MovimientoModel.php";
 
-
+date_default_timezone_set('America/Costa_Rica');
 
 session_start();
 
@@ -14,7 +14,7 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     $lote = $_POST["txtLote"];
     $fecha_vencimiento = $_POST["txtFechaVencimiento"];
     $fecha = $_POST["txtFecha"];
-    $tipo = $_POST["ddlTipo"];
+    $tipo = 'Entrada';
     $cantidad = intval($_POST["txtCantidad"]);
     $descripcion = $_POST["txtDescripcion"];
     $empresa = isset($_POST["chkEmpresa"]) ? $_POST["txtEmpresa"] : '';
@@ -86,7 +86,7 @@ if (isset($_POST["btnSeleccionarLotes"])) {
     $codigo = $_POST["txtCodigo"];
     $id_farmacia = intval($_POST["ddlFarmaciaBuscar"]);
     $cantidad_solicitada = intval($_POST["txtCantidad"]);
-    $fecha_movimiento = $_POST["txtFecha"];
+    $fecha = date('Y-m-d');
     $descripcion = $_POST["txtDescripcion"];
     $empresa = isset($_POST["chkEmpresa"]) ? $_POST["txtEmpresa"] : '';
 
@@ -94,7 +94,7 @@ if (isset($_POST["btnSeleccionarLotes"])) {
         $codigo,
         $id_farmacia,
         $cantidad_solicitada,
-        $fecha_movimiento,
+        $fecha,
         $descripcion,
         $empresa
     );

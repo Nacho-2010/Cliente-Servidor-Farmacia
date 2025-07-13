@@ -28,18 +28,28 @@ function InsertarMovimientoModel($codigo, $lote, $fecha_vencimiento, $fecha, $ti
 // ===================================
 // SP: Buscar Producto con Stock
 // ===================================
+// ===================================
+// SP: Buscar Producto con Stock
+// ===================================
 function BuscarProductoPorCodigo($codigo, $id_farmacia)
 {
     try {
         $conexion = OpenDB();
+
         $codigo = mysqli_real_escape_string($conexion, $codigo);
         $id_farmacia = intval($id_farmacia);
 
         $sp = "CALL BuscarProductoPorCodigo('$codigo', $id_farmacia)";
         $resultado = $conexion->query($sp);
 
+        if ($resultado && $resultado->num_rows > 0) {
+            $producto = $resultado->fetch_assoc();
+            CloseDB($conexion);
+            return $producto;
+        }
+
         CloseDB($conexion);
-        return $resultado->fetch_assoc();
+        return null;
     } catch (Exception $e) {
         RegistrarError($e);
         return null;
@@ -156,9 +166,7 @@ function GenerarSalidaPorLotesModel($codigo, $id_farmacia, $cantidad_total, $fec
     }
 }
 
-// ===================================
-// Vista: Obtener Resumen por Salida
-// ===================================
+
 
 // ===================================
 // Vista: Historial Kardex Detallado
