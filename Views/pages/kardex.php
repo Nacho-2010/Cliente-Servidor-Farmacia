@@ -58,7 +58,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     </div>
 
                     <!-- Formulario de movimiento -->
-                    <h2>Registrar Movimiento</h2>
+                    <h2>Registrar Movimiento Ingreso</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
                         <input type="text" name="txtLote" placeholder="Número de lote" required>
@@ -99,6 +99,41 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         <button type="submit" name="btnRegistrarMovimiento">Registrar</button>
                     </form>
 
+                    <!-- Formulario para salida automática por lotes -->
+                    <h2>Salida Automática por Lotes</h2>
+                    <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
+                        <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
+
+                        <h4>Ingrese la cantidad que desea retirar</h4>
+                        <input type="number" name="txtCantidad" placeholder="Cantidad total a retirar" required>
+
+                        <h4>Ingrese fecha de movimiento</h4>
+                        <input type="date" name="txtFecha" required>
+
+                        <label>
+                            <input type="checkbox" id="chkDescripcionLotes" data-target="txtDescripcionLotes">
+                            Incluir descripción
+                        </label>
+                        <input type="text" id="txtDescripcionLotes" name="txtDescripcion" placeholder="Descripción"
+                            disabled>
+
+                        <label>
+                            <input type="checkbox" id="chkEmpresaLotes" name="chkEmpresa" data-target="txtEmpresaLotes">
+                            Incluir empresa
+                        </label>
+                        <input type="text" id="txtEmpresaLotes" name="txtEmpresa" placeholder="Empresa" disabled>
+
+                        <input type="hidden" name="ddlFarmaciaBuscar" value="<?= $_SESSION["FARMACIA_BUSCADA"] ?>">
+
+                        <button type="submit" name="btnSeleccionarLotes" class="btn btn-warning">
+                            Seleccionar lotes disponibles
+                        </button>
+                    </form>
+
+
+
+
+
                     <?php if (isset($_SESSION["txtMensaje"])): ?>
                         <div class="mensaje-sistema">
                             <?= $_SESSION["txtMensaje"];
@@ -108,7 +143,10 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 </div>
 
                 <!-- Historial dinámico -->
-                <?php if (!empty($_SESSION["MOVIMIENTOS"])): ?>
+                <?php
+                $historial = $_SESSION["MOVIMIENTOS"] ?? [];
+                ?>
+                <?php if (!empty($historial)): ?>
                     <div class="historial-kardex">
                         <h2>Historial de Movimientos</h2>
                         <table>
@@ -117,15 +155,17 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                     <th>Fecha</th>
                                     <th>Tipo</th>
                                     <th>Cantidad</th>
+                                    <th>Lotes Afectados</th>
                                     <th>Saldo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($_SESSION["MOVIMIENTOS"] as $mov): ?>
+                                <?php foreach ($historial as $mov): ?>
                                     <tr>
                                         <td><?= $mov["FECHA_MOVIMIENTO"] ?></td>
                                         <td><?= $mov["TIPO_MOVIMIENTO"] ?></td>
                                         <td><?= $mov["CANTIDAD"] ?></td>
+                                        <td><?= $mov["LOTES_AFECTADOS"] ?? '-' ?></td>
                                         <td><?= $mov["SALDO"] ?></td>
                                     </tr>
                                 <?php endforeach; ?>

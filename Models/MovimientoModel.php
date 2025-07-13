@@ -3,6 +3,9 @@ include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/conn
 
 
 
+// ===================================
+// SP: Insertar Movimiento Individual
+// ===================================
 function InsertarMovimientoModel($codigo, $lote, $fecha_vencimiento, $fecha, $tipo, $cantidad, $descripcion, $empresa, $id_farmacia)
 {
     try {
@@ -10,47 +13,47 @@ function InsertarMovimientoModel($codigo, $lote, $fecha_vencimiento, $fecha, $ti
 
         $sp = "CALL InsertarMovimiento(
             '$codigo', '$lote', '$fecha_vencimiento', '$fecha', '$tipo',
-            $cantidad, '$descripcion', '$empresa', $id_farmacia)";
+            $cantidad, '$descripcion', '$empresa', $id_farmacia
+        )";
 
         $respuesta = $conexion->query($sp);
         CloseDB($conexion);
         return $respuesta;
-
     } catch (Exception $error) {
         RegistrarError($error);
         return false;
     }
 }
 
-
-function BuscarProductoPorCodigo($codigo)
+// ===================================
+// SP: Buscar Producto con Stock
+// ===================================
+function BuscarProductoPorCodigo($codigo, $id_farmacia)
 {
     try {
         $conexion = OpenDB();
         $codigo = mysqli_real_escape_string($conexion, $codigo);
+        $id_farmacia = intval($id_farmacia);
 
-        $query = "SELECT P.CODIGO, P.NOMBRE, U.NOMBRE AS UNIDAD, I.CANTIDAD_DISPONIBLE
-                  FROM FIDE_PRODUCTO_TB P
-                  JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
-                  JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
-                  WHERE P.CODIGO = '$codigo'";
+        $sp = "CALL BuscarProductoPorCodigo('$codigo', $id_farmacia)";
+        $resultado = $conexion->query($sp);
 
-        $resultado = $conexion->query($query);
         CloseDB($conexion);
         return $resultado->fetch_assoc();
-
     } catch (Exception $e) {
         RegistrarError($e);
         return null;
     }
 }
 
-
+// ===================================
+// Vista: Obtener Farmacias Activas
+// ===================================
 function ObtenerFarmaciasActivas()
 {
     try {
         $conexion = OpenDB();
-        $query = "SELECT ID_FARMACIA, NOMBRE FROM FARMACIA_ACTIVA_V";
+        $query = "SELECT ID_FARMACIA, NOMBRE FROM FARMACIAS_V";
         $resultado = $conexion->query($query);
         $farmacias = [];
 
@@ -66,20 +69,115 @@ function ObtenerFarmaciasActivas()
     }
 }
 
-function ObtenerHistorialMovimientos($codigo)
+// ===================================
+// SP: Historial por Producto/Farmacia
+// ===================================
+function ObtenerHistorialMovimientos($codigo, $id_farmacia)
+{
+    try {
+        $conexion = OpenDB();
+        $codigo = mysqli_real_escape_string($conexion, $codigo);
+        $id_farmacia = intval($id_farmacia);
+
+        $sp = "CALL ObtenerHistorialMovimientos('$codigo', $id_farmacia)";
+        $resultado = $conexion->query($sp);
+
+        $movimientos = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $movimientos[] = $fila;
+        }
+
+        CloseDB($conexion);
+        return $movimientos;
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return [];
+    }
+}
+
+// ===================================
+// SP: Consultar Stock Disponible
+// ===================================
+function ObtenerStockDisponible($codigo, $id_farmacia)
+{
+    try {
+        $conexion = OpenDB();
+        $codigo = mysqli_real_escape_string($conexion, $codigo);
+        $id_farmacia = intval($id_farmacia);
+
+        $sp = "CALL ObtenerStockDisponible('$codigo', $id_farmacia)";
+        $resultado = $conexion->query($sp);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
+            CloseDB($conexion);
+            return $row["CANTIDAD_DISPONIBLE"];
+        }
+
+        CloseDB($conexion);
+        return null;
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return null;
+    }
+}
+
+// ===================================
+// SP: Generar Salida Automática
+// ===================================
+function GenerarSalidaPorLotesModel($codigo, $id_farmacia, $cantidad_total, $fecha_movimiento, $descripcion, $empresa)
 {
     try {
         $conexion = OpenDB();
 
         $codigo = mysqli_real_escape_string($conexion, $codigo);
+        $id_farmacia = intval($id_farmacia);
+        $cantidad_total = intval($cantidad_total);
+        $fecha_movimiento = mysqli_real_escape_string($conexion, $fecha_movimiento);
+        $descripcion = mysqli_real_escape_string($conexion, $descripcion);
+        $empresa = mysqli_real_escape_string($conexion, $empresa);
 
-        $query = "SELECT M.FECHA_MOVIMIENTO, M.TIPO_MOVIMIENTO, M.CANTIDAD,
-                         IF(M.TIPO_MOVIMIENTO = 'Entrada', I.CANTIDAD_DISPONIBLE, I.CANTIDAD_DISPONIBLE - M.CANTIDAD) AS SALDO
-                  FROM FIDE_MOVIMIENTO_TB M
-                  JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
-                  WHERE I.CODIGO = '$codigo'
-                  ORDER BY M.FECHA_MOVIMIENTO DESC
-                  LIMIT 5";
+        $sp = "CALL GenerarSalidaPorLotes(
+            '$codigo',
+            $id_farmacia,
+            $cantidad_total,
+            '$fecha_movimiento',
+            '$descripcion',
+            '$empresa'
+        )";
+
+        $resultado = $conexion->query($sp);
+
+        CloseDB($conexion);
+        return $resultado;
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return false;
+    }
+}
+
+// ===================================
+// Vista: Obtener Resumen por Salida
+// ===================================
+
+// ===================================
+// Vista: Historial Kardex Detallado
+// ===================================
+function ObtenerHistorialKardex($codigo, $id_farmacia)
+{
+    try {
+        $conexion = OpenDB();
+
+        $codigo = mysqli_real_escape_string($conexion, $codigo);
+        $id_farmacia = intval($id_farmacia);
+
+        $query = "
+            SELECT *
+            FROM HISTORIAL_KARDEX_V
+            WHERE CODIGO = '$codigo'
+              AND ID_FARMACIA = $id_farmacia
+            ORDER BY FECHA_MOVIMIENTO ASC
+        ";
 
         $resultado = $conexion->query($query);
 
@@ -90,7 +188,6 @@ function ObtenerHistorialMovimientos($codigo)
 
         CloseDB($conexion);
         return $movimientos;
-
     } catch (Exception $e) {
         RegistrarError($e);
         return [];

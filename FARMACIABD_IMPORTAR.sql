@@ -62,14 +62,14 @@ LOCK TABLES `cliente` WRITE;
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `farmacia_activa_v`
+-- Temporary view structure for view `farmacias_v`
 --
 
-DROP TABLE IF EXISTS `farmacia_activa_v`;
-/*!50001 DROP VIEW IF EXISTS `farmacia_activa_v`*/;
+DROP TABLE IF EXISTS `farmacias_v`;
+/*!50001 DROP VIEW IF EXISTS `farmacias_v`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `farmacia_activa_v` AS SELECT 
+/*!50001 CREATE VIEW `farmacias_v` AS SELECT 
  1 AS `ID_FARMACIA`,
  1 AS `NOMBRE`*/;
 SET character_set_client = @saved_cs_client;
@@ -206,7 +206,7 @@ CREATE TABLE `fide_inventario_tb` (
   CONSTRAINT `FK_INVENTARIO_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
   CONSTRAINT `FK_INVENTARIO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
   CONSTRAINT `FK_INVENTARIO_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +215,7 @@ CREATE TABLE `fide_inventario_tb` (
 
 LOCK TABLES `fide_inventario_tb` WRITE;
 /*!40000 ALTER TABLE `fide_inventario_tb` DISABLE KEYS */;
-INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',4,0,0,10,1),(2,'110010204',-2,0,0,5,1);
+INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',4,0,0,10,1),(2,'110010204',-2,0,0,5,1),(3,'110010204',40,0,0,1,1),(4,'110010205',8,0,0,1,1),(5,'110010205',4,0,0,3,1);
 /*!40000 ALTER TABLE `fide_inventario_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +238,7 @@ CREATE TABLE `fide_lote_tb` (
   KEY `FK_LOTE_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `fide_lote_tb` (
 
 LOCK TABLES `fide_lote_tb` WRITE;
 /*!40000 ALTER TABLE `fide_lote_tb` DISABLE KEYS */;
-INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1);
+INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1);
 /*!40000 ALTER TABLE `fide_lote_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +276,7 @@ CREATE TABLE `fide_movimiento_tb` (
   CONSTRAINT `FK_MOVIMIENTO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
   CONSTRAINT `FK_MOVIMIENTO_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
   CONSTRAINT `FK_MOVIMIENTO_LOTE` FOREIGN KEY (`ID_LOTE`) REFERENCES `fide_lote_tb` (`ID_LOTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +285,7 @@ CREATE TABLE `fide_movimiento_tb` (
 
 LOCK TABLES `fide_movimiento_tb` WRITE;
 /*!40000 ALTER TABLE `fide_movimiento_tb` DISABLE KEYS */;
-INSERT INTO `fide_movimiento_tb` VALUES (1,1,1,'2025-07-11','2025-07-12','Entrada',4,'prueba','prueba',10),(2,1,1,'2025-07-11','2025-07-12','Entrada',4,'prueba','prueba',10),(3,2,1,'2025-07-19','2025-07-12','Salida',2,'','',5),(4,1,1,'2025-07-19','2025-07-12','Salida',2,'','',10),(5,1,1,'2025-07-19','2025-07-12','Salida',2,'','',10);
+INSERT INTO `fide_movimiento_tb` VALUES (1,3,19,'2025-07-13','2025-08-22','Entrada',5,'','',1),(2,3,20,'2025-07-13','2025-08-07','Entrada',2,'','',1),(3,3,21,'2025-07-14','2025-08-08','Entrada',4,'','',1),(4,3,20,'2025-07-13','2025-08-07','Salida',2,'','',1),(5,3,19,'2025-07-13','2025-08-22','Salida',1,'','',1),(6,3,21,'2025-07-14','2025-08-08','Salida',4,'','',1),(7,3,19,'2025-07-14','2025-08-22','Salida',1,'','',1);
 /*!40000 ALTER TABLE `fide_movimiento_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,6 +352,25 @@ INSERT INTO `fide_unidad_medida_tb` VALUES (1,'Unidad',1),(2,'Tableta',1),(3,'C�
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `historial_kardex_v`
+--
+
+DROP TABLE IF EXISTS `historial_kardex_v`;
+/*!50001 DROP VIEW IF EXISTS `historial_kardex_v`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `historial_kardex_v` AS SELECT 
+ 1 AS `FECHA_MOVIMIENTO`,
+ 1 AS `TIPO_MOVIMIENTO`,
+ 1 AS `CANTIDAD`,
+ 1 AS `LOTES_AFECTADOS`,
+ 1 AS `SALDO`,
+ 1 AS `CODIGO`,
+ 1 AS `ID_FARMACIA`,
+ 1 AS `ID_INVENTARIO`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `rol`
 --
 
@@ -387,7 +406,7 @@ CREATE TABLE `terror` (
   `DESCRIPCION` text NOT NULL,
   `FECHAHORA` datetime NOT NULL,
   PRIMARY KEY (`ID_ERROR`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +415,7 @@ CREATE TABLE `terror` (
 
 LOCK TABLES `terror` WRITE;
 /*!40000 ALTER TABLE `terror` DISABLE KEYS */;
-INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49');
+INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49'),(5,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:04:41'),(6,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:22:09'),(7,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:23'),(8,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:37'),(9,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:44'),(10,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:43:21'),(11,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:44:12'),(12,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:48:53'),(13,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:05:47'),(14,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:09:04'),(15,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:25:54'),(16,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:29:58'),(17,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:44:33'),(18,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:51:35'),(19,'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.','2025-07-13 15:54:01'),(20,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:58:23');
 /*!40000 ALTER TABLE `terror` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,6 +544,33 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `BuscarProductoPorCodigo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoPorCodigo`(IN p_codigo VARCHAR(20))
+BEGIN
+    SELECT 
+        P.CODIGO, 
+        P.NOMBRE, 
+        U.NOMBRE AS UNIDAD, 
+        I.CANTIDAD_DISPONIBLE
+    FROM FIDE_PRODUCTO_TB P
+    JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
+    JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
+    WHERE P.CODIGO = p_codigo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `convertir_usuario_en_cliente` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -641,6 +687,128 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GenerarSalidaPorLotes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerarSalidaPorLotes`(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_id_farmacia INT,
+    IN p_cantidad_total INT,
+    IN p_fecha_movimiento DATE,
+    IN p_descripcion VARCHAR(255),
+    IN p_empresa VARCHAR(100)
+)
+BEGIN
+    DECLARE v_cantidad_restante INT DEFAULT 0;
+    DECLARE v_id_inventario INT;
+    DECLARE v_id_lote INT;
+    DECLARE v_numero_lote VARCHAR(100);
+    DECLARE v_fecha_venc DATE;
+    DECLARE v_cantidad_en_lote INT;
+    DECLARE v_stock_fecha INT;
+
+    -- Cursor y handler deben declararse ANTES de cualquier otra lógica
+    DECLARE lote_cursor CURSOR FOR
+        SELECT 
+            L.ID_LOTE, L.NUMERO_LOTE, L.FECHA_VENCIMIENTO,
+            SUM(CASE 
+                WHEN M.TIPO_MOVIMIENTO = 'Entrada' THEN M.CANTIDAD
+                WHEN M.TIPO_MOVIMIENTO = 'Salida' THEN -M.CANTIDAD
+                ELSE 0
+            END) AS CANTIDAD_EN_LOTE
+        FROM FIDE_MOVIMIENTO_TB M
+        JOIN FIDE_LOTE_TB L ON M.ID_LOTE = L.ID_LOTE
+        WHERE L.CODIGO = p_codigo_producto AND M.ID_FARMACIA = p_id_farmacia
+          AND M.FECHA_MOVIMIENTO <= p_fecha_movimiento
+        GROUP BY L.ID_LOTE, L.NUMERO_LOTE, L.FECHA_VENCIMIENTO
+        HAVING CANTIDAD_EN_LOTE > 0
+        ORDER BY L.FECHA_VENCIMIENTO ASC;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_id_lote = NULL;
+
+    -- Inicializamos valor restante
+    SET v_cantidad_restante = p_cantidad_total;
+
+    -- Validación previa: stock hasta la fecha del movimiento
+    SELECT 
+        IFNULL(SUM(CASE 
+            WHEN TIPO_MOVIMIENTO = 'Entrada' THEN CANTIDAD
+            WHEN TIPO_MOVIMIENTO = 'Salida' THEN -CANTIDAD
+            ELSE 0
+        END), 0)
+    INTO v_stock_fecha
+    FROM FIDE_MOVIMIENTO_TB M
+    JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
+    WHERE I.CODIGO = p_codigo_producto
+      AND M.ID_FARMACIA = p_id_farmacia
+      AND M.FECHA_MOVIMIENTO <= p_fecha_movimiento;
+
+    IF v_stock_fecha < p_cantidad_total THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.';
+    END IF;
+
+    -- Obtener ID_INVENTARIO
+    SELECT ID_INVENTARIO INTO v_id_inventario
+    FROM FIDE_INVENTARIO_TB
+    WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
+    LIMIT 1;
+
+    -- Cursor para aplicar la salida por lotes disponibles
+    OPEN lote_cursor;
+
+    lote_loop: LOOP
+        FETCH lote_cursor INTO v_id_lote, v_numero_lote, v_fecha_venc, v_cantidad_en_lote;
+
+        IF v_id_lote IS NULL OR v_cantidad_restante <= 0 THEN
+            LEAVE lote_loop;
+        END IF;
+
+        IF v_cantidad_en_lote >= v_cantidad_restante THEN
+            INSERT INTO FIDE_MOVIMIENTO_TB (
+                ID_INVENTARIO, ID_LOTE, FECHA_MOVIMIENTO, FECHA_VENCIMIENTO,
+                TIPO_MOVIMIENTO, CANTIDAD, DESCRIPCION, EMPRESA, ID_FARMACIA
+            ) VALUES (
+                v_id_inventario, v_id_lote, p_fecha_movimiento, v_fecha_venc,
+                'Salida', v_cantidad_restante, p_descripcion, p_empresa, p_id_farmacia
+            );
+
+            UPDATE FIDE_INVENTARIO_TB
+            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_restante
+            WHERE ID_INVENTARIO = v_id_inventario;
+
+            SET v_cantidad_restante = 0;
+        ELSE
+            INSERT INTO FIDE_MOVIMIENTO_TB (
+                ID_INVENTARIO, ID_LOTE, FECHA_MOVIMIENTO, FECHA_VENCIMIENTO,
+                TIPO_MOVIMIENTO, CANTIDAD, DESCRIPCION, EMPRESA, ID_FARMACIA
+            ) VALUES (
+                v_id_inventario, v_id_lote, p_fecha_movimiento, v_fecha_venc,
+                'Salida', v_cantidad_en_lote, p_descripcion, p_empresa, p_id_farmacia
+            );
+
+            UPDATE FIDE_INVENTARIO_TB
+            SET CANTIDAD_DISPONIBLE = CANTIDAD_DISPONIBLE - v_cantidad_en_lote
+            WHERE ID_INVENTARIO = v_id_inventario;
+
+            SET v_cantidad_restante = v_cantidad_restante - v_cantidad_en_lote;
+        END IF;
+    END LOOP;
+
+    CLOSE lote_cursor;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `InsertarMovimiento` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -666,11 +834,14 @@ BEGIN
     DECLARE v_id_lote INT;
     DECLARE v_id_inventario INT;
     DECLARE v_saldo_actual INT;
+    DECLARE v_stock_a_fecha INT;
 
-    -- Buscar lote
+    -- Buscar lote por producto, número y vencimiento
     SELECT ID_LOTE INTO v_id_lote
     FROM FIDE_LOTE_TB
-    WHERE CODIGO = p_codigo_producto AND NUMERO_LOTE = p_numero_lote
+    WHERE CODIGO = p_codigo_producto
+      AND NUMERO_LOTE = p_numero_lote
+      AND FECHA_VENCIMIENTO = p_fecha_vencimiento
     LIMIT 1;
 
     -- Si no existe el lote, se crea
@@ -690,7 +861,7 @@ BEGIN
     WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
     LIMIT 1;
 
-    -- Si no existe, lo insertamos con cantidad 0
+    -- Si no existe, se inserta el registro en inventario
     IF v_id_inventario IS NULL THEN
         INSERT INTO FIDE_INVENTARIO_TB (
             CODIGO, CANTIDAD_DISPONIBLE, STOCK_MINIMO, STOCK_MAXIMO,
@@ -704,7 +875,27 @@ BEGIN
         SET v_saldo_actual = 0;
     END IF;
 
-    -- Según el tipo de movimiento, se actualiza el inventario
+    -- Validación: si tipo salida y hay menos cantidad disponible hasta esa fecha
+    IF p_tipo_movimiento = 'Salida' THEN
+        SELECT 
+            IFNULL(SUM(CASE 
+                WHEN TIPO_MOVIMIENTO = 'Entrada' THEN CANTIDAD
+                WHEN TIPO_MOVIMIENTO = 'Salida' THEN -CANTIDAD
+                ELSE 0
+            END), 0)
+        INTO v_stock_a_fecha
+        FROM FIDE_MOVIMIENTO_TB
+        WHERE ID_INVENTARIO = v_id_inventario
+          AND ID_FARMACIA = p_id_farmacia
+          AND FECHA_MOVIMIENTO <= p_fecha_movimiento;
+
+        IF v_stock_a_fecha < p_cantidad THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No hay suficiente stock disponible para esa fecha de salida.';
+        END IF;
+    END IF;
+
+    -- Actualizar inventario según tipo
     IF p_tipo_movimiento = 'Entrada' THEN
         UPDATE FIDE_INVENTARIO_TB
         SET CANTIDAD_DISPONIBLE = v_saldo_actual + p_cantidad
@@ -723,7 +914,114 @@ BEGIN
         v_id_inventario, v_id_lote, p_fecha_movimiento, p_fecha_vencimiento,
         p_tipo_movimiento, p_cantidad, p_descripcion, p_empresa, p_id_farmacia
     );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ObtenerHistorialMovimientos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerHistorialMovimientos`(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_id_farmacia INT
+)
+BEGIN
+    SET @saldo := 0;
 
+    SELECT 
+        Movs.FECHA_MOVIMIENTO,
+        Movs.TIPO_MOVIMIENTO,
+        CONCAT(
+            IF(Movs.TIPO_MOVIMIENTO = 'Entrada', '+', '-'),
+            Movs.CANTIDAD
+        ) AS CANTIDAD,
+        @saldo := @saldo + 
+            (CASE 
+                WHEN Movs.TIPO_MOVIMIENTO = 'Entrada' THEN Movs.CANTIDAD 
+                ELSE -Movs.CANTIDAD 
+            END) AS SALDO
+    FROM (
+        SELECT M.FECHA_MOVIMIENTO, M.TIPO_MOVIMIENTO, M.CANTIDAD
+        FROM FIDE_MOVIMIENTO_TB M
+        JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
+        WHERE I.CODIGO = p_codigo_producto AND M.ID_FARMACIA = p_id_farmacia
+        ORDER BY M.FECHA_MOVIMIENTO ASC
+    ) AS Movs;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ObtenerLotesDisponiblesPorProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerLotesDisponiblesPorProducto`(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_id_farmacia INT
+)
+BEGIN
+    SELECT
+        L.CODIGO,
+        L.NUMERO_LOTE,
+        L.FECHA_VENCIMIENTO,
+        F.NOMBRE AS NOMBRE_FARMACIA,
+        SUM(
+            CASE
+                WHEN M.TIPO_MOVIMIENTO = 'Entrada' THEN M.CANTIDAD
+                WHEN M.TIPO_MOVIMIENTO = 'Salida' THEN -M.CANTIDAD
+                ELSE 0
+            END
+        ) AS CANTIDAD_EN_LOTE
+    FROM FIDE_MOVIMIENTO_TB M
+    JOIN FIDE_LOTE_TB L ON M.ID_LOTE = L.ID_LOTE
+    JOIN FIDE_FARMACIA_TB F ON M.ID_FARMACIA = F.ID_FARMACIA
+    WHERE L.CODIGO = p_codigo_producto
+      AND M.ID_FARMACIA = p_id_farmacia
+    GROUP BY L.CODIGO, L.NUMERO_LOTE, L.FECHA_VENCIMIENTO, F.NOMBRE
+    HAVING CANTIDAD_EN_LOTE > 0
+    ORDER BY L.FECHA_VENCIMIENTO ASC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ObtenerStockDisponible` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerStockDisponible`(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_id_farmacia INT
+)
+BEGIN
+    SELECT CANTIDAD_DISPONIBLE
+    FROM FIDE_INVENTARIO_TB
+    WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
+    LIMIT 1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -855,10 +1153,10 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `farmacia_activa_v`
+-- Final view structure for view `farmacias_v`
 --
 
-/*!50001 DROP VIEW IF EXISTS `farmacia_activa_v`*/;
+/*!50001 DROP VIEW IF EXISTS `farmacias_v`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -867,7 +1165,25 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `farmacia_activa_v` AS select `fide_farmacia_tb`.`ID_FARMACIA` AS `ID_FARMACIA`,`fide_farmacia_tb`.`NOMBRE` AS `NOMBRE` from `fide_farmacia_tb` where `fide_farmacia_tb`.`ID_ESTADO` = 1 */;
+/*!50001 VIEW `farmacias_v` AS select `fide_farmacia_tb`.`ID_FARMACIA` AS `ID_FARMACIA`,`fide_farmacia_tb`.`NOMBRE` AS `NOMBRE` from `fide_farmacia_tb` where `fide_farmacia_tb`.`ID_ESTADO` = 1 */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `historial_kardex_v`
+--
+
+/*!50001 DROP VIEW IF EXISTS `historial_kardex_v`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `historial_kardex_v` AS select `m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,concat('+',sum(`m`.`CANTIDAD`)) AS `CANTIDAD`,group_concat(concat(`m`.`CANTIDAD`,' lot ',`m`.`NUMERO_LOTE`) separator ', ') AS `LOTES_AFECTADOS`,(select ifnull(sum(case when `m2`.`TIPO_MOVIMIENTO` = 'Entrada' then `m2`.`CANTIDAD` when `m2`.`TIPO_MOVIMIENTO` = 'Salida' then -`m2`.`CANTIDAD` else 0 end),0) from `fide_movimiento_tb` `m2` where `m2`.`ID_INVENTARIO` = `m`.`ID_INVENTARIO` and `m2`.`ID_FARMACIA` = `m`.`ID_FARMACIA` and (`m2`.`FECHA_MOVIMIENTO` < `m`.`FECHA_MOVIMIENTO` or `m2`.`FECHA_MOVIMIENTO` = `m`.`FECHA_MOVIMIENTO` and `m2`.`ID_MOVIMIENTO` <= max(`m`.`ID_MOVIMIENTO`))) AS `SALDO`,`m`.`CODIGO` AS `CODIGO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO` from (select `m`.`ID_MOVIMIENTO` AS `ID_MOVIMIENTO`,`m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,`m`.`CANTIDAD` AS `CANTIDAD`,`l`.`NUMERO_LOTE` AS `NUMERO_LOTE`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`i`.`CODIGO` AS `CODIGO` from ((`fide_movimiento_tb` `m` join `fide_lote_tb` `l` on(`m`.`ID_LOTE` = `l`.`ID_LOTE`)) join `fide_inventario_tb` `i` on(`m`.`ID_INVENTARIO` = `i`.`ID_INVENTARIO`))) `m` group by case when `m`.`TIPO_MOVIMIENTO` = 'Entrada' then `m`.`FECHA_MOVIMIENTO` else `m`.`ID_MOVIMIENTO` end,`m`.`TIPO_MOVIMIENTO`,`m`.`ID_INVENTARIO`,`m`.`ID_FARMACIA`,`m`.`CODIGO` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -899,4 +1215,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-13 11:11:16
+-- Dump completed on 2025-07-13 16:05:31

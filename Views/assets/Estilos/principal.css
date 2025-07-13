@@ -1101,6 +1101,22 @@ input#c3:checked + label.fiebre {
   color: #00ffff;
 }
 
+.historial-kardex td.lotes-afectados {
+  max-width: 300px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lotes-afectados {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+  padding: 6px;
+}
+
 /* ---------------------------------------------------------------------
   FIN CSS for KARDEX Section
   --------------------------------------------------------------------- */

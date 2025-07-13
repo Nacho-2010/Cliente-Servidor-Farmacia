@@ -19,7 +19,7 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     $descripcion = $_POST["txtDescripcion"];
     $empresa = isset($_POST["chkEmpresa"]) ? $_POST["txtEmpresa"] : '';
 
-    if (!isset($_POST["ddlFarmacia"]) || $_POST["ddlFarmacia"] == "") {
+    if (empty($_POST["ddlFarmacia"])) {
         $_SESSION["txtMensaje"] = "❌ Debe seleccionar una farmacia válida.";
         header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
         exit();
@@ -39,47 +39,10 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
         $id_farmacia
     );
 
-    // Actualizar stock
-    $conexion = OpenDB();
-    $queryInv = "SELECT CANTIDAD_DISPONIBLE 
-                 FROM FIDE_INVENTARIO_TB 
-                 WHERE CODIGO = '$codigo' AND ID_FARMACIA = $id_farmacia";
-    $resInv = $conexion->query($queryInv);
-    $_SESSION["CANT_DISPONIBLE"] = $resInv && $resInv->num_rows > 0
-        ? $resInv->fetch_assoc()["CANTIDAD_DISPONIBLE"]
-        : null;
-
-    // Actualizar historial
-    $queryMovs = "
-        SELECT 
-            Movs.FECHA_MOVIMIENTO,
-            Movs.TIPO_MOVIMIENTO,
-            CONCAT(IF(Movs.TIPO_MOVIMIENTO = 'Entrada', '+', '-'), Movs.CANTIDAD) AS CANTIDAD,
-            @saldo := IFNULL(@saldo, 0) + 
-                (CASE 
-                    WHEN Movs.TIPO_MOVIMIENTO = 'Entrada' THEN Movs.CANTIDAD 
-                    ELSE -Movs.CANTIDAD 
-                END) AS SALDO
-        FROM (
-            SELECT M.FECHA_MOVIMIENTO, M.TIPO_MOVIMIENTO, M.CANTIDAD
-            FROM FIDE_MOVIMIENTO_TB M
-            JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
-            WHERE I.CODIGO = '$codigo' AND M.ID_FARMACIA = $id_farmacia
-            ORDER BY M.FECHA_MOVIMIENTO ASC
-        ) AS Movs,
-        (SELECT @saldo := 0) AS init
-    ";
-    $resMovs = $conexion->query($queryMovs);
-    $historial = [];
-    while ($row = $resMovs->fetch_assoc()) {
-        $historial[] = $row;
-    }
-
-    $_SESSION["MOVIMIENTOS"] = $historial;
+    $_SESSION["CANT_DISPONIBLE"] = ObtenerStockDisponible($codigo, $id_farmacia);
+    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
-
-    CloseDB($conexion);
 
     $_SESSION["txtMensaje"] = $respuesta
         ? "✅ Movimiento registrado correctamente."
@@ -89,7 +52,6 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     exit();
 }
 
-
 // ===================================
 // BUSCAR PRODUCTO
 // ===================================
@@ -97,63 +59,55 @@ if (isset($_POST["btnBuscarProducto"])) {
     $codigo = $_POST["txtCodigo"];
     $id_farmacia = intval($_POST["ddlFarmaciaBuscar"]);
 
-    $conexion = OpenDB();
+    $producto = BuscarProductoPorCodigo($codigo, $id_farmacia);
 
-    // Obtener inventario y datos del producto
-    $queryInv = "
-        SELECT 
-            I.CANTIDAD_DISPONIBLE, 
-            P.NOMBRE, 
-            U.NOMBRE AS UNIDAD_MEDIDA
-        FROM FIDE_INVENTARIO_TB I
-        JOIN FIDE_PRODUCTO_TB P ON I.CODIGO = P.CODIGO
-        JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
-        WHERE I.CODIGO = '$codigo' AND I.ID_FARMACIA = $id_farmacia
-    ";
-    $resInv = $conexion->query($queryInv);
-
-    if ($resInv && $resInv->num_rows > 0) {
-        $row = $resInv->fetch_assoc();
-        $_SESSION["CANT_DISPONIBLE"] = $row["CANTIDAD_DISPONIBLE"];
-        $_SESSION["NOMBRE_PRODUCTO"] = $row["NOMBRE"];
-        $_SESSION["UNIDAD_MEDIDA"] = $row["UNIDAD_MEDIDA"];
+    if ($producto) {
+        $_SESSION["CANT_DISPONIBLE"] = $producto["CANTIDAD_DISPONIBLE"];
+        $_SESSION["NOMBRE_PRODUCTO"] = $producto["NOMBRE"];
+        $_SESSION["UNIDAD_MEDIDA"] = $producto["UNIDAD"];
     } else {
         $_SESSION["CANT_DISPONIBLE"] = null;
         $_SESSION["NOMBRE_PRODUCTO"] = "Producto no encontrado";
         $_SESSION["UNIDAD_MEDIDA"] = "No definida";
     }
 
-    // Obtener historial
-    $queryMovs = "
-        SELECT 
-            Movs.FECHA_MOVIMIENTO,
-            Movs.TIPO_MOVIMIENTO,
-            CONCAT(IF(Movs.TIPO_MOVIMIENTO = 'Entrada', '+', '-'), Movs.CANTIDAD) AS CANTIDAD,
-            @saldo := IFNULL(@saldo, 0) + 
-                (CASE 
-                    WHEN Movs.TIPO_MOVIMIENTO = 'Entrada' THEN Movs.CANTIDAD 
-                    ELSE -Movs.CANTIDAD 
-                END) AS SALDO
-        FROM (
-            SELECT M.FECHA_MOVIMIENTO, M.TIPO_MOVIMIENTO, M.CANTIDAD
-            FROM FIDE_MOVIMIENTO_TB M
-            JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
-            WHERE I.CODIGO = '$codigo' AND M.ID_FARMACIA = $id_farmacia
-            ORDER BY M.FECHA_MOVIMIENTO ASC
-        ) AS Movs,
-        (SELECT @saldo := 0) AS init
-    ";
-    $resMovs = $conexion->query($queryMovs);
-    $historial = [];
-    while ($row = $resMovs->fetch_assoc()) {
-        $historial[] = $row;
-    }
-
-    $_SESSION["MOVIMIENTOS"] = $historial;
+    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
 
-    CloseDB($conexion);
+    header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
+    exit();
+}
+
+// ===================================
+// SELECCIONAR LOTES DISPONIBLES PARA SALIDA AUTOMÁTICA
+// ===================================
+if (isset($_POST["btnSeleccionarLotes"])) {
+    $codigo = $_POST["txtCodigo"];
+    $id_farmacia = intval($_POST["ddlFarmaciaBuscar"]);
+    $cantidad_solicitada = intval($_POST["txtCantidad"]);
+    $fecha_movimiento = $_POST["txtFecha"];
+    $descripcion = $_POST["txtDescripcion"];
+    $empresa = isset($_POST["chkEmpresa"]) ? $_POST["txtEmpresa"] : '';
+
+    $resultado = GenerarSalidaPorLotesModel(
+        $codigo,
+        $id_farmacia,
+        $cantidad_solicitada,
+        $fecha_movimiento,
+        $descripcion,
+        $empresa
+    );
+
+    $_SESSION["CANT_DISPONIBLE"] = ObtenerStockDisponible($codigo, $id_farmacia);
+    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
+    $_SESSION["CODIGO_BUSCADO"] = $codigo;
+    $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
+
+    $_SESSION["txtMensaje"] = $resultado
+        ? "✅ Se aplicó correctamente la salida automática por lotes."
+        : "❌ Error al aplicar salida automática. Verifique stock y datos.";
+
     header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
     exit();
 }
