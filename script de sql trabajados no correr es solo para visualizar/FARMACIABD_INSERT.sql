@@ -47,6 +47,14 @@ INSERT INTO FIDE_UNIDAD_MEDIDA_TB (NOMBRE, ID_ESTADO) VALUES
 ('Ungüento', 1);  -- ID 30
 
 
+INSERT INTO FIDE_FARMACIA_TB (NOMBRE, ID_ESTADO) VALUES
+('Farmacia Central San José', 1),
+('Farmacia Heredia Norte', 1),
+('Farmacia Cartago Este', 1),
+('Farmacia Alajuela Centro', 2), -- Inactiva
+('Farmacia Liberia Oeste', 1),
+('Farmacia Pérez Zeledón', 1),
+('Farmacia San Ramón', 2); -- Inactiva
 
 
 INSERT INTO FIDE_CATEGORIA_PRODUCTO_TB (NOMBRE, ID_ESTADO) VALUES
@@ -166,20 +174,23 @@ VALUES
 
 
 
-INSERT INTO ROL (ID, NOMBRE) VALUES 
-(1, 'CLIENTE'),
-(2, 'ADMIN');
+-- Insertar roles base del sistema
+INSERT INTO ROL (ID, NOMBRE) 
+VALUES 
+    (1, 'CLIENTE'),
+    (2, 'ADMIN');
 
--- Usuarios de ejemplo
+-- Insertar usuarios base del sistema
 INSERT INTO USUARIO (ID, NOMBRE, CORREO, USUARIO, CONTRASENA)
 VALUES 
-(1, 'Josue', 'josueadmin@email.com', 'josue', '123'), /* 123 */
-(2, 'Abraham', 'abrahamcliente@email.com', 'abraham', '123');/* 123 */
+    (1, 'Josue Navarro',  'josueadmin@email.com',     'josue',   '123'), -- Usuario administrador
+    (2, 'Abraham Cascante','abrahamcliente@email.com','abraham', '123'); -- Usuario cliente
 
--- Asignar rol ADMIN a Josue
-INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (1, 2);
--- Asignar rol CLIENTE a Abraham
-INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) VALUES (2, 1);
+-- Asignar roles correspondientes a los usuarios
+INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) 
+VALUES 
+    (1, 2), -- Josue tiene rol ADMIN
+    (2, 1); -- Abraham tiene rol CLIENTE
 
 
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap");
 
 :root {
   --title-font: "Fredoka", sans-serif;
@@ -850,7 +850,9 @@ footer {
 
 /* ======== Sección Enfermedades generales ======== */
 .Enfermedades {
-  min-height: calc(100vh - 200px); /* Auto ajuste depende de si se mueva algo en la sección de arriba y el footer */
+  min-height: calc(
+    100vh - 200px
+  ); /* Auto ajuste depende de si se mueva algo en la sección de arriba y el footer */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -859,7 +861,7 @@ footer {
 }
 
 .titulo-enfermedades {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
   color: #1a1a1a;
@@ -897,8 +899,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  transition: .6s cubic-bezier(.28,-0.03,0,.99);
-  box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
   position: relative;
 }
 
@@ -922,7 +924,7 @@ footer {
   justify-content: center;
   align-items: center;
   margin-right: 10px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .card-info > .row > .description {
@@ -934,9 +936,9 @@ footer {
   width: 520px;
   opacity: 0;
   transform: translateY(30px);
-  transition-delay: .3s;
-  transition: all .3s ease;
-  font-family: 'Roboto', sans-serif;
+  transition-delay: 0.3s;
+  transition: all 0.3s ease;
+  font-family: "Roboto", sans-serif;
 }
 
 .card-info .description p {
@@ -977,7 +979,7 @@ input[type="radio"]:checked + label .description {
   writing-mode: vertical-rl;
   text-align: center;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 1.8rem;
   opacity: 1;
@@ -993,13 +995,108 @@ input[type="radio"]:checked + label .vertical-title {
 
 /* Mostrar imagen solo cuando está estirada la vara */
 input#c1:checked + label.virus {
-  background-image: url('../../assets/Imagenes/virus.jpg');
+  background-image: url("../../assets/Imagenes/virus.jpg");
 }
 
 input#c2:checked + label.coronavirus {
-  background-image: url('../../assets/Imagenes/coronavirus.jpg');
+  background-image: url("../../assets/Imagenes/coronavirus.jpg");
 }
 
 input#c3:checked + label.fiebre {
-  background-image: url('../../assets/Imagenes/fiebre.jpg');
+  background-image: url("../../assets/Imagenes/fiebre.jpg");
 }
+
+/* ---------------------------------------------------------------------
+  CSS for KARDEX Section
+  --------------------------------------------------------------------- */
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background-color: #10101a;
+  color: #f0f0f0;
+}
+
+
+.main-kardex {
+    margin-left: 13%;
+    padding: 100px 2rem 2rem 2rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.kardex-container {
+  display: flex;
+  padding: 20px;
+  gap: 40px;
+}
+
+.formulario-kardex,
+.historial-kardex {
+  background-color: #1e1e2e;
+  padding: 20px;
+  border-radius: 12px;
+  width: 45%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.formulario-kardex h2,
+.historial-kardex h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #66ccff;
+}
+
+.formulario-kardex form input,
+.formulario-kardex form select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2c2c3a;
+  color: #ffffff;
+}
+
+.formulario-kardex form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.formulario-kardex form button:hover {
+  background-color: #218838;
+}
+
+.checkbox {
+  margin-bottom: 10px;
+}
+
+.historial-kardex table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+.historial-kardex th,
+.historial-kardex td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: center;
+}
+
+.historial-kardex th {
+  background-color: #33334d;
+  color: #00ffff;
+}
+
+/* ---------------------------------------------------------------------
+  FIN CSS for KARDEX Section
+  --------------------------------------------------------------------- */

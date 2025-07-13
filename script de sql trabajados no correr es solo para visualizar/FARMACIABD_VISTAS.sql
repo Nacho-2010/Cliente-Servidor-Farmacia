@@ -23,3 +23,16 @@ FROM
     FIDE_UNIDAD_MEDIDA_TB
 WHERE 
     ID_ESTADO = 1;
+    
+    
+-- ========================================
+-- VISTA: Farmacias Activas
+-- ========================================
+CREATE OR REPLACE VIEW FARMACIA_ACTIVA_V AS
+SELECT 
+    ID_FARMACIA, 
+    NOMBRE
+FROM 
+    FIDE_FARMACIA_TB
+WHERE 
+    ID_ESTADO = 1;

@@ -47,8 +47,8 @@ CREATE TABLE `cliente` (
   `SEXO` varchar(10) DEFAULT NULL,
   `ALERGIAS` text DEFAULT NULL,
   PRIMARY KEY (`ID_CLIENTE`),
-  KEY `ID_USUARIO` (`ID_USUARIO`),
-  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE
+  KEY `FK_CLIENTE_USUARIO` (`ID_USUARIO`),
+  CONSTRAINT `FK_CLIENTE_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,6 +60,19 @@ LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `farmacia_activa_v`
+--
+
+DROP TABLE IF EXISTS `farmacia_activa_v`;
+/*!50001 DROP VIEW IF EXISTS `farmacia_activa_v`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `farmacia_activa_v` AS SELECT 
+ 1 AS `ID_FARMACIA`,
+ 1 AS `NOMBRE`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `fide_alerta_tb`
@@ -75,12 +88,12 @@ CREATE TABLE `fide_alerta_tb` (
   `ID_INVENTARIO` int(11) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_ALERTA`),
-  KEY `ID_TIPO_ALERTA` (`ID_TIPO_ALERTA`),
-  KEY `ID_INVENTARIO` (`ID_INVENTARIO`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_alerta_tb_ibfk_1` FOREIGN KEY (`ID_TIPO_ALERTA`) REFERENCES `tipo_alerta` (`ID_TIPO_ALERTA`),
-  CONSTRAINT `fide_alerta_tb_ibfk_2` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
-  CONSTRAINT `fide_alerta_tb_ibfk_3` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
+  KEY `FK_ALERTA_TIPO` (`ID_TIPO_ALERTA`),
+  KEY `FK_ALERTA_INVENTARIO` (`ID_INVENTARIO`),
+  KEY `FK_ALERTA_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_ALERTA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
+  CONSTRAINT `FK_ALERTA_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
+  CONSTRAINT `FK_ALERTA_TIPO` FOREIGN KEY (`ID_TIPO_ALERTA`) REFERENCES `tipo_alerta` (`ID_TIPO_ALERTA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -105,9 +118,9 @@ CREATE TABLE `fide_categoria_producto_tb` (
   `NOMBRE` varchar(100) NOT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_CATEGORIA_PRODUCTO`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_categoria_producto_tb_ibfk_1` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_CATEGORIA_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_CATEGORIA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +129,7 @@ CREATE TABLE `fide_categoria_producto_tb` (
 
 LOCK TABLES `fide_categoria_producto_tb` WRITE;
 /*!40000 ALTER TABLE `fide_categoria_producto_tb` DISABLE KEYS */;
-INSERT INTO `fide_categoria_producto_tb` VALUES (1,'Analgésico',1),(2,'Antibiótico',1),(3,'Antiinflamatorio',1),(4,'Antialérgico',1),(5,'Antipirético',1),(6,'Antihipertensivo',1),(7,'Antidiabético',1),(8,'Anticonvulsivo',1),(9,'Antipsicótico',1),(10,'Ansiolítico',1),(11,'Antidepresivo',1),(12,'Gastrointestinal',1),(13,'Vitaminas y suplementos',1),(14,'Antimicótico',1),(15,'Antiviral',1),(16,'Hormonas',1),(17,'Cardiovascular',1),(18,'Anticoagulante',1),(19,'Antiparasitario',1),(20,'Cuidado dermatológico',1),(21,'Inmunológico',1),(22,'Pediátrico',1),(23,'Ginecológico',1),(24,'Respiratorio',1),(25,'Oftálmico',1),(26,'Odontológico',1),(27,'Otros',1);
+INSERT INTO `fide_categoria_producto_tb` VALUES (1,'Analgésico',1),(2,'Antibiótico',1),(3,'Antiinflamatorio',1),(4,'Antialérgico',1),(5,'Antipirético',1),(6,'Antihipertensivo',1),(7,'Antidiabético',1),(8,'Anticonvulsivo',1),(9,'Antipsicótico',1),(10,'Ansiolítico',1),(11,'Antidepresivo',1),(12,'Gastrointestinal',1),(13,'Vitaminas y suplementos',1),(14,'Antimicótico',1),(15,'Antiviral',1),(16,'Hormonas',1),(17,'Cardiovascular',1),(18,'Anticoagulante',1),(19,'Antiparasitario',1),(20,'Cuidado dermatológico',1),(21,'Inmunológico',1),(22,'Pediátrico',1),(23,'Ginecológico',1),(24,'Respiratorio',1),(25,'Oftálmico',1),(26,'Odontológico',1),(27,'Otros',1),(28,'Analgésico',1),(29,'Antibiótico',1),(30,'Antiinflamatorio',1),(31,'Antialérgico',1),(32,'Antipirético',1),(33,'Antihipertensivo',1),(34,'Antidiabético',1),(35,'Anticonvulsivo',1),(36,'Antipsicótico',1),(37,'Ansiolítico',1),(38,'Antidepresivo',1),(39,'Gastrointestinal',1),(40,'Vitaminas y suplementos',1),(41,'Antimicótico',1),(42,'Antiviral',1),(43,'Hormonas',1),(44,'Cardiovascular',1),(45,'Anticoagulante',1),(46,'Antiparasitario',1),(47,'Cuidado dermatológico',1),(48,'Inmunológico',1),(49,'Pediátrico',1),(50,'Ginecológico',1),(51,'Respiratorio',1),(52,'Oftálmico',1),(53,'Odontológico',1),(54,'Otros',1),(55,'Analgésico',1),(56,'Antibiótico',1),(57,'Antiinflamatorio',1),(58,'Antialérgico',1),(59,'Antipirético',1),(60,'Antihipertensivo',1),(61,'Antidiabético',1),(62,'Anticonvulsivo',1),(63,'Antipsicótico',1),(64,'Ansiolítico',1),(65,'Antidepresivo',1),(66,'Gastrointestinal',1),(67,'Vitaminas y suplementos',1),(68,'Antimicótico',1),(69,'Antiviral',1),(70,'Hormonas',1),(71,'Cardiovascular',1),(72,'Anticoagulante',1),(73,'Antiparasitario',1),(74,'Cuidado dermatológico',1),(75,'Inmunológico',1),(76,'Pediátrico',1),(77,'Ginecológico',1),(78,'Respiratorio',1),(79,'Oftálmico',1),(80,'Odontológico',1),(81,'Otros',1);
 /*!40000 ALTER TABLE `fide_categoria_producto_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +144,7 @@ CREATE TABLE `fide_estado_tb` (
   `ID_ESTADO` int(11) NOT NULL AUTO_INCREMENT,
   `DESCRIPCION` varchar(100) NOT NULL,
   PRIMARY KEY (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +153,7 @@ CREATE TABLE `fide_estado_tb` (
 
 LOCK TABLES `fide_estado_tb` WRITE;
 /*!40000 ALTER TABLE `fide_estado_tb` DISABLE KEYS */;
-INSERT INTO `fide_estado_tb` VALUES (1,'Activo'),(2,'Inactivo'),(3,'Eliminado'),(4,'Pendiente'),(5,'Vencido'),(6,'En revisión'),(7,'Completado'),(8,'Cancelado');
+INSERT INTO `fide_estado_tb` VALUES (1,'Activo'),(2,'Inactivo'),(3,'Eliminado'),(4,'Pendiente'),(5,'Vencido'),(6,'En revisión'),(7,'Completado'),(8,'Cancelado'),(9,'Activo'),(10,'Inactivo'),(11,'Eliminado'),(12,'Pendiente'),(13,'Vencido'),(14,'En revisión'),(15,'Completado'),(16,'Cancelado'),(17,'Activo'),(18,'Inactivo'),(19,'Eliminado'),(20,'Pendiente'),(21,'Vencido'),(22,'En revisión'),(23,'Completado'),(24,'Cancelado');
 /*!40000 ALTER TABLE `fide_estado_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,9 +169,9 @@ CREATE TABLE `fide_farmacia_tb` (
   `NOMBRE` varchar(100) NOT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_FARMACIA`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_farmacia_tb_ibfk_1` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_FARMACIA_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_FARMACIA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +180,7 @@ CREATE TABLE `fide_farmacia_tb` (
 
 LOCK TABLES `fide_farmacia_tb` WRITE;
 /*!40000 ALTER TABLE `fide_farmacia_tb` DISABLE KEYS */;
+INSERT INTO `fide_farmacia_tb` VALUES (1,'Farmacia Central San José',1),(2,'Farmacia Heredia Norte',1),(3,'Farmacia Cartago Este',1),(4,'Farmacia Alajuela Centro',2),(5,'Farmacia Liberia Oeste',1),(6,'Farmacia Pérez Zeledón',1),(7,'Farmacia San Ramón',2),(8,'Farmacia Central San José',1),(9,'Farmacia Heredia Norte',1),(10,'Farmacia Cartago Este',1),(11,'Farmacia Alajuela Centro',2),(12,'Farmacia Liberia Oeste',1),(13,'Farmacia Pérez Zeledón',1),(14,'Farmacia San Ramón',2);
 /*!40000 ALTER TABLE `fide_farmacia_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,20 +193,20 @@ DROP TABLE IF EXISTS `fide_inventario_tb`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fide_inventario_tb` (
   `ID_INVENTARIO` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_PRODUCTO` int(11) DEFAULT NULL,
+  `CODIGO` varchar(20) DEFAULT NULL,
   `CANTIDAD_DISPONIBLE` int(11) NOT NULL,
   `STOCK_MINIMO` int(11) DEFAULT NULL,
   `STOCK_MAXIMO` int(11) DEFAULT NULL,
   `ID_FARMACIA` int(11) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_INVENTARIO`),
-  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
-  KEY `ID_FARMACIA` (`ID_FARMACIA`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_inventario_tb_ibfk_1` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `fide_producto_tb` (`ID_PRODUCTO`),
-  CONSTRAINT `fide_inventario_tb_ibfk_2` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
-  CONSTRAINT `fide_inventario_tb_ibfk_3` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_INVENTARIO_PRODUCTO` (`CODIGO`),
+  KEY `FK_INVENTARIO_FARMACIA` (`ID_FARMACIA`),
+  KEY `FK_INVENTARIO_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_INVENTARIO_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
+  CONSTRAINT `FK_INVENTARIO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
+  CONSTRAINT `FK_INVENTARIO_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,6 +215,7 @@ CREATE TABLE `fide_inventario_tb` (
 
 LOCK TABLES `fide_inventario_tb` WRITE;
 /*!40000 ALTER TABLE `fide_inventario_tb` DISABLE KEYS */;
+INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',4,0,0,10,1),(2,'110010204',-2,0,0,5,1);
 /*!40000 ALTER TABLE `fide_inventario_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,17 +228,17 @@ DROP TABLE IF EXISTS `fide_lote_tb`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fide_lote_tb` (
   `ID_LOTE` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_PRODUCTO` int(11) DEFAULT NULL,
+  `CODIGO` varchar(20) DEFAULT NULL,
   `NUMERO_LOTE` varchar(100) DEFAULT NULL,
   `FECHA_ELABORADO` date DEFAULT NULL,
   `FECHA_VENCIMIENTO` date DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_LOTE`),
-  KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_lote_tb_ibfk_1` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `fide_producto_tb` (`ID_PRODUCTO`),
-  CONSTRAINT `fide_lote_tb_ibfk_2` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_LOTE_PRODUCTO` (`CODIGO`),
+  KEY `FK_LOTE_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_LOTE_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
+  CONSTRAINT `FK_LOTE_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +247,46 @@ CREATE TABLE `fide_lote_tb` (
 
 LOCK TABLES `fide_lote_tb` WRITE;
 /*!40000 ALTER TABLE `fide_lote_tb` DISABLE KEYS */;
+INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1);
 /*!40000 ALTER TABLE `fide_lote_tb` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fide_movimiento_tb`
+--
+
+DROP TABLE IF EXISTS `fide_movimiento_tb`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fide_movimiento_tb` (
+  `ID_MOVIMIENTO` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_INVENTARIO` int(11) NOT NULL,
+  `ID_LOTE` int(11) NOT NULL,
+  `FECHA_MOVIMIENTO` date NOT NULL,
+  `FECHA_VENCIMIENTO` date NOT NULL,
+  `TIPO_MOVIMIENTO` varchar(10) DEFAULT NULL CHECK (`TIPO_MOVIMIENTO` in ('Entrada','Salida')),
+  `CANTIDAD` int(11) NOT NULL,
+  `DESCRIPCION` varchar(255) DEFAULT NULL,
+  `EMPRESA` varchar(100) DEFAULT NULL,
+  `ID_FARMACIA` int(11) NOT NULL,
+  PRIMARY KEY (`ID_MOVIMIENTO`),
+  KEY `FK_MOVIMIENTO_INVENTARIO` (`ID_INVENTARIO`),
+  KEY `FK_MOVIMIENTO_LOTE` (`ID_LOTE`),
+  KEY `FK_MOVIMIENTO_FARMACIA` (`ID_FARMACIA`),
+  CONSTRAINT `FK_MOVIMIENTO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
+  CONSTRAINT `FK_MOVIMIENTO_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
+  CONSTRAINT `FK_MOVIMIENTO_LOTE` FOREIGN KEY (`ID_LOTE`) REFERENCES `fide_lote_tb` (`ID_LOTE`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fide_movimiento_tb`
+--
+
+LOCK TABLES `fide_movimiento_tb` WRITE;
+/*!40000 ALTER TABLE `fide_movimiento_tb` DISABLE KEYS */;
+INSERT INTO `fide_movimiento_tb` VALUES (1,1,1,'2025-07-11','2025-07-12','Entrada',4,'prueba','prueba',10),(2,1,1,'2025-07-11','2025-07-12','Entrada',4,'prueba','prueba',10),(3,2,1,'2025-07-19','2025-07-12','Salida',2,'','',5),(4,1,1,'2025-07-19','2025-07-12','Salida',2,'','',10),(5,1,1,'2025-07-19','2025-07-12','Salida',2,'','',10);
+/*!40000 ALTER TABLE `fide_movimiento_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -243,22 +297,21 @@ DROP TABLE IF EXISTS `fide_producto_tb`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fide_producto_tb` (
-  `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(100) NOT NULL,
   `CODIGO` varchar(20) NOT NULL,
+  `NOMBRE` varchar(100) NOT NULL,
   `PRECIO_UNITARIO` decimal(10,2) DEFAULT NULL,
   `ID_CATEGORIA_PRODUCTO` int(11) DEFAULT NULL,
   `ID_UNIDAD_MEDIDA` int(11) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID_PRODUCTO`),
-  UNIQUE KEY `CODIGO` (`CODIGO`),
-  KEY `ID_CATEGORIA_PRODUCTO` (`ID_CATEGORIA_PRODUCTO`),
-  KEY `ID_UNIDAD_MEDIDA` (`ID_UNIDAD_MEDIDA`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_producto_tb_ibfk_1` FOREIGN KEY (`ID_CATEGORIA_PRODUCTO`) REFERENCES `fide_categoria_producto_tb` (`ID_CATEGORIA_PRODUCTO`),
-  CONSTRAINT `fide_producto_tb_ibfk_2` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `fide_unidad_medida_tb` (`ID_UNIDAD_MEDIDA`),
-  CONSTRAINT `fide_producto_tb_ibfk_3` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `URL_IMAGEN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CODIGO`),
+  KEY `FK_PRODUCTO_CATEGORIA` (`ID_CATEGORIA_PRODUCTO`),
+  KEY `FK_PRODUCTO_UNIDAD` (`ID_UNIDAD_MEDIDA`),
+  KEY `FK_PRODUCTO_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_PRODUCTO_CATEGORIA` FOREIGN KEY (`ID_CATEGORIA_PRODUCTO`) REFERENCES `fide_categoria_producto_tb` (`ID_CATEGORIA_PRODUCTO`),
+  CONSTRAINT `FK_PRODUCTO_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
+  CONSTRAINT `FK_PRODUCTO_UNIDAD` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `fide_unidad_medida_tb` (`ID_UNIDAD_MEDIDA`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +320,7 @@ CREATE TABLE `fide_producto_tb` (
 
 LOCK TABLES `fide_producto_tb` WRITE;
 /*!40000 ALTER TABLE `fide_producto_tb` DISABLE KEYS */;
-INSERT INTO `fide_producto_tb` VALUES (1,'ATORVASTATINA 20 MG TABLETA','110010204',135.75,1,1,1),(2,'ENALAPRIL 10 MG TABLETA','110010205',52.30,1,1,1),(3,'FUROSEMIDA 40 MG TABLETA','110010206',25.00,1,1,1),(4,'PREDNISONA 5 MG TABLETA','110010207',33.00,10,1,1),(5,'CLORFENAMINA 4 MG TABLETA','110010208',19.50,6,1,1),(6,'DICLOFENACO 50 MG TABLETA','110010209',27.75,4,1,1),(7,'NAPROXENO 500 MG TABLETA','110010210',41.20,4,1,1),(8,'RANITIDINA 150 MG TABLETA','110010211',60.00,5,1,1),(9,'CIPROFLOXACINO 500 MG TABLETA','110010212',88.50,2,1,1),(10,'CEFALEXINA 500 MG CÁPSULA','110010213',92.30,2,1,1),(11,'ACICLOVIR 400 MG TABLETA','110010214',79.00,2,1,1),(12,'AZITROMICINA 500 MG TABLETA','110010215',160.00,2,1,1),(13,'CLARITROMICINA 500 MG TABLETA','110010216',175.00,2,1,1),(14,'DOXICICLINA 100 MG TABLETA','110010217',67.25,2,1,1),(15,'LEVOTIROXINA 50 MCG TABLETA','110010218',32.00,10,1,1),(16,'GLIBENCLAMIDA 5 MG TABLETA','110010219',29.00,10,1,1),(17,'INSULINA NPH 100 UI/ML FRASCO','110010220',4350.00,10,2,1),(18,'INSULINA REGULAR 100 UI/ML FRASCO','110010221',4200.00,10,2,1),(19,'ASPIRINA 100 MG TABLETA','110010222',23.00,3,1,1),(20,'WARFARINA 5 MG TABLETA','110010223',95.00,1,1,1),(21,'HEPARINA SÓDICA 5000 UI/ML','110010224',2250.00,1,3,1),(22,'METRONIDAZOL 250 MG TABLETA','110010225',55.00,2,1,1),(23,'NISTATINA 100000 UI TABLETA','110010226',61.00,2,1,1),(24,'FLUCONAZOL 150 MG CÁPSULA','110010227',135.00,2,1,1),(25,'KETOCONAZOL 200 MG TABLETA','110010228',115.00,2,1,1),(26,'CLONAZEPAM 0.5 MG TABLETA','110010261',65.00,9,1,1),(27,'DIAZEPAM 10 MG TABLETA','110010262',70.00,9,1,1),(28,'BISACODILO 5 MG TABLETA','110010263',30.00,5,1,1),(29,'LOPERAMIDA 2 MG CÁPSULA','110010264',40.00,5,1,1),(30,'DOMPERIDONA 10 MG TABLETA','110010265',48.00,5,1,1),(31,'ONDANSETRON 4 MG TABLETA','110010266',120.00,5,1,1),(32,'RIVAROXABAN 20 MG TABLETA','110010267',320.00,1,1,1),(33,'APIXABAN 5 MG TABLETA','110010268',290.00,1,1,1),(34,'ENOXAPARINA 40 MG/0.4ML JERINGA','110010269',3850.00,1,4,1),(35,'FENILEFRINA 10 MG TABLETA','110010270',35.00,6,1,1),(36,'PSEUDOEFEDRINA 30 MG TABLETA','110010271',44.00,6,1,1),(37,'OXIMETAZOLINA 0.05% GOTAS NASALES','110010272',120.00,6,5,1),(38,'DEXTROMETORFANO 15 MG/5ML JARABE','110010273',112.00,8,6,1),(39,'BROMEXINA 8 MG/5ML JARABE','110010274',105.00,8,6,1),(40,'AMBROXOL 30 MG/5ML JARABE','110010275',99.00,8,6,1),(41,'CLORURO DE SODIO 0.9% FRASCO','110010276',475.00,10,2,1),(42,'GLUCOSA 5% FRASCO','110010277',510.00,10,2,1),(43,'RINGER LACTATO FRASCO','110010278',490.00,10,2,1),(44,'KETOROLACO 30 MG/ML AMPOLLAS','110010279',185.00,3,3,1),(45,'TRAMADOL 100 MG/ML AMPOLLAS','110010280',220.00,3,3,1),(46,'MORFINA 10 MG/ML AMPOLLAS','110010281',285.00,3,3,1),(47,'FENTANILO 50 MCG/ML AMPOLLAS','110010282',300.00,3,3,1),(48,'NEOMICINA + BACITRACINA UNGÜENTO','110010283',290.00,7,7,1),(49,'HIDROCORTISONA 1% CREMA','110010284',210.00,7,7,1),(50,'BETAMETASONA 0.1% CREMA','110010285',250.00,7,7,1),(51,'CLOTRIMAZOL 1% CREMA','110010286',240.00,7,7,1),(52,'MICONAZOL 2% CREMA','110010287',230.00,7,7,1),(53,'NISTATINA 100,000 UI CREMA','110010288',225.00,7,7,1),(54,'KETOCONAZOL 2% CHAMPÚ','110010289',650.00,7,8,1),(55,'TRETINOÍNA 0.05% CREMA','110010290',800.00,7,7,1),(56,'BENZOIL PERÓXIDO 5% GEL','110010291',475.00,7,7,1),(57,'ACICLOVIR 5% CREMA','110010292',340.00,7,7,1),(58,'NAPROXENO SÓDICO 550 MG TABLETA','110010293',90.00,4,1,1),(59,'IBUPROFENO 400 MG TABLETA','110010306',85.00,3,1,1),(60,'AMOXICILINA 500 MG CÁPSULA','110010307',110.00,2,1,1),(61,'CLARITROMICINA 250 MG TABLETA','110010308',185.00,2,1,1),(62,'ENALAPRIL 5 MG TABLETA','110010309',46.00,4,1,1),(63,'LOSARTÁN 50 MG TABLETA','110010310',58.00,4,1,1),(64,'METFORMINA 850 MG TABLETA','110010311',60.00,5,1,1),(65,'GLICLAZIDA 30 MG TABLETA','110010312',72.00,5,1,1),(66,'LORATADINA 10 MG TABLETA','110010313',42.00,6,1,1),(67,'CETIRIZINA 10 MG TABLETA','110010314',49.00,6,1,1),(68,'OMEPRAZOL 20 MG CÁPSULA','110010315',98.00,7,1,1),(69,'FAMOTIDINA 40 MG TABLETA','110010316',88.00,7,1,1),(70,'SALBUTAMOL SPRAY 100 MCG','110010317',2750.00,8,9,1),(71,'BUDESONIDA 100 MCG INHALADOR','110010318',3600.00,8,17,1),(72,'BETAMETASONA CREMA 0.05%','110010319',270.00,9,8,1),(73,'KETOCONAZOL CREMA 2%','110010320',310.00,9,8,1);
+INSERT INTO `fide_producto_tb` VALUES ('110010204','ATORVASTATINA 20 MG TABLETA',135.75,1,1,1,NULL),('110010205','ENALAPRIL 10 MG TABLETA',52.30,1,1,1,NULL),('110010206','FUROSEMIDA 40 MG TABLETA',25.00,1,1,1,NULL),('110010207','PREDNISONA 5 MG TABLETA',33.00,10,1,1,NULL),('110010208','CLORFENAMINA 4 MG TABLETA',19.50,6,1,1,NULL),('110010209','DICLOFENACO 50 MG TABLETA',27.75,4,1,1,NULL),('110010210','NAPROXENO 500 MG TABLETA',41.20,4,1,1,NULL),('110010211','RANITIDINA 150 MG TABLETA',60.00,5,1,1,NULL),('110010212','CIPROFLOXACINO 500 MG TABLETA',88.50,2,1,1,NULL),('110010213','CEFALEXINA 500 MG CÁPSULA',92.30,2,1,1,NULL),('110010214','ACICLOVIR 400 MG TABLETA',79.00,2,1,1,NULL),('110010215','AZITROMICINA 500 MG TABLETA',160.00,2,1,1,NULL),('110010216','CLARITROMICINA 500 MG TABLETA',175.00,2,1,1,NULL),('110010217','DOXICICLINA 100 MG TABLETA',67.25,2,1,1,NULL),('110010218','LEVOTIROXINA 50 MCG TABLETA',32.00,10,1,1,NULL),('110010219','GLIBENCLAMIDA 5 MG TABLETA',29.00,10,1,1,NULL),('110010220','INSULINA NPH 100 UI/ML FRASCO',4350.00,10,2,1,NULL),('110010221','INSULINA REGULAR 100 UI/ML FRASCO',4200.00,10,2,1,NULL),('110010222','ASPIRINA 100 MG TABLETA',23.00,3,1,1,NULL),('110010223','WARFARINA 5 MG TABLETA',95.00,1,1,1,NULL),('110010224','HEPARINA SÓDICA 5000 UI/ML',2250.00,1,3,1,NULL),('110010225','METRONIDAZOL 250 MG TABLETA',55.00,2,1,1,NULL),('110010226','NISTATINA 100000 UI TABLETA',61.00,2,1,1,NULL),('110010227','FLUCONAZOL 150 MG CÁPSULA',135.00,2,1,1,NULL),('110010228','KETOCONAZOL 200 MG TABLETA',115.00,2,1,1,NULL),('110010261','CLONAZEPAM 0.5 MG TABLETA',65.00,9,1,1,NULL),('110010262','DIAZEPAM 10 MG TABLETA',70.00,9,1,1,NULL),('110010263','BISACODILO 5 MG TABLETA',30.00,5,1,1,NULL),('110010264','LOPERAMIDA 2 MG CÁPSULA',40.00,5,1,1,NULL),('110010265','DOMPERIDONA 10 MG TABLETA',48.00,5,1,1,NULL),('110010266','ONDANSETRON 4 MG TABLETA',120.00,5,1,1,NULL),('110010267','RIVAROXABAN 20 MG TABLETA',320.00,1,1,1,NULL),('110010268','APIXABAN 5 MG TABLETA',290.00,1,1,1,NULL),('110010269','ENOXAPARINA 40 MG/0.4ML JERINGA',3850.00,1,4,1,NULL),('110010270','FENILEFRINA 10 MG TABLETA',35.00,6,1,1,NULL),('110010271','PSEUDOEFEDRINA 30 MG TABLETA',44.00,6,1,1,NULL),('110010272','OXIMETAZOLINA 0.05% GOTAS NASALES',120.00,6,5,1,NULL),('110010273','DEXTROMETORFANO 15 MG/5ML JARABE',112.00,8,6,1,NULL),('110010274','BROMEXINA 8 MG/5ML JARABE',105.00,8,6,1,NULL),('110010275','AMBROXOL 30 MG/5ML JARABE',99.00,8,6,1,NULL),('110010276','CLORURO DE SODIO 0.9% FRASCO',475.00,10,2,1,NULL),('110010277','GLUCOSA 5% FRASCO',510.00,10,2,1,NULL),('110010278','RINGER LACTATO FRASCO',490.00,10,2,1,NULL),('110010279','KETOROLACO 30 MG/ML AMPOLLAS',185.00,3,3,1,NULL),('110010280','TRAMADOL 100 MG/ML AMPOLLAS',220.00,3,3,1,NULL),('110010281','MORFINA 10 MG/ML AMPOLLAS',285.00,3,3,1,NULL),('110010282','FENTANILO 50 MCG/ML AMPOLLAS',300.00,3,3,1,NULL),('110010283','NEOMICINA + BACITRACINA UNGÜENTO',290.00,7,7,1,NULL),('110010284','HIDROCORTISONA 1% CREMA',210.00,7,7,1,NULL),('110010285','BETAMETASONA 0.1% CREMA',250.00,7,7,1,NULL),('110010286','CLOTRIMAZOL 1% CREMA',240.00,7,7,1,NULL),('110010287','MICONAZOL 2% CREMA',230.00,7,7,1,NULL),('110010288','NISTATINA 100,000 UI CREMA',225.00,7,7,1,NULL),('110010289','KETOCONAZOL 2% CHAMPÚ',650.00,7,8,1,NULL),('110010290','TRETINOÍNA 0.05% CREMA',800.00,7,7,1,NULL),('110010291','BENZOIL PERÓXIDO 5% GEL',475.00,7,7,1,NULL),('110010292','ACICLOVIR 5% CREMA',340.00,7,7,1,NULL),('110010293','NAPROXENO SÓDICO 550 MG TABLETA',90.00,4,1,1,NULL),('110010306','IBUPROFENO 400 MG TABLETA',85.00,3,1,1,NULL),('110010307','AMOXICILINA 500 MG CÁPSULA',110.00,2,1,1,NULL),('110010308','CLARITROMICINA 250 MG TABLETA',185.00,2,1,1,NULL),('110010309','ENALAPRIL 5 MG TABLETA',46.00,4,1,1,NULL),('110010310','LOSARTÁN 50 MG TABLETA',58.00,4,1,1,NULL),('110010311','METFORMINA 850 MG TABLETA',60.00,5,1,1,NULL),('110010312','GLICLAZIDA 30 MG TABLETA',72.00,5,1,1,NULL),('110010313','LORATADINA 10 MG TABLETA',42.00,6,1,1,NULL),('110010314','CETIRIZINA 10 MG TABLETA',49.00,6,1,1,NULL),('110010315','OMEPRAZOL 20 MG CÁPSULA',98.00,7,1,1,NULL),('110010316','FAMOTIDINA 40 MG TABLETA',88.00,7,1,1,NULL),('110010317','SALBUTAMOL SPRAY 100 MCG',2750.00,8,9,1,NULL),('110010318','BUDESONIDA 100 MCG INHALADOR',3600.00,8,17,1,NULL),('110010319','BETAMETASONA CREMA 0.05%',270.00,9,8,1,NULL),('110010320','KETOCONAZOL CREMA 2%',310.00,9,8,1,NULL);
 /*!40000 ALTER TABLE `fide_producto_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,9 +336,9 @@ CREATE TABLE `fide_unidad_medida_tb` (
   `NOMBRE` varchar(50) NOT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_UNIDAD_MEDIDA`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `fide_unidad_medida_tb_ibfk_1` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_UNIDAD_MEDIDA_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_UNIDAD_MEDIDA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +347,7 @@ CREATE TABLE `fide_unidad_medida_tb` (
 
 LOCK TABLES `fide_unidad_medida_tb` WRITE;
 /*!40000 ALTER TABLE `fide_unidad_medida_tb` DISABLE KEYS */;
-INSERT INTO `fide_unidad_medida_tb` VALUES (1,'Unidad',1),(2,'Tableta',1),(3,'Cápsula',1),(4,'Frasco',1),(5,'Gotas',1),(6,'Ampolla',1),(7,'Sobre',1),(8,'Crema',1),(9,'Gel',1),(10,'Solución',1),(11,'Jarabe',1),(12,'Polvo',1),(13,'Spray',1),(14,'Parche',1),(15,'Supositorio',1),(16,'Enema',1),(17,'Inhalador',1),(18,'Colirio',1),(19,'Inyectable',1),(20,'Comprimido',1),(21,'Emulsión',1),(22,'Suspensión',1),(23,'Óvulo',1),(24,'Loción',1),(25,'Vial',1),(26,'Kit',1),(27,'Implante',1),(28,'Jeringa',1),(29,'Champú',1),(30,'Ungüento',1);
+INSERT INTO `fide_unidad_medida_tb` VALUES (1,'Unidad',1),(2,'Tableta',1),(3,'Cápsula',1),(4,'Frasco',1),(5,'Gotas',1),(6,'Ampolla',1),(7,'Sobre',1),(8,'Crema',1),(9,'Gel',1),(10,'Solución',1),(11,'Jarabe',1),(12,'Polvo',1),(13,'Spray',1),(14,'Parche',1),(15,'Supositorio',1),(16,'Enema',1),(17,'Inhalador',1),(18,'Colirio',1),(19,'Inyectable',1),(20,'Comprimido',1),(21,'Emulsión',1),(22,'Suspensión',1),(23,'Óvulo',1),(24,'Loción',1),(25,'Vial',1),(26,'Kit',1),(27,'Implante',1),(28,'Jeringa',1),(29,'Champú',1),(30,'Ungüento',1),(31,'Unidad',1),(32,'Tableta',1),(33,'Cápsula',1),(34,'Frasco',1),(35,'Gotas',1),(36,'Ampolla',1),(37,'Sobre',1),(38,'Crema',1),(39,'Gel',1),(40,'Solución',1),(41,'Jarabe',1),(42,'Polvo',1),(43,'Spray',1),(44,'Parche',1),(45,'Supositorio',1),(46,'Enema',1),(47,'Inhalador',1),(48,'Colirio',1),(49,'Inyectable',1),(50,'Comprimido',1),(51,'Emulsión',1),(52,'Suspensión',1),(53,'Óvulo',1),(54,'Loción',1),(55,'Vial',1),(56,'Kit',1),(57,'Implante',1),(58,'Jeringa',1),(59,'Champú',1),(60,'Ungüento',1),(61,'Unidad',1),(62,'Tableta',1),(63,'Cápsula',1),(64,'Frasco',1),(65,'Gotas',1),(66,'Ampolla',1),(67,'Sobre',1),(68,'Crema',1),(69,'Gel',1),(70,'Solución',1),(71,'Jarabe',1),(72,'Polvo',1),(73,'Spray',1),(74,'Parche',1),(75,'Supositorio',1),(76,'Enema',1),(77,'Inhalador',1),(78,'Colirio',1),(79,'Inyectable',1),(80,'Comprimido',1),(81,'Emulsión',1),(82,'Suspensión',1),(83,'Óvulo',1),(84,'Loción',1),(85,'Vial',1),(86,'Kit',1),(87,'Implante',1),(88,'Jeringa',1),(89,'Champú',1),(90,'Ungüento',1);
 /*!40000 ALTER TABLE `fide_unidad_medida_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +387,7 @@ CREATE TABLE `terror` (
   `DESCRIPCION` text NOT NULL,
   `FECHAHORA` datetime NOT NULL,
   PRIMARY KEY (`ID_ERROR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,6 +396,7 @@ CREATE TABLE `terror` (
 
 LOCK TABLES `terror` WRITE;
 /*!40000 ALTER TABLE `terror` DISABLE KEYS */;
+INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49');
 /*!40000 ALTER TABLE `terror` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,8 +412,8 @@ CREATE TABLE `tipo_alerta` (
   `NOMBRE` varchar(100) NOT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_TIPO_ALERTA`),
-  KEY `ID_ESTADO` (`ID_ESTADO`),
-  CONSTRAINT `tipo_alerta_ibfk_1` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
+  KEY `FK_TIPO_ALERTA_ESTADO` (`ID_ESTADO`),
+  CONSTRAINT `FK_TIPO_ALERTA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -399,8 +453,8 @@ CREATE TABLE `usuario` (
   `USUARIO` varchar(50) NOT NULL,
   `CONTRASENA` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `USUARIO` (`USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `UQ_USUARIO` (`USUARIO`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +463,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Josue','josueadmin@email.com','josue','123'),(2,'Abraham','abrahamcliente@email.com','abraham','123');
+INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123'),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123'),(3,'josue ','josue13398@gmail.com','jnavarro','123');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,9 +478,9 @@ CREATE TABLE `usuario_rol` (
   `USUARIO_ID` bigint(20) NOT NULL,
   `ROL_ID` bigint(20) NOT NULL,
   PRIMARY KEY (`USUARIO_ID`,`ROL_ID`),
-  KEY `ROL_ID` (`ROL_ID`),
-  CONSTRAINT `usuario_rol_ibfk_1` FOREIGN KEY (`USUARIO_ID`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE,
-  CONSTRAINT `usuario_rol_ibfk_2` FOREIGN KEY (`ROL_ID`) REFERENCES `rol` (`ID`) ON DELETE CASCADE
+  KEY `FK_USUARIO_ROL_ROL` (`ROL_ID`),
+  CONSTRAINT `FK_USUARIO_ROL_ROL` FOREIGN KEY (`ROL_ID`) REFERENCES `rol` (`ID`) ON DELETE CASCADE,
+  CONSTRAINT `FK_USUARIO_ROL_USUARIO` FOREIGN KEY (`USUARIO_ID`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -457,14 +511,14 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarContrasenna`(pIdUsuario bigint(11),
-     pContrasenna varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarContrasenna`(
+    IN pIdUsuario BIGINT(11),
+    IN pContrasenna VARCHAR(100)
+)
 BEGIN
-
-	UPDATE 	USUARIO
-	SET 	CONTRASENA = pContrasenna
-    WHERE 	ID = pIdUsuario;
-
+    UPDATE USUARIO
+    SET CONTRASENA = pContrasenna
+    WHERE ID = pIdUsuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -587,6 +641,95 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `InsertarMovimiento` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarMovimiento`(
+    IN p_codigo_producto VARCHAR(20),
+    IN p_numero_lote VARCHAR(100),
+    IN p_fecha_vencimiento DATE,
+    IN p_fecha_movimiento DATE,
+    IN p_tipo_movimiento VARCHAR(10),
+    IN p_cantidad INT,
+    IN p_descripcion VARCHAR(255),
+    IN p_empresa VARCHAR(100),
+    IN p_id_farmacia INT
+)
+BEGIN
+    DECLARE v_id_lote INT;
+    DECLARE v_id_inventario INT;
+    DECLARE v_saldo_actual INT;
+
+    -- Buscar lote
+    SELECT ID_LOTE INTO v_id_lote
+    FROM FIDE_LOTE_TB
+    WHERE CODIGO = p_codigo_producto AND NUMERO_LOTE = p_numero_lote
+    LIMIT 1;
+
+    -- Si no existe el lote, se crea
+    IF v_id_lote IS NULL THEN
+        INSERT INTO FIDE_LOTE_TB (
+            CODIGO, NUMERO_LOTE, FECHA_ELABORADO, FECHA_VENCIMIENTO, ID_ESTADO
+        ) VALUES (
+            p_codigo_producto, p_numero_lote, p_fecha_movimiento, p_fecha_vencimiento, 1
+        );
+
+        SET v_id_lote = LAST_INSERT_ID();
+    END IF;
+
+    -- Verificar si ya está en inventario de la farmacia
+    SELECT ID_INVENTARIO, CANTIDAD_DISPONIBLE INTO v_id_inventario, v_saldo_actual
+    FROM FIDE_INVENTARIO_TB
+    WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
+    LIMIT 1;
+
+    -- Si no existe, lo insertamos con cantidad 0
+    IF v_id_inventario IS NULL THEN
+        INSERT INTO FIDE_INVENTARIO_TB (
+            CODIGO, CANTIDAD_DISPONIBLE, STOCK_MINIMO, STOCK_MAXIMO,
+            ID_FARMACIA, ID_ESTADO
+        ) VALUES (
+            p_codigo_producto, 0, 0, 0,
+            p_id_farmacia, 1
+        );
+
+        SET v_id_inventario = LAST_INSERT_ID();
+        SET v_saldo_actual = 0;
+    END IF;
+
+    -- Según el tipo de movimiento, se actualiza el inventario
+    IF p_tipo_movimiento = 'Entrada' THEN
+        UPDATE FIDE_INVENTARIO_TB
+        SET CANTIDAD_DISPONIBLE = v_saldo_actual + p_cantidad
+        WHERE ID_INVENTARIO = v_id_inventario;
+    ELSE
+        UPDATE FIDE_INVENTARIO_TB
+        SET CANTIDAD_DISPONIBLE = v_saldo_actual - p_cantidad
+        WHERE ID_INVENTARIO = v_id_inventario;
+    END IF;
+
+    -- Insertar movimiento
+    INSERT INTO FIDE_MOVIMIENTO_TB (
+        ID_INVENTARIO, ID_LOTE, FECHA_MOVIMIENTO, FECHA_VENCIMIENTO,
+        TIPO_MOVIMIENTO, CANTIDAD, DESCRIPCION, EMPRESA, ID_FARMACIA
+    ) VALUES (
+        v_id_inventario, v_id_lote, p_fecha_movimiento, p_fecha_vencimiento,
+        p_tipo_movimiento, p_cantidad, p_descripcion, p_empresa, p_id_farmacia
+    );
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RegistrarError` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -626,8 +769,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarUsuario`(
     IN pcontrasena VARCHAR(100)
 )
 BEGIN
-        INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
-        VALUES (pnombre, pcorreo, pusuario, pcontrasena);
+    INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
+    VALUES (pnombre, pcorreo, pusuario, pcontrasena);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -646,10 +789,9 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ValidarCorreo`(pcorreo VARCHAR(100))
 BEGIN
-    SELECT NOMBRE
-           ID
-    FROM   USUARIO
-    WHERE  CORREO = pcorreo;
+    SELECT NOMBRE, ID
+    FROM USUARIO
+    WHERE CORREO = pcorreo;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -709,6 +851,24 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `farmacia_activa_v`
+--
+
+/*!50001 DROP VIEW IF EXISTS `farmacia_activa_v`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `farmacia_activa_v` AS select `fide_farmacia_tb`.`ID_FARMACIA` AS `ID_FARMACIA`,`fide_farmacia_tb`.`NOMBRE` AS `NOMBRE` from `fide_farmacia_tb` where `fide_farmacia_tb`.`ID_ESTADO` = 1 */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `unidad_medida_activa_v`
 --
 
@@ -735,4 +895,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-12 17:39:53
+-- Dump completed on 2025-07-12 23:40:13
