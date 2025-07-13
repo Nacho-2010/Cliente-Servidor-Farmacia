@@ -21,21 +21,50 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 <h2>Consultar Producto</h2>
                 <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                     <input type="text" name="txtCodigo" placeholder="Código del producto" required>
+
+                    <select name="ddlFarmaciaBuscar" required>
+                        <option value="">Seleccione una farmacia</option>
+                        <?php foreach ($id_farmacia as $FARM): ?>
+                            <option value="<?= $FARM["ID_FARMACIA"] ?>">
+                                <?= htmlspecialchars($FARM["NOMBRE"]) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
                     <button type="submit" name="btnBuscarProducto">Buscar</button>
                 </form>
             </div>
 
             <?php if (isset($_SESSION["CODIGO_BUSCADO"])): ?>
                 <div class="formulario-kardex">
-                    <h3>Producto: <?= $_SESSION["CODIGO_BUSCADO"] ?></h3>
-                    <p><strong>Cantidad Disponible:</strong> <?= $_SESSION["CANT_DISPONIBLE"] ?? 'No disponible' ?></p>
+                    <div class="info-producto">
+                        <h3><?= $_SESSION["NOMBRE_PRODUCTO"] ?? "Producto Desconocido" ?></h3>
+                        <p><strong>Unidad de medida:</strong> <?= $_SESSION["UNIDAD_MEDIDA"] ?? "No definida" ?></p>
+                        <p><strong>Código:</strong> <?= $_SESSION["CODIGO_BUSCADO"] ?></p>
+                        <p><strong>Stock disponible:</strong> <?= $_SESSION["CANT_DISPONIBLE"] ?? 'No disponible' ?></p>
+                        <p><strong>Farmacia:</strong>
+                            <?php
+                            $idFarm = $_SESSION["FARMACIA_BUSCADA"] ?? null;
+                            $nombreFarm = "No definida";
+                            foreach ($id_farmacia as $farm) {
+                                if ($farm["ID_FARMACIA"] == $idFarm) {
+                                    $nombreFarm = $farm["NOMBRE"];
+                                    break;
+                                }
+                            }
+                            echo $nombreFarm;
+                            ?>
+                        </p>
+                    </div>
 
                     <!-- Formulario de movimiento -->
                     <h2>Registrar Movimiento</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
                         <input type="text" name="txtLote" placeholder="Número de lote" required>
+                        <h4>Ingrese fecha de vencimiento del producto</h4>
                         <input type="date" name="txtFechaVencimiento" required>
+                        <h4>Ingrese fecha de movimiento</h4>
                         <input type="date" name="txtFecha" required>
 
                         <select name="ddlTipo" required>
@@ -45,20 +74,27 @@ $id_farmacia = ObtenerFarmaciasActivas();
                         </select>
 
                         <input type="number" name="txtCantidad" placeholder="Cantidad" required>
-                        <input type="text" name="txtDescripcion" placeholder="Descripción">
 
-                        <label><input type="checkbox" name="chkEmpresa" id="chkEmpresa"> Incluir Empresa</label>
-                        <input type="text" name="txtEmpresa" id="txtEmpresa" placeholder="Empresa" disabled>
+                        <label>
+                            <input type="checkbox" id="chkDescripcion" data-target="txtDescripcion"> Incluir descripción
+                        </label>
+                        <input type="text" id="txtDescripcion" name="txtDescripcion" placeholder="Descripción" disabled>
+
+                        <label>
+                            <input type="checkbox" id="chkEmpresa" name="chkEmpresa" data-target="txtEmpresa"> Incluir
+                            Empresa
+                        </label>
+                        <input type="text" id="txtEmpresa" name="txtEmpresa" placeholder="Empresa" disabled>
 
                         <select name="ddlFarmacia" required>
                             <option value="">Seleccione una farmacia</option>
                             <?php foreach ($id_farmacia as $FARM): ?>
-                                <option value="<?= $FARM["ID_FARMACIA"] ?>">
+                                <option value="<?= $FARM["ID_FARMACIA"] ?>"
+                                    <?= ($FARM["ID_FARMACIA"] == ($_SESSION["FARMACIA_BUSCADA"] ?? '')) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($FARM["NOMBRE"]) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-
 
                         <button type="submit" name="btnRegistrarMovimiento">Registrar</button>
                     </form>
@@ -89,7 +125,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                     <tr>
                                         <td><?= $mov["FECHA_MOVIMIENTO"] ?></td>
                                         <td><?= $mov["TIPO_MOVIMIENTO"] ?></td>
-                                        <td><?= ($mov["TIPO_MOVIMIENTO"] === 'Entrada' ? '+' : '-') . $mov["CANTIDAD"] ?></td>
+                                        <td><?= $mov["CANTIDAD"] ?></td>
                                         <td><?= $mov["SALDO"] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -102,8 +138,14 @@ $id_farmacia = ObtenerFarmaciasActivas();
     </main>
 
     <script>
-        document.getElementById('chkEmpresa')?.addEventListener('change', function () {
-            document.getElementById('txtEmpresa').disabled = !this.checked;
+        document.querySelectorAll('input[type="checkbox"][data-target]').forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                const targetId = this.getAttribute('data-target');
+                const targetInput = document.getElementById(targetId);
+                if (targetInput) {
+                    targetInput.disabled = !this.checked;
+                }
+            });
         });
     </script>
 </body>
