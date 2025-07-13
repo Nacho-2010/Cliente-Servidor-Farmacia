@@ -20,6 +20,10 @@ CREATE PROCEDURE RegistrarUsuario(
 BEGIN
     INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
     VALUES (pnombre, pcorreo, pusuario, pcontrasena);
+    -- Asignar rol por defecto (CLIENTE con ID = 1)
+    INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID)
+    VALUES (LAST_INSERT_ID(),1);
+
 END $$
 
 DELIMITER ;

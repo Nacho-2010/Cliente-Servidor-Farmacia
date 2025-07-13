@@ -68,9 +68,9 @@ function verheader()
   if ($usuarioLogueado) {
     echo '
         <div class="profile-dis scrollable">
-          <span class="user-name">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
+          <span class="user-name" style="color: #333; font-weight: bold;">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
 
-          <a class="dropdown-item" href="?logout=true"><i class="ti-power-off m-r-5 m-1-5"></i> Cerrar Sesión</a>
+          <a class="dropdown-item" href="?logout=true" style="color: #007bff; font-weight: bold; text-decoration: none;"></i> Cerrar Sesión</a>
         </div>';
   }
   echo '</div></div></header>';

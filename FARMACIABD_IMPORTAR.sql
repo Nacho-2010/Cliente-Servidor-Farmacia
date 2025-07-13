@@ -454,7 +454,7 @@ CREATE TABLE `usuario` (
   `CONTRASENA` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `UQ_USUARIO` (`USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +463,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123'),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123'),(3,'josue ','josue13398@gmail.com','jnavarro','123');
+INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123'),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123'),(4,'UsuarioPrueba','usuario@gmail.com','usuario','123');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -490,7 +490,7 @@ CREATE TABLE `usuario_rol` (
 
 LOCK TABLES `usuario_rol` WRITE;
 /*!40000 ALTER TABLE `usuario_rol` DISABLE KEYS */;
-INSERT INTO `usuario_rol` VALUES (1,2),(2,1);
+INSERT INTO `usuario_rol` VALUES (1,2),(2,1),(4,1);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -771,6 +771,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarUsuario`(
 BEGIN
     INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
     VALUES (pnombre, pcorreo, pusuario, pcontrasena);
+    -- Asignar rol por defecto (CLIENTE con ID = 1)
+    INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID)
+    VALUES (LAST_INSERT_ID(),1);
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -895,4 +899,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-12 23:40:13
+-- Dump completed on 2025-07-13 11:11:16
