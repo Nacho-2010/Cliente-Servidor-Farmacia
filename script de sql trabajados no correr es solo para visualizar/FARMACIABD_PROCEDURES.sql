@@ -565,6 +565,10 @@ CALL ObtenerStockDisponible('110010204', 1);
 
 CALL ObtenerLotesDisponiblesPorProducto('110010204', 1);
 
-
+-- para elimiar los movimientos de un codigo en una farma 
+DELETE M
+FROM FIDE_MOVIMIENTO_TB M
+JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
+WHERE I.CODIGO = '110010204' AND I.ID_FARMACIA = 1;
 
 

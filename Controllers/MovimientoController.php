@@ -6,9 +6,16 @@ date_default_timezone_set('America/Costa_Rica');
 session_start();
 
 
-// ===================================
+// Función auxiliar para paginar movimientos
+function paginarMovimientos($movimientos, $porPagina = 5)
+{
+    $_SESSION["MOVIMIENTOS_PAGINADOS"] = array_chunk($movimientos, $porPagina);
+    $_SESSION["PAGINA_ACTUAL"] = 0;
+}
+
+// ===============================
 // REGISTRAR MOVIMIENTO
-// ===================================
+// ===============================
 if (isset($_POST["btnRegistrarMovimiento"])) {
     $codigo = $_POST["txtCodigo"];
     $lote = $_POST["txtLote"];
@@ -40,7 +47,9 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     );
 
     $_SESSION["CANT_DISPONIBLE"] = ObtenerStockDisponible($codigo, $id_farmacia);
-    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
+    $movimientos = ObtenerHistorialKardex($codigo, $id_farmacia);
+    $_SESSION["MOVIMIENTOS"] = $movimientos;
+    paginarMovimientos($movimientos); // ✅ Nuevo
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
 
@@ -52,9 +61,9 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     exit();
 }
 
-// ===================================
+// ===============================
 // BUSCAR PRODUCTO
-// ===================================
+// ===============================
 if (isset($_POST["btnBuscarProducto"])) {
     $codigo = $_POST["txtCodigo"];
     $id_farmacia = intval($_POST["ddlFarmaciaBuscar"]);
@@ -71,7 +80,9 @@ if (isset($_POST["btnBuscarProducto"])) {
         $_SESSION["UNIDAD_MEDIDA"] = "No definida";
     }
 
-    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
+    $movimientos = ObtenerHistorialKardex($codigo, $id_farmacia);
+    $_SESSION["MOVIMIENTOS"] = $movimientos;
+    paginarMovimientos($movimientos); // ✅ Nuevo
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
 
@@ -79,9 +90,9 @@ if (isset($_POST["btnBuscarProducto"])) {
     exit();
 }
 
-// ===================================
-// SELECCIONAR LOTES DISPONIBLES PARA SALIDA AUTOMÁTICA
-// ===================================
+// ===============================
+// SALIDA AUTOMÁTICA POR LOTES
+// ===============================
 if (isset($_POST["btnSeleccionarLotes"])) {
     $codigo = $_POST["txtCodigo"];
     $id_farmacia = intval($_POST["ddlFarmaciaBuscar"]);
@@ -100,7 +111,9 @@ if (isset($_POST["btnSeleccionarLotes"])) {
     );
 
     $_SESSION["CANT_DISPONIBLE"] = ObtenerStockDisponible($codigo, $id_farmacia);
-    $_SESSION["MOVIMIENTOS"] = ObtenerHistorialKardex($codigo, $id_farmacia); // ✅ NUEVO
+    $movimientos = ObtenerHistorialKardex($codigo, $id_farmacia);
+    $_SESSION["MOVIMIENTOS"] = $movimientos;
+    paginarMovimientos($movimientos); // ✅ Nuevo
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
 
@@ -111,4 +124,24 @@ if (isset($_POST["btnSeleccionarLotes"])) {
     header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
     exit();
 }
+
+// ===================================
+// CAMBIAR DE HOJA EN HISTORIAL
+// ===================================
+if (isset($_POST["btnPaginaAnterior"]) || isset($_POST["btnPaginaSiguiente"])) {
+    $paginaActual = $_SESSION["PAGINA_ACTUAL"] ?? 0;
+    $totalPaginas = isset($_SESSION["MOVIMIENTOS_PAGINADOS"]) ? count($_SESSION["MOVIMIENTOS_PAGINADOS"]) : 0;
+
+    if (isset($_POST["btnPaginaAnterior"]) && $paginaActual > 0) {
+        $_SESSION["PAGINA_ACTUAL"] = $paginaActual - 1;
+    } elseif (isset($_POST["btnPaginaSiguiente"]) && $paginaActual < $totalPaginas - 1) {
+        $_SESSION["PAGINA_ACTUAL"] = $paginaActual + 1;
+    }
+
+    header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
+    exit();
+}
+
+
+
 ?>

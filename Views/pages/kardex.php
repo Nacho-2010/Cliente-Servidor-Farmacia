@@ -138,13 +138,21 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 </div>
             <?php endif; ?>
 
-            <!-- 3. COLUMNA: HISTORIAL -->
+            <!-- 3. HISTORIAL -->
             <?php
-            $historial = $_SESSION["MOVIMIENTOS"] ?? [];
+            $paginaActual = $_SESSION["PAGINA_ACTUAL"] ?? 0;
+            $movimientosPaginados = $_SESSION["MOVIMIENTOS_PAGINADOS"] ?? [];
+            $totalPaginas = count($movimientosPaginados);
+            $historial = $movimientosPaginados[$paginaActual] ?? [];
             ?>
-            <?php if (!empty($historial)): ?>
-                <div class="historial-kardex">
-                    <h2>Historial de Movimientos</h2>
+
+            <div class="historial-kardex">
+                <h2>Historial de Movimientos</h2>
+                <h4 style="margin-top: -10px; color: #444;">Página <?= $paginaActual + 1 ?> de
+                    <?= max($totalPaginas, 1) ?>
+                </h4>
+
+                <?php if (!empty($historial)): ?>
                     <table>
                         <thead>
                             <tr>
@@ -167,8 +175,17 @@ $id_farmacia = ObtenerFarmaciasActivas();
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>
-            <?php endif; ?>
+                <?php else: ?>
+                    <p style="margin-top: 20px; color: #777;">No hay movimientos en esta página.</p>
+                <?php endif; ?>
+
+                <form method="POST" action="../../Controllers/MovimientoController.php" class="navegacion-kardex">
+                    <button type="submit" name="btnPaginaAnterior" <?= $paginaActual == 0 ? 'disabled' : '' ?>>←
+                        Anterior</button>
+                    <span>Página <?= $paginaActual + 1 ?> de <?= max($totalPaginas, 1) ?></span>
+                    <button type="submit" name="btnPaginaSiguiente" <?= $paginaActual >= $totalPaginas - 1 ? 'disabled' : '' ?>>Siguiente →</button>
+                </form>
+            </div>
         </section>
     </main>
 
