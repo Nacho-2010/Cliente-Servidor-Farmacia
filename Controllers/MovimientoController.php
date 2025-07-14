@@ -21,6 +21,12 @@ if (isset($_POST["btnRegistrarMovimiento"])) {
     $lote = $_POST["txtLote"];
     $fecha_vencimiento = $_POST["txtFechaVencimiento"];
     $fecha = $_POST["txtFecha"];
+    $hoy = date('Y-m-d');
+    if ($fecha > $hoy) {
+        $_SESSION["txtMensaje"] = "❌ La fecha del movimiento no puede ser posterior a hoy.";
+        header("Location: /Cliente-Servidor-Farmacia/Views/pages/kardex.php");
+        exit();
+    }
     $tipo = 'Entrada';
     $cantidad = intval($_POST["txtCantidad"]);
     $descripcion = $_POST["txtDescripcion"];

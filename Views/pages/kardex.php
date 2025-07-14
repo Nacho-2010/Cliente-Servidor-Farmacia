@@ -12,36 +12,38 @@ $id_farmacia = ObtenerFarmaciasActivas();
 <body>
     <?php verheader(); ?>
     <?php sidebar(); ?>
-    <br>
-    <br>
-    <br>
+    <br><br><br>
+
     <main class="main-kardex">
         <section class="kardex-container">
+            <br>
+            <br>
+            <!-- BOTÓN PARA MOSTRAR/OCULTAR CONSULTA -->
+            <div style="margin: 10px 50px;">
+                <button onclick="toggleConsulta()" id="consultaProductoToggle" class="btn btn-info">
+                    🔍 Consultar Producto
+                </button>
 
-            <!-- 1. COLUMNA: BÚSQUEDA DE PRODUCTO -->
-            <div class="formulario-kardex">
+            </div>
+
+            <!-- COLUMNA DE CONSULTA PRODUCTO -->
+            <div id="consultaProducto" class="formulario-kardex" style="display: none;">
                 <h2>Consultar Producto</h2>
                 <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                     <input type="text" name="txtCodigo" placeholder="Código del producto" required>
-
                     <select name="ddlFarmaciaBuscar" required>
                         <option value="">Seleccione una farmacia</option>
                         <?php foreach ($id_farmacia as $FARM): ?>
-                            <option value="<?= $FARM["ID_FARMACIA"] ?>">
-                                <?= htmlspecialchars($FARM["NOMBRE"]) ?>
-                            </option>
+                            <option value="<?= $FARM["ID_FARMACIA"] ?>"><?= htmlspecialchars($FARM["NOMBRE"]) ?></option>
                         <?php endforeach; ?>
                     </select>
-
                     <button type="submit" name="btnBuscarProducto">Buscar</button>
                 </form>
             </div>
 
-            <!-- 2. COLUMNA: INFO + FORMULARIOS DINÁMICOS -->
+            <!-- INFORMACIÓN Y FORMULARIOS -->
             <?php if (isset($_SESSION["CODIGO_BUSCADO"])): ?>
                 <div class="formulario-kardex">
-
-                    <!-- INFORMACIÓN DEL PRODUCTO -->
                     <div class="info-producto">
                         <h3><?= $_SESSION["NOMBRE_PRODUCTO"] ?? "Producto Desconocido" ?></h3>
                         <p><strong>Unidad de medida:</strong> <?= $_SESSION["UNIDAD_MEDIDA"] ?? "No definida" ?></p>
@@ -67,13 +69,10 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
                         <input type="text" name="txtLote" placeholder="Número de lote" required>
-
                         <h4>Fecha del movimiento</h4>
-                        <input type="date" name="txtFecha" required>
-
+                        <input type="date" name="txtFecha" required max="<?= date('Y-m-d') ?>">
                         <h4>Fecha de vencimiento</h4>
                         <input type="date" name="txtFechaVencimiento" required>
-
                         <input type="number" name="txtCantidad" placeholder="Cantidad" required>
 
                         <label>
@@ -96,21 +95,19 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                 </option>
                             <?php endforeach; ?>
                         </select>
-
-                        <button type="submit" name="btnRegistrarMovimiento">Registrar</button>
+                        <button type="submit" name="btnRegistrarMovimiento" class="btn btn-registrar">Registrar</button>
                     </form>
 
-                    <!-- FORMULARIO SALIDA AUTOMÁTICA -->
+                    <!-- SALIDA AUTOMÁTICA -->
                     <h2>Salida Automática por Lotes</h2>
                     <form method="POST" action="../../Controllers/MovimientoController.php" class="form-movimiento">
                         <input type="text" name="txtCodigo" value="<?= $_SESSION["CODIGO_BUSCADO"] ?>" readonly>
-
                         <h4>Cantidad total a retirar</h4>
                         <input type="number" name="txtCantidad" placeholder="Cantidad" required>
 
                         <label>
-                            <input type="checkbox" id="chkDescripcionLotes" data-target="txtDescripcionLotes">
-                            Incluir descripción
+                            <input type="checkbox" id="chkDescripcionLotes" data-target="txtDescripcionLotes"> Incluir
+                            descripción
                         </label>
                         <input type="text" id="txtDescripcionLotes" name="txtDescripcion" placeholder="Descripción"
                             disabled>
@@ -123,12 +120,11 @@ $id_farmacia = ObtenerFarmaciasActivas();
 
                         <input type="hidden" name="ddlFarmaciaBuscar" value="<?= $_SESSION["FARMACIA_BUSCADA"] ?>">
 
-                        <button type="submit" name="btnSeleccionarLotes" class="btn btn-warning">
-                            Seleccionar lotes disponibles
-                        </button>
+                        <button type="submit" name="btnSeleccionarLotes" class="btn btn-warning">Seleccionar lotes
+                            disponibles</button>
                     </form>
 
-                    <!-- MENSAJE -->
+                    <!-- MENSAJE DEL SISTEMA -->
                     <?php if (isset($_SESSION["txtMensaje"])): ?>
                         <div class="mensaje-sistema">
                             <?= $_SESSION["txtMensaje"];
@@ -138,7 +134,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 </div>
             <?php endif; ?>
 
-            <!-- 3. HISTORIAL -->
+            <!-- HISTORIAL DE MOVIMIENTOS -->
             <?php
             $paginaActual = $_SESSION["PAGINA_ACTUAL"] ?? 0;
             $movimientosPaginados = $_SESSION["MOVIMIENTOS_PAGINADOS"] ?? [];
@@ -189,8 +185,8 @@ $id_farmacia = ObtenerFarmaciasActivas();
         </section>
     </main>
 
-
     <script>
+        // Habilita o deshabilita campos por checkbox
         document.querySelectorAll('input[type="checkbox"][data-target]').forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
                 const targetId = this.getAttribute('data-target');
@@ -200,7 +196,15 @@ $id_farmacia = ObtenerFarmaciasActivas();
                 }
             });
         });
+
+        // Mostrar/Ocultar panel de consulta
+        function toggleConsulta() {
+            const panel = document.getElementById("consultaProducto");
+            panel.style.display = panel.style.display === "none" ? "block" : "none";
+        }
     </script>
+
+
 </body>
 
 </html>

@@ -7,6 +7,10 @@
   --primary-color: #0050a0;
   --secondary-color: #ffffff;
   --text-color: #000000;
+
+  --surface-color: #ffffff; /* fondo tarjetas */
+  --surface-alt: #0d0d0e; /* gradiente claro */
+  --input-bg: #ffffff; /* fondo inputs */
 }
 
 html {
@@ -1018,94 +1022,95 @@ input#c3:checked + label.fiebre {
   background-image: url("../../assets/Imagenes/fiebre.jpg");
 }
 
-/* ---------------------------------------------------------------------
-   CSS  PARA MÓDULO KARDEX –
---------------------------------------------------------------------- */
-
-body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #121212;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-}
+/* ============================================================
+    MÓDULO KARDEX
+   
+============================================================ */
 
 .main-kardex {
   margin-left: 13%;
-  padding: 100px 2rem 2rem 2rem;
+  padding: 6rem 2rem 2rem 2rem;
   min-height: 100vh;
+  background-color: #f5f7fc; /* tono gris-azul claro */
   box-sizing: border-box;
-  background-color: #121212;
 }
 
+/* CONTENEDOR GENERAL */
 .kardex-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: auto auto;
+  gap: 2rem;
+  align-items: flex-start;
+  position: relative;
 }
 
-/* Tarjetas */
 .formulario-kardex,
 .historial-kardex {
-  background: linear-gradient(to bottom right, #1e1e2e, #2b2b3b);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
-  transition: transform 0.2s ease-in-out;
+  background: linear-gradient(to bottom right, #f0f4fa, #d8e2f1);
+  border: 1px solid #c3d0e5;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
 }
 
 .formulario-kardex:hover,
 .historial-kardex:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
+/* TÍTULOS */
 .formulario-kardex h2,
 .historial-kardex h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #00cfff;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.formulario-kardex form input,
-.formulario-kardex form select {
-  display: block;
+.formulario-kardex input,
+.formulario-kardex select {
+  background-color: #fff;
+  border: 1px solid #b0c4de;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-kardex input:focus,
+.formulario-kardex select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 80, 160, 0.2);
+}
+.formulario-kardex input::placeholder {
+  color: var(--text-muted);
+}
+
+.formulario-kardex select option {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+/* BOTONES */
+.formulario-kardex button {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 10px;
-  background-color: #2c2c3a;
-  color: #ffffff;
-  font-size: 14px;
-}
-
-input::placeholder {
-  color: #bbb;
-}
-
-select,
-option {
-  background-color: #2c2c3a;
-  color: #ffffff;
-}
-
-/* Botones */
-.formulario-kardex form button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background-color: #28a745;
-  color: white;
+  padding: 0.75rem;
+  background-color: var(--accent-color);
+  color: rgb(0, 0, 0);
   font-weight: bold;
-  cursor: pointer;
-  font-size: 15px;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.formulario-kardex form button:hover {
+.formulario-kardex button:hover {
   background-color: #218838;
 }
 
@@ -1118,73 +1123,170 @@ option {
   background-color: #e0a800;
 }
 
-/* Checkbox */
-.checkbox {
-  margin-bottom: 10px;
-}
-
+/* CHECKBOXES */
 label {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #ccc;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #000000;
 }
 
-/* Tabla de historial */
+/* MENSAJES */
+.mensaje-sistema {
+  background-color: #003d4d;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
+}
+
+/* TABLA DE HISTORIAL */
 .historial-kardex table {
   width: 100%;
   border-collapse: collapse;
-  color: #fff;
+  font-size: 0.95rem;
+  color: white;
 }
 
 .historial-kardex th,
 .historial-kardex td {
-  border: 1px solid #444;
-  padding: 10px;
+  border: 1px solid var(--border-color);
+  padding: 0.8rem;
   text-align: center;
 }
 
 .historial-kardex th {
   background-color: #1f2a3a;
-  color: #00ffff;
+  color: var(--primary-color);
+  text-transform: uppercase;
 }
 
 .historial-kardex td.lotes-afectados {
-  max-width: 300px;
-  word-wrap: break-word;
   white-space: pre-wrap;
   text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.4;
 }
 
-.lotes-afectados {
-  white-space: normal;
-  text-align: left;
-  line-height: 1.4;
-  padding: 6px;
-}
-
-.mensaje-sistema {
-  background-color: #003d4d;
-  color: #ffffff;
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 15px;
-  text-align: center;
-  font-weight: bold;
-  border: 1px solid #00cfff;
-}
-
+/* NAVEGACIÓN */
 .navegacion-kardex {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
-/* ---------------------------------------------------------------------
-   FIN CSS KARDEX
---------------------------------------------------------------------- */
+
+.navegacion-kardex button {
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.navegacion-kardex button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* PANEL DE CONSULTA */
+#consultaProducto {
+  position: fixed;
+  top: 300px;
+  left: 40%; /* ajusta la posicion */
+  width: 360px;
+  z-index: 9999; /* valor más alto que el header */
+  background: linear-gradient(to bottom right, #e9f1fb, #cfd8e7);
+  border: 1px solid var(--primary-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+#consultaProductoToggle {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+#consultaProductoToggle:hover {
+  background-color: #003b7e;
+}
+
+.formulario-kardex input,
+.formulario-kardex select {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.historial-kardex table {
+  table-layout: fixed;
+  width: 100%;
+  background-color: #fff;
+  border-collapse: collapse;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.historial-kardex th {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.historial-kardex td {
+  padding: 0.8rem;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.historial-kardex tr:nth-child(even) {
+  background-color: #f5f9ff;
+}
+
+.btn-warning {
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  font-weight: 600;
+  padding: 1rem;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+}
+
+.btn-warning:hover {
+  background-color: #e6b800;
+  cursor: pointer;
+}
+.btn-registrar {
+  background-color: #28a745; /* verde visible */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-registrar:hover {
+  background-color: #218838;
+}
