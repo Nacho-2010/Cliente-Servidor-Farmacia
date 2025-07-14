@@ -57,8 +57,8 @@ function verheader()
       <nav class="header__nav">
         <ul class="header__nav-links">
           <li><a href="../Home/principal.php" class="header__nav-link">Inicio</a></li>
-          <li><a href="#" class="header__nav-link">Productos</a></li>
-          <li><a href="#" class="header__nav-link">Quiénes somos</a></li>
+          <li><a href="" class="header__nav-link">Productos</a></li>
+          <li><a href="../Home/quieneSomos.php" class="header__nav-link">Quiénes somos</a></li>
           <li><a href="#" class="header__nav-link">Pide en línea</a></li>
           <li><a href="#" class="header__nav-link">Contacto</a></li>
         </ul>

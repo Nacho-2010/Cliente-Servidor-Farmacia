@@ -540,7 +540,43 @@ h3 {
   align-items: center;
 }
 
+.booking2 {
+  background-image: url(../Imagenes/personas.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  position: relative;
+  min-height: 60rem;
+  padding: 10rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking3 {
+  background-image: url(../Imagenes/fondo.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  position: relative;
+  min-height: 60rem;
+  padding: 10rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .booking::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.booking2::before {
   content: "";
   position: absolute;
   top: 0;
@@ -578,6 +614,21 @@ h3 {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
+.booking__places {
+  display: flex;
+  justify-content: center; 
+  gap: 2rem;                
+  flex-wrap: wrap;          
+  margin-top: 3rem;
+}
+
+.booking__places2 {
+  display: flex;
+  justify-content: center; 
+  gap: 2rem;                
+  flex-wrap: wrap;          
+  margin-top: 3rem;
+}
 .btn__place {
   text-transform: uppercase;
   display: inline-flex;
@@ -593,10 +644,26 @@ h3 {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.btn__placeD {
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16.6rem;
+  padding: 10rem 3rem;
+  border: 2px solid #fff; 
+  color: #fff; 
+  background-color: transparent;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+} 
+
 .btn__place:hover {
   background-color: rgba(255, 255, 255, 0.15); /* Fondo blanco translúcido */
   color: #00bfff; /* O el color que uses como primario */
 }
+
 
 .fa-location-dot {
   margin-right: 1rem;
@@ -1289,4 +1356,34 @@ label {
 
 .btn-registrar:hover {
   background-color: #218838;
+}
+
+/* DOCTORES  */
+.btn-wrapper {
+  text-align: center;
+  margin: 1rem; 
+}
+
+.btn-label {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+  color: #fff; 
+  line-height: 1.4rem;
+}
+
+.btn-wrapper img {
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.foto-btn {
+  padding: 1rem;
+  width: 14rem;
+}
+
+.foto-persona {
+  width: 180px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
 }
