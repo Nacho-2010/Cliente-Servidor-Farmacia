@@ -179,15 +179,9 @@ function ObtenerHistorialKardex($codigo, $id_farmacia)
         $codigo = mysqli_real_escape_string($conexion, $codigo);
         $id_farmacia = intval($id_farmacia);
 
-        $query = "
-            SELECT *
-            FROM HISTORIAL_KARDEX_V
-            WHERE CODIGO = '$codigo'
-              AND ID_FARMACIA = $id_farmacia
-            ORDER BY FECHA_MOVIMIENTO ASC
-        ";
+        $sp = "CALL ObtenerHistorialKardex('$codigo', $id_farmacia)";
 
-        $resultado = $conexion->query($query);
+        $resultado = $conexion->query($sp);
 
         $movimientos = [];
         while ($fila = $resultado->fetch_assoc()) {

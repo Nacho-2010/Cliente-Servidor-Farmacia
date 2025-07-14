@@ -540,7 +540,25 @@ BEGIN
 END $$
 DELIMITER ;
 
+use FARMACIABD
+-- ========================================
+-- PROCEDIMIENTO: Obtener Historial Kardex
+-- ========================================
+DELIMITER $$
 
+DROP PROCEDURE IF EXISTS ObtenerHistorialKardex $$
+CREATE PROCEDURE ObtenerHistorialKardex(
+    IN p_codigo VARCHAR(20),
+    IN p_id_farmacia INT
+)
+BEGIN
+    SELECT *
+    FROM HISTORIAL_KARDEX_V
+    WHERE CODIGO = p_codigo
+      AND ID_FARMACIA = p_id_farmacia
+    ORDER BY FECHA_MOVIMIENTO ASC;
+END $$
+DELIMITER ;
 
 
 SELECT 
@@ -582,5 +600,9 @@ WHERE CODIGO = '110010204' AND ID_FARMACIA = 1;
 
 -- REACTIVAR MODO SEGURO SI LO TENÍAS ANTES (opcional)
 SET SQL_SAFE_UPDATES = 1;
+
+
+select * from usuario 
+
 
 
