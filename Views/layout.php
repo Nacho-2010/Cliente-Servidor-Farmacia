@@ -27,6 +27,8 @@ function añadirCSS()
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
@@ -60,7 +62,7 @@ function verheader()
           <li><a href="" class="header__nav-link">Productos</a></li>
           <li><a href="../Home/quieneSomos.php" class="header__nav-link">Quiénes somos</a></li>
           <li><a href="#" class="header__nav-link">Pide en línea</a></li>
-          <li><a href="#" class="header__nav-link">Contacto</a></li>
+          <li><a href="../Home/contacto.php" class="header__nav-link">Contacto</a></li>
         </ul>
       </nav>
       <div class="header__right">';

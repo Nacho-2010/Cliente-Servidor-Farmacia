@@ -629,6 +629,15 @@ h3 {
   flex-wrap: wrap;          
   margin-top: 3rem;
 }
+
+.booking__places3 {
+  display: flex;
+  justify-content: center; 
+  gap: 2rem;                
+  flex-wrap: wrap;          
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
 .btn__place {
   text-transform: uppercase;
   display: inline-flex;
@@ -659,10 +668,40 @@ h3 {
   transition: background-color 0.3s ease, color 0.3s ease;
 } 
 
-.btn__place:hover {
-  background-color: rgba(255, 255, 255, 0.15); /* Fondo blanco translúcido */
-  color: #00bfff; /* O el color que uses como primario */
+.btn__place3 {
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;               
+  min-width: 14rem;          
+  padding: 1.2rem 2.5rem;    
+  font-size: 1.3rem;  
+  padding: 10rem 3rem;
+  border: 2px solid #0b0966; 
+  color: #2e6985; 
+  background-color: transparent;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+} 
+.btn__place3:hover {
+  background-color: #2c2b6b;
+  color: #fff;
 }
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.figure-caption {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  color: #555;
+} 
 
 
 .fa-location-dot {
@@ -1386,4 +1425,45 @@ label {
   border-radius: 50%;
   display: block;
   margin: 0 auto;
+}
+
+.contact-section {
+  background-color: #f8f8f8; /* color de fondo opcional */
+  padding: 30px 15px;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap; /* se acomoda en móvil */
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.contact-box {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.contact-box i {
+  font-size: 28px;
+  color: #28a745; /* verde */
+}
+
+.contact-box h4 {
+  font-size: 14px;
+  color: #28a745;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.contact-box p {
+  font-size: 13px;
+  color: #333;
+  margin: 0;
 }
