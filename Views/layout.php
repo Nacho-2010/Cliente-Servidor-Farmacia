@@ -66,15 +66,32 @@ function verheader()
         </ul>
       </nav>
       <div class="header__right">';
-
-  if ($usuarioLogueado) {
+if ($usuarioLogueado) {
     echo '
-        <div class="profile-dis scrollable">
-          <span class="user-name" style="color: #333; font-weight: bold;">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
+    <div class="profile-dis scrollable" style="padding: 10px;">
+        <span class="user-name" style="color: #333; font-weight: bold;">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
+        
+        <div class="mt-2">
+            <a class="dropdown-item" href="/Cliente-Servidor-Farmacia/Views/Home/informacion_usuario.php" style="color: #28a745; text-decoration: none;">
+    🧾 Información de Usuario
+</a>
 
-          <a class="dropdown-item" href="?logout=true" style="color: #007bff; font-weight: bold; text-decoration: none;"></i> Cerrar Sesión</a>
-        </div>';
-  }
+        </div>
+
+        <div class="mt-1">
+            <a class="dropdown-item" href="cambio_contrasenna.php" style="color: #ffc107; text-decoration: none;">
+                🔒 Cambiar Contraseña
+            </a>
+        </div>
+
+        <div class="mt-1">
+            <a class="dropdown-item" href="?logout=true" style="color: #dc3545; font-weight: bold; text-decoration: none;">
+                🔓 Cerrar Sesión
+            </a>
+        </div>
+    </div>
+    </div></div></header>';
+}
   echo '</div></div></header>';
 }
 

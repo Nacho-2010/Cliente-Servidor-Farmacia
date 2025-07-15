@@ -20,8 +20,15 @@ if (isset($_POST["btnIniciarSesion"])) {
     if ($respuesta != null && $respuesta->num_rows > 0) {
         $datos = mysqli_fetch_array($respuesta);
         $_SESSION["NOMBRE"] = $datos["NOMBRE"];
+
         $_SESSION["ID"] = $datos["ID"];
+$_SESSION["Contrasenna"] = $datos["CONTRASENA"];
+$_SESSION["CORREO"] = $datos["CORREO"];
+
+      
         $_SESSION["ROL"] = $datos["ROL"];
+ 
+
         header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
     } else {
         $_POST["txtMensaje"] = "Su información no fue validada correctamente.";
@@ -34,6 +41,7 @@ if (isset($_POST["btnRegistrarUsuario"])) {
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
     $usuario = $_POST["txtUsuario"];
+
     $contrasenna = $_POST["txtContrasenna"];
 
     $respuesta = RegistrarUsuarioModel($nombre, $correo, $usuario, $contrasenna);

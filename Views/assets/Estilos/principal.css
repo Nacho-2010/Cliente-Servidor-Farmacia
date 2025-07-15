@@ -1467,3 +1467,27 @@ label {
   color: #333;
   margin: 0;
 }
+.main-formulario-centrado {
+  max-width: 500px;
+ margin: 160px auto 40px auto;
+
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.btn-actualizar {
+  border-radius: 6px !important;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  width: 94%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-actualizar:hover {
+  background-color: #003b7e;
+}
