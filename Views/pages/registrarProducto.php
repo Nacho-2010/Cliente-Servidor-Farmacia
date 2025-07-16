@@ -43,7 +43,7 @@ $unidades = ObtenerUnidadesMedida();
 
       <div class="mb-3">
         <label for="txtPrecio" class="form-label">Precio Unitario</label>
-        <input type="number" id="txtPrecio" name="txtPrecio" step="100" class="form-control" required>
+        <input type="number" id="txtPrecio" name="txtPrecio" step="50" class="form-control" required>
       </div>
 
       <div class="mb-3">
