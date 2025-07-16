@@ -167,7 +167,7 @@ function sidebar()
 
   if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
     echo '<li><a href="/Cliente-Servidor-Farmacia/Views/pages/kardex.php"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>
-    <li> <a href="/Cliente-Servidor-Farmacia/Views/pages/producto.php"> <i class="fa-solid fa-plus"></i>
+    <li> <a href="/Cliente-Servidor-Farmacia/Views/pages/RegistrarProducto.php"> <i class="fa-solid fa-plus"></i>
          <span class="texto-menu">Registrar Producto</span></a>
         </li>';
   }
