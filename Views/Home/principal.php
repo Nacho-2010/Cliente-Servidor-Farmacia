@@ -9,7 +9,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layou
 añadirCSS(); //<head> con CSS
 ?>
 
+
 <body>
+
 
   <?php
   verheader();

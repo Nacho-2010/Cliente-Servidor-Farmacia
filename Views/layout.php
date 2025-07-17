@@ -149,13 +149,20 @@ function sidebar()
   $nombreUsuario = isset($_SESSION["NOMBRE"]) ? $_SESSION["NOMBRE"] : "Invitado";
 
   echo '
-  <aside class="sidebar">
+  <!-- BOTÓN HAMBURGUESA RESPONSIVE -->
+  <button id="toggleSidebar" class="sidebar-toggle" aria-label="Abrir menú">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- SIDEBAR LATERAL -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar__logo">
       <i class="fa-solid fa-prescription-bottle-medical"></i>';
 
   if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
-    echo '<h2>Sistema Administrador</h2>';
-    echo '<small class="nombre-usuario">👤 ' . htmlspecialchars($nombreUsuario) . '</small>';
+    echo '
+      <h2>Sistema Administrador</h2>
+      <small class="nombre-usuario">👤 ' . htmlspecialchars($nombreUsuario) . '</small>';
   }
 
   echo '
@@ -163,22 +170,48 @@ function sidebar()
 
     <nav class="sidebar__nav">
       <ul>
-        <li><a href="#"><i class="fa-solid fa-user-gear"></i> <span class="texto-menu">Manejo de Usuario</span></a></li>';
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="texto-menu">Manejo de Usuario</span>
+          </a>
+        </li>';
 
+  // Opciones solo para ADMIN
   if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
-    echo '<li><a href="/Cliente-Servidor-Farmacia/Views/pages/kardex.php"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>
-    <li><a href="/Cliente-Servidor-Farmacia/Views/pages/RegistrarProducto.php"><i class="fa-solid fa-box"></i>
-        <span class="texto-menu">Registrar Producto</span></a></li>
-    <li><a href="/Cliente-Servidor-Farmacia/Views/pages/eliminarProducto.php"><i class="fa-solid fa-trash"></i>
-        <span class="texto-menu">Eliminar Producto</span></a></li>';
-}
+    echo '
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/kardex.php">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span class="texto-menu">Kardex</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/RegistrarProducto.php">
+            <i class="fa-solid fa-box"></i>
+            <span class="texto-menu">Registrar Producto</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/eliminarProducto.php">
+            <i class="fa-solid fa-trash"></i>
+            <span class="texto-menu">Eliminar Producto</span>
+          </a>
+        </li>';
+  }
 
   echo '
-        <li><a href="#"><i class="fa-solid fa-chart-bar"></i> <span class="texto-menu">Reportes</span></a></li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-chart-bar"></i>
+            <span class="texto-menu">Reportes</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </aside>';
 }
+
 
 
 
@@ -189,7 +222,7 @@ function añadirScripts()
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/Funciones/scrollReveal.js"></script>
   <script src="../assets/Funciones/customScrollReveal.js"></script>
-  <script src="../assets/Funciones/app.js"></script>
+  <script src="../assets/Funciones/apps.js"></script>
   <script src="../assets/Funciones/principal.js"></script>';
 }
 ?>

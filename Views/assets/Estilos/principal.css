@@ -110,24 +110,31 @@ h3 {
 .header {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 100%;
-  padding: 2rem 0;
-  background-color: var(--secondary-color);
+  left: 13%; /* igual al ancho del sidebar */
+  width: 87%; /* 100% - 13% del sidebar */
+  background-color: white;
   z-index: 1000;
+  padding: 1rem 2rem;
+  box-shadow: 0px 5px 5px -5px #274cf1;
   transition: all 0.8s ease;
 }
 
+
+
 .sticky {
   padding: 1rem 0;
-  box-shadow: 0px 5px 5px -5px #e58f00;
+  box-shadow: 0px 5px 5px -5px #274cf1;
 }
 
 .header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 
 .header__logo-image {
   max-width: 8rem;
@@ -165,8 +172,8 @@ h3 {
 }
 
 .header__nav-link {
-  font-size: 2.5rem;
-  padding-left: 3rem;
+  font-size: 1.6rem; /* antes 1.8rem o 2.5rem */
+  padding: 0 1rem;
   color: var(--secondary-color);
   border-left: 1rem solid var(--text-color);
 }
@@ -918,7 +925,8 @@ h3 {
   color: white;
   display: flex;
   flex-direction: column;
-  padding-top: 150px;
+  padding-top: 20px;
+
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
@@ -1490,4 +1498,71 @@ label {
 
 .btn-actualizar:hover {
   background-color: #003b7e;
+}
+/* Estilos base */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 225px;
+  height: 100%;
+  background-color: #1e293b;
+  color: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar__logo h2,
+.sidebar__logo small {
+  margin: 10px 0;
+}
+
+.sidebar__nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar__nav ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar__nav ul li a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar__nav i {
+  margin-right: 10px;
+}
+
+/* Botón para mostrar/ocultar */
+.sidebar-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  background: none;
+  border: none;
+  color: #1e293b;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Estado oculto en responsive */
+.sidebar.hide {
+  transform: translateX(-100%);
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
 }
