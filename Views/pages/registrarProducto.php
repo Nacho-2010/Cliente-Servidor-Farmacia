@@ -1,10 +1,13 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/registrarProductoModel.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/modificarProductoModel.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Controllers/eliminarProductoController.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Views/layout.php";
 
+
 $categorias = ObtenerCategoriasProducto();
 $unidades = ObtenerUnidadesMedida();
+$productosActivos = ObtenerProductosActivosPorCodigo();
 ?>
 
 <!DOCTYPE html>
@@ -121,11 +124,20 @@ $unidades = ObtenerUnidadesMedida();
   <section id="seccion-modificar" class="seccion-formulario">
   <h3 class="text-center mb-3">Modificar Producto</h3>
   <form method="post" action="/Cliente-Servidor-Farmacia/Controllers/modificarProductoController.php" class="mx-auto" style="max-width:600px;">
+
+    <!-- Seleccionar el producto por código -->
     <div class="mb-3">
-      <label for="txtCodigoModificar" class="form-label">Código del Producto</label>
-      <input type="text" id="txtCodigoModificar" name="txtCodigoModificar" class="form-control" required>
+      <label for="cmbProducto" class="form-label">Seleccione Producto (Código)</label>
+      <select id="cmbProducto" name="cmbProducto" class="form-select" required>
+        <option value="">Seleccione un producto</option>
+        <?php while ($prod = mysqli_fetch_array($productosActivos)): ?>
+          <option value="<?= $prod["CODIGO"] ?>"><?= htmlspecialchars($prod["CODIGO"]) ?> - <?= htmlspecialchars($prod["NOMBRE"]) ?>
+          </option>
+        <?php endwhile; ?>
+      </select>
     </div>
 
+    <!-- Seccion modificar -->
     <div class="mb-3">
       <label for="txtNombreNuevo" class="form-label">Nuevo Nombre</label>
       <input type="text" id="txtNombreNuevo" name="txtNombreNuevo" class="form-control" required>
@@ -141,10 +153,8 @@ $unidades = ObtenerUnidadesMedida();
       <select id="cmbCategoriaNueva" name="cmbCategoriaNueva" class="form-select" required>
         <option value="">Seleccione una categoría</option>
         <?php while ($cat = mysqli_fetch_array($categorias)): ?>
-          <option value="<?= $cat["ID_CATEGORIA_PRODUCTO"] ?>">
-            <?= htmlspecialchars($cat["NOMBRE"]) ?>
-          </option>
-        <?php endwhile; ?>
+            <option value="<?= $cat["ID_CATEGORIA_PRODUCTO"] ?>"><?= htmlspecialchars($cat["NOMBRE"]) ?></option>
+          <?php endwhile; ?>>
       </select>
     </div>
 
@@ -154,8 +164,7 @@ $unidades = ObtenerUnidadesMedida();
         <option value="">Seleccione una unidad</option>
         <?php mysqli_data_seek($unidades, 0); ?>
         <?php while ($uni = mysqli_fetch_array($unidades)): ?>
-          <option value="<?= $uni["ID_UNIDAD_MEDIDA"] ?>">
-            <?= htmlspecialchars($uni["NOMBRE"]) ?>
+          <option value="<?= $uni["ID_UNIDAD_MEDIDA"] ?>"><?= htmlspecialchars($uni["NOMBRE"]) ?>
           </option>
         <?php endwhile; ?>
       </select>

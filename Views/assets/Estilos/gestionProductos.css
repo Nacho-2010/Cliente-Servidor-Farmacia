@@ -42,7 +42,11 @@ h2 {
 }
 
 .menu-opciones {
-      text-align: center;
+      display: flex;              
+      justify-content: center;    
+      align-items: center;        
+      gap: 20px;                  
+      flex-wrap: wrap;            
       margin-bottom: 30px;
     }
     .menu-opciones button {
@@ -54,3 +58,12 @@ h2 {
     .seccion-activa {
       display: block; 
     }
+
+
+.menu-opciones button {
+  padding: 12px 25px;         /* más grandes */
+  font-size: 18px;            /* letra más grande */
+  border-radius: 8px;         /* bordes redondeados */
+  min-width: 180px;           /* ancho mínimo para que se vean parejos */
+  font-weight: 600;
+}
