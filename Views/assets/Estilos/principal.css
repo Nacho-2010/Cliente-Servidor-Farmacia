@@ -1573,3 +1573,7 @@ label {
     transform: translateX(0);
   }
 }
+
+.page-wrapper {
+  padding-bottom: 50px; 
+}
