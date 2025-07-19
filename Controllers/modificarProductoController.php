@@ -2,7 +2,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/modificarProductoModel.php";
 
 if (isset($_POST["btnModificarProducto"])) {
-    $codigoOriginal = $_POST["cmbProducto"]; 
+    $codigoOriginal = $_POST["cmbProducto"]; // código elegido (NO se cambia)
     $nombreNuevo    = $_POST["txtNombreNuevo"];
     $precioNuevo    = $_POST["txtPrecioNuevo"];
     $idCategoria    = $_POST["cmbCategoriaNueva"];
