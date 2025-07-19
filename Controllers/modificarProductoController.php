@@ -11,7 +11,7 @@ if (isset($_POST["btnModificarProducto"])) {
 
     ModificarProducto($codigoOriginal, $nombreNuevo, $precioNuevo, $idCategoria, $idUnidad, $idEstado);
 
-    header("Location: /Cliente-Servidor-Farmacia/Views/pages/modificarProducto.php?mensaje=Producto modificado correctamente");
+    header("Location: /Cliente-Servidor-Farmacia/Views/pages/registrarProducto.php?mensaje=Producto modificado correctamente");
     exit();
 }
 ?>

@@ -148,15 +148,16 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
       <input type="number" id="txtPrecioNuevo" name="txtPrecioNuevo" step="50" class="form-control" required>
     </div>
 
-    <div class="mb-3">
-      <label for="cmbCategoriaNueva" class="form-label">Nueva Categoría</label>
-      <select id="cmbCategoriaNueva" name="cmbCategoriaNueva" class="form-select" required>
-        <option value="">Seleccione una categoría</option>
-        <?php while ($cat = mysqli_fetch_array($categorias)): ?>
-            <option value="<?= $cat["ID_CATEGORIA_PRODUCTO"] ?>"><?= htmlspecialchars($cat["NOMBRE"]) ?></option>
-          <?php endwhile; ?>>
-      </select>
-    </div>
+   <div class="mb-3">
+  <label for="cmbCategoriaNueva" class="form-label">Nueva Categoría</label>
+  <select id="cmbCategoriaNueva" name="cmbCategoriaNueva" class="form-select" required>
+    <option value="">Seleccione una categoría</option>
+    <?php mysqli_data_seek($categorias, 0); ?>
+    <?php while ($cat = mysqli_fetch_array($categorias)): ?>
+        <option value="<?= $cat["ID_CATEGORIA_PRODUCTO"] ?>"><?= htmlspecialchars($cat["NOMBRE"]) ?></option>
+    <?php endwhile; ?>
+  </select>
+</div>
 
     <div class="mb-3">
       <label for="cmbUnidadNueva" class="form-label">Nueva Unidad de Medida</label>
