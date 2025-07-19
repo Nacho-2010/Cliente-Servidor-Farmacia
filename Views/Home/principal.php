@@ -21,7 +21,7 @@ añadirCSS(); //<head> con CSS
   sidebar();
   ?>
 
-  <main style="margin-left: 13%">
+  <main style="margin-left: 11%">
 
 
 

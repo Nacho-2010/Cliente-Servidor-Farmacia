@@ -5,7 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url(../Imagenes/farmacia.jpeg);
+  background-image: url(../Imagenes/FondoImagen.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,7 +13,7 @@ body {
 }
 
 .main-content {
-  background-color: rgba(12, 12, 12, 0.26); /*semitransparente*/
+  background-color: rgb(255, 255, 255); /*semitransparente*/
   padding: 30px;
   border-radius: 15px;
   max-width: 600px;
@@ -40,3 +40,17 @@ h2 {
   right: 20px;
   z-index: 10;
 }
+
+.menu-opciones {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .menu-opciones button {
+      margin: 0 10px;
+    }
+    .seccion-formulario {
+      display: none; 
+    }
+    .seccion-activa {
+      display: block; 
+    }
