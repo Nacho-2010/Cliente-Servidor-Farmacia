@@ -91,8 +91,7 @@ añadirCSS(); //<head> con CSS
                     </a>
                     <a href="https://maps.app.goo.gl/gMCJu9Ga4W73bbXv5" class="btn btn__place">
                       <i class="fa-solid fa-location-dot"></i> Farmacia Pérez Zeledón Oeste
-                    </a>
-              
+                    </a>           
                   </div>
                 </div>
               </section>
