@@ -1,9 +1,10 @@
 <?php
 // Incluye tu layout y controlador
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layout.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/productosController.php';
 
-
-
+// Llamada al controlador para obtener los datos
+$resultado = ConsultarProductos();
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layou
               <div class="card-body">
 
                 <?php
-                  if(isset($_POST["txtMensaje"])) {
+                  if (isset($_POST["txtMensaje"])) {
                       echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
                   }
                 ?>
@@ -46,11 +47,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layou
                 <table id="tablaDatos" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>Código</th>
                       <th>Nombre</th>
-                      <th>Descripción</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
+                      <th>Precio Unitario</th>
+                      <th>Categoría</th>
+                      <th>Unidad Medida</th>
                       <th>Imagen</th>
                       <th>Estado</th>
                       <th>Acciones</th>
@@ -58,30 +59,50 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layou
                   </thead>
                   <tbody>
                     <?php
-                      while($fila = mysqli_fetch_array($resultado)) {
-                        echo "<tr>";
-                        echo "<td>". $fila["IdProducto"] ."</td>";
-                        echo "<td>". $fila["Nombre"] ."</td>";
-                        echo "<td>". $fila["Descripcion"] ."</td>";
-                        echo "<td>". $fila["Precio"] ."</td>";
-                        echo "<td>". $fila["Cantidad"] ."</td>";
-                        echo "<td><img src='". $fila["Imagen"] ."' width='125' height='125'></td>";
-                        echo "<td>". $fila["EstadoDescripcion"] ."</td>";
-                        echo '<td>
-                          <a class="btn btnAbrirModal" data-toggle="modal" data-target="#CambiarEstadoProducto"
-                            data-id="' . $fila["IdProducto"] . '" data-nombre="' . $fila["Nombre"] . '">
-                            <i class="fa ' . ($fila["Estado"] ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger') . '" style="font-size:1.5em;"></i>
-                          </a>
-                          <a class="btn">
-                            <i class="fa fa-edit" style="font-size:1.5em;"></i>
-                          </a>
-                        </td>';
-                        echo "</tr>";
+                      if ($resultado) {
+                        while ($fila = mysqli_fetch_array($resultado)) {
+                          echo "<tr>";
+                          echo "<td>" . $fila["CODIGO"] . "</td>";
+                          echo "<td>" . $fila["NOMBRE"] . "</td>";
+                          echo "<td>" . $fila["PRECIO_UNITARIO"] . "</td>";
+                          echo "<td>" . $fila["ID_CATEGORIA_PRODUCTO"] . "</td>";
+                          echo "<td>" . $fila["ID_UNIDAD_MEDIDA"] . "</td>";
+
+                          // Imagen
+                          echo "<td>";
+                          if (!empty($fila["URL_IMAGEN"])) {
+                            echo "<img src='" . $fila["URL_IMAGEN"] . "' width='125' height='125'>";
+                          } else {
+                            echo "Sin imagen";
+                          }
+                          echo "</td>";
+
+                          // Estado
+                          echo "<td>";
+                          if ($fila["ID_ESTADO"] == 1) {
+                            echo "<span class='badge badge-success'>Activo</span>";
+                          } else {
+                            echo "<span class='badge badge-danger'>Inactivo</span>";
+                          }
+                          echo "</td>";
+
+                          // Acciones
+                          echo "<td>
+                            <a class='btn btnAbrirModal' data-toggle='modal' data-target='#CambiarEstadoProducto'
+                              data-id='" . $fila["CODIGO"] . "' data-nombre='" . $fila["NOMBRE"] . "'>
+                              <i class='fa " . ($fila["ID_ESTADO"] == 1 ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger') . "' style='font-size:1.5em;'></i>
+                            </a>
+                            <a class='btn' href='editarProducto.php?id=" . $fila["CODIGO"] . "'>
+                              <i class='fa fa-edit' style='font-size:1.5em;'></i>
+                            </a>
+                          </td>";
+
+                          echo "</tr>";
+                        }
                       }
                     ?>
                   </tbody>
                 </table>
-
               </div>
             </form>
           </div>
