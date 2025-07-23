@@ -834,9 +834,9 @@ h3 {
   background-position: center;
   background-size: cover;
   position: relative;
-  padding: 2rem 0;
+  padding: 0.4rem 0;
   color: #000;
-  font-size: 1.3rem;
+  font-size: 0.75rem;
 }
 
 .footer::after {
@@ -854,7 +854,7 @@ h3 {
   z-index: 10;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .footer__content {
@@ -866,12 +866,12 @@ h3 {
 }
 
 .footer__social-block {
-  flex: 1 1 200px;
+  flex: 1 1 180px;
 }
 
 .footer__legend {
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 0.95rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1149,10 +1149,13 @@ input#c3:checked + label.fiebre {
 ============================================================ */
 
 .main-kardex {
+  background-image: url("/Cliente-Servidor-Farmacia/Views/assets/Imagenes/FondoImagen.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-left: 13%;
   padding: 6rem 2rem 2rem 2rem;
   min-height: 100vh;
-  background-color: #f5f7fc; /* tono gris-azul claro */
   box-sizing: border-box;
 }
 
