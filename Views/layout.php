@@ -59,22 +59,39 @@ function verheader()
       <nav class="header__nav">
         <ul class="header__nav-links">
           <li><a href="../Home/principal.php" class="header__nav-link">Inicio</a></li>
-          <li><a href="" class="header__nav-link">Productos</a></li>
-          <li><a href="../Home/quieneSomos.php" class="header__nav-link">Quiénes somos</a></li>
-          <li><a href="#" class="header__nav-link">Pide en línea</a></li>
+          <li><a href="../Home/producto.php" class="header__nav-link">Productos</a></li>
+          <li><a href="../Home/quieneSomos.php" class="header__nav-link">Nosotros</a></li>
           <li><a href="../Home/contacto.php" class="header__nav-link">Contacto</a></li>
+          <li><a href="#" class="header__nav-link">Carrito</a></li>
         </ul>
       </nav>
       <div class="header__right">';
-
-  if ($usuarioLogueado) {
+if ($usuarioLogueado) {
     echo '
-        <div class="profile-dis scrollable">
-          <span class="user-name" style="color: #333; font-weight: bold;">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
+    <div class="profile-dis scrollable" style="padding: 10px;">
+        <span class="user-name" style="color: #333; font-weight: bold;">Hola, ' . htmlspecialchars($nombreUsuario) . '</span>
+        
+        <div class="mt-2">
+            <a class="dropdown-item" href="/Cliente-Servidor-Farmacia/Views/Home/informacion_usuario.php" style="color: #28a745; text-decoration: none;">
+    🧾 Información de Usuario
+</a>
 
-          <a class="dropdown-item" href="?logout=true" style="color: #007bff; font-weight: bold; text-decoration: none;"></i> Cerrar Sesión</a>
-        </div>';
-  }
+        </div>
+
+        <div class="mt-1">
+            <a class="dropdown-item" href="cambio_contrasenna.php" style="color: #ffc107; text-decoration: none;">
+                🔒 Cambiar Contraseña
+            </a>
+        </div>
+
+        <div class="mt-1">
+            <a class="dropdown-item" href="?logout=true" style="color: #dc3545; font-weight: bold; text-decoration: none;">
+                🔓 Cerrar Sesión
+            </a>
+        </div>
+    </div>
+    </div></div></header>';
+}
   echo '</div></div></header>';
 }
 
@@ -132,13 +149,20 @@ function sidebar()
   $nombreUsuario = isset($_SESSION["NOMBRE"]) ? $_SESSION["NOMBRE"] : "Invitado";
 
   echo '
-  <aside class="sidebar">
+  <!-- BOTÓN HAMBURGUESA RESPONSIVE -->
+  <button id="toggleSidebar" class="sidebar-toggle" aria-label="Abrir menú">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- SIDEBAR LATERAL -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar__logo">
       <i class="fa-solid fa-prescription-bottle-medical"></i>';
 
   if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
-    echo '<h2>Sistema Administrador</h2>';
-    echo '<small class="nombre-usuario">👤 ' . htmlspecialchars($nombreUsuario) . '</small>';
+    echo '
+      <h2>Sistema Administrador</h2>
+      <small class="nombre-usuario">👤 ' . htmlspecialchars($nombreUsuario) . '</small>';
   }
 
   echo '
@@ -146,21 +170,43 @@ function sidebar()
 
     <nav class="sidebar__nav">
       <ul>
-        <li><a href="#"><i class="fa-solid fa-user-gear"></i> <span class="texto-menu">Manejo de Usuario</span></a></li>';
-
-  if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
-    echo '<li><a href="/Cliente-Servidor-Farmacia/Views/pages/kardex.php"><i class="fa-solid fa-boxes-stacked"></i> <span class="texto-menu">Kardex</span></a></li>
-    <li> <a href="/Cliente-Servidor-Farmacia/Views/pages/producto.php"> <i class="fa-solid fa-plus"></i>
-         <span class="texto-menu">Registrar Producto</span></a>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="texto-menu">Manejo de Usuario</span>
+          </a>
         </li>';
+
+  // Opciones solo para ADMIN
+  if (isset($_SESSION['ROL']) && $_SESSION['ROL'] === 'ADMIN') {
+    echo '
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/kardex.php">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span class="texto-menu">Kardex</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/RegistrarProducto.php">
+            <i class="fa-solid fa-box"></i>
+            <span class="texto-menu">Modificar Producto</span>
+          </a>
+        </li>
+        ';
   }
 
   echo '
-        <li><a href="#"><i class="fa-solid fa-chart-bar"></i> <span class="texto-menu">Reportes</span></a></li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-chart-bar"></i>
+            <span class="texto-menu">Reportes</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </aside>';
 }
+
 
 
 
@@ -171,7 +217,7 @@ function añadirScripts()
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/Funciones/scrollReveal.js"></script>
   <script src="../assets/Funciones/customScrollReveal.js"></script>
-  <script src="../assets/Funciones/app.js"></script>
+  <script src="../assets/Funciones/apps.js"></script>
   <script src="../assets/Funciones/principal.js"></script>';
 }
 ?>

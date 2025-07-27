@@ -52,13 +52,46 @@ añadirCSS(); //<head> con CSS
                 <div class="booking__container">
                   <h2 class="booking__title">Encuentra lo que necesitas</h2>
                   <p class="booking__text">
-                    Visitá cualquiera de nuestras 3 sucursales para adquirir tus medicamentos... <span>Elegí la sede de tu
+                    Visitá cualquiera de nuestras sucursales para adquirir tus medicamentos... <span>Elegí la sede de tu
                       interés.</span>
                   </p>
                   <div class="booking__places">
-                    <button class="btn btn__place"><i class="fa-solid fa-location-dot"></i> Norte</button>
-                    <button class="btn btn__place"><i class="fa-solid fa-location-dot"></i> Centro</button>
-                    <button class="btn btn__place"><i class="fa-solid fa-location-dot"></i> Sur</button>
+                    <a href="https://maps.app.goo.gl/xKk3V6pbdiUXSqd6A" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Central San José
+                    </a>
+                    <a href="https://maps.app.goo.gl/d6z3snMzR1q72F1e6" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Heredia Norte
+                    </a>
+                    <a href="https://maps.app.goo.gl/RCeYzeKLkquhHGzL7" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Cartago Este
+                    </a>
+                    <a href="https://maps.app.goo.gl/bo2MZFnDnsoGgBqx6" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Alajuela Centro
+                    </a>
+                    <a href="https://maps.app.goo.gl/DPQU2cWQspiWstzP6" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Liberia Oeste
+                    </a>
+                    <a href="https://maps.app.goo.gl/bvgx2vMm8JfEfhPr7" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Pérez Zeledón
+                    </a>
+                    <a href="https://maps.app.goo.gl/9QsQiRwBinFj4nun9" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia San Ramón
+                    </a>
+                    <a href="https://maps.app.goo.gl/9rigjkirjTLiVrJj9" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Central San José
+                    </a>
+                    <a href="https://maps.app.goo.gl/iUAn2xhc9qx826Ns9" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Heredia Norte
+                    </a>
+                    <a href="https://maps.app.goo.gl/U9ARZspGAyJysgkr5" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Cartago Este
+                    </a>
+                    <a href="https://maps.app.goo.gl/1gayHTCyDUHZhWxD6" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Liberia Oeste
+                    </a>
+                    <a href="https://maps.app.goo.gl/gMCJu9Ga4W73bbXv5" class="btn btn__place">
+                      <i class="fa-solid fa-location-dot"></i> Farmacia Pérez Zeledón Oeste
+                    </a>           
                   </div>
                 </div>
               </section>
@@ -72,13 +105,13 @@ añadirCSS(); //<head> con CSS
                     <div class="booking__container">
                       <h2 class="booking__title">Conocé los medicos de la empresa</h2>
                       <p class="booking__text">
-                        Visitá cualquiera de nuestras 3 sucursales para poder hablar con ellos... <span>Elegí la sede de tu
+                        Visitá cualquiera de nuestras sucursales para poder hablar con ellos... <span>Elegí la sede de tu
                           interés.</span>
                       </p>
                       <div class="booking__places2">
                         <div class="btn-wrapper">
                             <button class="btn btn__placeD foto-btn">
-                              <img src="../assets/Imagenes/JuanPa.jpg" alt="Foto" class="foto-persona">
+                              <img src="../assets/Imagenes/JuanPablo.jpg" alt="Foto" class="foto-persona">
                             </button>
                             <div class="btn-label">
                               <strong>Juan Pablo Vega</strong><br>

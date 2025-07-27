@@ -561,6 +561,8 @@ END $$
 DELIMITER ;
 
 
+
+
 SELECT 
     M.ID_MOVIMIENTO,
     L.CODIGO,
@@ -602,7 +604,18 @@ WHERE CODIGO = '110010204' AND ID_FARMACIA = 1;
 SET SQL_SAFE_UPDATES = 1;
 
 
-select * from usuario 
-
+-- ========================================
+-- PROCEDIMIENTO: ELIMINAR PRODUCTO (PASAR A INACTIVO)
+-- ========================================
+DELIMITER $$
+CREATE PROCEDURE FIDE_PRODUCTO_ELIMINAR_SP (
+    IN P_CODIGO VARCHAR(20)
+)
+BEGIN
+    UPDATE fide_producto_tb
+    SET ID_ESTADO = 2
+    WHERE CODIGO = P_CODIGO;
+END $$
+DELIMITER ;
 
 

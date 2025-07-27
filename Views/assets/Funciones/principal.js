@@ -1,11 +1,38 @@
-// ======= Sección: este js es para el button del login del home  =======
+// ========== Sidebar Toggle ==========
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.getElementById('sidebar');
+
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+    });
+  }
+});
+
+// ========== Modal (Login, etc.) ==========
 function openModal() {
-  document.getElementById("modalOverlay").className = "overlay open";
-  document.getElementById("modalDialog").className = "dialog open";
+  const overlay = document.getElementById("modalOverlay");
+  const dialog = document.getElementById("modalDialog");
+
+  if (overlay && dialog) {
+    overlay.classList.remove("closed");
+    overlay.classList.add("open");
+
+    dialog.classList.remove("closed");
+    dialog.classList.add("open");
+  }
 }
 
 function closeModal() {
-  document.getElementById("modalOverlay").className = "overlay closed";
-  document.getElementById("modalDialog").className = "dialog closed";
-}
+  const overlay = document.getElementById("modalOverlay");
+  const dialog = document.getElementById("modalDialog");
 
+  if (overlay && dialog) {
+    overlay.classList.remove("open");
+    overlay.classList.add("closed");
+
+    dialog.classList.remove("open");
+    dialog.classList.add("closed");
+  }
+}

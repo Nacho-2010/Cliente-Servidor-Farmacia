@@ -1,22 +1,32 @@
 <?php
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Models/connect.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 
-    function ConsultarInfoUsuarioModel($idUsuario)
-    {
-        try
-        {
-            $context = OpenDB();
+function ActualizarContrasennaModel($idUsuario, $nuevaContrasenna) {
+    try {
+        $conexion = OpenDB(); // Debe retornar un objeto mysqli válido
 
-            $sp = "CALL ConsultarInfoUsuario('$idUsuario')";
-            $respuesta = $context -> query($sp);
+        $sql = "CALL ActualizarContrasenna(?, ?)";
+        $stmt = $conexion->prepare($sql);
 
-            CloseDB($context);           
-            return $respuesta;
+        if (!$stmt) {
+            echo "❌ Error al preparar: " . $conexion->error;
+            return false;
         }
-        catch(Exception $error)
-        {
-            RegistrarError($error);
-            return null;
+
+        $stmt->bind_param("is", $idUsuario, $nuevaContrasenna);
+
+        if (!$stmt->execute()) {
+            echo "❌ Error al ejecutar: " . $stmt->error;
+            return false;
         }
+
+        $stmt->close();
+        $conexion->close();
+
+        return true;
+    } catch (Exception $e) {
+        echo "❌ Excepción atrapada: " . $e->getMessage();
+        return false;
     }
-?>
+}
+

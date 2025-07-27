@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/productoModel.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/registrarProductoModel.php";
 
 if (isset($_POST["btnRegistrarProducto"])) {
     $nombre = $_POST["txtNombre"];
@@ -11,7 +11,8 @@ if (isset($_POST["btnRegistrarProducto"])) {
 
     InsertarProducto($nombre, $codigo, $precio, $idCategoria, $idUnidad, $idEstado);
 
-    header("Location: /Cliente-Servidor-Farmacia/Views/pages/producto.php?mensaje=Producto registrado correctamente");
+    header("Location: /Cliente-Servidor-Farmacia/Views/pages/registrarProducto.php?mensaje=Producto registrado correctamente");
     exit(); //se detiene la ejecucion
 }
+
 ?>

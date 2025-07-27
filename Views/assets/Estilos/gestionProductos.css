@@ -1,0 +1,69 @@
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url(../Imagenes/FondoImagen.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.main-content {
+  background-color: rgb(255, 255, 255); /*semitransparente*/
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+form input,
+form select,
+form button {
+  box-shadow: none;
+}
+
+h2 {
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.boton-salir {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.menu-opciones {
+      display: flex;              
+      justify-content: center;    
+      align-items: center;        
+      gap: 20px;                  
+      flex-wrap: wrap;            
+      margin-bottom: 30px;
+    }
+    .menu-opciones button {
+      margin: 0 10px;
+    }
+    .seccion-formulario {
+      display: none; 
+    }
+    .seccion-activa {
+      display: block; 
+    }
+
+
+.menu-opciones button {
+  padding: 12px 25px;         /* más grandes */
+  font-size: 18px;            /* letra más grande */
+  border-radius: 8px;         /* bordes redondeados */
+  min-width: 180px;           /* ancho mínimo para que se vean parejos */
+  font-weight: 600;
+}

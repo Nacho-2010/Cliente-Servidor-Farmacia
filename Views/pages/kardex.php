@@ -8,7 +8,6 @@ $id_farmacia = ObtenerFarmaciasActivas();
 <!DOCTYPE html>
 <html lang="es">
 <?php añadirCSS(); ?>
-
 <body>
     <?php verheader(); ?>
     <?php sidebar(); ?>

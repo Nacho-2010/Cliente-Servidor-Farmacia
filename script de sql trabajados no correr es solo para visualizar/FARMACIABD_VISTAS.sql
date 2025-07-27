@@ -74,10 +74,19 @@ JOIN FIDE_LOTE_TB L ON M.ID_LOTE = L.ID_LOTE
 JOIN FIDE_INVENTARIO_TB I ON M.ID_INVENTARIO = I.ID_INVENTARIO
 ORDER BY M.FECHA_MOVIMIENTO, M.ID_MOVIMIENTO;
 
-select * from fide_producto_tb 
+-- ========================================
+-- VISTA: PRODUCTOS ACTIVOS
+-- ========================================
 
-
-
+CREATE OR REPLACE VIEW productos_activos_v AS
+SELECT 
+  CODIGO, 
+  NOMBRE, 
+  PRECIO_UNITARIO 
+FROM 
+  fide_producto_tb 
+WHERE 
+  ID_ESTADO = 1;
 
 
 
