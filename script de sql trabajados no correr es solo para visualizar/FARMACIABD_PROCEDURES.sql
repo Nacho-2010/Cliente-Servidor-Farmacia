@@ -349,9 +349,9 @@ DELIMITER ;
 -- ========================================
 -- PROCEDIMIENTO: BuscarProductoPorCodigo
 -- ========================================
-DROP PROCEDURE IF EXISTS BuscarProductoPorCodigo;
 DELIMITER $$
 
+DROP PROCEDURE IF EXISTS BuscarProductoPorCodigo $$
 CREATE PROCEDURE BuscarProductoPorCodigo(
     IN p_codigo VARCHAR(20),
     IN p_id_farmacia INT
@@ -360,11 +360,21 @@ BEGIN
     SELECT 
         P.CODIGO, 
         P.NOMBRE, 
+        cat.NOMBRE AS CATEGORIA,
         U.NOMBRE AS UNIDAD, 
-        I.CANTIDAD_DISPONIBLE
+        I.CANTIDAD_DISPONIBLE,
+        P.ID_ESTADO,
+        e.DESCRIPCION AS ESTADO,
+        P.URL_IMAGEN
     FROM FIDE_PRODUCTO_TB P
-    JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
-    JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
+    JOIN FIDE_UNIDAD_MEDIDA_TB U 
+        ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
+    JOIN FIDE_INVENTARIO_TB I 
+        ON P.CODIGO = I.CODIGO
+    JOIN FIDE_CATEGORIA_PRODUCTO_TB cat
+        ON cat.ID_CATEGORIA_PRODUCTO = P.ID_CATEGORIA_PRODUCTO
+    JOIN FIDE_ESTADO_TB e
+        ON e.ID_ESTADO = P.ID_ESTADO
     WHERE P.CODIGO = p_codigo
       AND I.ID_FARMACIA = p_id_farmacia
     LIMIT 1;
@@ -559,31 +569,45 @@ BEGIN
     ORDER BY FECHA_MOVIMIENTO ASC;
 END $$
 DELIMITER ;
+-- ========================================
+-- TERMINA
+-- ========================================
 
 
 
+-- ========================================
+-- PROCEDIMIENTO: ConsultarProductos
+-- ========================================
+DROP PROCEDURE IF EXISTS ConsultarProductos;
+DELIMITER $$
 
-SELECT 
-    M.ID_MOVIMIENTO,
-    L.CODIGO,
-    L.NUMERO_LOTE,
-    L.FECHA_VENCIMIENTO,
-    M.FECHA_MOVIMIENTO,
-    M.CANTIDAD,
-    M.DESCRIPCION,
-    F.NOMBRE AS NOMBRE_FARMACIA
-FROM FIDE_MOVIMIENTO_TB M
-JOIN FIDE_LOTE_TB L ON M.ID_LOTE = L.ID_LOTE
-JOIN FIDE_FARMACIA_TB F ON M.ID_FARMACIA = F.ID_FARMACIA
-WHERE M.TIPO_MOVIMIENTO = 'Salida'
-  AND M.FECHA_MOVIMIENTO = '2025-07-13'
-  AND L.CODIGO = '110010204'
-  AND M.ID_FARMACIA = 1;
+CREATE PROCEDURE ConsultarProductos()
+BEGIN
+    SELECT 
+        P.CODIGO,
+        P.NOMBRE,
+        P.PRECIO_UNITARIO,
+        cat.NOMBRE AS CATEGORIA,
+        um.NOMBRE AS UNIDAD_MEDIDA,
+        e.DESCRIPCION AS ESTADO,
+        P.ID_ESTADO, 
+        P.URL_IMAGEN
+    FROM FIDE_PRODUCTO_TB P
+    JOIN FIDE_CATEGORIA_PRODUCTO_TB cat ON cat.ID_CATEGORIA_PRODUCTO = P.ID_CATEGORIA_PRODUCTO
+    JOIN FIDE_UNIDAD_MEDIDA_TB um ON um.ID_UNIDAD_MEDIDA = P.ID_UNIDAD_MEDIDA
+    JOIN FIDE_ESTADO_TB e ON e.ID_ESTADO = P.ID_ESTADO;
+END $$
+DELIMITER ;
 
 
-CALL ObtenerStockDisponible('110010204', 1);
+-- ========================================
+-- TERMINA
+-- ========================================
 
-CALL ObtenerLotesDisponiblesPorProducto('110010204', 1);
+
+CALL ObtenerStockDisponible('110010207', 1);
+
+CALL ObtenerLotesDisponiblesPorProducto('110010205', 1);
 
 -- para elimiar los movimientos de un codigo en una farma 
 -- DESACTIVAR MODO SEGURO TEMPORALMENTE (opcional si estás en modo seguro)

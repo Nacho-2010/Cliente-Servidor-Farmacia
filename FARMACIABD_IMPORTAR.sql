@@ -62,6 +62,19 @@ LOCK TABLES `cliente` WRITE;
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `codigos_activos_v`
+--
+
+DROP TABLE IF EXISTS `codigos_activos_v`;
+/*!50001 DROP VIEW IF EXISTS `codigos_activos_v`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `codigos_activos_v` AS SELECT 
+ 1 AS `CODIGO`,
+ 1 AS `NOMBRE`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `farmacia_activa_v`
 --
 
@@ -133,7 +146,7 @@ CREATE TABLE `fide_categoria_producto_tb` (
   PRIMARY KEY (`ID_CATEGORIA_PRODUCTO`),
   KEY `FK_CATEGORIA_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_CATEGORIA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +155,7 @@ CREATE TABLE `fide_categoria_producto_tb` (
 
 LOCK TABLES `fide_categoria_producto_tb` WRITE;
 /*!40000 ALTER TABLE `fide_categoria_producto_tb` DISABLE KEYS */;
-INSERT INTO `fide_categoria_producto_tb` VALUES (1,'Analgésico',1),(2,'Antibiótico',1),(3,'Antiinflamatorio',1),(4,'Antialérgico',1),(5,'Antipirético',1),(6,'Antihipertensivo',1),(7,'Antidiabético',1),(8,'Anticonvulsivo',1),(9,'Antipsicótico',1),(10,'Ansiolítico',1),(11,'Antidepresivo',1),(12,'Gastrointestinal',1),(13,'Vitaminas y suplementos',1),(14,'Antimicótico',1),(15,'Antiviral',1),(16,'Hormonas',1),(17,'Cardiovascular',1),(18,'Anticoagulante',1),(19,'Antiparasitario',1),(20,'Cuidado dermatológico',1),(21,'Inmunológico',1),(22,'Pediátrico',1),(23,'Ginecológico',1),(24,'Respiratorio',1),(25,'Oftálmico',1),(26,'Odontológico',1),(27,'Otros',1),(28,'Analgésico',1),(29,'Antibiótico',1),(30,'Antiinflamatorio',1),(31,'Antialérgico',1),(32,'Antipirético',1),(33,'Antihipertensivo',1),(34,'Antidiabético',1),(35,'Anticonvulsivo',1),(36,'Antipsicótico',1),(37,'Ansiolítico',1),(38,'Antidepresivo',1),(39,'Gastrointestinal',1),(40,'Vitaminas y suplementos',1),(41,'Antimicótico',1),(42,'Antiviral',1),(43,'Hormonas',1),(44,'Cardiovascular',1),(45,'Anticoagulante',1),(46,'Antiparasitario',1),(47,'Cuidado dermatológico',1),(48,'Inmunológico',1),(49,'Pediátrico',1),(50,'Ginecológico',1),(51,'Respiratorio',1),(52,'Oftálmico',1),(53,'Odontológico',1),(54,'Otros',1),(55,'Analgésico',1),(56,'Antibiótico',1),(57,'Antiinflamatorio',1),(58,'Antialérgico',1),(59,'Antipirético',1),(60,'Antihipertensivo',1),(61,'Antidiabético',1),(62,'Anticonvulsivo',1),(63,'Antipsicótico',1),(64,'Ansiolítico',1),(65,'Antidepresivo',1),(66,'Gastrointestinal',1),(67,'Vitaminas y suplementos',1),(68,'Antimicótico',1),(69,'Antiviral',1),(70,'Hormonas',1),(71,'Cardiovascular',1),(72,'Anticoagulante',1),(73,'Antiparasitario',1),(74,'Cuidado dermatológico',1),(75,'Inmunológico',1),(76,'Pediátrico',1),(77,'Ginecológico',1),(78,'Respiratorio',1),(79,'Oftálmico',1),(80,'Odontológico',1),(81,'Otros',1);
+INSERT INTO `fide_categoria_producto_tb` VALUES (1,'Analgésico',1),(2,'Antibiótico',1),(3,'Antiinflamatorio',1),(4,'Antialérgico',1),(5,'Antipirético',1),(6,'Antihipertensivo',1),(7,'Antidiabético',1),(8,'Anticonvulsivo',1),(9,'Antipsicótico',1),(10,'Ansiolítico',1),(11,'Antidepresivo',1),(12,'Gastrointestinal',1),(13,'Vitaminas y suplementos',1),(14,'Antimicótico',1),(15,'Antiviral',1),(16,'Hormonas',1),(17,'Cardiovascular',1),(18,'Anticoagulante',1),(19,'Antiparasitario',1),(20,'Cuidado dermatológico',1),(21,'Inmunológico',1),(22,'Pediátrico',1),(23,'Ginecológico',1),(24,'Respiratorio',1),(25,'Oftálmico',1),(26,'Odontológico',1),(27,'Otros',1),(28,'Analgésico',1),(29,'Antibiótico',1),(30,'Antiinflamatorio',1),(31,'Antialérgico',1),(32,'Antipirético',1),(33,'Antihipertensivo',1),(34,'Antidiabético',1),(35,'Anticonvulsivo',1),(36,'Antipsicótico',1),(37,'Ansiolítico',1),(38,'Antidepresivo',1),(39,'Gastrointestinal',1),(40,'Vitaminas y suplementos',1),(41,'Antimicótico',1),(42,'Antiviral',1),(43,'Hormonas',1),(44,'Cardiovascular',1),(45,'Anticoagulante',1),(46,'Antiparasitario',1),(47,'Cuidado dermatológico',1),(48,'Inmunológico',1),(49,'Pediátrico',1),(50,'Ginecológico',1),(51,'Respiratorio',1),(52,'Oftálmico',1),(53,'Odontológico',1),(54,'Otros',1),(55,'Analgésico',1),(56,'Antibiótico',1),(57,'Antiinflamatorio',1),(58,'Antialérgico',1),(59,'Antipirético',1),(60,'Antihipertensivo',1),(61,'Antidiabético',1),(62,'Anticonvulsivo',1),(63,'Antipsicótico',1),(64,'Ansiolítico',1),(65,'Antidepresivo',1),(66,'Gastrointestinal',1),(67,'Vitaminas y suplementos',1),(68,'Antimicótico',1),(69,'Antiviral',1),(70,'Hormonas',1),(71,'Cardiovascular',1),(72,'Anticoagulante',1),(73,'Antiparasitario',1),(74,'Cuidado dermatológico',1),(75,'Inmunológico',1),(76,'Pediátrico',1),(77,'Ginecológico',1),(78,'Respiratorio',1),(79,'Oftálmico',1),(80,'Odontológico',1),(81,'Otros',1),(82,'Analgésico',1),(83,'Antibiótico',1),(84,'Antiinflamatorio',1),(85,'Antialérgico',1),(86,'Antipirético',1),(87,'Antihipertensivo',1),(88,'Antidiabético',1),(89,'Anticonvulsivo',1),(90,'Antipsicótico',1),(91,'Ansiolítico',1),(92,'Antidepresivo',1),(93,'Gastrointestinal',1),(94,'Vitaminas y suplementos',1),(95,'Antimicótico',1),(96,'Antiviral',1),(97,'Hormonas',1),(98,'Cardiovascular',1),(99,'Anticoagulante',1),(100,'Antiparasitario',1),(101,'Cuidado dermatológico',1),(102,'Inmunológico',1),(103,'Pediátrico',1),(104,'Ginecológico',1),(105,'Respiratorio',1),(106,'Oftálmico',1),(107,'Odontológico',1),(108,'Otros',1),(109,'Analgésico',1),(110,'Antibiótico',1),(111,'Antiinflamatorio',1),(112,'Antialérgico',1),(113,'Antipirético',1),(114,'Antihipertensivo',1),(115,'Antidiabético',1),(116,'Anticonvulsivo',1),(117,'Antipsicótico',1),(118,'Ansiolítico',1),(119,'Antidepresivo',1),(120,'Gastrointestinal',1),(121,'Vitaminas y suplementos',1),(122,'Antimicótico',1),(123,'Antiviral',1),(124,'Hormonas',1),(125,'Cardiovascular',1),(126,'Anticoagulante',1),(127,'Antiparasitario',1),(128,'Cuidado dermatológico',1),(129,'Inmunológico',1),(130,'Pediátrico',1),(131,'Ginecológico',1),(132,'Respiratorio',1),(133,'Oftálmico',1),(134,'Odontológico',1),(135,'Otros',1);
 /*!40000 ALTER TABLE `fide_categoria_producto_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +170,7 @@ CREATE TABLE `fide_estado_tb` (
   `ID_ESTADO` int(11) NOT NULL AUTO_INCREMENT,
   `DESCRIPCION` varchar(100) NOT NULL,
   PRIMARY KEY (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +179,7 @@ CREATE TABLE `fide_estado_tb` (
 
 LOCK TABLES `fide_estado_tb` WRITE;
 /*!40000 ALTER TABLE `fide_estado_tb` DISABLE KEYS */;
-INSERT INTO `fide_estado_tb` VALUES (1,'Activo'),(2,'Inactivo'),(3,'Eliminado'),(4,'Pendiente'),(5,'Vencido'),(6,'En revisión'),(7,'Completado'),(8,'Cancelado'),(9,'Activo'),(10,'Inactivo'),(11,'Eliminado'),(12,'Pendiente'),(13,'Vencido'),(14,'En revisión'),(15,'Completado'),(16,'Cancelado'),(17,'Activo'),(18,'Inactivo'),(19,'Eliminado'),(20,'Pendiente'),(21,'Vencido'),(22,'En revisión'),(23,'Completado'),(24,'Cancelado');
+INSERT INTO `fide_estado_tb` VALUES (1,'Activo'),(2,'Inactivo'),(3,'Eliminado'),(4,'Pendiente'),(5,'Vencido'),(6,'En revisión'),(7,'Completado'),(8,'Cancelado'),(9,'Activo'),(10,'Inactivo'),(11,'Eliminado'),(12,'Pendiente'),(13,'Vencido'),(14,'En revisión'),(15,'Completado'),(16,'Cancelado'),(17,'Activo'),(18,'Inactivo'),(19,'Eliminado'),(20,'Pendiente'),(21,'Vencido'),(22,'En revisión'),(23,'Completado'),(24,'Cancelado'),(25,'Activo'),(26,'Inactivo'),(27,'Eliminado'),(28,'Pendiente'),(29,'Vencido'),(30,'En revisión'),(31,'Completado'),(32,'Cancelado'),(33,'Activo'),(34,'Inactivo'),(35,'Eliminado'),(36,'Pendiente'),(37,'Vencido'),(38,'En revisión'),(39,'Completado'),(40,'Cancelado');
 /*!40000 ALTER TABLE `fide_estado_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +197,7 @@ CREATE TABLE `fide_farmacia_tb` (
   PRIMARY KEY (`ID_FARMACIA`),
   KEY `FK_FARMACIA_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_FARMACIA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +206,7 @@ CREATE TABLE `fide_farmacia_tb` (
 
 LOCK TABLES `fide_farmacia_tb` WRITE;
 /*!40000 ALTER TABLE `fide_farmacia_tb` DISABLE KEYS */;
-INSERT INTO `fide_farmacia_tb` VALUES (1,'Farmacia Central San José',1),(2,'Farmacia Heredia Norte',1),(3,'Farmacia Cartago Este',1),(4,'Farmacia Alajuela Centro',2),(5,'Farmacia Liberia Oeste',1),(6,'Farmacia Pérez Zeledón',1),(7,'Farmacia San Ramón',2),(8,'Farmacia Central San José',1),(9,'Farmacia Heredia Norte',1),(10,'Farmacia Cartago Este',1),(11,'Farmacia Alajuela Centro',2),(12,'Farmacia Liberia Oeste',1),(13,'Farmacia Pérez Zeledón',1),(14,'Farmacia San Ramón',2);
+INSERT INTO `fide_farmacia_tb` VALUES (1,'Farmacia Central San José',1),(2,'Farmacia Heredia Norte',1),(3,'Farmacia Cartago Este',1),(4,'Farmacia Alajuela Centro',2),(5,'Farmacia Liberia Oeste',1),(6,'Farmacia Pérez Zeledón',1),(7,'Farmacia San Ramón',2),(8,'Farmacia Central San José',1),(9,'Farmacia Heredia Norte',1),(10,'Farmacia Cartago Este',1),(11,'Farmacia Alajuela Centro',2),(12,'Farmacia Liberia Oeste',1),(13,'Farmacia Pérez Zeledón',1),(14,'Farmacia San Ramón',2),(15,'Farmacia Central San José',1),(16,'Farmacia Heredia Norte',1),(17,'Farmacia Cartago Este',1),(18,'Farmacia Alajuela Centro',2),(19,'Farmacia Liberia Oeste',1),(20,'Farmacia Pérez Zeledón',1),(21,'Farmacia San Ramón',2),(22,'Farmacia Central San José',1),(23,'Farmacia Heredia Norte',1),(24,'Farmacia Cartago Este',1),(25,'Farmacia Alajuela Centro',2),(26,'Farmacia Liberia Oeste',1),(27,'Farmacia Pérez Zeledón',1),(28,'Farmacia San Ramón',2);
 /*!40000 ALTER TABLE `fide_farmacia_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +241,7 @@ CREATE TABLE `fide_inventario_tb` (
 
 LOCK TABLES `fide_inventario_tb` WRITE;
 /*!40000 ALTER TABLE `fide_inventario_tb` DISABLE KEYS */;
-INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',0,0,0,10,1),(2,'110010204',0,0,0,5,1),(3,'110010204',21,0,0,1,1),(4,'110010205',0,0,0,1,1),(5,'110010205',0,0,0,3,1);
+INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',0,0,0,10,1),(2,'110010204',0,0,0,5,1),(3,'110010204',0,0,0,1,1),(4,'110010205',0,0,0,1,1),(5,'110010205',0,0,0,3,1);
 /*!40000 ALTER TABLE `fide_inventario_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +264,7 @@ CREATE TABLE `fide_lote_tb` (
   KEY `FK_LOTE_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +273,7 @@ CREATE TABLE `fide_lote_tb` (
 
 LOCK TABLES `fide_lote_tb` WRITE;
 /*!40000 ALTER TABLE `fide_lote_tb` DISABLE KEYS */;
-INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1),(22,'110010204','9999','2025-07-13','2025-08-08',1),(23,'110010204','88888','2025-07-13','2025-08-07',1),(24,'110010204','888','2025-07-14','2025-08-09',1),(25,'110010204','888','2025-07-13','2025-08-23',1),(26,'110010204','88888','2025-07-13','2025-08-16',1),(27,'110010204','88888','2025-07-13','2025-08-29',1),(28,'110010204','9999','2025-07-13','2025-08-09',1),(29,'110010204','8888','2025-07-13','2025-08-24',1),(30,'110010204','9999','2025-07-13','2025-08-06',1),(31,'110010204','9999','2025-07-13','2025-07-25',1),(32,'110010204','8888888','2025-07-13','2025-08-01',1),(33,'110010204','9999','2025-07-13','2025-08-07',1),(34,'110010204','9999','2025-07-13','2025-08-29',1),(35,'110010204','8888888','2025-07-13','2025-07-25',1),(36,'110010204','88888','2025-07-13','2025-07-25',1),(37,'110010204','88888','2025-07-13','2025-08-02',1);
+INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1),(22,'110010204','9999','2025-07-13','2025-08-08',1),(23,'110010204','88888','2025-07-13','2025-08-07',1),(24,'110010204','888','2025-07-14','2025-08-09',1),(25,'110010204','888','2025-07-13','2025-08-23',1),(26,'110010204','88888','2025-07-13','2025-08-16',1),(27,'110010204','88888','2025-07-13','2025-08-29',1),(28,'110010204','9999','2025-07-13','2025-08-09',1),(29,'110010204','8888','2025-07-13','2025-08-24',1),(30,'110010204','9999','2025-07-13','2025-08-06',1),(31,'110010204','9999','2025-07-13','2025-07-25',1),(32,'110010204','8888888','2025-07-13','2025-08-01',1),(33,'110010204','9999','2025-07-13','2025-08-07',1),(34,'110010204','9999','2025-07-13','2025-08-29',1),(35,'110010204','8888888','2025-07-13','2025-07-25',1),(36,'110010204','88888','2025-07-13','2025-07-25',1),(37,'110010204','88888','2025-07-13','2025-08-02',1),(38,'110010204','777','2025-07-27','2025-08-10',1),(39,'110010204','888','2025-07-27','2025-07-27',1),(40,'110010204','10','2025-07-27','2025-07-27',1);
 /*!40000 ALTER TABLE `fide_lote_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +302,7 @@ CREATE TABLE `fide_movimiento_tb` (
   CONSTRAINT `FK_MOVIMIENTO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
   CONSTRAINT `FK_MOVIMIENTO_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
   CONSTRAINT `FK_MOVIMIENTO_LOTE` FOREIGN KEY (`ID_LOTE`) REFERENCES `fide_lote_tb` (`ID_LOTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +311,6 @@ CREATE TABLE `fide_movimiento_tb` (
 
 LOCK TABLES `fide_movimiento_tb` WRITE;
 /*!40000 ALTER TABLE `fide_movimiento_tb` DISABLE KEYS */;
-INSERT INTO `fide_movimiento_tb` VALUES (30,3,34,'2025-07-13','2025-08-29','Entrada',6,'','',1),(31,3,35,'2025-07-13','2025-07-25','Entrada',5,'','',1),(32,3,36,'2025-07-13','2025-07-25','Entrada',5,'','',1),(33,3,37,'2025-07-13','2025-08-02','Entrada',5,'','',1);
 /*!40000 ALTER TABLE `fide_movimiento_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +345,7 @@ CREATE TABLE `fide_producto_tb` (
 
 LOCK TABLES `fide_producto_tb` WRITE;
 /*!40000 ALTER TABLE `fide_producto_tb` DISABLE KEYS */;
-INSERT INTO `fide_producto_tb` VALUES ('110010204','ATORVASTATINA 20 MG TABLETA',135.75,1,1,1,NULL),('110010205','ENALAPRIL 10 MG TABLETA',52.30,1,1,1,NULL),('110010206','FUROSEMIDA 40 MG TABLETA',25.00,1,1,1,NULL),('110010207','PREDNISONA 5 MG TABLETA',33.00,10,1,1,NULL),('110010208','CLORFENAMINA 4 MG TABLETA',19.50,6,1,1,NULL),('110010209','DICLOFENACO 50 MG TABLETA',27.75,4,1,1,NULL),('110010210','NAPROXENO 500 MG TABLETA',41.20,4,1,1,NULL),('110010211','RANITIDINA 150 MG TABLETA',60.00,5,1,1,NULL),('110010212','CIPROFLOXACINO 500 MG TABLETA',88.50,2,1,1,NULL),('110010213','CEFALEXINA 500 MG CÁPSULA',92.30,2,1,1,NULL),('110010214','ACICLOVIR 400 MG TABLETA',79.00,2,1,1,NULL),('110010215','AZITROMICINA 500 MG TABLETA',160.00,2,1,1,NULL),('110010216','CLARITROMICINA 500 MG TABLETA',175.00,2,1,1,NULL),('110010217','DOXICICLINA 100 MG TABLETA',67.25,2,1,1,NULL),('110010218','LEVOTIROXINA 50 MCG TABLETA',32.00,10,1,1,NULL),('110010219','GLIBENCLAMIDA 5 MG TABLETA',29.00,10,1,1,NULL),('110010220','INSULINA NPH 100 UI/ML FRASCO',4350.00,10,2,1,NULL),('110010221','INSULINA REGULAR 100 UI/ML FRASCO',4200.00,10,2,1,NULL),('110010222','ASPIRINA 100 MG TABLETA',23.00,3,1,1,NULL),('110010223','WARFARINA 5 MG TABLETA',95.00,1,1,1,NULL),('110010224','HEPARINA SÓDICA 5000 UI/ML',2250.00,1,3,1,NULL),('110010225','METRONIDAZOL 250 MG TABLETA',55.00,2,1,1,NULL),('110010226','NISTATINA 100000 UI TABLETA',61.00,2,1,1,NULL),('110010227','FLUCONAZOL 150 MG CÁPSULA',135.00,2,1,1,NULL),('110010228','KETOCONAZOL 200 MG TABLETA',115.00,2,1,1,NULL),('110010261','CLONAZEPAM 0.5 MG TABLETA',65.00,9,1,1,NULL),('110010262','DIAZEPAM 10 MG TABLETA',70.00,9,1,1,NULL),('110010263','BISACODILO 5 MG TABLETA',30.00,5,1,1,NULL),('110010264','LOPERAMIDA 2 MG CÁPSULA',40.00,5,1,1,NULL),('110010265','DOMPERIDONA 10 MG TABLETA',48.00,5,1,1,NULL),('110010266','ONDANSETRON 4 MG TABLETA',120.00,5,1,1,NULL),('110010267','RIVAROXABAN 20 MG TABLETA',320.00,1,1,1,NULL),('110010268','APIXABAN 5 MG TABLETA',290.00,1,1,1,NULL),('110010269','ENOXAPARINA 40 MG/0.4ML JERINGA',3850.00,1,4,1,NULL),('110010270','FENILEFRINA 10 MG TABLETA',35.00,6,1,1,NULL),('110010271','PSEUDOEFEDRINA 30 MG TABLETA',44.00,6,1,1,NULL),('110010272','OXIMETAZOLINA 0.05% GOTAS NASALES',120.00,6,5,1,NULL),('110010273','DEXTROMETORFANO 15 MG/5ML JARABE',112.00,8,6,1,NULL),('110010274','BROMEXINA 8 MG/5ML JARABE',105.00,8,6,1,NULL),('110010275','AMBROXOL 30 MG/5ML JARABE',99.00,8,6,1,NULL),('110010276','CLORURO DE SODIO 0.9% FRASCO',475.00,10,2,1,NULL),('110010277','GLUCOSA 5% FRASCO',510.00,10,2,1,NULL),('110010278','RINGER LACTATO FRASCO',490.00,10,2,1,NULL),('110010279','KETOROLACO 30 MG/ML AMPOLLAS',185.00,3,3,1,NULL),('110010280','TRAMADOL 100 MG/ML AMPOLLAS',220.00,3,3,1,NULL),('110010281','MORFINA 10 MG/ML AMPOLLAS',285.00,3,3,1,NULL),('110010282','FENTANILO 50 MCG/ML AMPOLLAS',300.00,3,3,1,NULL),('110010283','NEOMICINA + BACITRACINA UNGÜENTO',290.00,7,7,1,NULL),('110010284','HIDROCORTISONA 1% CREMA',210.00,7,7,1,NULL),('110010285','BETAMETASONA 0.1% CREMA',250.00,7,7,1,NULL),('110010286','CLOTRIMAZOL 1% CREMA',240.00,7,7,1,NULL),('110010287','MICONAZOL 2% CREMA',230.00,7,7,1,NULL),('110010288','NISTATINA 100,000 UI CREMA',225.00,7,7,1,NULL),('110010289','KETOCONAZOL 2% CHAMPÚ',650.00,7,8,1,NULL),('110010290','TRETINOÍNA 0.05% CREMA',800.00,7,7,1,NULL),('110010291','BENZOIL PERÓXIDO 5% GEL',475.00,7,7,1,NULL),('110010292','ACICLOVIR 5% CREMA',340.00,7,7,1,NULL),('110010293','NAPROXENO SÓDICO 550 MG TABLETA',90.00,4,1,1,NULL),('110010306','IBUPROFENO 400 MG TABLETA',85.00,3,1,1,NULL),('110010307','AMOXICILINA 500 MG CÁPSULA',110.00,2,1,1,NULL),('110010308','CLARITROMICINA 250 MG TABLETA',185.00,2,1,1,NULL),('110010309','ENALAPRIL 5 MG TABLETA',46.00,4,1,1,NULL),('110010310','LOSARTÁN 50 MG TABLETA',58.00,4,1,1,NULL),('110010311','METFORMINA 850 MG TABLETA',60.00,5,1,1,NULL),('110010312','GLICLAZIDA 30 MG TABLETA',72.00,5,1,1,NULL),('110010313','LORATADINA 10 MG TABLETA',42.00,6,1,1,NULL),('110010314','CETIRIZINA 10 MG TABLETA',49.00,6,1,1,NULL),('110010315','OMEPRAZOL 20 MG CÁPSULA',98.00,7,1,1,NULL),('110010316','FAMOTIDINA 40 MG TABLETA',88.00,7,1,1,NULL),('110010317','SALBUTAMOL SPRAY 100 MCG',2750.00,8,9,1,NULL),('110010318','BUDESONIDA 100 MCG INHALADOR',3600.00,8,17,1,NULL),('110010319','BETAMETASONA CREMA 0.05%',270.00,9,8,1,NULL),('110010320','KETOCONAZOL CREMA 2%',310.00,9,8,1,NULL),('888','CATAFLAM 50 MG TABLETAS VIA ORAL',850.00,3,2,2,NULL),('991','Acetaminofen',300.00,1,2,2,NULL),('994','Acetaminofen',200.00,1,2,2,NULL),('995','Pastilla',200.00,1,2,2,NULL);
+INSERT INTO `fide_producto_tb` VALUES ('110010204','ATORVASTATINA 20 MG TABLETA',135.75,1,2,1,NULL),('110010205','ENALAPRIL 10 MG TABLETA',52.30,1,2,1,NULL),('110010206','FUROSEMIDA 40 MG TABLETA',25.00,1,2,1,NULL),('110010207','PREDNISONA 5 MG TABLETA',33.00,10,2,1,NULL),('110010208','CLORFENAMINA 4 MG TABLETA',19.50,6,2,1,NULL),('110010209','DICLOFENACO 50 MG TABLETA',27.75,4,2,1,NULL),('110010210','NAPROXENO 500 MG TABLETA',41.20,4,2,1,NULL),('110010211','RANITIDINA 150 MG TABLETA',60.00,5,2,1,NULL),('110010212','CIPROFLOXACINO 500 MG TABLETA',88.50,2,2,1,NULL),('110010213','CEFALEXINA 500 MG CÁPSULA',92.30,2,3,1,NULL),('110010214','ACICLOVIR 400 MG TABLETA',79.00,2,2,1,NULL),('110010215','AZITROMICINA 500 MG TABLETA',160.00,2,2,1,NULL),('110010216','CLARITROMICINA 500 MG TABLETA',175.00,2,2,1,NULL),('110010217','DOXICICLINA 100 MG TABLETA',67.25,2,2,1,NULL),('110010218','LEVOTIROXINA 50 MCG TABLETA',32.00,10,2,1,NULL),('110010219','GLIBENCLAMIDA 5 MG TABLETA',29.00,10,2,1,NULL),('110010220','INSULINA NPH 100 UI/ML FRASCO',4350.00,10,4,1,NULL),('110010221','INSULINA REGULAR 100 UI/ML FRASCO',4200.00,10,4,1,NULL),('110010222','ASPIRINA 100 MG TABLETA',23.00,3,2,1,NULL),('110010223','WARFARINA 5 MG TABLETA',95.00,1,2,1,NULL),('110010224','HEPARINA SÓDICA 5000 UI/ML',2250.00,1,3,1,NULL),('110010225','METRONIDAZOL 250 MG TABLETA',55.00,2,2,1,NULL),('110010226','NISTATINA 100000 UI TABLETA',61.00,2,2,1,NULL),('110010227','FLUCONAZOL 150 MG CÁPSULA',135.00,2,3,1,NULL),('110010228','KETOCONAZOL 200 MG TABLETA',115.00,2,2,1,NULL),('110010261','CLONAZEPAM 0.5 MG TABLETA',65.00,9,2,1,NULL),('110010262','DIAZEPAM 10 MG TABLETA',70.00,9,2,1,NULL),('110010263','BISACODILO 5 MG TABLETA',30.00,5,2,1,NULL),('110010264','LOPERAMIDA 2 MG CÁPSULA',40.00,5,3,1,NULL),('110010265','DOMPERIDONA 10 MG TABLETA',48.00,5,2,1,NULL),('110010266','ONDANSETRON 4 MG TABLETA',120.00,5,2,1,NULL),('110010267','RIVAROXABAN 20 MG TABLETA',320.00,1,2,1,NULL),('110010268','APIXABAN 5 MG TABLETA',290.00,1,2,1,NULL),('110010269','ENOXAPARINA 40 MG/0.4ML JERINGA',3850.00,1,4,1,NULL),('110010270','FENILEFRINA 10 MG TABLETA',35.00,6,2,1,NULL),('110010271','PSEUDOEFEDRINA 30 MG TABLETA',44.00,6,2,1,NULL),('110010272','OXIMETAZOLINA 0.05% GOTAS NASALES',120.00,6,5,1,NULL),('110010273','DEXTROMETORFANO 15 MG/5ML JARABE',112.00,8,11,1,NULL),('110010274','BROMEXINA 8 MG/5ML JARABE',105.00,8,11,1,NULL),('110010275','AMBROXOL 30 MG/5ML JARABE',99.00,8,11,1,NULL),('110010276','CLORURO DE SODIO 0.9% FRASCO',475.00,10,4,1,NULL),('110010277','GLUCOSA 5% FRASCO',510.00,10,4,1,NULL),('110010278','RINGER LACTATO FRASCO',490.00,10,4,1,NULL),('110010279','KETOROLACO 30 MG/ML AMPOLLAS',185.00,3,6,1,NULL),('110010280','TRAMADOL 100 MG/ML AMPOLLAS',220.00,3,6,1,NULL),('110010281','MORFINA 10 MG/ML AMPOLLAS',285.00,3,6,1,NULL),('110010282','FENTANILO 50 MCG/ML AMPOLLAS',300.00,3,6,1,NULL),('110010283','NEOMICINA + BACITRACINA UNGÜENTO',290.00,7,30,1,NULL),('110010284','HIDROCORTISONA 1% CREMA',210.00,7,8,1,NULL),('110010285','BETAMETASONA 0.1% CREMA',250.00,7,8,1,NULL),('110010286','CLOTRIMAZOL 1% CREMA',240.00,7,8,1,NULL),('110010287','MICONAZOL 2% CREMA',230.00,7,8,1,NULL),('110010288','NISTATINA 100,000 UI CREMA',225.00,7,8,1,NULL),('110010289','KETOCONAZOL 2% CHAMPÚ',650.00,7,29,1,NULL),('110010290','TRETINOÍNA 0.05% CREMA',800.00,7,8,1,NULL),('110010291','BENZOIL PERÓXIDO 5% GEL',475.00,7,9,1,NULL),('110010292','ACICLOVIR 5% CREMA',340.00,7,8,1,NULL),('110010293','NAPROXENO SÓDICO 550 MG TABLETA',90.00,4,2,1,NULL),('110010306','IBUPROFENO 400 MG TABLETA',85.00,3,2,1,NULL),('110010307','AMOXICILINA 500 MG CÁPSULA',110.00,2,3,1,NULL),('110010308','CLARITROMICINA 250 MG TABLETA',185.00,2,2,1,NULL),('110010309','ENALAPRIL 5 MG TABLETA',46.00,4,2,1,NULL),('110010310','LOSARTÁN 50 MG TABLETA',58.00,4,2,1,NULL),('110010311','METFORMINA 850 MG TABLETA',60.00,5,2,1,NULL),('110010312','GLICLAZIDA 30 MG TABLETA',72.00,5,2,1,NULL),('110010313','LORATADINA 10 MG TABLETA',42.00,6,2,1,NULL),('110010314','CETIRIZINA 10 MG TABLETA',49.00,6,2,1,NULL),('110010315','OMEPRAZOL 20 MG CÁPSULA',98.00,7,3,1,NULL),('110010316','FAMOTIDINA 40 MG TABLETA',88.00,7,2,1,NULL),('110010317','SALBUTAMOL SPRAY 100 MCG',2750.00,8,13,1,NULL),('110010318','BUDESONIDA 100 MCG INHALADOR',3600.00,8,17,1,NULL),('110010319','BETAMETASONA CREMA 0.05%',270.00,9,8,1,NULL),('110010320','KETOCONAZOL CREMA 2%',310.00,9,8,1,NULL);
 /*!40000 ALTER TABLE `fide_producto_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +363,7 @@ CREATE TABLE `fide_unidad_medida_tb` (
   PRIMARY KEY (`ID_UNIDAD_MEDIDA`),
   KEY `FK_UNIDAD_MEDIDA_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_UNIDAD_MEDIDA_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,7 +372,7 @@ CREATE TABLE `fide_unidad_medida_tb` (
 
 LOCK TABLES `fide_unidad_medida_tb` WRITE;
 /*!40000 ALTER TABLE `fide_unidad_medida_tb` DISABLE KEYS */;
-INSERT INTO `fide_unidad_medida_tb` VALUES (1,'Unidad',1),(2,'Tableta',1),(3,'Cápsula',1),(4,'Frasco',1),(5,'Gotas',1),(6,'Ampolla',1),(7,'Sobre',1),(8,'Crema',1),(9,'Gel',1),(10,'Solución',1),(11,'Jarabe',1),(12,'Polvo',1),(13,'Spray',1),(14,'Parche',1),(15,'Supositorio',1),(16,'Enema',1),(17,'Inhalador',1),(18,'Colirio',1),(19,'Inyectable',1),(20,'Comprimido',1),(21,'Emulsión',1),(22,'Suspensión',1),(23,'Óvulo',1),(24,'Loción',1),(25,'Vial',1),(26,'Kit',1),(27,'Implante',1),(28,'Jeringa',1),(29,'Champú',1),(30,'Ungüento',1),(31,'Unidad',1),(32,'Tableta',1),(33,'Cápsula',1),(34,'Frasco',1),(35,'Gotas',1),(36,'Ampolla',1),(37,'Sobre',1),(38,'Crema',1),(39,'Gel',1),(40,'Solución',1),(41,'Jarabe',1),(42,'Polvo',1),(43,'Spray',1),(44,'Parche',1),(45,'Supositorio',1),(46,'Enema',1),(47,'Inhalador',1),(48,'Colirio',1),(49,'Inyectable',1),(50,'Comprimido',1),(51,'Emulsión',1),(52,'Suspensión',1),(53,'Óvulo',1),(54,'Loción',1),(55,'Vial',1),(56,'Kit',1),(57,'Implante',1),(58,'Jeringa',1),(59,'Champú',1),(60,'Ungüento',1),(61,'Unidad',1),(62,'Tableta',1),(63,'Cápsula',1),(64,'Frasco',1),(65,'Gotas',1),(66,'Ampolla',1),(67,'Sobre',1),(68,'Crema',1),(69,'Gel',1),(70,'Solución',1),(71,'Jarabe',1),(72,'Polvo',1),(73,'Spray',1),(74,'Parche',1),(75,'Supositorio',1),(76,'Enema',1),(77,'Inhalador',1),(78,'Colirio',1),(79,'Inyectable',1),(80,'Comprimido',1),(81,'Emulsión',1),(82,'Suspensión',1),(83,'Óvulo',1),(84,'Loción',1),(85,'Vial',1),(86,'Kit',1),(87,'Implante',1),(88,'Jeringa',1),(89,'Champú',1),(90,'Ungüento',1);
+INSERT INTO `fide_unidad_medida_tb` VALUES (1,'Unidad',1),(2,'Tableta',1),(3,'Cápsula',1),(4,'Frasco',1),(5,'Gotas',1),(6,'Ampolla',1),(7,'Sobre',1),(8,'Crema',1),(9,'Gel',1),(10,'Solución',1),(11,'Jarabe',1),(12,'Polvo',1),(13,'Spray',1),(14,'Parche',1),(15,'Supositorio',1),(16,'Enema',1),(17,'Inhalador',1),(18,'Colirio',1),(19,'Inyectable',1),(20,'Comprimido',1),(21,'Emulsión',1),(22,'Suspensión',1),(23,'Óvulo',1),(24,'Loción',1),(25,'Vial',1),(26,'Kit',1),(27,'Implante',1),(28,'Jeringa',1),(29,'Champú',1),(30,'Ungüento',1),(31,'Unidad',1),(32,'Tableta',1),(33,'Cápsula',1),(34,'Frasco',1),(35,'Gotas',1),(36,'Ampolla',1),(37,'Sobre',1),(38,'Crema',1),(39,'Gel',1),(40,'Solución',1),(41,'Jarabe',1),(42,'Polvo',1),(43,'Spray',1),(44,'Parche',1),(45,'Supositorio',1),(46,'Enema',1),(47,'Inhalador',1),(48,'Colirio',1),(49,'Inyectable',1),(50,'Comprimido',1),(51,'Emulsión',1),(52,'Suspensión',1),(53,'Óvulo',1),(54,'Loción',1),(55,'Vial',1),(56,'Kit',1),(57,'Implante',1),(58,'Jeringa',1),(59,'Champú',1),(60,'Ungüento',1),(61,'Unidad',1),(62,'Tableta',1),(63,'Cápsula',1),(64,'Frasco',1),(65,'Gotas',1),(66,'Ampolla',1),(67,'Sobre',1),(68,'Crema',1),(69,'Gel',1),(70,'Solución',1),(71,'Jarabe',1),(72,'Polvo',1),(73,'Spray',1),(74,'Parche',1),(75,'Supositorio',1),(76,'Enema',1),(77,'Inhalador',1),(78,'Colirio',1),(79,'Inyectable',1),(80,'Comprimido',1),(81,'Emulsión',1),(82,'Suspensión',1),(83,'Óvulo',1),(84,'Loción',1),(85,'Vial',1),(86,'Kit',1),(87,'Implante',1),(88,'Jeringa',1),(89,'Champú',1),(90,'Ungüento',1),(91,'Unidad',1),(92,'Tableta',1),(93,'Cápsula',1),(94,'Frasco',1),(95,'Gotas',1),(96,'Ampolla',1),(97,'Sobre',1),(98,'Crema',1),(99,'Gel',1),(100,'Solución',1),(101,'Jarabe',1),(102,'Polvo',1),(103,'Spray',1),(104,'Parche',1),(105,'Supositorio',1),(106,'Enema',1),(107,'Inhalador',1),(108,'Colirio',1),(109,'Inyectable',1),(110,'Comprimido',1),(111,'Emulsión',1),(112,'Suspensión',1),(113,'Óvulo',1),(114,'Loción',1),(115,'Vial',1),(116,'Kit',1),(117,'Implante',1),(118,'Jeringa',1),(119,'Champú',1),(120,'Ungüento',1),(121,'Unidad',1),(122,'Tableta',1),(123,'Cápsula',1),(124,'Frasco',1),(125,'Gotas',1),(126,'Ampolla',1),(127,'Sobre',1),(128,'Crema',1),(129,'Gel',1),(130,'Solución',1),(131,'Jarabe',1),(132,'Polvo',1),(133,'Spray',1),(134,'Parche',1),(135,'Supositorio',1),(136,'Enema',1),(137,'Inhalador',1),(138,'Colirio',1),(139,'Inyectable',1),(140,'Comprimido',1),(141,'Emulsión',1),(142,'Suspensión',1),(143,'Óvulo',1),(144,'Loción',1),(145,'Vial',1),(146,'Kit',1),(147,'Implante',1),(148,'Jeringa',1),(149,'Champú',1),(150,'Ungüento',1);
 /*!40000 ALTER TABLE `fide_unidad_medida_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +392,8 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `SALDO`,
  1 AS `CODIGO`,
  1 AS `ID_FARMACIA`,
- 1 AS `ID_INVENTARIO`*/;
+ 1 AS `ID_INVENTARIO`,
+ 1 AS `UNIDAD_MEDIDA`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -541,6 +554,10 @@ INSERT INTO `usuario_rol` VALUES (1,2),(2,1),(4,1);
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'farmaciabd'
+--
+
+--
 -- Dumping routines for database 'farmaciabd'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `ActualizarContrasenna` */;
@@ -585,14 +602,55 @@ BEGIN
     SELECT 
         P.CODIGO, 
         P.NOMBRE, 
+        cat.NOMBRE AS CATEGORIA,
         U.NOMBRE AS UNIDAD, 
-        I.CANTIDAD_DISPONIBLE
+        I.CANTIDAD_DISPONIBLE,
+        P.ID_ESTADO,
+        e.DESCRIPCION AS ESTADO,
+        P.URL_IMAGEN
     FROM FIDE_PRODUCTO_TB P
-    JOIN FIDE_UNIDAD_MEDIDA_TB U ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
-    JOIN FIDE_INVENTARIO_TB I ON P.CODIGO = I.CODIGO
+    JOIN FIDE_UNIDAD_MEDIDA_TB U 
+        ON P.ID_UNIDAD_MEDIDA = U.ID_UNIDAD_MEDIDA
+    JOIN FIDE_INVENTARIO_TB I 
+        ON P.CODIGO = I.CODIGO
+    JOIN FIDE_CATEGORIA_PRODUCTO_TB cat
+        ON cat.ID_CATEGORIA_PRODUCTO = P.ID_CATEGORIA_PRODUCTO
+    JOIN FIDE_ESTADO_TB e
+        ON e.ID_ESTADO = P.ID_ESTADO
     WHERE P.CODIGO = p_codigo
       AND I.ID_FARMACIA = p_id_farmacia
     LIMIT 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarProductos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarProductos`()
+BEGIN
+    SELECT 
+        P.CODIGO,
+        P.NOMBRE,
+        P.PRECIO_UNITARIO,
+        cat.NOMBRE AS CATEGORIA,
+        um.NOMBRE AS UNIDAD_MEDIDA,
+        e.DESCRIPCION AS ESTADO,
+        P.ID_ESTADO, 
+        P.URL_IMAGEN
+    FROM FIDE_PRODUCTO_TB P
+    JOIN FIDE_CATEGORIA_PRODUCTO_TB cat ON cat.ID_CATEGORIA_PRODUCTO = P.ID_CATEGORIA_PRODUCTO
+    JOIN FIDE_UNIDAD_MEDIDA_TB um ON um.ID_UNIDAD_MEDIDA = P.ID_UNIDAD_MEDIDA
+    JOIN FIDE_ESTADO_TB e ON e.ID_ESTADO = P.ID_ESTADO;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -732,6 +790,75 @@ BEGIN
         p_NOMBRE, p_CODIGO, p_PRECIO_UNITARIO,
         p_ID_CATEGORIA_PRODUCTO, p_ID_UNIDAD_MEDIDA, p_ID_ESTADO
     );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_PRODUCTO_MODIFICAR_SP` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_PRODUCTO_MODIFICAR_SP`(
+    IN p_ID_PRODUCTO INT,               
+    IN p_NOMBRE VARCHAR(100),
+    IN p_CODIGO VARCHAR(20),
+    IN p_PRECIO_UNITARIO DECIMAL(10,2),
+    IN p_ID_CATEGORIA_PRODUCTO INT,     
+    IN p_ID_UNIDAD_MEDIDA INT,
+    IN p_ID_ESTADO INT
+)
+BEGIN
+    UPDATE FIDE_PRODUCTO_TB
+    SET
+        NOMBRE = p_NOMBRE,
+        CODIGO = p_CODIGO,
+        PRECIO_UNITARIO = p_PRECIO_UNITARIO,
+        ID_CATEGORIA_PRODUCTO = p_ID_CATEGORIA_PRODUCTO,
+        ID_UNIDAD_MEDIDA = p_ID_UNIDAD_MEDIDA,
+        ID_ESTADO = p_ID_ESTADO
+    WHERE
+        ID_PRODUCTO = p_ID_PRODUCTO;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_PRODUCTO_MODIFICAR_SP_CODIGO` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_PRODUCTO_MODIFICAR_SP_CODIGO`(
+    IN p_CODIGO_ORIGINAL VARCHAR(20),
+    IN p_NOMBRE VARCHAR(100),
+    IN p_PRECIO_UNITARIO DECIMAL(10,2),
+    IN p_ID_CATEGORIA_PRODUCTO INT,
+    IN p_ID_UNIDAD_MEDIDA INT,
+    IN p_ID_ESTADO INT
+)
+BEGIN
+    UPDATE FIDE_PRODUCTO_TB
+    SET
+        NOMBRE = p_NOMBRE,
+        PRECIO_UNITARIO = p_PRECIO_UNITARIO,
+        ID_CATEGORIA_PRODUCTO = p_ID_CATEGORIA_PRODUCTO,
+        ID_UNIDAD_MEDIDA = p_ID_UNIDAD_MEDIDA,
+        ID_ESTADO = p_ID_ESTADO
+    WHERE CODIGO = p_CODIGO_ORIGINAL;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -882,14 +1009,11 @@ BEGIN
     DECLARE v_id_lote INT;
     DECLARE v_id_inventario INT;
     DECLARE v_saldo_actual INT;
-    DECLARE v_stock_a_fecha INT;
 
-    -- Buscar lote por producto, número y vencimiento
+    -- Buscar lote
     SELECT ID_LOTE INTO v_id_lote
     FROM FIDE_LOTE_TB
-    WHERE CODIGO = p_codigo_producto
-      AND NUMERO_LOTE = p_numero_lote
-      AND FECHA_VENCIMIENTO = p_fecha_vencimiento
+    WHERE CODIGO = p_codigo_producto AND NUMERO_LOTE = p_numero_lote
     LIMIT 1;
 
     -- Si no existe el lote, se crea
@@ -909,7 +1033,7 @@ BEGIN
     WHERE CODIGO = p_codigo_producto AND ID_FARMACIA = p_id_farmacia
     LIMIT 1;
 
-    -- Si no existe, se inserta el registro en inventario
+    -- Si no existe, lo insertamos con cantidad 0
     IF v_id_inventario IS NULL THEN
         INSERT INTO FIDE_INVENTARIO_TB (
             CODIGO, CANTIDAD_DISPONIBLE, STOCK_MINIMO, STOCK_MAXIMO,
@@ -923,27 +1047,7 @@ BEGIN
         SET v_saldo_actual = 0;
     END IF;
 
-    -- Validación: si tipo salida y hay menos cantidad disponible hasta esa fecha
-    IF p_tipo_movimiento = 'Salida' THEN
-        SELECT 
-            IFNULL(SUM(CASE 
-                WHEN TIPO_MOVIMIENTO = 'Entrada' THEN CANTIDAD
-                WHEN TIPO_MOVIMIENTO = 'Salida' THEN -CANTIDAD
-                ELSE 0
-            END), 0)
-        INTO v_stock_a_fecha
-        FROM FIDE_MOVIMIENTO_TB
-        WHERE ID_INVENTARIO = v_id_inventario
-          AND ID_FARMACIA = p_id_farmacia
-          AND FECHA_MOVIMIENTO <= p_fecha_movimiento;
-
-        IF v_stock_a_fecha < p_cantidad THEN
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No hay suficiente stock disponible para esa fecha de salida.';
-        END IF;
-    END IF;
-
-    -- Actualizar inventario según tipo
+    -- Según el tipo de movimiento, se actualiza el inventario
     IF p_tipo_movimiento = 'Entrada' THEN
         UPDATE FIDE_INVENTARIO_TB
         SET CANTIDAD_DISPONIBLE = v_saldo_actual + p_cantidad
@@ -962,6 +1066,7 @@ BEGIN
         v_id_inventario, v_id_lote, p_fecha_movimiento, p_fecha_vencimiento,
         p_tipo_movimiento, p_cantidad, p_descripcion, p_empresa, p_id_farmacia
     );
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1143,10 +1248,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarUsuario`(
 BEGIN
     INSERT INTO USUARIO (NOMBRE, CORREO, USUARIO, CONTRASENA)
     VALUES (pnombre, pcorreo, pusuario, pcontrasena);
-    -- Asignar rol por defecto (CLIENTE con ID = 1)
+    -- Asignar rol por defecto(CLIENTE con ID = 1)
     INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID)
-    VALUES (LAST_INSERT_ID(),1);
-
+    VALUES (LAST_INSERT_ID(), 1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1227,6 +1331,24 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `codigos_activos_v`
+--
+
+/*!50001 DROP VIEW IF EXISTS `codigos_activos_v`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `codigos_activos_v` AS select `fide_producto_tb`.`CODIGO` AS `CODIGO`,`fide_producto_tb`.`NOMBRE` AS `NOMBRE` from `fide_producto_tb` where `fide_producto_tb`.`ID_ESTADO` = 1 */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `farmacia_activa_v`
 --
 
@@ -1275,7 +1397,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `historial_kardex_v` AS select `m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,case when `m`.`TIPO_MOVIMIENTO` = 'Entrada' then concat('+',`m`.`CANTIDAD`) when `m`.`TIPO_MOVIMIENTO` = 'Salida' then concat('-',`m`.`CANTIDAD`) else concat('',`m`.`CANTIDAD`) end AS `CANTIDAD`,concat(`m`.`CANTIDAD`,' lot ',`l`.`NUMERO_LOTE`) AS `LOTES_AFECTADOS`,(select ifnull(sum(case when `m2`.`TIPO_MOVIMIENTO` = 'Entrada' then `m2`.`CANTIDAD` when `m2`.`TIPO_MOVIMIENTO` = 'Salida' then -`m2`.`CANTIDAD` else 0 end),0) from `fide_movimiento_tb` `m2` where `m2`.`ID_INVENTARIO` = `m`.`ID_INVENTARIO` and `m2`.`ID_FARMACIA` = `m`.`ID_FARMACIA` and (`m2`.`FECHA_MOVIMIENTO` < `m`.`FECHA_MOVIMIENTO` or `m2`.`FECHA_MOVIMIENTO` = `m`.`FECHA_MOVIMIENTO` and `m2`.`ID_MOVIMIENTO` <= `m`.`ID_MOVIMIENTO`)) AS `SALDO`,`i`.`CODIGO` AS `CODIGO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO` from ((`fide_movimiento_tb` `m` join `fide_lote_tb` `l` on(`m`.`ID_LOTE` = `l`.`ID_LOTE`)) join `fide_inventario_tb` `i` on(`m`.`ID_INVENTARIO` = `i`.`ID_INVENTARIO`)) order by `m`.`FECHA_MOVIMIENTO`,`m`.`ID_MOVIMIENTO` */;
+/*!50001 VIEW `historial_kardex_v` AS select `m`.`FECHA_MOVIMIENTO` AS `FECHA_MOVIMIENTO`,`m`.`TIPO_MOVIMIENTO` AS `TIPO_MOVIMIENTO`,case when `m`.`TIPO_MOVIMIENTO` = 'Entrada' then concat('+',`m`.`CANTIDAD`) when `m`.`TIPO_MOVIMIENTO` = 'Salida' then concat('-',`m`.`CANTIDAD`) else concat('',`m`.`CANTIDAD`) end AS `CANTIDAD`,`l`.`NUMERO_LOTE` AS `LOTES_AFECTADOS`,(select ifnull(sum(case when `m2`.`TIPO_MOVIMIENTO` = 'Entrada' then `m2`.`CANTIDAD` when `m2`.`TIPO_MOVIMIENTO` = 'Salida' then -`m2`.`CANTIDAD` else 0 end),0) from `fide_movimiento_tb` `m2` where `m2`.`ID_INVENTARIO` = `m`.`ID_INVENTARIO` and `m2`.`ID_FARMACIA` = `m`.`ID_FARMACIA` and (`m2`.`FECHA_MOVIMIENTO` < `m`.`FECHA_MOVIMIENTO` or `m2`.`FECHA_MOVIMIENTO` = `m`.`FECHA_MOVIMIENTO` and `m2`.`ID_MOVIMIENTO` <= `m`.`ID_MOVIMIENTO`)) AS `SALDO`,`i`.`CODIGO` AS `CODIGO`,`m`.`ID_FARMACIA` AS `ID_FARMACIA`,`m`.`ID_INVENTARIO` AS `ID_INVENTARIO`,`u`.`NOMBRE` AS `UNIDAD_MEDIDA` from ((((`fide_movimiento_tb` `m` join `fide_lote_tb` `l` on(`m`.`ID_LOTE` = `l`.`ID_LOTE`)) join `fide_inventario_tb` `i` on(`m`.`ID_INVENTARIO` = `i`.`ID_INVENTARIO`)) join `fide_producto_tb` `p` on(`i`.`CODIGO` = `p`.`CODIGO`)) join `fide_unidad_medida_tb` `u` on(`p`.`ID_UNIDAD_MEDIDA` = `u`.`ID_UNIDAD_MEDIDA`)) order by `m`.`FECHA_MOVIMIENTO`,`m`.`ID_MOVIMIENTO` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1325,4 +1447,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-16 14:36:31
+-- Dump completed on 2025-07-27 19:37:06

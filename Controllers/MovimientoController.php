@@ -7,7 +7,7 @@ session_start();
 
 
 // Función auxiliar para paginar movimientos
-function paginarMovimientos($movimientos, $porPagina = 5)
+function paginarMovimientos($movimientos, $porPagina = 10)
 {
     $_SESSION["MOVIMIENTOS_PAGINADOS"] = array_chunk($movimientos, $porPagina);
     $_SESSION["PAGINA_ACTUAL"] = 0;
@@ -80,15 +80,28 @@ if (isset($_POST["btnBuscarProducto"])) {
         $_SESSION["CANT_DISPONIBLE"] = $producto["CANTIDAD_DISPONIBLE"];
         $_SESSION["NOMBRE_PRODUCTO"] = $producto["NOMBRE"];
         $_SESSION["UNIDAD_MEDIDA"] = $producto["UNIDAD"];
+        $_SESSION["CATEGORIA_PRODUCTO"] = $producto["CATEGORIA"];
+        $_SESSION["ESTADO_PRODUCTO"] = $producto["ESTADO"];
+        $_SESSION["URL_IMAGEN"] = $producto["URL_IMAGEN"];
+
+        unset($_SESSION["MENSAJE_ERROR"]);
     } else {
         $_SESSION["CANT_DISPONIBLE"] = null;
-        $_SESSION["NOMBRE_PRODUCTO"] = "Producto no encontrado";
-        $_SESSION["UNIDAD_MEDIDA"] = "No definida";
+        $_SESSION["NOMBRE_PRODUCTO"] = null;
+        $_SESSION["UNIDAD_MEDIDA"] = null;
+        $_SESSION["CATEGORIA_PRODUCTO"] = null;
+        $_SESSION["ESTADO_PRODUCTO"] = null;
+        $_SESSION["URL_IMAGEN"] = null;
+
+        $_SESSION["MENSAJE_ERROR"] = "⚠️ El código ingresado no existe. Por favor verifique e intente nuevamente.";
     }
+
 
     $movimientos = ObtenerHistorialKardex($codigo, $id_farmacia);
     $_SESSION["MOVIMIENTOS"] = $movimientos;
-    paginarMovimientos($movimientos); // ✅ Nuevo
+    paginarMovimientos($movimientos);
+
+
     $_SESSION["CODIGO_BUSCADO"] = $codigo;
     $_SESSION["FARMACIA_BUSCADA"] = $id_farmacia;
 

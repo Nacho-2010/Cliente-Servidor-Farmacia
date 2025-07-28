@@ -8,6 +8,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
 <!DOCTYPE html>
 <html lang="es">
 <?php añadirCSS(); ?>
+
 <body>
     <?php verheader(); ?>
     <?php sidebar(); ?>
@@ -38,10 +39,17 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     </select>
                     <button type="submit" name="btnBuscarProducto">Buscar</button>
                 </form>
+
+                <?php if (isset($_SESSION["MENSAJE_ERROR"])): ?>
+                    <div class="alert alert-danger" style="margin-top:10px; text-align:center;">
+                        <?= $_SESSION["MENSAJE_ERROR"]; ?>
+                    </div>
+                    <?php unset($_SESSION["MENSAJE_ERROR"]); ?>
+                <?php endif; ?>
             </div>
 
             <!-- INFORMACIÓN Y FORMULARIOS -->
-            <?php if (isset($_SESSION["CODIGO_BUSCADO"])): ?>
+            <?php if (isset($_SESSION["CODIGO_BUSCADO"]) && empty($_SESSION["MENSAJE_ERROR"])): ?>
                 <div class="formulario-kardex">
                     <div class="info-producto">
                         <h3><?= $_SESSION["NOMBRE_PRODUCTO"] ?? "Producto Desconocido" ?></h3>
@@ -151,11 +159,12 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     <table>
                         <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th>Fecha Movimiento</th>
                                 <th>Tipo</th>
                                 <th>Cantidad</th>
-                                <th>Lotes Afectados</th>
+                                <th>Lote</th>
                                 <th>Saldo</th>
+                                <th>U.M.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -166,6 +175,10 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                     <td><?= $mov["CANTIDAD"] ?></td>
                                     <td><?= $mov["LOTES_AFECTADOS"] ?? '-' ?></td>
                                     <td><?= $mov["SALDO"] ?></td>
+                                    <td><?= $mov["UNIDAD_MEDIDA"] ?></td>
+
+
+
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

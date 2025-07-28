@@ -13,60 +13,61 @@ $resultado = ConsultarProductos();
 
 <body>
 
-<?php
-  verheader(); 
-  sidebar();   
-?>
+  <?php
+  verheader();
+  sidebar();
+  ?>
 
-<main style="margin-left:13%; padding: 2rem;">
-  <div class="page-wrapper">
-    <div class="container-fluid">
+  <main style="margin-left:13%; padding: 2rem;">
+    <div class="page-wrapper">
+      <div class="container-fluid">
 
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Consulta de Productos</h4>
-            </div>
-            <hr>
-            <form class="form-horizontal" action="" method="POST">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
               <div class="card-body">
+                <h4 class="card-title">Consulta de Productos</h4>
+              </div>
+              <hr>
+              <form class="form-horizontal" action="" method="POST">
+                <div class="card-body">
 
-                <?php
+                  <?php
                   if (isset($_POST["txtMensaje"])) {
-                      echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
+                    echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
                   }
-                ?>
+                  ?>
 
-                <div class="row">
-                  <div class="col-md-12 text-right pb-4">
-                    <a href="registrarProducto.php" class="btn btn-info">Agregar</a>
+                  <div class="row">
+                    <div class="col-md-12 text-right pb-4">
+                      <a href="registrarProducto.php" class="btn btn-info">Agregar</a>
+                    </div>
                   </div>
-                </div>
 
-                <table id="tablaDatos" class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th>Código</th>
-                      <th>Nombre</th>
-                      <th>Precio Unitario</th>
-                      <th>Categoría</th>
-                      <th>Unidad Medida</th>
-                      <th>Imagen</th>
-                      <th>Estado</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
+                  <table id="tablaDatos" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio Unitario</th>
+                        <th>Categoría</th>
+                        <th>Unidad Medida</th>
+                        <th>Imagen</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
                       if ($resultado) {
                         while ($fila = mysqli_fetch_array($resultado)) {
                           echo "<tr>";
                           echo "<td>" . $fila["CODIGO"] . "</td>";
                           echo "<td>" . $fila["NOMBRE"] . "</td>";
                           echo "<td>" . $fila["PRECIO_UNITARIO"] . "</td>";
-                          echo "<td>" . $fila["ID_CATEGORIA_PRODUCTO"] . "</td>";
-                          echo "<td>" . $fila["ID_UNIDAD_MEDIDA"] . "</td>";
+                          echo "<td>" . $fila["CATEGORIA"] . "</td>";
+                          echo "<td>" . $fila["UNIDAD_MEDIDA"] . "</td>";
+
 
                           // Imagen
                           echo "<td>";
@@ -78,13 +79,14 @@ $resultado = ConsultarProductos();
                           echo "</td>";
 
                           // Estado
-                          echo "<td>";
+                      
                           if ($fila["ID_ESTADO"] == 1) {
-                            echo "<span class='badge badge-success'>Activo</span>";
+
+                            echo "<td><span class='badge badge-success'>Activo</span></td>";
                           } else {
-                            echo "<span class='badge badge-danger'>Inactivo</span>";
+
+                            echo "<td><span class='badge badge-danger'>" . $fila["ESTADO"] . "</span></td>";
                           }
-                          echo "</td>";
 
                           // Acciones
                           echo "<td>
@@ -100,63 +102,66 @@ $resultado = ConsultarProductos();
                           echo "</tr>";
                         }
                       }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-            </form>
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="CambiarEstadoProducto" tabindex="-1" role="dialog" aria-labelledby="tituloModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="tituloModal">Confirmación</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <form action="" method="POST">
-          <div class="modal-body">
-            <input type="hidden" id="IdProducto" name="IdProducto" class="form-control">
-            <label id="lblNombre" name="lblNombre"></label>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" id="btnCambiarEstadoProducto" name="btnCambiarEstadoProducto" class="btn btn-primary">Procesar</button>
-          </div>
-        </form>
 
       </div>
     </div>
-  </div>
-</main>
 
-<?php verfooter(); ?>
-<?php añadirScripts(); ?>
+    <!-- Modal -->
+    <div class="modal fade" id="CambiarEstadoProducto" tabindex="-1" role="dialog" aria-labelledby="tituloModal"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tituloModal">Confirmación</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-<script>
-  $(document).ready(function() {
-    new DataTable('#tablaDatos', {
-      language: {
-        url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json',
-      },
+          <form action="" method="POST">
+            <div class="modal-body">
+              <input type="hidden" id="IdProducto" name="IdProducto" class="form-control">
+              <label id="lblNombre" name="lblNombre"></label>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" id="btnCambiarEstadoProducto" name="btnCambiarEstadoProducto"
+                class="btn btn-primary">Procesar</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <?php verfooter(); ?>
+  <?php añadirScripts(); ?>
+
+  <script>
+    $(document).ready(function () {
+      new DataTable('#tablaDatos', {
+        language: {
+          url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json',
+        },
+      });
+
+      $('.btnAbrirModal').on('click', function () {
+        const id = $(this).data('id');
+        const nombre = $(this).data('nombre');
+        $('#IdProducto').val(id);
+        $('#lblNombre').text("¿Desea cambiar el estado del producto " + nombre + "?");
+      });
     });
-
-    $('.btnAbrirModal').on('click', function () {
-      const id = $(this).data('id');
-      const nombre = $(this).data('nombre');
-      $('#IdProducto').val(id);
-      $('#lblNombre').text("¿Desea cambiar el estado del producto " + nombre + "?");
-    });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
