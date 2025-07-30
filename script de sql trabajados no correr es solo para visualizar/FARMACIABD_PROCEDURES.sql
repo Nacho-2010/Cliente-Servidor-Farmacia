@@ -642,4 +642,48 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- ========================================
+-- Procedimiento: Encapsuladores de vista OBTENER_CATEGORIAS
+-- ========================================
+DELIMITER //
+CREATE PROCEDURE FIDE_OBTENER_CATEGORIAS_SP()
+BEGIN
+  SELECT ID_CATEGORIA_PRODUCTO, NOMBRE FROM CATEGORIA_PRODUCTO_ACTIVA_V;
+END //
+DELIMITER;
 
+-- ========================================
+-- Procedimiento: Encapsuladores de vista UNIDAD_MEDIDA_ACTIVA
+-- ========================================
+ 
+DELIMITER //
+CREATE PROCEDURE FIDE_OBTENER_UNIDAD_MEDIDA_ACTIVA_SP()
+BEGIN
+  SELECT ID_UNIDAD_MEDIDA, NOMBRE FROM  UNIDAD_MEDIDA_ACTIVA_V;
+END //
+DELIMITER ;
+
+-- ========================================
+-- Procedimiento: Encapsuladores de vista PRODUCTO_POR_CODIGO
+-- ========================================
+
+DELIMITER //
+CREATE PROCEDURE FIDE_OBTENER_PRODUCTO_POR_CODIGO_SP(IN p_codigo VARCHAR(50))
+BEGIN
+  SELECT CODIGO, NOMBRE, PRECIO_UNITARIO
+  FROM PRODUCTOS_ACTIVOS_V
+  WHERE CODIGO = p_codigo;
+END //
+DELIMITER ;
+
+-- ========================================
+-- Procedimiento: Encapsuladores de vista PRODUCTOS_ACTIVOS
+-- ========================================
+
+DELIMITER //
+CREATE PROCEDURE FIDE_OBTENER_PRODUCTOS_ACTIVOS_SP()
+BEGIN
+  SELECT CODIGO, NOMBRE
+  FROM CODIGOS_ACTIVOS_V;
+END //
+DELIMITER ;
