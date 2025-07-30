@@ -19,13 +19,16 @@ function ObtenerCategoriasProducto()
 {
     try {
         $conexion = OpenDB();
-        $sql = "SELECT ID_CATEGORIA_PRODUCTO, NOMBRE FROM CATEGORIA_PRODUCTO_ACTIVA_V";
-        $resultado = $conexion->query($sql);
+        $sp = "CALL FIDE_OBTENER_CATEGORIAS_SP()";
+        //capturamos el resultado
+        $resultado = $conexion->query($sp); 
+
         CloseDB($conexion);
-        return $resultado;
+        //devolvemos resultado para que se pueda usar
+        return $resultado;  
     } catch (Exception $error) {
         RegistrarError($error);
-        return null;
+        return null; 
     }
 }
 
@@ -33,13 +36,15 @@ function ObtenerUnidadesMedida()
 {
     try {
         $conexion = OpenDB();
-        $sql = "SELECT ID_UNIDAD_MEDIDA, NOMBRE FROM UNIDAD_MEDIDA_ACTIVA_V";
-        $resultado = $conexion->query($sql);
+        $sp = "CALL FIDE_OBTENER_UNIDAD_MEDIDA_ACTIVA_SP()";
+         //capturamos el resultado
+        $resultado = $conexion->query($sp); 
+
         CloseDB($conexion);
-        return $resultado;
+        return $resultado;  
     } catch (Exception $error) {
         RegistrarError($error);
-        return null;
+        return null; 
     }
 }
 ?>

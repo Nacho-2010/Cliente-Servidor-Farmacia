@@ -5,8 +5,8 @@ function BuscarProducto($codigo)
 {
     try {
         $conexion = OpenDB();
-        $sql = "SELECT CODIGO, NOMBRE, PRECIO_UNITARIO FROM PRODUCTOS_ACTIVOS_V WHERE CODIGO = '$codigo'";
-        $resultado = $conexion->query($sql);
+        $sp = "CALL FIDE_OBTENER_PRODUCTO_POR_CODIGO_SP('$codigo')";
+        $resultado = $conexion->query($sp);
         $producto = null;
 
         if ($resultado && $resultado->num_rows > 0) {

@@ -17,8 +17,8 @@ function ObtenerProductosActivosPorCodigo()
 {
     try {
         $conexion = OpenDB();
-        $sql = "SELECT CODIGO, NOMBRE FROM CODIGOS_ACTIVOS_V";
-        $resultado = $conexion->query($sql);
+        $sp = "CALL FIDE_OBTENER_PRODUCTOS_ACTIVOS_SP()";
+        $resultado = $conexion->query($sp);
         CloseDB($conexion);
         return $resultado;
     } catch (Exception $error) {
@@ -26,6 +26,5 @@ function ObtenerProductosActivosPorCodigo()
         return null;
     }
 }
-
 
 ?>
