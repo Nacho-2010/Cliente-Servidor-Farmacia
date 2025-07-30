@@ -82,7 +82,9 @@ $resultado = ConsultarProductos();
                       
                           if ($fila["ID_ESTADO"] == 1) {
 
-                            echo "<td><span class='badge badge-success'>Activo</span></td>";
+                          echo "<td><span class='badge border border-primary text-primary bg-white'>Activo</span></td>";
+
+
                           } else {
 
                             echo "<td><span class='badge badge-danger'>" . $fila["ESTADO"] . "</span></td>";
