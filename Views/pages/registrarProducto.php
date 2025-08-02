@@ -50,7 +50,7 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
   <!-- ====== Sección Registrar ====== -->
   <section id="seccion-registrar" class="seccion-formulario">
     <h3 class="text-center mb-3">Registrar Producto</h3>
-    <form method="post" action="/Cliente-Servidor-Farmacia/Controllers/registrarProductoController.php" class="mx-auto" style="max-width:600px;">
+    <form method="post" action="/Cliente-Servidor-Farmacia/Controllers/registrarProductoController.php" class="mx-auto" style="max-width:600px;" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="txtNombre" class="form-label">Nombre</label>
         <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
@@ -80,6 +80,11 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
             <option value="<?= $uni["ID_UNIDAD_MEDIDA"] ?>"><?= htmlspecialchars($uni["NOMBRE"]) ?></option>
           <?php endwhile; ?>
         </select>
+      </div>
+      <!-- Imagen -->
+      <div class="mb-3">
+        <label for="txtImagen" class="form-label">Imagen (formato PNG)</label>
+        <input type="file" id="txtImagen" name="txtImagen" accept="image/png" class="form-control" required>
       </div>
       <div class="text-center">
         <button type="submit" name="btnRegistrarProducto" class="btn btn-primary">Registrar Producto</button>
@@ -123,7 +128,7 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
 
   <section id="seccion-modificar" class="seccion-formulario">
   <h3 class="text-center mb-3">Modificar Producto</h3>
-  <form method="post" action="/Cliente-Servidor-Farmacia/Controllers/modificarProductoController.php" class="mx-auto" style="max-width:600px;">
+  <form method="post" action="/Cliente-Servidor-Farmacia/Controllers/modificarProductoController.php" class="mx-auto" style="max-width:600px;" enctype="multipart/form-data">
 
     <!-- Seleccionar el producto por código -->
     <div class="mb-3">
@@ -169,6 +174,11 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
           </option>
         <?php endwhile; ?>
       </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="txtImagen" class="form-label">Nueva Imagen (opcional, formato PNG)</label>
+      <input type="file" id="txtImagen" name="txtImagen" accept="image/png" class="form-control">
     </div>
 
     <div class="text-center">

@@ -62,7 +62,7 @@ function verheader()
           <li><a href="../Home/producto.php" class="header__nav-link">Productos</a></li>
           <li><a href="../Home/quieneSomos.php" class="header__nav-link">Nosotros</a></li>
           <li><a href="../Home/contacto.php" class="header__nav-link">Contacto</a></li>
-          <li><a href="#" class="header__nav-link">Carrito</a></li>
+          <li><a href="../Home/carrito.php" class="header__nav-link">Carrito</a></li>
         </ul>
       </nav>
       <div class="header__right">';

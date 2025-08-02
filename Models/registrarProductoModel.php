@@ -1,12 +1,12 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 
-function InsertarProducto($nombre, $codigo, $precio, $idCategoria, $idUnidad, $idEstado)
+function InsertarProducto($nombre, $codigo, $precio, $idCategoria, $idUnidad, $idEstado, $urlImagen)
 {
     try {
         $conexion = OpenDB();
 
-        $sp = "CALL FIDE_PRODUCTO_INSERTAR_SP('$nombre', '$codigo', $precio, $idCategoria, $idUnidad, $idEstado)";
+        $sp = "CALL FIDE_PRODUCTO_INSERTAR_SP('$nombre', '$codigo', $precio, $idCategoria, $idUnidad, $idEstado,'$urlImagen')";
         $conexion->query($sp);
 
         CloseDB($conexion);

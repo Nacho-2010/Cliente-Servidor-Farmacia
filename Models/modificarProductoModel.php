@@ -1,11 +1,16 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 
-function ModificarProducto($codigoOriginal, $nombreNuevo, $precioNuevo, $idCategoriaNueva, $idUnidadNueva, $idEstado)
+function ModificarProducto($codigoOriginal, $nombreNuevo, $precioNuevo, $idCategoriaNueva, $idUnidadNueva, $idEstado, $resultadoImagen = null)
 {
     try {
         $conexion = OpenDB();
-        $sp = "CALL FIDE_PRODUCTO_MODIFICAR_SP_CODIGO('$codigoOriginal', '$nombreNuevo', $precioNuevo, $idCategoriaNueva, $idUnidadNueva, $idEstado)";
+        if ($urlImagen !== null) {
+            $sp = "CALL FIDE_PRODUCTO_MODIFICAR_SP('$codigo', '$nombre', $precio, $idCategoria, $idUnidad, $idEstado, '$urlImagen')";
+        } else {
+            // Si no hay nueva imagen, usa un SP que no actualice imagen o envía NULL y que el SP lo ignore si es NULL
+            $sp = "CALL FIDE_PRODUCTO_MODIFICAR_SP('$codigo', '$nombre', $precio, $idCategoria, $idUnidad, $idEstado, NULL)";
+        }
         $conexion->query($sp);
         CloseDB($conexion);
     } catch (Exception $error) {
