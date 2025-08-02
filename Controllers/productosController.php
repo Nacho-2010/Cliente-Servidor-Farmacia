@@ -6,4 +6,14 @@
     {
         return ConsultarProductosModel(); 
     } 
+
+    function ConsultarProductosFiltrados($nombre = '', $categoria = '')
+    {
+        return ConsultarProductosFiltradosModel($nombre, $categoria);
+    }
+
+    function ObtenerCategorias()
+    {
+        return ObtenerCategoriasModel();
+    }
 ?>

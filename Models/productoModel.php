@@ -14,4 +14,36 @@
             return null;
         }
     }
+
+    function ConsultarProductosFiltradosModel($nombre = '', $categoria = '')
+    {
+        try {
+            $context = OpenDB(); 
+            $stmt = $context->prepare("CALL ConsultarProductosFiltrados(?, ?)");
+            $stmt->bind_param("ss", $nombre, $categoria);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            CloseDB($context);
+            return $resultado; 
+        } catch (Exception $error) {
+            RegistrarError($error);
+            return null;
+        }
+    }
+
+    function ObtenerCategoriasModel()
+    {
+        try {
+            $context = OpenDB();
+            $stmt = $context->prepare("CALL ObtenerCategorias()");
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            CloseDB($context);
+            return $resultado;
+        } catch (Exception $error) {
+            RegistrarError($error);
+            return null;
+        }
+    }
+
 ?>

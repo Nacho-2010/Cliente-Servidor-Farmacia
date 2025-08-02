@@ -345,7 +345,7 @@ CREATE TABLE `fide_producto_tb` (
 
 LOCK TABLES `fide_producto_tb` WRITE;
 /*!40000 ALTER TABLE `fide_producto_tb` DISABLE KEYS */;
-INSERT INTO `fide_producto_tb` VALUES ('110010204','ATORVASTATINA 20 MG TABLETA',135.75,1,2,1,NULL),('110010205','ENALAPRIL 10 MG TABLETA',52.30,1,2,1,NULL),('110010206','FUROSEMIDA 40 MG TABLETA',25.00,1,2,1,NULL),('110010207','PREDNISONA 5 MG TABLETA',33.00,10,2,1,NULL),('110010208','CLORFENAMINA 4 MG TABLETA',19.50,6,2,1,NULL),('110010209','DICLOFENACO 50 MG TABLETA',27.75,4,2,1,NULL),('110010210','NAPROXENO 500 MG TABLETA',41.20,4,2,1,NULL),('110010211','RANITIDINA 150 MG TABLETA',60.00,5,2,1,NULL),('110010212','CIPROFLOXACINO 500 MG TABLETA',88.50,2,2,1,NULL),('110010213','CEFALEXINA 500 MG CÁPSULA',92.30,2,3,1,NULL),('110010214','ACICLOVIR 400 MG TABLETA',79.00,2,2,1,NULL),('110010215','AZITROMICINA 500 MG TABLETA',160.00,2,2,1,NULL),('110010216','CLARITROMICINA 500 MG TABLETA',175.00,2,2,1,NULL),('110010217','DOXICICLINA 100 MG TABLETA',67.25,2,2,1,NULL),('110010218','LEVOTIROXINA 50 MCG TABLETA',32.00,10,2,1,NULL),('110010219','GLIBENCLAMIDA 5 MG TABLETA',29.00,10,2,1,NULL),('110010220','INSULINA NPH 100 UI/ML FRASCO',4350.00,10,4,1,NULL),('110010221','INSULINA REGULAR 100 UI/ML FRASCO',4200.00,10,4,1,NULL),('110010222','ASPIRINA 100 MG TABLETA',23.00,3,2,1,NULL),('110010223','WARFARINA 5 MG TABLETA',95.00,1,2,1,NULL),('110010224','HEPARINA SÓDICA 5000 UI/ML',2250.00,1,3,1,NULL),('110010225','METRONIDAZOL 250 MG TABLETA',55.00,2,2,1,NULL),('110010226','NISTATINA 100000 UI TABLETA',61.00,2,2,1,NULL),('110010227','FLUCONAZOL 150 MG CÁPSULA',135.00,2,3,1,NULL),('110010228','KETOCONAZOL 200 MG TABLETA',115.00,2,2,1,NULL),('110010261','CLONAZEPAM 0.5 MG TABLETA',65.00,9,2,1,NULL),('110010262','DIAZEPAM 10 MG TABLETA',70.00,9,2,1,NULL),('110010263','BISACODILO 5 MG TABLETA',30.00,5,2,1,NULL),('110010264','LOPERAMIDA 2 MG CÁPSULA',40.00,5,3,1,NULL),('110010265','DOMPERIDONA 10 MG TABLETA',48.00,5,2,1,NULL),('110010266','ONDANSETRON 4 MG TABLETA',120.00,5,2,1,NULL),('110010267','RIVAROXABAN 20 MG TABLETA',320.00,1,2,1,NULL),('110010268','APIXABAN 5 MG TABLETA',290.00,1,2,1,NULL),('110010269','ENOXAPARINA 40 MG/0.4ML JERINGA',3850.00,1,4,1,NULL),('110010270','FENILEFRINA 10 MG TABLETA',35.00,6,2,1,NULL),('110010271','PSEUDOEFEDRINA 30 MG TABLETA',44.00,6,2,1,NULL),('110010272','OXIMETAZOLINA 0.05% GOTAS NASALES',120.00,6,5,1,NULL),('110010273','DEXTROMETORFANO 15 MG/5ML JARABE',112.00,8,11,1,NULL),('110010274','BROMEXINA 8 MG/5ML JARABE',105.00,8,11,1,NULL),('110010275','AMBROXOL 30 MG/5ML JARABE',99.00,8,11,1,NULL),('110010276','CLORURO DE SODIO 0.9% FRASCO',475.00,10,4,1,NULL),('110010277','GLUCOSA 5% FRASCO',510.00,10,4,1,NULL),('110010278','RINGER LACTATO FRASCO',490.00,10,4,1,NULL),('110010279','KETOROLACO 30 MG/ML AMPOLLAS',185.00,3,6,1,NULL),('110010280','TRAMADOL 100 MG/ML AMPOLLAS',220.00,3,6,1,NULL),('110010281','MORFINA 10 MG/ML AMPOLLAS',285.00,3,6,1,NULL),('110010282','FENTANILO 50 MCG/ML AMPOLLAS',300.00,3,6,1,NULL),('110010283','NEOMICINA + BACITRACINA UNGÜENTO',290.00,7,30,1,NULL),('110010284','HIDROCORTISONA 1% CREMA',210.00,7,8,1,NULL),('110010285','BETAMETASONA 0.1% CREMA',250.00,7,8,1,NULL),('110010286','CLOTRIMAZOL 1% CREMA',240.00,7,8,1,NULL),('110010287','MICONAZOL 2% CREMA',230.00,7,8,1,NULL),('110010288','NISTATINA 100,000 UI CREMA',225.00,7,8,1,NULL),('110010289','KETOCONAZOL 2% CHAMPÚ',650.00,7,29,1,NULL),('110010290','TRETINOÍNA 0.05% CREMA',800.00,7,8,1,NULL),('110010291','BENZOIL PERÓXIDO 5% GEL',475.00,7,9,1,NULL),('110010292','ACICLOVIR 5% CREMA',340.00,7,8,1,NULL),('110010293','NAPROXENO SÓDICO 550 MG TABLETA',90.00,4,2,1,NULL),('110010306','IBUPROFENO 400 MG TABLETA',85.00,3,2,1,NULL),('110010307','AMOXICILINA 500 MG CÁPSULA',110.00,2,3,1,NULL),('110010308','CLARITROMICINA 250 MG TABLETA',185.00,2,2,1,NULL),('110010309','ENALAPRIL 5 MG TABLETA',46.00,4,2,1,NULL),('110010310','LOSARTÁN 50 MG TABLETA',58.00,4,2,1,NULL),('110010311','METFORMINA 850 MG TABLETA',60.00,5,2,1,NULL),('110010312','GLICLAZIDA 30 MG TABLETA',72.00,5,2,1,NULL),('110010313','LORATADINA 10 MG TABLETA',42.00,6,2,1,NULL),('110010314','CETIRIZINA 10 MG TABLETA',49.00,6,2,1,NULL),('110010315','OMEPRAZOL 20 MG CÁPSULA',98.00,7,3,1,NULL),('110010316','FAMOTIDINA 40 MG TABLETA',88.00,7,2,1,NULL),('110010317','SALBUTAMOL SPRAY 100 MCG',2750.00,8,13,1,NULL),('110010318','BUDESONIDA 100 MCG INHALADOR',3600.00,8,17,1,NULL),('110010319','BETAMETASONA CREMA 0.05%',270.00,9,8,1,NULL),('110010320','KETOCONAZOL CREMA 2%',310.00,9,8,1,NULL);
+INSERT INTO `fide_producto_tb` VALUES ('110010204','ATORVASTATINA 20 MG TABLETA',135.75,1,2,1,NULL),('110010205','ENALAPRIL 10 MG TABLETA',52.30,1,2,1,NULL),('110010206','FUROSEMIDA 40 MG TABLETA',25.00,1,2,1,NULL),('110010207','PREDNISONA 5 MG TABLETA',33.00,10,2,1,NULL),('110010208','CLORFENAMINA 4 MG TABLETA',19.50,6,2,1,NULL),('110010209','DICLOFENACO 50 MG TABLETA',27.75,4,2,1,NULL),('110010210','NAPROXENO 500 MG TABLETA',41.20,4,2,1,NULL),('110010211','RANITIDINA 150 MG TABLETA',60.00,5,2,1,NULL),('110010212','CIPROFLOXACINO 500 MG TABLETA',88.50,2,2,1,NULL),('110010213','CEFALEXINA 500 MG CÁPSULA',92.30,2,3,1,NULL),('110010214','ACICLOVIR 400 MG TABLETA',79.00,2,2,1,NULL),('110010215','AZITROMICINA 500 MG TABLETA',160.00,2,2,1,NULL),('110010216','CLARITROMICINA 500 MG TABLETA',175.00,2,2,1,NULL),('110010217','DOXICICLINA 100 MG TABLETA',67.25,2,2,1,NULL),('110010218','LEVOTIROXINA 50 MCG TABLETA',32.00,10,2,1,NULL),('110010219','GLIBENCLAMIDA 5 MG TABLETA',29.00,10,2,1,NULL),('110010220','INSULINA NPH 100 UI/ML FRASCO',4350.00,10,4,1,NULL),('110010221','INSULINA REGULAR 100 UI/ML FRASCO',4200.00,10,4,1,NULL),('110010222','ASPIRINA 100 MG TABLETA',23.00,3,2,1,NULL),('110010223','WARFARINA 5 MG TABLETA',95.00,1,2,1,NULL),('110010224','HEPARINA SÓDICA 5000 UI/ML',2250.00,1,3,1,NULL),('110010225','METRONIDAZOL 250 MG TABLETA',55.00,2,2,1,NULL),('110010226','NISTATINA 100000 UI TABLETA',61.00,2,2,1,NULL),('110010227','FLUCONAZOL 150 MG CÁPSULA',135.00,2,3,1,NULL),('110010228','KETOCONAZOL 200 MG TABLETA',115.00,2,2,1,NULL),('110010261','CLONAZEPAM 0.5 MG TABLETA',65.00,9,2,1,NULL),('110010262','DIAZEPAM 10 MG TABLETA',70.00,9,2,1,NULL),('110010263','BISACODILO 5 MG TABLETA',30.00,5,2,1,NULL),('110010264','LOPERAMIDA 2 MG CÁPSULA',40.00,5,3,1,NULL),('110010265','DOMPERIDONA 10 MG TABLETA',48.00,5,2,1,NULL),('110010266','ONDANSETRON 4 MG TABLETA',120.00,5,2,1,NULL),('110010267','RIVAROXABAN 20 MG TABLETA',320.00,1,2,1,NULL),('110010268','APIXABAN 5 MG TABLETA',290.00,1,2,1,NULL),('110010269','ENOXAPARINA 40 MG/0.4ML JERINGA',3850.00,1,4,1,NULL),('110010270','FENILEFRINA 10 MG TABLETA',35.00,6,2,1,NULL),('110010271','PSEUDOEFEDRINA 30 MG TABLETA',44.00,6,2,1,NULL),('110010272','OXIMETAZOLINA 0.05% GOTAS NASALES',120.00,6,5,1,NULL),('110010273','DEXTROMETORFANO 15 MG/5ML JARABE',112.00,8,11,1,NULL),('110010274','BROMEXINA 8 MG/5ML JARABE',105.00,8,11,1,NULL),('110010275','AMBROXOL 30 MG/5ML JARABE',99.00,8,11,1,NULL),('110010276','CLORURO DE SODIO 0.9% FRASCO',475.00,10,4,1,NULL),('110010277','GLUCOSA 5% FRASCO',510.00,10,4,1,NULL),('110010278','RINGER LACTATO FRASCO',490.00,10,4,1,NULL),('110010279','KETOROLACO 30 MG/ML AMPOLLAS',185.00,3,6,1,NULL),('110010280','TRAMADOL 100 MG/ML AMPOLLAS',220.00,3,6,1,NULL),('110010281','MORFINA 10 MG/ML AMPOLLAS',285.00,3,6,1,NULL),('110010282','FENTANILO 50 MCG/ML AMPOLLAS',300.00,3,6,1,NULL),('110010283','NEOMICINA + BACITRACINA UNGÜENTO',290.00,7,30,1,NULL),('110010284','HIDROCORTISONA 1% CREMA',210.00,7,8,1,NULL),('110010285','BETAMETASONA 0.1% CREMA',250.00,7,8,1,NULL),('110010286','CLOTRIMAZOL 1% CREMA',240.00,7,8,1,NULL),('110010287','MICONAZOL 2% CREMA',230.00,7,8,1,NULL),('110010288','NISTATINA 100,000 UI CREMA',225.00,7,8,1,NULL),('110010289','KETOCONAZOL 2% CHAMPÚ',650.00,7,29,1,NULL),('110010290','TRETINOÍNA 0.05% CREMA',800.00,7,8,1,NULL),('110010291','BENZOIL PERÓXIDO 5% GEL',475.00,7,9,1,NULL),('110010292','ACICLOVIR 5% CREMA',340.00,7,8,1,NULL),('110010293','NAPROXENO SÓDICO 550 MG TABLETA',90.00,4,2,1,NULL),('110010306','IBUPROFENO 400 MG TABLETA',85.00,3,2,1,NULL),('110010307','AMOXICILINA 500 MG CÁPSULA',110.00,2,3,1,NULL),('110010308','CLARITROMICINA 250 MG TABLETA',185.00,2,2,1,NULL),('110010309','ENALAPRIL 5 MG TABLETA',46.00,4,2,1,NULL),('110010310','LOSARTÁN 50 MG TABLETA',58.00,4,2,1,NULL),('110010311','METFORMINA 850 MG TABLETA',60.00,5,2,1,NULL),('110010312','GLICLAZIDA 30 MG TABLETA',72.00,5,2,1,NULL),('110010313','LORATADINA 10 MG TABLETA',42.00,6,2,1,NULL),('110010314','CETIRIZINA 10 MG TABLETA',49.00,6,2,1,NULL),('110010315','OMEPRAZOL 20 MG CÁPSULA',98.00,7,3,1,NULL),('110010316','FAMOTIDINA 40 MG TABLETA',88.00,7,2,1,NULL),('110010317','SALBUTAMOL SPRAY 100 MCG',2750.00,8,13,1,NULL),('110010318','BUDESONIDA 100 MCG INHALADOR',3600.00,8,17,1,NULL),('110010319','BETAMETASONA CREMA 0.05%',270.00,9,8,1,NULL),('110010320','KETOCONAZOL CREMA 2%',310.00,9,8,1,NULL),('200012','Alka-Seltzer',500.00,1,1,1,'/Cliente-Servidor-Farmacia/Views/ImagenProductos/Alka Setzer_0.png');
 /*!40000 ALTER TABLE `fide_producto_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,7 +446,7 @@ CREATE TABLE `terror` (
   `DESCRIPCION` text NOT NULL,
   `FECHAHORA` datetime NOT NULL,
   PRIMARY KEY (`ID_ERROR`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -455,7 +455,7 @@ CREATE TABLE `terror` (
 
 LOCK TABLES `terror` WRITE;
 /*!40000 ALTER TABLE `terror` DISABLE KEYS */;
-INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49'),(5,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:04:41'),(6,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:22:09'),(7,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:23'),(8,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:37'),(9,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:44'),(10,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:43:21'),(11,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:44:12'),(12,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:48:53'),(13,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:05:47'),(14,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:09:04'),(15,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:25:54'),(16,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:29:58'),(17,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:44:33'),(18,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:51:35'),(19,'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.','2025-07-13 15:54:01'),(20,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:58:23'),(21,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:41:34'),(22,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:46:17'),(23,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:49:29'),(24,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:54:05'),(25,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:56:28'),(26,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:58:35'),(27,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 17:00:46');
+INSERT INTO `terror` VALUES (1,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 22:49:34'),(2,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:08:36'),(3,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:18'),(4,'Column \'ID_INVENTARIO\' cannot be null','2025-07-12 23:14:49'),(5,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:04:41'),(6,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:22:09'),(7,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:23'),(8,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:37'),(9,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:25:44'),(10,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:43:21'),(11,'No hay suficiente stock en los lotes disponibles.','2025-07-13 14:44:12'),(12,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 14:48:53'),(13,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:05:47'),(14,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:09:04'),(15,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:25:54'),(16,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:29:58'),(17,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:44:33'),(18,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:51:35'),(19,'No hay suficiente stock acumulado hasta esa fecha para realizar la salida.','2025-07-13 15:54:01'),(20,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 15:58:23'),(21,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:41:34'),(22,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:46:17'),(23,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:49:29'),(24,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:54:05'),(25,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:56:28'),(26,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 16:58:35'),(27,'Incorrect number of arguments for PROCEDURE farmaciabd.BuscarProductoPorCodigo; expected 1, got 2','2025-07-13 17:00:46'),(28,'You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \' , , 1, NULL)\' at line 1','2025-08-01 16:56:58'),(29,'You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \' , , 1, NULL)\' at line 1','2025-08-01 17:02:50'),(30,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:11:32'),(31,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:11:38'),(32,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:11:41'),(33,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:21:39'),(34,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:23:43'),(35,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:23:57'),(36,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:00'),(37,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:02'),(38,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:04'),(39,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:31'),(40,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:33'),(41,'Table \'farmaciabd.productos\' doesn\'t exist','2025-08-01 18:24:35');
 /*!40000 ALTER TABLE `terror` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,6 +674,63 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarProductosFiltrados` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarProductosFiltrados`(
+    IN P_NOMBRE VARCHAR(100),
+    IN P_CATEGORIA VARCHAR(100)
+)
+BEGIN
+   SELECT 
+        P.CODIGO,
+        P.NOMBRE,
+        P.PRECIO_UNITARIO,
+        C.NOMBRE AS CATEGORIA,
+        P.URL_IMAGEN
+    FROM 
+        fide_producto_tb P
+        INNER JOIN fide_categoria_producto_tb C ON P.ID_CATEGORIA_PRODUCTO = C.ID_CATEGORIA_PRODUCTO
+    WHERE 
+        (P_NOMBRE IS NULL OR P_NOMBRE = '' OR P.NOMBRE LIKE CONCAT('%', P_NOMBRE, '%'))
+        AND (P_CATEGORIA IS NULL OR P_CATEGORIA = '' OR C.NOMBRE = P_CATEGORIA);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CONSULTAR_PRODUCTOS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CONSULTAR_PRODUCTOS`(
+    IN P_NOMBRE VARCHAR(100),
+    IN P_CATEGORIA VARCHAR(100)
+)
+BEGIN
+    SELECT * FROM PRODUCTOS
+    WHERE (P_NOMBRE IS NULL OR NOMBRE LIKE CONCAT('%', P_NOMBRE, '%'))
+      AND (P_CATEGORIA IS NULL OR CATEGORIA = P_CATEGORIA);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `convertir_usuario_en_cliente` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -875,16 +932,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_PRODUCTO_INSERTAR_SP`(
     IN p_PRECIO_UNITARIO DECIMAL(10,2),
     IN p_ID_CATEGORIA_PRODUCTO INT,
     IN p_ID_UNIDAD_MEDIDA INT,
-    IN p_ID_ESTADO INT
+    IN p_ID_ESTADO INT,
+    IN p_URL_IMAGEN VARCHAR(255)
 )
 BEGIN
     INSERT INTO FIDE_PRODUCTO_TB (
         NOMBRE, CODIGO, PRECIO_UNITARIO,
-        ID_CATEGORIA_PRODUCTO, ID_UNIDAD_MEDIDA, ID_ESTADO
+        ID_CATEGORIA_PRODUCTO, ID_UNIDAD_MEDIDA, ID_ESTADO, URL_IMAGEN
     )
     VALUES (
         p_NOMBRE, p_CODIGO, p_PRECIO_UNITARIO,
-        p_ID_CATEGORIA_PRODUCTO, p_ID_UNIDAD_MEDIDA, p_ID_ESTADO
+        p_ID_CATEGORIA_PRODUCTO, p_ID_UNIDAD_MEDIDA, p_ID_ESTADO, p_URL_IMAGEN
     );
 END ;;
 DELIMITER ;
@@ -909,19 +967,34 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_PRODUCTO_MODIFICAR_SP`(
     IN p_PRECIO_UNITARIO DECIMAL(10,2),
     IN p_ID_CATEGORIA_PRODUCTO INT,     
     IN p_ID_UNIDAD_MEDIDA INT,
-    IN p_ID_ESTADO INT
+    IN p_ID_ESTADO INT,
+    IN p_URL_IMAGEN VARCHAR (255)
 )
 BEGIN
-    UPDATE FIDE_PRODUCTO_TB
-    SET
-        NOMBRE = p_NOMBRE,
-        CODIGO = p_CODIGO,
-        PRECIO_UNITARIO = p_PRECIO_UNITARIO,
-        ID_CATEGORIA_PRODUCTO = p_ID_CATEGORIA_PRODUCTO,
-        ID_UNIDAD_MEDIDA = p_ID_UNIDAD_MEDIDA,
-        ID_ESTADO = p_ID_ESTADO
-    WHERE
-        ID_PRODUCTO = p_ID_PRODUCTO;
+    IF p_URL_IMAGEN IS NOT NULL THEN
+        UPDATE FIDE_PRODUCTO_TB
+        SET
+            NOMBRE = p_NOMBRE,
+            CODIGO = p_CODIGO,
+            PRECIO_UNITARIO = p_PRECIO_UNITARIO,
+            ID_CATEGORIA_PRODUCTO = p_ID_CATEGORIA_PRODUCTO,
+            ID_UNIDAD_MEDIDA = p_ID_UNIDAD_MEDIDA,
+            ID_ESTADO = p_ID_ESTADO,
+            URL_IMAGEN = p_URL_IMAGEN
+        WHERE
+            ID_PRODUCTO = p_ID_PRODUCTO;
+    ELSE
+        UPDATE FIDE_PRODUCTO_TB
+        SET
+            NOMBRE = p_NOMBRE,
+            CODIGO = p_CODIGO,
+            PRECIO_UNITARIO = p_PRECIO_UNITARIO,
+            ID_CATEGORIA_PRODUCTO = p_ID_CATEGORIA_PRODUCTO,
+            ID_UNIDAD_MEDIDA = p_ID_UNIDAD_MEDIDA,
+            ID_ESTADO = p_ID_ESTADO
+        WHERE
+            ID_PRODUCTO = p_ID_PRODUCTO;
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1163,6 +1236,25 @@ BEGIN
         p_tipo_movimiento, p_cantidad, p_descripcion, p_empresa, p_id_farmacia
     );
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ObtenerCategorias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerCategorias`()
+BEGIN
+    SELECT DISTINCT NOMBRE FROM fide_categoria_producto_tb ORDER BY NOMBRE ASC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1543,4 +1635,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-30 11:50:40
+-- Dump completed on 2025-08-01 18:47:04
