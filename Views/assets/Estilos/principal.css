@@ -8,9 +8,9 @@
   --secondary-color: #ffffff;
   --text-color: #000000;
 
-  --surface-color: #ffffff; /* fondo tarjetas */
-  --surface-alt: #0d0d0e; /* gradiente claro */
-  --input-bg: #ffffff; /* fondo inputs */
+  --surface-color: #ffffff; 
+  --surface-alt: #0d0d0e; 
+  --input-bg: #ffffff; 
 }
 
 html {
@@ -119,8 +119,6 @@ h3 {
   transition: all 0.8s ease;
 }
 
-
-
 .sticky {
   padding: 1rem 0;
   box-shadow: 0px 5px 5px -5px #274cf1;
@@ -134,7 +132,6 @@ h3 {
   justify-content: space-between;
   align-items: center;
 }
-
 
 .header__logo-image {
   max-width: 8rem;
@@ -449,7 +446,6 @@ h3 {
   margin-bottom: 5rem;
 }
 
-
 .card {
   position: relative;
   overflow: hidden;
@@ -458,7 +454,6 @@ h3 {
   box-shadow: 0px 0.4rem 0.8rem #140158;
   transition: all 0.5s ease;
 }
-
 
 @media screen and (min-width: 950px) {
   .card:hover .menu__info {
@@ -626,33 +621,32 @@ h3 {
 
 .booking__places {
   display: flex;
-  justify-content: center; 
-  gap: 2rem;                
-  flex-wrap: wrap;          
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
   margin-top: 3rem;
 }
 
 .booking__places2 {
   display: flex;
-  justify-content: center; 
-  gap: 2rem;                
-  flex-wrap: wrap;          
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
   margin-top: 3rem;
-  
 }
 
 .booking__places3 {
-  display: flex;            
-  justify-content: center;  
-  align-items: flex-start;  
-  flex-wrap: nowrap;          
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 2rem;
-  overflow-x: auto;                
+  overflow-x: auto;
 }
 
 .booking__places3 .figure {
-  flex: 1 1 200px;  
-  max-width: 250px; 
+  flex: 1 1 200px;
+  max-width: 250px;
 }
 
 .btn__place {
@@ -677,13 +671,13 @@ h3 {
   justify-content: center;
   width: 16.6rem;
   padding: 10rem 3rem;
-  border: 2px solid #fff; 
-  color: #fff; 
+  border: 2px solid #fff;
+  color: #fff;
   background-color: transparent;
   font-weight: 600;
   border-radius: 0.8rem;
   transition: background-color 0.3s ease, color 0.3s ease;
-} 
+}
 
 .btn__place3 {
   text-transform: uppercase;
@@ -692,8 +686,8 @@ h3 {
   justify-content: center;
   width: auto;
   min-width: 14rem;
-  padding: 1.2rem 2.5rem;  
-  font-size: 1.3rem;  
+  padding: 1.2rem 2.5rem;
+  font-size: 1.3rem;
   border: 2px solid #0b0966;
   color: #2e6985;
   background-color: transparent;
@@ -718,8 +712,7 @@ h3 {
   margin-top: 0.8rem;
   font-size: 0.9rem;
   color: #555;
-} 
-
+}
 
 .fa-location-dot {
   margin-right: 1rem;
@@ -1151,15 +1144,43 @@ input#c3:checked + label.fiebre {
    
 ============================================================ */
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 225px;
+  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #1e293b;
+  z-index: 1000;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 225px;
+  width: calc(100% - 225px);
+  background-color: white;
+  z-index: 999;
+  padding: 1rem 2rem;
+  box-shadow: 0px 5px 5px -5px #274cf1;
+}
+
 .main-kardex {
   background-image: url("/Cliente-Servidor-Farmacia/Views/assets/Imagenes/FondoImagen.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-left: 13%;
+  margin-left: 225px;
   padding: 6rem 2rem 2rem 2rem;
   min-height: 100vh;
-  box-sizing: border-box;
+  font-family: var(--text-font);
+  color: var(--text-color);
 }
 
 /* CONTENEDOR GENERAL */
@@ -1173,11 +1194,11 @@ input#c3:checked + label.fiebre {
 
 .formulario-kardex,
 .historial-kardex {
-  background: linear-gradient(to bottom right, #f0f4fa, #d8e2f1);
+  background: linear-gradient(to bottom right, var(--surface-color), #d8e2f1);
   border: 1px solid #c3d0e5;
   border-radius: 1rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  padding: 2rem;
 }
 
 .formulario-kardex:hover,
@@ -1418,16 +1439,30 @@ label {
   background-color: #218838;
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px; /* ajustalo según tu diseño real */
+  flex-shrink: 0;
+}
+/* ============================================================
+    MÓDULO KARDEX
+   
+============================================================ */
+
 /* DOCTORES  */
 .btn-wrapper {
   text-align: center;
-  margin: 1rem; 
+  margin: 1rem;
 }
 
 .btn-label {
   margin-top: 0.8rem;
   font-size: 1.1rem;
-  color: #fff; 
+  color: #fff;
   line-height: 1.4rem;
 }
 
@@ -1490,7 +1525,7 @@ label {
 }
 .main-formulario-centrado {
   max-width: 500px;
- margin: 160px auto 40px auto;
+  margin: 160px auto 40px auto;
 
   padding: 20px;
   background-color: #ffffff;
@@ -1581,7 +1616,7 @@ label {
 }
 
 .page-wrapper {
-  padding-bottom: 50px; 
+  padding-bottom: 50px;
 }
 
 .search-bar {

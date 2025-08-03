@@ -183,14 +183,33 @@ VALUES
 -- Insertar usuarios base del sistema
 INSERT INTO USUARIO (ID, NOMBRE, CORREO, USUARIO, CONTRASENA)
 VALUES 
-    (1, 'Josue Navarro',  'josueadmin@email.com',     'josue',   '123'), -- Usuario administrador
-    (2, 'Abraham Cascante','abrahamcliente@email.com','abraham', '123'); -- Usuario cliente
+    (1, 'Josue Navarro',  'josueadmin@email.com',     'josue',   '123'), 
+    (2, 'Abraham Cascante','abrahamcliente@email.com','abraham', '123'); 
 
 -- Asignar roles correspondientes a los usuarios
 INSERT INTO USUARIO_ROL (USUARIO_ID, ROL_ID) 
 VALUES 
     (1, 2), -- Josue tiene rol ADMIN
-    (2, 1); -- Abraham tiene rol CLIENTE
+-- para convertir en cliente ya hay un procedure ejecutar 
+
+-- verificar usuarios con y sin rol asignado 
+SELECT * FROM USUARIO  ;
+SELECT * FROM usuario_rol  ;
+SELECT * FROM Rol  ;
+
+
+UPDATE FROM usuario_rol 
+
+-- verificar usuarios ya con el rol asignado 
+SELECT 
+    U.ID ID,
+    U.NOMBRE NOMBRE,
+    U.CORREO CORREO,
+    R.NOMBRE ROL
+FROM USUARIO U
+JOIN USUARIO_ROL UR ON UR.USUARIO_ID = U.ID
+JOIN ROL R ON R.ID = UR.ROL_ID
+ORDER BY U.ID ASC;
 
 
 

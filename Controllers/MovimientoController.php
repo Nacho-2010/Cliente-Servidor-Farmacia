@@ -82,6 +82,7 @@ if (isset($_POST["btnBuscarProducto"])) {
         $_SESSION["UNIDAD_MEDIDA"] = $producto["UNIDAD"];
         $_SESSION["CATEGORIA_PRODUCTO"] = $producto["CATEGORIA"];
         $_SESSION["ESTADO_PRODUCTO"] = $producto["ESTADO"];
+        $_SESSION["FECHA_VENCIMIENTO"] = $producto["FECHA_VENCIMIENTO"];
         $_SESSION["URL_IMAGEN"] = $producto["URL_IMAGEN"];
 
         unset($_SESSION["MENSAJE_ERROR"]);
@@ -91,6 +92,7 @@ if (isset($_POST["btnBuscarProducto"])) {
         $_SESSION["UNIDAD_MEDIDA"] = null;
         $_SESSION["CATEGORIA_PRODUCTO"] = null;
         $_SESSION["ESTADO_PRODUCTO"] = null;
+        $_SESSION["FECHA_VENCIMIENTO"] = null;
         $_SESSION["URL_IMAGEN"] = null;
 
         $_SESSION["MENSAJE_ERROR"] = "⚠️ El código ingresado no existe. Por favor verifique e intente nuevamente.";

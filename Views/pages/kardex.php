@@ -14,7 +14,12 @@ $id_farmacia = ObtenerFarmaciasActivas();
     <?php sidebar(); ?>
     <br><br><br>
 
+
+
+
+
     <main class="main-kardex">
+
         <section class="kardex-container">
             <br>
             <br>
@@ -34,7 +39,8 @@ $id_farmacia = ObtenerFarmaciasActivas();
                     <select name="ddlFarmaciaBuscar" required>
                         <option value="">Seleccione una farmacia</option>
                         <?php foreach ($id_farmacia as $FARM): ?>
-                            <option value="<?= $FARM["ID_FARMACIA"] ?>"><?= htmlspecialchars($FARM["NOMBRE"]) ?></option>
+                            <option value="<?= $FARM["ID_FARMACIA"] ?>"><?= htmlspecialchars($FARM["NOMBRE"]) ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                     <button type="submit" name="btnBuscarProducto">Buscar</button>
@@ -163,8 +169,9 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                 <th>Tipo</th>
                                 <th>Cantidad</th>
                                 <th>Lote</th>
-                                <th>Saldo</th>
+                                <th>Saldo Actual</th>
                                 <th>U.M.</th>
+                                <th>Fecha Vencimiento</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -176,9 +183,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
                                     <td><?= $mov["LOTES_AFECTADOS"] ?? '-' ?></td>
                                     <td><?= $mov["SALDO"] ?></td>
                                     <td><?= $mov["UNIDAD_MEDIDA"] ?></td>
-
-
-
+                                    <td><?= $mov["FECHA_VENCIMIENTO"] ?? '-' ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -196,6 +201,7 @@ $id_farmacia = ObtenerFarmaciasActivas();
             </div>
         </section>
     </main>
+
 
     <script>
         // Habilita o deshabilita campos por checkbox
