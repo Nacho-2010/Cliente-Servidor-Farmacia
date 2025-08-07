@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Views/layout.php';
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/productosController.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Controllers/carritoController.php';
 
 // Capturar filtros si vienen por GET
 $filtroNombre = isset($_GET['producto']) ? $_GET['producto'] : '';
@@ -58,7 +59,7 @@ if (!empty($filtroNombre) || !empty($filtroCategoria)) {
           <?php if ($resultado && mysqli_num_rows($resultado) > 0): ?>
             <?php while ($fila = mysqli_fetch_array($resultado)) {
               $stockTotal = ObtenerStockTotalGlobal($fila["CODIGO"]);
-              ?>
+            ?>
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card h-100">
                   <img class="card-img-top mt-3" src="<?= $fila["URL_IMAGEN"] ?>" alt="Imagen del producto"
@@ -94,6 +95,9 @@ if (!empty($filtroNombre) || !empty($filtroCategoria)) {
 
   <?php verfooter(); ?>
   <?php añadirScripts(); ?>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/Cliente-Servidor-Farmacia/Views/assets/Funciones/carrito.js"></script>
 
 </body>
 
