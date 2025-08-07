@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `farmaciabd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `farmaciabd`;
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: farmaciabd
 -- ------------------------------------------------------
@@ -653,7 +653,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123',1),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123',1),(3,'UsuarioCliente','cliente@gmail.com','usuario','123',1),(5,'USERCLIENTE ','PRUEBA@GMAIL.COM','JNAVARRO','123',1);
+INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123',1),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123',1),(3,'UsuarioCliente','cliente@gmail.com','usuario','123',1),(5,'USERCLIENTE ','PRUEBA@GMAIL.COM','JNAVARRO','123',2);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,10 +683,6 @@ LOCK TABLES `usuario_rol` WRITE;
 INSERT INTO `usuario_rol` VALUES (1,2),(2,1),(3,1),(5,1);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'farmaciabd'
---
 
 --
 -- Dumping routines for database 'farmaciabd'
@@ -1211,6 +1207,36 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_USUARIO_CONSULTAR_SP` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_USUARIO_CONSULTAR_SP`()
+BEGIN
+    SELECT 
+        u.ID AS IdUsuario,
+        u.USUARIO AS Identificacion,
+        u.NOMBRE AS Nombre,
+        u.CORREO AS Correo,
+        r.NOMBRE AS NombreRol,
+        e.DESCRIPCION AS EstadoDescripcion,
+        u.ID_ESTADO
+    FROM usuario u
+    LEFT JOIN usuario_rol ur ON u.ID = ur.USUARIO_ID
+    LEFT JOIN rol r ON ur.ROL_ID = r.ID
+    LEFT JOIN fide_estado_tb e ON u.ID_ESTADO = e.ID_ESTADO;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `GenerarSalidaPorLotes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1415,6 +1441,38 @@ BEGIN
         p_tipo_movimiento, p_cantidad, p_descripcion, p_empresa, p_id_farmacia
     );
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`(IN p_id_usuario BIGINT)
+BEGIN
+
+    DECLARE estado_actual INT;
+
+    -- Obtener el estado actual del usuario
+    SELECT ID_ESTADO INTO estado_actual
+    FROM usuario
+    WHERE ID = p_id_usuario;
+
+    -- Cambiar el estado: si es 1 (activo) se cambia a 2 (inactivo), y viceversa
+    IF estado_actual = 1 THEN
+        UPDATE usuario SET ID_ESTADO = 2 WHERE ID = p_id_usuario;
+    ELSE
+        UPDATE usuario SET ID_ESTADO = 1 WHERE ID = p_id_usuario;
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1866,4 +1924,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-06 21:02:49
+-- Dump completed on 2025-08-06 22:45:04
