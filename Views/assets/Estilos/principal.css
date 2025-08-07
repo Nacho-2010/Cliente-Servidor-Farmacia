@@ -8,9 +8,9 @@
   --secondary-color: #ffffff;
   --text-color: #000000;
 
-  --surface-color: #ffffff; 
-  --surface-alt: #0d0d0e; 
-  --input-bg: #ffffff; 
+  --surface-color: #ffffff;
+  --surface-alt: #0d0d0e;
+  --input-bg: #ffffff;
 }
 
 html {
@@ -1638,3 +1638,29 @@ label {
   font-weight: bold;
   border-radius: 5px;
 }
+
+/* para mant productos  */
+.main-consultar {
+  margin-left: 13%;
+  padding: 2rem;
+  width: 87%;
+}
+
+.consultar-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100% !important;
+  table-layout: auto;
+  word-wrap: break-word;
+}
+
+th,
+td {
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+/* para mant productos  */

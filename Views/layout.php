@@ -59,7 +59,6 @@ function verheader()
       <nav class="header__nav">
         <ul class="header__nav-links">
           <li><a href="../Home/principal.php" class="header__nav-link">Inicio</a></li>
-          <li><a href="../Home/producto.php" class="header__nav-link">Productos</a></li>
           <li><a href="../Home/quieneSomos.php" class="header__nav-link">Nosotros</a></li>
           <li><a href="../Home/contacto.php" class="header__nav-link">Contacto</a></li>
           <li><a href="../Home/compra.php" class="header__nav-link">Compra</a></li>
@@ -190,6 +189,12 @@ function sidebar()
           <a href="/Cliente-Servidor-Farmacia/Views/pages/RegistrarProducto.php">
             <i class="fa-solid fa-box"></i>
             <span class="texto-menu">Modificar Producto</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Cliente-Servidor-Farmacia/Views/pages/consultarUsuarios.php">
+            <i class="fa-solid fa-box"></i>
+            <span class="texto-menu">Mantenimiento Usuarios</span>
           </a>
         </li>
         ';

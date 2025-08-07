@@ -687,3 +687,61 @@ BEGIN
   FROM CODIGOS_ACTIVOS_V;
 END //
 DELIMITER ;
+
+-- ========================================
+-- fin 
+-- ========================================
+
+-- ========================================
+-- mantenimiento usuarios 
+-- ========================================
+
+
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE CambiarEstadoUsuarioFarmacia(IN pIdUsuario BIGINT)
+BEGIN
+    DECLARE estadoActual INT;
+
+    SELECT ID_ESTADO INTO estadoActual
+    FROM USUARIO
+    WHERE ID = pIdUsuario;
+
+    IF estadoActual = 1 THEN
+        UPDATE USUARIO SET ID_ESTADO = 2 WHERE ID = pIdUsuario;
+    ELSE
+        UPDATE USUARIO SET ID_ESTADO = 1 WHERE ID = pIdUsuario;
+    END IF;
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE ConsultarUsuariosFarmacia()
+BEGIN
+    SELECT 
+        U.ID AS IdUsuario,
+        C.CEDULA AS Identificacion,
+        U.NOMBRE AS Nombre,
+        U.CORREO AS Correo,
+        R.NOMBRE AS NombreRol,
+        E.DESCRIPCION AS EstadoDescripcion,
+        U.ID_ESTADO AS ID_ESTADO
+    FROM USUARIO U
+    INNER JOIN CLIENTE C ON U.ID = C.ID_USUARIO
+    INNER JOIN USUARIO_ROL UR ON U.ID = UR.USUARIO_ID
+    INNER JOIN ROL R ON UR.ROL_ID = R.ID
+    INNER JOIN FIDE_ESTADO_TB E ON U.ID_ESTADO = E.ID_ESTADO;
+END //
+
+DELIMITER ;
+
+
+
+
+-- ========================================
+-- fin 
+-- ========================================

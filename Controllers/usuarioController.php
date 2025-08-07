@@ -41,4 +41,23 @@ if (isset($_POST["btnActualizarContrasenna"])) {
     }
 }
 
+
+// este archivo es para mantenimiento de usuarios creado por josue navfunction ConsultarUsuarios()
+function ConsultarUsuarios()
+{
+    return ConsultarUsuariosModel();
+}
+
+
+if (isset($_POST["btnCambiarEstadoUsuario"])) {
+    $idUsuario = $_POST["IdUsuario"];
+    $respuesta = CambiarEstadoUsuarioModel($idUsuario);
+
+    if ($respuesta) {
+        header("location: ../../Views/pages/consultarUsuarios.php");
+        exit;
+    } else {
+        $_POST["txtMensaje"] = "El usuario no fue actualizado correctamente.";
+    }
+}
 ?>
