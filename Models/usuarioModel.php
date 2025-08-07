@@ -1,7 +1,8 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
-function ObtenerContrasennaModel($idUsuario)
-{
+
+// Obtener contraseña actual
+function ObtenerContrasennaModel($idUsuario) {
     $conexion = OpenDB();
     $stmt = $conexion->prepare("CALL ConsultarInfoUsuario(?)");
     $stmt->bind_param("i", $idUsuario);
@@ -19,45 +20,39 @@ function ObtenerContrasennaModel($idUsuario)
     return $contrasenna;
 }
 
-function ActualizarContrasennaModel($idUsuario, $nueva)
-{
+// Actualizar contraseña
+function ActualizarContrasennaModel($idUsuario, $nueva) {
     $conexion = OpenDB();
     $stmt = $conexion->prepare("CALL ActualizarContrasenna(?, ?)");
     $stmt->bind_param("is", $idUsuario, $nueva);
     $resultado = $stmt->execute();
-
     $stmt->close();
     CloseDB($conexion);
     return $resultado;
 }
 
-
-function ConsultarUsuariosModel()
-{
-    try {
-        $conexion = OpenDB();
-        $sql = "CALL ConsultarUsuariosFarmacia()";
-        $resultado = $conexion->query($sql);
-        CloseDB($conexion);
-        return $resultado;
-    } catch (Exception $error) {
-        RegistrarError($error);
-        return null;
-    }
+// Consultar todos los usuarios (SP sin filtros)
+function obtenerUsuarios() {
+    $conexion = OpenDB();
+    $resultado = $conexion->query("CALL FIDE_USUARIO_CONSULTAR_SP()");
+    CloseDB($conexion);
+    return $resultado;
 }
 
-function CambiarEstadoUsuarioModel($idUsuario)
-{
+function CambiarEstadoUsuarioModel($idUsuario) {
     try {
         $conexion = OpenDB();
-        $sp = $conexion->prepare("CALL CambiarEstadoUsuarioFarmacia(?)");
-        $sp->bind_param("i", $idUsuario);
-        $resultado = $sp->execute();
+        $stmt = $conexion->prepare("CALL CambiarEstadoUsuarioFarmacia(?)");
+        $stmt->bind_param("i", $idUsuario);
+        $resultado = $stmt->execute();
+        $stmt->close();
         CloseDB($conexion);
         return $resultado;
-    } catch (Exception $error) {
-        RegistrarError($error);
+    } catch (Exception $e) {
+        RegistrarError($e);
         return false;
     }
 }
 
+
+?>

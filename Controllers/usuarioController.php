@@ -1,11 +1,11 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/usuarioModel.php';
-include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 session_start();
 
+// CAMBIO DE CONTRASEÑA
 if (isset($_POST["btnActualizarContrasenna"])) {
     if (!isset($_SESSION["ID"])) {
-        $_POST["txtMensaje"] = "⚠️ Sesión expirada. Inicie sesión de nuevo.";
+        $_SESSION["txtMensaje"] = "⚠️ Sesión expirada. Inicie sesión de nuevo.";
         return;
     }
 
@@ -17,47 +17,43 @@ if (isset($_POST["btnActualizarContrasenna"])) {
     $contrasennaActualBD = ObtenerContrasennaModel($idUsuario);
 
     if ($contrasennaActualBD === null) {
-        $_POST["txtMensaje"] = "No se encontró el usuario.";
+        $_SESSION["txtMensaje"] = "No se encontró el usuario.";
         return;
     }
 
     if ($contrasennaActualBD !== $anterior) {
-        $_POST["txtMensaje"] = "Valide su contraseña anterior.";
+        $_SESSION["txtMensaje"] = "Valide su contraseña anterior.";
         return;
     }
 
     if ($nueva !== $confirmar) {
-        $_POST["txtMensaje"] = "Valide la confirmación de su nueva contraseña.";
+        $_SESSION["txtMensaje"] = "Valide la confirmación de su nueva contraseña.";
         return;
     }
 
     $respuesta = ActualizarContrasennaModel($idUsuario, $nueva);
 
-    if ($respuesta) {
-        $_SESSION["Contrasenna"] = $nueva;
-        $_POST["txtMensaje"] = "Contraseña actualizada correctamente.";
-    } else {
-        $_POST["txtMensaje"] = "Error al actualizar la contraseña.";
-    }
+    $_SESSION["txtMensaje"] = $respuesta ? "✅ Contraseña actualizada correctamente." : "❌ Error al actualizar la contraseña.";
+    return;
 }
-
-
-// este archivo es para mantenimiento de usuarios creado por josue navfunction ConsultarUsuarios()
-function ConsultarUsuarios()
-{
-    return ConsultarUsuariosModel();
-}
-
 
 if (isset($_POST["btnCambiarEstadoUsuario"])) {
-    $idUsuario = $_POST["IdUsuario"];
+    $idUsuario = intval($_POST["IdUsuario"]); // Forzar a número
+
+    if ($idUsuario <= 0) {
+        $_SESSION["txtMensaje"] = "❌ El ID del usuario no es válido.";
+        header("Location: ../../Views/pages/consultarUsuarios.php");
+        exit;
+    }
+
     $respuesta = CambiarEstadoUsuarioModel($idUsuario);
 
-    if ($respuesta) {
-        header("location: ../../Views/pages/consultarUsuarios.php");
-        exit;
-    } else {
-        $_POST["txtMensaje"] = "El usuario no fue actualizado correctamente.";
-    }
+
+    header("Location: ../../Views/pages/consultarUsuarios.php");
+    exit;
+}
+
+function ConsultarUsuarios() {
+    return obtenerUsuarios(); 
 }
 ?>
