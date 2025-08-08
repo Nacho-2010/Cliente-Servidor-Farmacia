@@ -13,7 +13,7 @@ $resultado = ConsultarUsuarios();
     <?php verheader(); ?>
     <?php sidebar(); ?>
     <br><br><br>
-
+<br><br>
     <main class="main-consultar">
         <section class="consultar-container">
             <h2>Consultar Usuarios</h2>
@@ -58,7 +58,7 @@ $resultado = ConsultarUsuarios();
    <i class="fa <?= $fila["ID_ESTADO"] == 1 ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'; ?>" style="font-size:1.5em;"></i>
 </a>
 
-                                        <a href="actualizarUsuario.php?q=<?= $fila["IdUsuario"]; ?>" class="btn">
+                                        <a href="/Cliente-Servidor-Farmacia/Controllers/usuarioController.php?accion=editarUsuario&q=<?= $fila["IdUsuario"]; ?>" class="btn">
                                             <i class="fa fa-edit" style="font-size:1.5em;"></i>
                                         </a>
                                     </td>

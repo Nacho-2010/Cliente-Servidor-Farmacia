@@ -54,5 +54,33 @@ function CambiarEstadoUsuarioModel($idUsuario) {
     }
 }
 
+function ObtenerUsuarioPorId($id) {
+    $conexion = OpenDB();
+    $stmt = $conexion->prepare("CALL FIDE_OBTENER_USUARIO_POR_ID_SP(?)");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $usuario = $resultado ? $resultado->fetch_assoc() : null;
+    $stmt->close();
+    CloseDB($conexion);
+
+    return $usuario;
+}
+
+function ActualizarUsuario($id, $nombre, $correo, $usuario, $estado) {
+    try {
+        $conexion = OpenDB();
+        $stmt = $conexion->prepare("CALL FIDE_ACTUALIZAR_USUARIOS_SP(?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssi", $id, $nombre, $correo, $usuario, $estado);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        CloseDB($conexion);
+        return $resultado;
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return false;
+    }
+}
+
 
 ?>
