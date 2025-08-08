@@ -1,0 +1,22 @@
+* Centrar el contenido de la página */
+.consultar-container{max-width:1100px;margin:0 auto;}
+
+/* Encabezado*/
+.page-header{text-align:center;margin:6px auto 18px;}
+.page-title{
+  margin:0;
+  font-weight:700;
+  letter-spacing:.4px;
+  font-size:clamp(1.25rem,2.2vw + .5rem,1.75rem);
+}
+.page-subtitle{margin:.25rem 0 0;color:#6c757d;font-size:.95rem}
+
+/* Icono en caja suave */
+.title-icon{
+  width:56px;height:56px;margin:0 auto .5rem;
+  display:grid;place-items:center;border-radius:14px;
+  background:linear-gradient(135deg,#e8f0fe,#e6f4ea);
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+}
+.title-icon i{font-size:1.25rem;color:#0d6efd}
+

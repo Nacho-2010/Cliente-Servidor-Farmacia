@@ -4,28 +4,37 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Views/layou
 
 $resultado = ConsultarUsuarios();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <?php añadirCSS(); ?>
-
+<?php verheader(); ?>
+<br>
+<link rel="stylesheet" href="/Cliente-Servidor-Farmacia/Views/assets/Estilos/consultarUsuarios.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
 <body>
     <?php verheader(); ?>
     <?php sidebar(); ?>
-    <br><br><br>
-<br><br>
-    <main class="main-consultar">
+
+    <main class="main-consultar py-3">
         <section class="consultar-container">
-            <h2>Consultar Usuarios</h2>
 
-           <?php if (isset($_SESSION["txtMensaje"])): ?>
-    <div class="alert alert-warning text-center">
-        <?= htmlspecialchars($_SESSION["txtMensaje"]); ?>
-        <?php unset($_SESSION["txtMensaje"]); ?>
-    </div>
-<?php endif; ?>
+            <!--Encabezado-->
+            <header class="page-header">
+                <div class="title-icon"><i class="fa fa-users"></i></div>
+                <h2 class="page-title">Consultar Usuarios</h2>
+                <p class="page-subtitle">Lista, estados y modificación de usuarios</p>
+            </header>
 
+            <!-- Mensaje de sesión -->
+            <?php if (isset($_SESSION["txtMensaje"])): ?>
+                <div class="alert alert-warning text-center">
+                    <?= htmlspecialchars($_SESSION["txtMensaje"]); ?>
+                    <?php unset($_SESSION["txtMensaje"]); ?>
+                </div>
+            <?php endif; ?>
 
+            <!--Tabla-->
             <form method="POST" class="form-movimiento">
                 <table id="tablaDatos" class="table table-bordered table-hover">
                     <thead class="table-light text-center">
@@ -51,12 +60,12 @@ $resultado = ConsultarUsuarios();
                                     <td><?= $fila["EstadoDescripcion"]; ?></td>
                                     <td class="text-center">
                                         <a class="btn btnAbrirModal" 
-   data-bs-toggle="modal" 
-   data-bs-target="#CambiarEstadoUsuario"
-   data-id="<?= $fila["IdUsuario"]; ?>" 
-   data-nombre="<?= $fila["Nombre"]; ?>">
-   <i class="fa <?= $fila["ID_ESTADO"] == 1 ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'; ?>" style="font-size:1.5em;"></i>
-</a>
+                                           data-bs-toggle="modal" 
+                                           data-bs-target="#CambiarEstadoUsuario"
+                                           data-id="<?= $fila["IdUsuario"]; ?>" 
+                                           data-nombre="<?= $fila["Nombre"]; ?>">
+                                           <i class="fa <?= $fila["ID_ESTADO"] == 1 ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'; ?>" style="font-size:1.5em;"></i>
+                                        </a>
 
                                         <a href="/Cliente-Servidor-Farmacia/Controllers/usuarioController.php?accion=editarUsuario&q=<?= $fila["IdUsuario"]; ?>" class="btn">
                                             <i class="fa fa-edit" style="font-size:1.5em;"></i>
@@ -88,8 +97,8 @@ $resultado = ConsultarUsuarios();
                         <input type="hidden" id="IdUsuario" name="IdUsuario">
                         <p id="lblNombre" class="text-center fw-bold"></p>
                     </div>
-                    <div class="modal-footer"><button type="submit" name="btnCambiarEstadoUsuario" class="btn btn-primary">Procesar</button>
-
+                    <div class="modal-footer">
+                        <button type="submit" name="btnCambiarEstadoUsuario" class="btn btn-primary">Procesar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
@@ -98,29 +107,25 @@ $resultado = ConsultarUsuarios();
     </div>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+    <script>
+      $(function () {
+          new DataTable('#tablaDatos', {
+              language: {
+                  url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json'
+              },
+              responsive: true
+          });
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
-<script>
-  $(function () {
-      new DataTable('#tablaDatos', {
-          language: {
-              url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json'
-          },
-          responsive: true
+          $('.btnAbrirModal').on('click', function () {
+              const id = $(this).data('id');
+              const nombre = $(this).data('nombre');
+              $('#IdUsuario').val(id);
+              $('#lblNombre').text("¿Desea cambiar el estado del usuario \"" + nombre + "\"?");
+          });
       });
-
-      $('.btnAbrirModal').on('click', function () {
-          const id = $(this).data('id');
-          const nombre = $(this).data('nombre');
-
-
-          $('#IdUsuario').val(id);
-          $('#lblNombre').text("¿Desea cambiar el estado del usuario \"" + nombre + "\"?");
-      });
-  });
-</script>
-
+    </script>
 
     <?php añadirScripts(); ?>
 </body>
