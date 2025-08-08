@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `farmaciabd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `farmaciabd`;
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: farmaciabd
 -- ------------------------------------------------------
@@ -653,7 +653,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123',1),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123',1),(3,'UsuarioCliente','cliente@gmail.com','usuario','123',1),(5,'USERCLIENTE ','PRUEBA@GMAIL.COM','JNAVARRO','123',2);
+INSERT INTO `usuario` VALUES (1,'Josue Navarro','josueadmin@email.com','josue','123',1),(2,'Abraham Cascante','abrahamcliente@email.com','abraham','123',1),(3,'USUARIO NACHO','cliente@gmail.com','usuario','123',1),(5,'USERCLIENTE ','PRUEBA@GMAIL.COM','JNAVARRO','123',2);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -987,6 +987,37 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_ACTUALIZAR_USUARIOS_SP` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_ACTUALIZAR_USUARIOS_SP`(
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_correo VARCHAR(100),
+    IN p_usuario VARCHAR(100),
+    IN p_estado INT
+)
+BEGIN
+    UPDATE USUARIO
+    SET
+        NOMBRE = p_nombre,
+        CORREO = p_correo,
+        USUARIO = p_usuario,
+        ID_ESTADO = p_estado
+    WHERE ID = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `FIDE_OBTENER_CATEGORIAS_SP` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1060,6 +1091,34 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_OBTENER_UNIDAD_MEDIDA_ACTIVA_SP`()
 BEGIN
   SELECT ID_UNIDAD_MEDIDA, NOMBRE FROM  UNIDAD_MEDIDA_ACTIVA_V;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `FIDE_OBTENER_USUARIO_POR_ID_SP` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_OBTENER_USUARIO_POR_ID_SP`(
+    IN p_id INT
+)
+BEGIN
+    SELECT 
+        u.ID AS IdUsuario,
+        u.NOMBRE,
+        u.CORREO,
+        u.USUARIO,
+        u.ID_ESTADO
+    FROM USUARIO u
+    WHERE u.ID = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1924,4 +1983,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-06 22:45:04
+-- Dump completed on 2025-08-08 13:43:24
