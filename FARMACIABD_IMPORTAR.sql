@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `farmaciabd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `farmaciabd`;
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: farmaciabd
 -- ------------------------------------------------------
@@ -683,6 +681,10 @@ LOCK TABLES `usuario_rol` WRITE;
 INSERT INTO `usuario_rol` VALUES (1,2),(2,1),(3,1),(5,1);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'farmaciabd'
+--
 
 --
 -- Dumping routines for database 'farmaciabd'
@@ -1835,12 +1837,14 @@ BEGIN
         u.CORREO,
         u.USUARIO,
         u.CONTRASENA,
+         r.ID     AS ROL_ID,
         r.NOMBRE AS ROL
     FROM USUARIO u
     JOIN USUARIO_ROL ur ON u.ID = ur.USUARIO_ID
     JOIN ROL r ON r.ID = ur.ROL_ID
     WHERE u.CORREO = pcorreo
-      AND u.CONTRASENA = pcontrasena;
+      AND u.CONTRASENA = pcontrasena
+      AND u.ID_ESTADO = 1; 
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1983,4 +1987,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-08 13:43:24
+-- Dump completed on 2025-08-14 20:51:03

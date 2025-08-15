@@ -1,9 +1,21 @@
 <?php
+session_start();
+
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/MovimientoModel.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Views/layout.php";
+if (!isset($_SESSION["ID"])) {
+    header("Location: /Cliente-Servidor-Farmacia/Views/Login/login.php");
+    exit;
+}
+if (!isset($_SESSION["ROL_ID"]) || (int)$_SESSION["ROL_ID"] !== 2) {
+    header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
+    exit;
+}
+
 
 $id_farmacia = ObtenerFarmaciasActivas();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

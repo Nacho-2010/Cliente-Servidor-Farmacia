@@ -25,9 +25,9 @@ if (isset($_POST["btnIniciarSesion"])) {
 $_SESSION["Contrasenna"] = $datos["CONTRASENA"];
 $_SESSION["CORREO"] = $datos["CORREO"];
 
-      
-        $_SESSION["ROL"] = $datos["ROL"];
- 
+      $_SESSION["ROL_ID"] = (int)$datos["ROL_ID"]; 
+$_SESSION["ROL"]    = $datos["ROL"];       
+
 
         header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
     } else {
