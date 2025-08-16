@@ -683,6 +683,51 @@ INSERT INTO `usuario_rol` VALUES (1,2),(2,1),(3,1),(5,1);
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `vw_resumen`
+--
+
+DROP TABLE IF EXISTS `vw_resumen`;
+/*!50001 DROP VIEW IF EXISTS `vw_resumen`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_resumen` AS SELECT 
+ 1 AS `ClientesActivos`,
+ 1 AS `ClientesInactivos`,
+ 1 AS `ProductosActivos`,
+ 1 AS `ProductosInactivos`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vw_top_clientes`
+--
+
+DROP TABLE IF EXISTS `vw_top_clientes`;
+/*!50001 DROP VIEW IF EXISTS `vw_top_clientes`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_top_clientes` AS SELECT 
+ 1 AS `Identificacion`,
+ 1 AS `Nombre`,
+ 1 AS `Cantidad`,
+ 1 AS `Total`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vw_top_productos`
+--
+
+DROP TABLE IF EXISTS `vw_top_productos`;
+/*!50001 DROP VIEW IF EXISTS `vw_top_productos`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_top_productos` AS SELECT 
+ 1 AS `IdProducto`,
+ 1 AS `Nombre`,
+ 1 AS `Precio`,
+ 1 AS `Total`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Dumping events for database 'farmaciabd'
 --
 
@@ -787,6 +832,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarClientesTop` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarClientesTop`(IN p_limit INT)
+BEGIN
+    SELECT * FROM VW_TOP_CLIENTES LIMIT p_limit;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ConsultarInfoUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -866,6 +930,44 @@ BEGIN
     WHERE 
         (P_NOMBRE IS NULL OR P_NOMBRE = '' OR P.NOMBRE LIKE CONCAT('%', P_NOMBRE, '%'))
         AND (P_CATEGORIA IS NULL OR P_CATEGORIA = '' OR C.NOMBRE = P_CATEGORIA);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarProductosTop` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarProductosTop`(IN p_limit INT)
+BEGIN
+    SELECT * FROM VW_TOP_PRODUCTOS LIMIT p_limit;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarResumenTop` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarResumenTop`()
+BEGIN
+    SELECT * FROM VW_RESUMEN;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1977,6 +2079,60 @@ DELIMITER ;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_resumen`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_resumen`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_resumen` AS select (select count(0) from `usuario` `u` where coalesce(`u`.`ID_ESTADO`,0) = 1) AS `ClientesActivos`,(select count(0) from `usuario` `u` where coalesce(`u`.`ID_ESTADO`,0) <> 1) AS `ClientesInactivos`,(select count(0) from (`fide_producto_tb` `p` join `fide_estado_tb` `e` on(`e`.`ID_ESTADO` = `p`.`ID_ESTADO`)) where `e`.`DESCRIPCION` = 'Activo') AS `ProductosActivos`,(select count(0) from (`fide_producto_tb` `p` join `fide_estado_tb` `e` on(`e`.`ID_ESTADO` = `p`.`ID_ESTADO`)) where `e`.`DESCRIPCION` = 'Inactivo') AS `ProductosInactivos` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_top_clientes`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_top_clientes`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_top_clientes` AS select `c`.`CEDULA` AS `Identificacion`,coalesce(`u`.`NOMBRE`,'(Sin nombre)') AS `Nombre`,count(distinct `s`.`ID_FACTURA`) AS `Cantidad`,coalesce(sum(`f`.`TOTAL`),0) AS `Total` from (((`cliente` `c` left join `usuario` `u` on(`u`.`ID` = `c`.`ID_USUARIO`)) left join `fide_solicitud_tb` `s` on(`s`.`ID_CLIENTE` = `c`.`ID_CLIENTE`)) left join `fide_factura_tb` `f` on(`f`.`ID_FACTURA` = `s`.`ID_FACTURA`)) group by `c`.`CEDULA`,`u`.`NOMBRE` order by coalesce(sum(`f`.`TOTAL`),0) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_top_productos`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_top_productos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_top_productos` AS select `p`.`CODIGO` AS `IdProducto`,`p`.`NOMBRE` AS `Nombre`,avg(coalesce(`p`.`PRECIO_UNITARIO`,0)) AS `Precio`,sum(coalesce(`ds`.`CANTIDAD_ENTREGADA`,0) * coalesce(`p`.`PRECIO_UNITARIO`,0)) AS `Total` from (((`fide_detalle_solicitud_tb` `ds` join `fide_solicitud_tb` `s` on(`s`.`ID_SOLICITUD` = `ds`.`ID_SOLICITUD`)) left join `fide_inventario_tb` `i` on(`i`.`ID_INVENTARIO` = `ds`.`ID_INVENTARIO`)) left join `fide_producto_tb` `p` on(`p`.`CODIGO` = `i`.`CODIGO`)) group by `p`.`CODIGO`,`p`.`NOMBRE` order by sum(coalesce(`ds`.`CANTIDAD_ENTREGADA`,0) * coalesce(`p`.`PRECIO_UNITARIO`,0)) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1987,4 +2143,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-14 20:51:03
+-- Dump completed on 2025-08-16 14:52:05
