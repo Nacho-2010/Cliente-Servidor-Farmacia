@@ -8,6 +8,11 @@ if (!isset($_SESSION["ID"])) {
   header("Location: /Cliente-Servidor-Farmacia/Views/Login/login.php");
   exit();
 }
+if (!isset($_SESSION["ROL_ID"]) || (int)$_SESSION["ROL_ID"] !== 2) {
+    header("Location: /Cliente-Servidor-Farmacia/Views/Home/principal.php");
+    exit;
+}
+
 
 $topProd = ConsultarProductosTop(8);   // array o mysqli_result según tu controller/model
 $topCli  = ConsultarClientesTop(8);
@@ -20,7 +25,7 @@ $resumen = ConsultarResumenTop();
 
 <?php verheader(); sidebar(); ?>
 
-<main style="margin-left: 13%; padding: 2rem; margin-top: 80px;">
+<main style="margin-left: 13%; padding: 2rem; margin-top: 130px;">
   <h2 class="mb-4">📊 Dashboard</h2>
 
   <div class="card-group mb-4">

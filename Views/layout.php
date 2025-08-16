@@ -203,7 +203,7 @@ function sidebar()
 
   echo '
         <li>
-          <a href="#">
+          <a href="/Cliente-Servidor-Farmacia/Views/Dashboard/index.php">
             <i class="fa-solid fa-chart-bar"></i>
             <span class="texto-menu">Reportes</span>
           </a>
