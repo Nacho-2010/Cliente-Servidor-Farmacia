@@ -32,4 +32,26 @@ function ObtenerProductosActivosPorCodigo()
     }
 }
 
+function ObtenerProductoPorCodigo(string $codigo)
+{
+    try {
+        $cnn = OpenDB();
+
+        $stmt = $cnn->prepare("CALL FIDE_OBTENER_PRODUCTO_POR_CODIGO_SP(?)");
+        $stmt->bind_param("s", $codigo);
+        $stmt->execute();
+        $rs = $stmt->get_result();
+        $row = $rs ? $rs->fetch_assoc() : null;
+        if ($rs)
+            $rs->free();
+        while ($cnn->more_results() && $cnn->next_result()) {
+        }
+        $stmt->close();
+        CloseDB($cnn);
+        return $row;
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return null;
+    }
+}
 ?>

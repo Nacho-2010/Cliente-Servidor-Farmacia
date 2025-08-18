@@ -1,4 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `farmaciabd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `farmaciabd`;
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: farmaciabd
 -- ------------------------------------------------------
@@ -70,7 +72,13 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `codigos_activos_v` AS SELECT 
  1 AS `CODIGO`,
- 1 AS `NOMBRE`*/;
+ 1 AS `NOMBRE`,
+ 1 AS `PRECIO_UNITARIO`,
+ 1 AS `ID_CATEGORIA_PRODUCTO`,
+ 1 AS `CATEGORIA`,
+ 1 AS `ID_UNIDAD_MEDIDA`,
+ 1 AS `UNIDAD_MEDIDA`,
+ 1 AS `URL_IMAGEN`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -1153,7 +1161,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_OBTENER_PRODUCTOS_ACTIVOS_SP`()
 BEGIN
-  SELECT CODIGO, NOMBRE
+  SELECT CODIGO, NOMBRE, PRECIO_UNITARIO,
+         ID_CATEGORIA_PRODUCTO, CATEGORIA,
+         ID_UNIDAD_MEDIDA,    UNIDAD_MEDIDA,
+         URL_IMAGEN
   FROM CODIGOS_ACTIVOS_V;
 END ;;
 DELIMITER ;
@@ -1173,8 +1184,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FIDE_OBTENER_PRODUCTO_POR_CODIGO_SP`(IN p_codigo VARCHAR(50))
 BEGIN
-  SELECT CODIGO, NOMBRE, PRECIO_UNITARIO
-  FROM PRODUCTOS_ACTIVOS_V
+  SELECT CODIGO, NOMBRE, PRECIO_UNITARIO,
+         ID_CATEGORIA_PRODUCTO, CATEGORIA,
+         ID_UNIDAD_MEDIDA,    UNIDAD_MEDIDA,
+         URL_IMAGEN
+  FROM CODIGOS_ACTIVOS_V
   WHERE CODIGO = p_codigo;
 END ;;
 DELIMITER ;
@@ -1985,7 +1999,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `codigos_activos_v` AS select `fide_producto_tb`.`CODIGO` AS `CODIGO`,`fide_producto_tb`.`NOMBRE` AS `NOMBRE` from `fide_producto_tb` where `fide_producto_tb`.`ID_ESTADO` = 1 */;
+/*!50001 VIEW `codigos_activos_v` AS select `p`.`CODIGO` AS `CODIGO`,`p`.`NOMBRE` AS `NOMBRE`,`p`.`PRECIO_UNITARIO` AS `PRECIO_UNITARIO`,`p`.`ID_CATEGORIA_PRODUCTO` AS `ID_CATEGORIA_PRODUCTO`,`c`.`NOMBRE` AS `CATEGORIA`,`p`.`ID_UNIDAD_MEDIDA` AS `ID_UNIDAD_MEDIDA`,`u`.`NOMBRE` AS `UNIDAD_MEDIDA`,`p`.`URL_IMAGEN` AS `URL_IMAGEN` from ((`fide_producto_tb` `p` join `fide_categoria_producto_tb` `c` on(`c`.`ID_CATEGORIA_PRODUCTO` = `p`.`ID_CATEGORIA_PRODUCTO`)) join `fide_unidad_medida_tb` `u` on(`u`.`ID_UNIDAD_MEDIDA` = `p`.`ID_UNIDAD_MEDIDA`)) where `p`.`ID_ESTADO` = 1 */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2143,4 +2157,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-16 14:52:05
+-- Dump completed on 2025-08-17 19:15:06
