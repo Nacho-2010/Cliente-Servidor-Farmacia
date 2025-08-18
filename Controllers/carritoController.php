@@ -9,6 +9,11 @@ if (isset($_POST["Accion"]) && $_POST["Accion"] === "AgregarCarrito") {
     AgregarCarrito($_POST["IdProducto"] ?? '', $_POST["Cantidad"] ?? 1);
 }
 
+if (isset($_POST["Accion"]) && $_POST["Accion"] === "EliminarDelCarrito") {
+    EliminarDelCarrito($_POST["IdProducto"] ?? '');
+}
+
+
 if (isset($_POST["Accion"]) && $_POST["Accion"] === "ProcesarPagoCarrito") {
     ProcesarPagoCarrito();
 }
@@ -64,6 +69,16 @@ function ProcesarPagoCarrito()
     echo $rs ? "OK" : "No se pudo procesar el pago.";
 }
 
+
+function EliminarDelCarrito($IdProducto)
+{
+    $idUsuario = $_SESSION["ID"] ?? $_SESSION["IdUsuario"] ?? null;
+    if (!$idUsuario) { echo "No autenticado."; return; }
+
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/carritoModel.php";
+    $ok = EliminarDelCarritoModel((int)$idUsuario, (int)$IdProducto);
+    echo $ok ? "OK" : "El producto no fue eliminado de su carrito.";
+}
 
 
 ?>

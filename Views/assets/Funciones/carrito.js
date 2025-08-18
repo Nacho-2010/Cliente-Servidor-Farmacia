@@ -54,7 +54,7 @@ function actualizarCantidad(idDetalle, nuevaCantidad) {
 }
 
 // Elimina un producto del carrito
-function quitarProducto(idDetalle) {
+function quitarProducto(idProducto) {
   Swal.fire({
     title: "¿Eliminar producto?",
     icon: "warning",
@@ -62,27 +62,27 @@ function quitarProducto(idDetalle) {
     confirmButtonText: "Sí, eliminar",
     cancelButtonText: "Cancelar",
   }).then((result) => {
-    if (result.isConfirmed) {
-      fetch("/Cliente-Servidor-Farmacia/Controllers/carritoController.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `accion=eliminar&id_detalle=${idDetalle}`,
+    if (!result.isConfirmed) return;
+
+    fetch("/Cliente-Servidor-Farmacia/Controllers/carritoController.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `Accion=EliminarDelCarrito&IdProducto=${encodeURIComponent(idProducto)}`, // <-- Accion y nombre correctos
+    })
+      .then((res) => res.text())   // <-- tu controller devuelve TEXTO
+      .then((t) => {
+        const r = (t || "").trim();
+        if (r === "OK") {
+          Swal.fire("Eliminado", "Producto eliminado del carrito.", "success")
+            .then(() => location.reload());
+        } else {
+          Swal.fire("Error", r || "No se pudo eliminar.", "error");
+        }
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            Swal.fire("Eliminado", data.message, "success").then(() => {
-              location.reload();
-            });
-          } else {
-            Swal.fire("Error", data.message, "error");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          Swal.fire("Error", "Ocurrió un error al eliminar.", "error");
-        });
-    }
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire("Error", "Ocurrió un error al eliminar.", "error");
+      });
   });
 }
 

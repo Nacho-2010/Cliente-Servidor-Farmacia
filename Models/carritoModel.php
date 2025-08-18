@@ -70,6 +70,33 @@ function ProcesarPagoCarritoModel($idUsuario, $descripcion = 'Venta General Clie
     }
 }
 
+/*Eliminar producto del carrito*/
+function EliminarDelCarritoModel($IdUsuario, $IdProducto)
+{
+    try {
+        $cn = OpenDB();
+
+        $stmt = $cn->prepare("CALL EliminarDelCarrito(?, ?)");
+        $stmt->bind_param("ii", $IdUsuario, $IdProducto);
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+        $estado = null;
+        if ($resultado && $fila = $resultado->fetch_assoc()) {
+            $estado = $fila["ESTADO"];
+        }
+
+        $stmt->close();
+        CloseDB($cn);
+
+        return $estado === "OK";
+    } catch (Exception $e) {
+        RegistrarError($e);
+        return false;
+    }
+}
+
+
 
 
 ?>

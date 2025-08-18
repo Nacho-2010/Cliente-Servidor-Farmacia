@@ -64,10 +64,9 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
                                                 <td>$ <?= number_format((float) $fila["Total"], 2) ?></td>
                                                 <td><?= $fila["FechaCarrito"] ?></td>
                                                 <td>
-                                                    <a class="btn btnAbrirModal" data-toggle="modal"
-                                                        data-target="#EliminarProductoCarrito"
-                                                        data-id="<?= $fila["IdProducto"] ?>"
-                                                        data-nombre="<?= htmlspecialchars($fila["Nombre"]) ?>">
+                                                    <a href="#" class="btn btnEliminar" 
+                                                        data-id="<?= $fila["IdProducto"] ?>" 
+                                                        title="Eliminar">
                                                         <i class="fa fa-trash" style="font-size:1.5em;"></i>
                                                     </a>
                                                 </td>
@@ -102,33 +101,6 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
             </div>
         </section>
 
-        <!-- Modal de confirmación -->
-        <div class="modal fade" id="EliminarProductoCarrito" tabindex="-1" role="dialog" aria-labelledby="tituloModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tituloModal">Confirmación</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <input type="hidden" id="IdProducto" name="IdProducto" class="form-control">
-                        <label id="lblNombre" name="lblNombre"></label>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" id="btnEliminarProductoCarrito" name="btnEliminarProductoCarrito"
-                            class="btn btn-primary" onclick="EliminarProductoCarrito($('#IdProducto').val())">
-                            Procesar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
 
     <!-- Footer fuera del main, como en tu Home -->
@@ -138,16 +110,18 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
     <?php añadirScripts(); ?>
     <script>
         $(function () {
-            new DataTable('#tablaDatos', {
-                language: { url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json' },
-            });
+            if (typeof DataTable !== 'undefined') {
+                new DataTable('#tablaDatos', {
+                    language: { url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json' },
+                });
+            }
 
-            $('.btnAbrirModal').on('click', function () {
-                const id = $(this).data('id');
-                const nombre = $(this).data('nombre');
-
-                $('#IdProducto').val(id);
-                $('#lblNombre').text("¿Desea eliminar el producto " + nombre + " del carrito?");
+            // Cargar datos al abrir el modal
+            $(document).on('click', '.btnEliminar', function (e) {
+                e.preventDefault();
+                const idProducto = $(this).data('id');
+                if (!idProducto) { alert('Sin identificador de producto'); return; }
+                EliminarProductoCarrito(idProducto);
             });
         });
 
@@ -156,10 +130,17 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
                 url: "../../Controllers/carritoController.php",
                 type: "POST",
                 dataType: 'text',
-                data: { Accion: "EliminarProductoCarrito", IdProducto: idProducto },
+                data: { Accion: "EliminarDelCarrito", IdProducto: idProducto },
                 success: function (response) {
-                    if (response === "OK") { window.location.reload(); }
-                    else { alert(response); }
+                    const r = (response || '').trim();
+                    if (r === "OK") {
+                        window.location.reload();
+                    } else {
+                        alert(r);
+                    }
+                },
+                error: function (xhr) {
+                    alert("Error eliminando el producto: " + xhr.status + " " + xhr.statusText);
                 }
             });
         }
