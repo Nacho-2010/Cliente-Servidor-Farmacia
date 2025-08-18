@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/eliminarProductoModel.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/modificarProductoModel.php";
+
 
 $producto = null;
 $mensaje = "";
@@ -25,17 +25,6 @@ if (isset($_POST["btnEliminarProducto"])) {
 }
 
 
-
-// Este controller solo PRE-CARGA. Crea la variable $productoModificar para la vista.
-$productoModificar = null;
-
-if (isset($_POST["btnCargarProducto"])) {
-    $codigo = trim($_POST["cmbProducto"] ?? "");
-    if ($codigo !== "") {
-        // Llama a tu SP con parámetro
-        $productoModificar = ObtenerProductoPorCodigo($codigo); // array o null
-    }
-}
 
 
 ?>
