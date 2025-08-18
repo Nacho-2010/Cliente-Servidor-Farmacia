@@ -1,78 +1,75 @@
 <?php
-
 include_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/connect.php';
 
-function AgregarAlCarritoModel($idUsuario, $codigoProducto, $cantidad)
+function AgregarCarritoModel($IdUsuario, $CodigoProducto, $Cantidad = 1)
 {
     try {
-        $conexion = OpenDB();
-        error_log("Llamando SP con: usuario={$idUsuario}, producto={$codigoProducto}, cantidad={$cantidad}");
-        $sp = $conexion->prepare("CALL FIDE_AGREGAR_AL_CARRITO_SP(?, ?, ?)");
-        $sp->bind_param("isi", $idUsuario, $codigoProducto, $cantidad);
-        $sp->execute();
-        $sp->close();
+        $cn = OpenDB();
+        $stmt = $cn->prepare("CALL AgregarAlCarrito(?, ?, ?)");
+        $stmt->bind_param("isi", $IdUsuario, $CodigoProducto, $Cantidad);
+        $ok = $stmt->execute();
+        $stmt->close();
+        CloseDB($cn);
+        return $ok;
+    } catch (Exception $error) {
+        RegistrarError($error);
+        return false;
+    }
+}
 
-        CloseDB($conexion);
-        return true;
+
+function ConsultarCarritoModel($idUsuario)
+{
+    try {
+        $cn = OpenDB();
+        $sp = "CALL ConsultarCarrito($idUsuario)";
+        $rs = $cn->query($sp);
+
+        return $rs;
     } catch (Exception $e) {
-        error_log("Error en AgregarAlCarritoModel: " . $e->getMessage());
+        RegistrarError($e);
         return false;
     }
 }
 
-function ObtenerCarritoModel($idUsuario)
+
+
+function LiberarCarrito($conexion, $resultado)
 {
-    try {
-        $conexion = OpenDB();
-        $sp = $conexion->prepare("CALL FIDE_OBTENER_CARRITO_SP(?)");
-        $sp->bind_param("i", $idUsuario);
-        $sp->execute();
-
-        $resultado = $sp->get_result();
-        $datos = $resultado->fetch_all(MYSQLI_ASSOC);
-
-        $sp->close();
-        CloseDB($conexion);
-
-        return $datos;
-    } catch (Exception $error) {
-        error_log("Error en ObtenerCarritoModel: " . $error->getMessage());
-        return [];
+    if ($resultado) {
+        $resultado->free();
     }
+    while ($conexion->more_results() && $conexion->next_result()) {
+        $extraResult = $conexion->use_result();
+        if ($extraResult instanceof mysqli_result) {
+            $extraResult->free();
+        }
+    }
+    CloseDB($conexion);
 }
 
-function QuitarDelCarritoModel($idDetalle)
+
+
+
+function ProcesarPagoCarritoModel($idUsuario, $descripcion = 'Venta General Clientes', $empresa = 'Venta Cliente', $fecha = null)
 {
     try {
-        $conexion = OpenDB();
-
-        $sp = $conexion->prepare("CALL FIDE_QUITAR_DEL_CARRITO_SP(?)");
-        $sp->bind_param("i", $idDetalle);
-        $sp->execute();
-        $sp->close();
-
-        CloseDB($conexion);
-        return true;
-    } catch (Exception $error) {
-        error_log("Error en QuitarDelCarritoModel: " . $error->getMessage());
+        $cn = OpenDB();
+        if ($fecha === null) {
+            $fecha = date('Y-m-d');
+        }
+        $desc = $cn->real_escape_string($descripcion);
+        $emp = $cn->real_escape_string($empresa);
+        $fec = $cn->real_escape_string($fecha);
+        $sp = "CALL ProcesarPagoCarrito($idUsuario, '$fec', '$desc', '$emp')";
+        $rs = $cn->query($sp);
+        return $rs;
+    } catch (Exception $e) {
+        RegistrarError($e);
         return false;
     }
 }
 
-function ActualizarCantidadCarritoModel($idDetalle, $cantidad)
-{
-    try {
-        $conexion = OpenDB();
 
-        $sp = $conexion->prepare("CALL FIDE_ACTUALIZAR_CANTIDAD_CARRITO_SP(?, ?)");
-        $sp->bind_param("ii", $idDetalle, $cantidad);
-        $sp->execute();
-        $sp->close();
 
-        CloseDB($conexion);
-        return true;
-    } catch (Exception $error) {
-        error_log("Error en ActualizarCantidadCarritoModel: " . $error->getMessage());
-        return false;
-    }
-}
+?>

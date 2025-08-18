@@ -140,6 +140,36 @@ LOCK TABLES `fide_alerta_tb` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `fide_carrito_tb`
+--
+
+DROP TABLE IF EXISTS `fide_carrito_tb`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fide_carrito_tb` (
+  `ID_CARRITO` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ID_USUARIO` bigint(11) NOT NULL,
+  `CODIGO` varchar(20) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `FECHA_AGREGADO` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`ID_CARRITO`),
+  UNIQUE KEY `UQ_FIDE_CARRITO_USR_PROD` (`ID_USUARIO`,`CODIGO`),
+  KEY `FK_CARRITO_PRODUCTO` (`CODIGO`),
+  CONSTRAINT `FK_CARRITO_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`),
+  CONSTRAINT `FK_CARRITO_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fide_carrito_tb`
+--
+
+LOCK TABLES `fide_carrito_tb` WRITE;
+/*!40000 ALTER TABLE `fide_carrito_tb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fide_carrito_tb` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `fide_categoria_producto_tb`
 --
 
@@ -315,7 +345,7 @@ CREATE TABLE `fide_inventario_tb` (
 
 LOCK TABLES `fide_inventario_tb` WRITE;
 /*!40000 ALTER TABLE `fide_inventario_tb` DISABLE KEYS */;
-INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',0,0,0,10,1),(2,'110010204',0,0,0,5,1),(3,'110010204',13,0,0,1,1),(4,'110010205',6,0,0,1,1),(5,'110010205',0,0,0,3,1),(6,'110010206',2,0,0,1,1);
+INSERT INTO `fide_inventario_tb` VALUES (1,'110010204',0,0,0,10,1),(2,'110010204',0,0,0,5,1),(3,'110010204',5,0,0,1,1),(4,'110010205',1,0,0,1,1),(5,'110010205',0,0,0,3,1),(6,'110010206',0,0,0,1,1);
 /*!40000 ALTER TABLE `fide_inventario_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +368,7 @@ CREATE TABLE `fide_lote_tb` (
   KEY `FK_LOTE_ESTADO` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_ESTADO` FOREIGN KEY (`ID_ESTADO`) REFERENCES `fide_estado_tb` (`ID_ESTADO`),
   CONSTRAINT `FK_LOTE_PRODUCTO` FOREIGN KEY (`CODIGO`) REFERENCES `fide_producto_tb` (`CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +377,7 @@ CREATE TABLE `fide_lote_tb` (
 
 LOCK TABLES `fide_lote_tb` WRITE;
 /*!40000 ALTER TABLE `fide_lote_tb` DISABLE KEYS */;
-INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1),(22,'110010204','9999','2025-07-13','2025-08-08',1),(23,'110010204','88888','2025-07-13','2025-08-07',1),(24,'110010204','888','2025-07-14','2025-08-09',1),(25,'110010204','888','2025-07-13','2025-08-23',1),(26,'110010204','88888','2025-07-13','2025-08-16',1),(27,'110010204','88888','2025-07-13','2025-08-29',1),(28,'110010204','9999','2025-07-13','2025-08-09',1),(29,'110010204','8888','2025-07-13','2025-08-24',1),(30,'110010204','9999','2025-07-13','2025-08-06',1),(31,'110010204','9999','2025-07-13','2025-07-25',1),(32,'110010204','8888888','2025-07-13','2025-08-01',1),(33,'110010204','9999','2025-07-13','2025-08-07',1),(34,'110010204','9999','2025-07-13','2025-08-29',1),(35,'110010204','8888888','2025-07-13','2025-07-25',1),(36,'110010204','88888','2025-07-13','2025-07-25',1),(37,'110010204','88888','2025-07-13','2025-08-02',1),(38,'110010204','777','2025-07-27','2025-08-10',1),(39,'110010204','888','2025-07-27','2025-07-27',1),(40,'110010204','10','2025-07-27','2025-07-27',1),(41,'110010204','7777','2025-08-02','2025-08-16',1),(42,'110010204','1','2025-08-02','2025-09-06',1),(43,'110010204','22','2025-08-02','2025-08-03',1),(44,'110010204','7777','2025-08-02','2025-08-30',1),(45,'110010205','7777','2025-08-02','2025-08-02',1),(46,'110010205','9999','2025-08-02','2025-08-30',1),(47,'110010206','7777','2025-08-03','2025-08-23',1);
+INSERT INTO `fide_lote_tb` VALUES (1,'110010204','9999','2025-07-11','2025-07-12',1),(2,'110010205','9999','2025-07-17','2025-07-11',1),(3,'110010204','9999','2025-07-01','2025-07-01',1),(4,'110010204','88888','2025-07-13','2025-07-27',1),(5,'110010204','88888','2025-07-13','2025-08-03',1),(6,'110010204','9999','2025-07-13','2025-08-10',1),(7,'110010204','8888888','2025-07-13','2025-08-03',1),(8,'110010204','9999','2025-07-20','2025-07-26',1),(9,'110010204','8888888','2025-07-19','2025-07-20',1),(10,'110010204','8888888','2025-07-13','2025-07-27',1),(11,'110010204','888','2025-07-13','2025-08-02',1),(12,'110010204','777','2025-07-14','2025-08-08',1),(13,'110010204','8888888','2025-07-13','2025-07-13',1),(14,'110010204','888','2025-07-14','2025-07-26',1),(15,'110010204','8888888','2025-07-14','2025-07-26',1),(16,'110010204','9999','2025-07-13','2025-07-27',1),(17,'110010204','8888888','2025-07-13','2025-08-09',1),(18,'110010204','9999','2025-07-13','2025-08-02',1),(19,'110010204','9999','2025-07-13','2025-08-22',1),(20,'110010204','8888888','2025-07-13','2025-08-07',1),(21,'110010204','888','2025-07-14','2025-08-08',1),(22,'110010204','9999','2025-07-13','2025-08-08',1),(23,'110010204','88888','2025-07-13','2025-08-07',1),(24,'110010204','888','2025-07-14','2025-08-09',1),(25,'110010204','888','2025-07-13','2025-08-23',1),(26,'110010204','88888','2025-07-13','2025-08-16',1),(27,'110010204','88888','2025-07-13','2025-08-29',1),(28,'110010204','9999','2025-07-13','2025-08-09',1),(29,'110010204','8888','2025-07-13','2025-08-24',1),(30,'110010204','9999','2025-07-13','2025-08-06',1),(31,'110010204','9999','2025-07-13','2025-07-25',1),(32,'110010204','8888888','2025-07-13','2025-08-01',1),(33,'110010204','9999','2025-07-13','2025-08-07',1),(34,'110010204','9999','2025-07-13','2025-08-29',1),(35,'110010204','8888888','2025-07-13','2025-07-25',1),(36,'110010204','88888','2025-07-13','2025-07-25',1),(37,'110010204','88888','2025-07-13','2025-08-02',1),(38,'110010204','777','2025-07-27','2025-08-10',1),(39,'110010204','888','2025-07-27','2025-07-27',1),(40,'110010204','10','2025-07-27','2025-07-27',1),(41,'110010204','7777','2025-08-02','2025-08-16',1),(42,'110010204','1','2025-08-02','2025-09-06',1),(43,'110010204','22','2025-08-02','2025-08-03',1),(44,'110010204','7777','2025-08-02','2025-08-30',1),(45,'110010205','7777','2025-08-02','2025-08-02',1),(46,'110010205','9999','2025-08-02','2025-08-30',1),(47,'110010206','7777','2025-08-03','2025-08-23',1),(48,'110010204','9999','2025-08-17','2025-08-30',1),(49,'110010204','888','2025-08-17','2025-09-06',1),(50,'110010205','9999','2025-08-17','2025-08-27',1);
 /*!40000 ALTER TABLE `fide_lote_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +406,7 @@ CREATE TABLE `fide_movimiento_tb` (
   CONSTRAINT `FK_MOVIMIENTO_FARMACIA` FOREIGN KEY (`ID_FARMACIA`) REFERENCES `fide_farmacia_tb` (`ID_FARMACIA`),
   CONSTRAINT `FK_MOVIMIENTO_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `fide_inventario_tb` (`ID_INVENTARIO`),
   CONSTRAINT `FK_MOVIMIENTO_LOTE` FOREIGN KEY (`ID_LOTE`) REFERENCES `fide_lote_tb` (`ID_LOTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +415,7 @@ CREATE TABLE `fide_movimiento_tb` (
 
 LOCK TABLES `fide_movimiento_tb` WRITE;
 /*!40000 ALTER TABLE `fide_movimiento_tb` DISABLE KEYS */;
-INSERT INTO `fide_movimiento_tb` VALUES (47,3,41,'2025-08-02','2025-08-31','Entrada',3,'','',1),(48,3,41,'2025-08-02','2025-09-24','Entrada',3,'','',1),(49,3,41,'2025-08-02','2025-08-30','Entrada',3,'','',1),(50,3,42,'2025-08-02','2025-09-06','Entrada',2,'','',1),(51,3,43,'2025-08-02','2025-08-03','Entrada',1,'','',1),(52,3,43,'2025-08-02','2025-08-03','Salida',1,'','',1),(53,3,41,'2025-08-02','2025-08-16','Salida',2,'','',1),(54,3,44,'2025-08-02','2025-08-30','Entrada',2,'','',1),(55,3,44,'2025-08-02','2025-08-30','Entrada',2,'','',1),(56,4,45,'2025-08-02','2025-08-02','Entrada',3,'','',1),(57,4,46,'2025-08-02','2025-08-30','Entrada',3,'','',1),(58,6,47,'2025-08-03','2025-08-23','Entrada',2,'','',1);
+INSERT INTO `fide_movimiento_tb` VALUES (60,3,48,'2025-08-17','2025-08-30','Entrada',5,'','',1),(61,3,49,'2025-08-17','2025-09-06','Entrada',2,'','',1),(62,4,50,'2025-08-17','2025-08-27','Entrada',3,'','',1),(63,3,48,'2025-08-18','2025-08-30','Salida',1,'Venta General Clientes','Venta Cliente',1),(64,4,50,'2025-08-18','2025-08-27','Salida',1,'Venta General Clientes','Venta Cliente',1),(65,4,50,'2025-08-18','2025-08-27','Salida',1,'Venta General Clientes','Venta Cliente',1),(66,3,48,'2025-08-18','2025-08-30','Salida',1,'Venta General Clientes','Venta Cliente',1);
 /*!40000 ALTER TABLE `fide_movimiento_tb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -766,6 +796,102 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AgregarAlCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarAlCarrito`(
+    IN p_id_usuario BIGINT,
+    IN p_codigo_producto VARCHAR(20),
+    IN p_cantidad INT
+)
+BEGIN
+    -- ===== Variables =====
+    DECLARE v_existe_usr  INT DEFAULT 0;
+    DECLARE v_existe_prod INT DEFAULT 0;
+    DECLARE v_id_carr     BIGINT;
+    DECLARE v_now         DATETIME;
+
+    -- ===== Handler de error: log en TERROR + rollback + resignal =====
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        GET DIAGNOSTICS CONDITION 1 @msg = MESSAGE_TEXT;
+        ROLLBACK;
+        INSERT INTO TERROR (DESCRIPCION, FECHAHORA)
+        VALUES (CONCAT('AgregarAlCarrito -> ', COALESCE(@msg,'Error no especificado')), NOW());
+        RESIGNAL;
+    END;
+
+    -- ===== Validaciones =====
+    IF p_cantidad IS NULL OR p_cantidad <= 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La cantidad debe ser mayor a 0';
+    END IF;
+
+    SELECT COUNT(*) INTO v_existe_usr
+      FROM USUARIO
+     WHERE ID = p_id_usuario;
+
+    IF v_existe_usr = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El usuario no existe';
+    END IF;
+
+    SELECT COUNT(*) INTO v_existe_prod
+      FROM FIDE_PRODUCTO_TB
+     WHERE CODIGO = p_codigo_producto;
+
+    IF v_existe_prod = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El producto no existe';
+    END IF;
+
+    -- ===== Lógica principal =====
+    SET v_now = NOW();
+    START TRANSACTION;
+
+    -- 1) Intentar actualizar si ya existe el ítem en el carrito
+    UPDATE FIDE_CARRITO_TB
+       SET CANTIDAD = CANTIDAD + p_cantidad,
+           FECHA_AGREGADO = v_now
+     WHERE ID_USUARIO = p_id_usuario
+       AND CODIGO     = p_codigo_producto;
+
+    -- 2) Si no existía, insertarlo
+    IF ROW_COUNT() = 0 THEN
+        INSERT INTO FIDE_CARRITO_TB (ID_USUARIO, CODIGO, CANTIDAD, FECHA_AGREGADO)
+        VALUES (p_id_usuario, p_codigo_producto, p_cantidad, v_now);
+
+        SET v_id_carr = LAST_INSERT_ID();
+    ELSE
+        SELECT ID_CARRITO INTO v_id_carr
+          FROM FIDE_CARRITO_TB
+         WHERE ID_USUARIO = p_id_usuario
+           AND CODIGO     = p_codigo_producto;
+    END IF;
+
+    COMMIT;
+
+    -- ===== Respuesta estándar =====
+    SELECT
+        v_id_carr              AS ID_CARRITO,
+        p_id_usuario           AS ID_USUARIO,
+        p_codigo_producto      AS CODIGO,
+        p_cantidad             AS CANTIDAD_AGREGADA,
+        'OK'                   AS ESTADO,
+        'Agregado/Actualizado en carrito' AS MENSAJE;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `BuscarProductoPorCodigo` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -834,6 +960,43 @@ BEGIN
     ELSE
         UPDATE USUARIO SET ID_ESTADO = 1 WHERE ID = pIdUsuario;
     END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarCarrito`(
+  IN pIdUsuario BIGINT
+)
+BEGIN
+  SELECT
+      c.ID_CARRITO                                 AS IdCarrito,
+      c.ID_USUARIO                                 AS IdUsuario,
+      c.CODIGO                                     AS IdProducto,
+      p.NOMBRE                                     AS Nombre,
+      IFNULL(c.CANTIDAD, 0)                        AS Cantidad,
+      IFNULL(p.PRECIO_UNITARIO, 0)                 AS Precio,
+      c.FECHA_AGREGADO                             AS FechaCarrito,
+      ROUND(p.PRECIO_UNITARIO * c.CANTIDAD, 2)     AS SubTotal,
+      ROUND(p.PRECIO_UNITARIO * c.CANTIDAD * 0.13, 2) AS Impuesto,
+      ROUND(p.PRECIO_UNITARIO * c.CANTIDAD * 1.13, 2) AS Total,
+      -- total general del carrito (misma consulta, una sola salida)
+      ROUND(SUM(p.PRECIO_UNITARIO * c.CANTIDAD * 1.13) OVER (), 2) AS TotalCarrito
+  FROM FIDE_CARRITO_TB c
+  JOIN FIDE_PRODUCTO_TB p ON p.CODIGO = c.CODIGO
+  WHERE c.ID_USUARIO = pIdUsuario
+  ORDER BY c.FECHA_AGREGADO DESC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1861,6 +2024,144 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ProcesarPagoCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProcesarPagoCarrito`(
+    IN p_id_usuario BIGINT,
+    IN p_fecha DATE,
+    IN p_descripcion VARCHAR(255),
+    IN p_empresa VARCHAR(100)
+)
+BEGIN
+    DECLARE v_cod VARCHAR(20);
+    DECLARE v_cant INT;
+    DECLARE v_remanente INT;
+
+    DECLARE v_id_farmacia INT;
+    DECLARE v_nom_farmacia VARCHAR(100);
+    DECLARE v_disp INT;
+
+    DECLARE v_nom_prod VARCHAR(100);
+    DECLARE v_take INT;
+
+    DECLARE done_items TINYINT DEFAULT 0;
+
+    DECLARE v_msg VARCHAR(255);
+
+    DECLARE cur_items CURSOR FOR
+        SELECT CODIGO, CANTIDAD
+        FROM FIDE_CARRITO_TB
+        WHERE ID_USUARIO = p_id_usuario
+        ORDER BY ID_CARRITO;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_items = 1;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        INSERT INTO TERROR (DESCRIPCION, FECHAHORA) VALUES ('ProcesarPagoCarrito -> Error SQL', NOW());
+    END;
+
+    DROP TEMPORARY TABLE IF EXISTS tmp_carrito_sedes;
+    CREATE TEMPORARY TABLE tmp_carrito_sedes (
+        CODIGO VARCHAR(20) NOT NULL,
+        NOMBRE_PRODUCTO VARCHAR(100),
+        ID_FARMACIA INT NOT NULL,
+        NOMBRE_FARMACIA VARCHAR(100),
+        CANTIDAD_TOMADA INT NOT NULL
+    ) ENGINE=MEMORY;
+
+    START TRANSACTION;
+
+    OPEN cur_items;
+    items_loop: LOOP
+        FETCH cur_items INTO v_cod, v_cant;
+        IF done_items = 1 THEN
+            LEAVE items_loop;
+        END IF;
+
+        SET v_remanente = v_cant;
+
+        IF (SELECT IFNULL(SUM(CANTIDAD_DISPONIBLE),0) FROM FIDE_INVENTARIO_TB WHERE CODIGO = v_cod) < v_cant THEN
+            SET v_msg = CONCAT('Stock insuficiente para el producto ', v_cod);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = v_msg;
+        END IF;
+
+        SET v_nom_prod = (SELECT NOMBRE FROM FIDE_PRODUCTO_TB WHERE CODIGO = v_cod LIMIT 1);
+
+        BEGIN
+            DECLARE done_sedes TINYINT DEFAULT 0;
+            DECLARE cur_sedes CURSOR FOR
+                SELECT I.ID_FARMACIA, F.NOMBRE, I.CANTIDAD_DISPONIBLE
+                FROM FIDE_INVENTARIO_TB I
+                JOIN FIDE_FARMACIA_TB F ON F.ID_FARMACIA = I.ID_FARMACIA
+                WHERE I.CODIGO = v_cod AND I.CANTIDAD_DISPONIBLE > 0
+                ORDER BY I.CANTIDAD_DISPONIBLE DESC;
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_sedes = 1;
+
+            OPEN cur_sedes;
+            sedes_loop: LOOP
+                FETCH cur_sedes INTO v_id_farmacia, v_nom_farmacia, v_disp;
+                IF done_sedes = 1 OR v_remanente <= 0 THEN
+                    LEAVE sedes_loop;
+                END IF;
+
+                SET v_take = LEAST(v_remanente, v_disp);
+                IF v_take > 0 THEN
+                    CALL GenerarSalidaPorLotes(
+                        v_cod,
+                        v_id_farmacia,
+                        v_take,
+                        p_fecha,
+                        p_descripcion,
+                        p_empresa
+                    );
+
+                    INSERT INTO tmp_carrito_sedes (CODIGO, NOMBRE_PRODUCTO, ID_FARMACIA, NOMBRE_FARMACIA, CANTIDAD_TOMADA)
+                    VALUES (v_cod, v_nom_prod, v_id_farmacia, v_nom_farmacia, v_take);
+
+                    SET v_remanente = v_remanente - v_take;
+                END IF;
+            END LOOP sedes_loop;
+            CLOSE cur_sedes;
+        END;
+
+        IF v_remanente > 0 THEN
+            SET v_msg = CONCAT('No fue posible completar la cantidad para el producto ', v_cod);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = v_msg;
+        END IF;
+
+    END LOOP items_loop;
+    CLOSE cur_items;
+
+    DELETE FROM FIDE_CARRITO_TB WHERE ID_USUARIO = p_id_usuario;
+
+    COMMIT;
+
+    SELECT
+        t.CODIGO AS IdProducto,
+        t.NOMBRE_PRODUCTO AS Nombre,
+        SUM(t.CANTIDAD_TOMADA) AS CantidadTotal,
+        COUNT(DISTINCT t.ID_FARMACIA) AS SedesInvolucradas,
+        GROUP_CONCAT(CONCAT(t.NOMBRE_FARMACIA, ':', t.CANTIDAD_TOMADA) ORDER BY t.NOMBRE_FARMACIA SEPARATOR ' | ') AS DetalleSedes
+    FROM tmp_carrito_sedes t
+    GROUP BY t.CODIGO, t.NOMBRE_PRODUCTO
+    ORDER BY t.NOMBRE_PRODUCTO;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RegistrarError` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2157,4 +2458,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-17 19:15:06
+-- Dump completed on 2025-08-17 23:54:08

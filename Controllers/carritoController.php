@@ -1,66 +1,69 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/Cliente-Servidor-Farmacia/Models/carritoModel.php";
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/Cliente-Servidor-Farmacia/Models/carritoModel.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-session_start();
+if (isset($_POST["Accion"]) && $_POST["Accion"] === "AgregarCarrito") {
+    AgregarCarrito($_POST["IdProducto"] ?? '', $_POST["Cantidad"] ?? 1);
+}
 
-$accion = $_POST["accion"] ?? '';
+if (isset($_POST["Accion"]) && $_POST["Accion"] === "ProcesarPagoCarrito") {
+    ProcesarPagoCarrito();
+}
 
-if ($accion === 'agregar') {
+
+function AgregarCarrito($IdProducto, $Cantidad = 1)
+{
     $idUsuario = $_SESSION["ID"] ?? null;
-    $codigo = $_POST["codigo"] ?? '';
-    $cantidad = $_POST["cantidad"] ?? 1;
-
-    if (!$idUsuario || !$codigo) {
-        echo json_encode(["success" => false, "message" => "Datos incompletos."]);
-        exit;
+    if (!$idUsuario) {
+        echo "No autenticado.";
+        return;
     }
 
-    $exito = AgregarAlCarritoModel($idUsuario, $codigo, $cantidad);
+    $ok = AgregarCarritoModel((int) $idUsuario, (string) $IdProducto, (int) $Cantidad);
 
-    if ($exito) {
-        echo json_encode(["success" => true, "message" => "Producto agregado al carrito."]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Error al agregar al carrito."]);
+    echo $ok ? "OK" : "El producto no fue agregado a su carrito.";
+}
+
+
+
+
+function ConsultarCarrito()
+{
+    $idUsuario = $_SESSION["ID"] ?? null;
+    if (!$idUsuario)
+        return false;
+
+    $resultado = ConsultarCarritoModel((int) $idUsuario);
+
+
+    $_SESSION["Total"] = 0.00;
+    if ($resultado && $resultado->num_rows > 0) {
+        $first = $resultado->fetch_assoc();
+        $_SESSION["Total"] = (float) $first['TotalCarrito'];
+        $resultado->data_seek(0);
     }
-    exit;
+    return $resultado;
 }
 
-if ($accion === 'actualizar') {
-    $idDetalle = $_POST["id_detalle"] ?? 0;
-    $cantidad = $_POST["cantidad"] ?? 1;
 
-    $exito = ActualizarCantidadCarrito($idDetalle, $cantidad);
-    echo json_encode([
-        "success" => $exito,
-        "message" => $exito ? "Cantidad actualizada." : "No se pudo actualizar."
-    ]);
-    exit;
-}
 
-if ($accion === 'eliminar') {
-    $idDetalle = $_POST["id_detalle"] ?? 0;
 
-    $exito = QuitarDelCarrito($idDetalle);
-    echo json_encode([
-        "success" => $exito,
-        "message" => $exito ? "Producto eliminado." : "No se pudo eliminar."
-    ]);
-    exit;
-}
-
-// Para otras llamadas internas
-function ObtenerCarrito($idUsuario)
+function ProcesarPagoCarrito()
 {
-    return ObtenerCarritoModel($idUsuario);
+    $idUsuario = $_SESSION["ID"] ?? null;
+    if (!$idUsuario) {
+        echo "No autenticado.";
+        return;
+    }
+
+    $rs = ProcesarPagoCarritoModel((int) $idUsuario, 'Venta General Clientes', 'Venta Cliente');
+
+    echo $rs ? "OK" : "No se pudo procesar el pago.";
 }
 
-function QuitarDelCarrito($idDetalle)
-{
-    return QuitarDelCarritoModel($idDetalle);
-}
 
-function ActualizarCantidadCarrito($idDetalle, $cantidad)
-{
-    return ActualizarCantidadCarritoModel($idDetalle, $cantidad);
-}
+
+?>
