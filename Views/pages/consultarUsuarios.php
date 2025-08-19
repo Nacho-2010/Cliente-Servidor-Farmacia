@@ -134,7 +134,7 @@ $resultado = ConsultarUsuarios();
         dom: 'ft'                    // solo filtro (f) + tabla (t)
         });
 
-        // placeholder bonito para el buscador
+    
         $('#tablaDatos_filter input').attr('placeholder', 'Buscar usuario…');
 
         $(document).on('click', '.btnAbrirModal', function () {

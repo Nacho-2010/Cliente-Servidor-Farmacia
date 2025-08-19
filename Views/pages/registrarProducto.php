@@ -119,7 +119,7 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
       </form>
 
       <?php if (!empty($producto)): ?>
-        <div class="card mx-auto mt-4" style="max-width: 700px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);">
+        <div class="card mx-auto mt-4">
           <div class="card-body">
             <h5 class="card-title">Detalles del Producto</h5>
             <p><strong>Nombre:</strong> <?= htmlspecialchars($producto["NOMBRE"]) ?></p>
@@ -194,7 +194,7 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
           <img id="imgPreviewProducto"
             src="<?= isset($productoModificar['URL_IMAGEN']) ? htmlspecialchars($productoModificar['URL_IMAGEN']) : '' ?>"
             alt="Imagen del producto"
-            style="max-height:150px; <?= empty($productoModificar['URL_IMAGEN']) ? 'display:none;' : '' ?>; border:1px solid #ddd; border-radius:8px; padding:4px;">
+            style="max-height:150px; <?= empty($productoModificar['URL_IMAGEN']) ? 'display:none;' : '' ?>;">
         </div>
 
         <div class="mb-3">
@@ -209,9 +209,6 @@ $productosActivos = ObtenerProductosActivosPorCodigo();
         </div>
       </form>
     </section>
-
-
-
 
   </main>
 

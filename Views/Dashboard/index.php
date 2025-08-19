@@ -21,6 +21,12 @@ $resumen = ConsultarResumenTop();
 <!DOCTYPE html>
 <html lang="es">
 <?php añadirCSS(); ?>
+
+<head>
+  <link rel="stylesheet" href="/Cliente-Servidor-Farmacia/Views/assets/Estilos/dashboard.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
+</head>
+
 <body>
 
 <?php verheader(); sidebar(); ?>
@@ -113,7 +119,6 @@ $resumen = ConsultarResumenTop();
   </div>
 </main>
 
-<?php verfooter(); ?>
 <?php añadirScripts(); ?>
 </body>
 </html>

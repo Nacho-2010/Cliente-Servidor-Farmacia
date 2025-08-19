@@ -36,7 +36,7 @@ añadirCSS(); //<head> con CSS
           <p class="hero__legend">Ofrecemos atención personalizada, productos de calidad y el compromiso de cuidar tu
             salud en todo momento.</p>
           <div class="hero__btn">
-            <a href="producto.php" class="btn btn__invite">
+            <a href="compra.php" class="btn btn__invite">
               <i class="fa-solid fa-arrow-right"></i> Ver productos disponibles
             </a>
           </div>
@@ -70,44 +70,53 @@ añadirCSS(); //<head> con CSS
     <!-- Productos -->
     <section class="menu">
       <div class="menu__container">
-        <h2 class="menu__title">Algunos Productos</h2>
+        <h2 class="menu__title">Consejos de Salud</h2>
         <div class="menu__content">
 
-          <!-- Tarjeta Producto 1 -->
+          <!-- Consejo 1 -->
           <div class="card">
-            <img class="acetaminofen__image" src="../assets/Imagenes/acetaminofen.jpg" alt="acetaminofen" />
+            <img class="card__image" src="../assets/Imagenes/hidratacion.jpg" alt="Hidratación diaria" />
             <div class="menu__info">
-              <h3 class="card__title">Pastilla Acetaminofen</h3>
-              <p class="card__text">La acetaminofén, también conocido como paracetamol...</p>
-              <div class="cart__price">
-                <p class="price">₡1.350</p>
-                <i class="fa-solid fa-cart-plus"></i>
+              <h3 class="card__title">Hidratación diaria</h3>
+              <p class="card__text">
+                Toma 6–8 vasos de agua al día. Evita el exceso de bebidas azucaradas y
+                fíjate en señales de deshidratación: labios secos, dolor de cabeza o cansancio.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Bienestar general</small>
+                <a href="/Cliente-Servidor-Farmacia/Views/pages/consejos.php#hidratacion" class="btn btn-primary btn-sm">Leer más</a>
               </div>
             </div>
           </div>
 
-          <!-- Tarjeta Producto 2 -->
+          <!-- Consejo 2 -->
           <div class="card">
-            <img class="card__image" src="../assets/Imagenes/colgate2.jpg" alt="COLGATE" />
+            <img class="card__image" src="../assets/Imagenes/medicacion.jpg" alt="Uso responsable de medicamentos" />
             <div class="menu__info">
-              <h3 class="card__title">Pasta Dental Colgate Triple Acción</h3>
-              <p class="card__text">Ayuda a prevenir las caries, combate el mal aliento...</p>
-              <div class="cart__price">
-                <p class="price">₡2.050</p>
-                <i class="fa-solid fa-cart-plus"></i>
+              <h3 class="card__title">Uso responsable de medicamentos</h3>
+              <p class="card__text">
+                No te automediques. Lee la etiqueta, respeta las dosis y horarios. Si tomas
+                más de un fármaco, consulta por posibles interacciones.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Seguridad del paciente</small>
+                <a href="/Cliente-Servidor-Farmacia/Views/pages/consejos.php#medicacion" class="btn btn-primary btn-sm">Leer más</a>
               </div>
             </div>
           </div>
 
-          <!-- Tarjeta Producto 3 -->
+          <!-- Consejo 3 -->
           <div class="card">
-            <img class="card__image" src="../assets/Imagenes/dolo.jpg" alt="DOLO-NEUROBIÓN" />
+            <img class="card__image" src="../assets/Imagenes/preventivo.jpg" alt="Prevención y chequeos" />
             <div class="menu__info">
-              <h3 class="card__title">DOLO-NEUROBIÓN N TABLETAS</h3>
-              <p class="card__text">Se usa para aliviar el dolor e inflamación asociados a problemas musculares...</p>
-              <div class="cart__price">
-                <p class="price">₡1.500</p>
-                <i class="fa-solid fa-cart-plus"></i>
+              <h3 class="card__title">Prevención y chequeos</h3>
+              <p class="card__text">
+                Mantén tus vacunas al día, usa protector solar (SPF 30+), duerme bien y realiza
+                chequeos médicos periódicos: prevenir es cuidar tu futuro.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Prevención</small>
+                <a href="/Cliente-Servidor-Farmacia/Views/pages/consejos.php#preventivo" class="btn btn-primary btn-sm">Leer más</a>
               </div>
             </div>
           </div>

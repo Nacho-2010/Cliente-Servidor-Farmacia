@@ -194,7 +194,7 @@ function sidebar()
         </li>
         <li>
           <a href="/Cliente-Servidor-Farmacia/Views/pages/consultarUsuarios.php">
-            <i class="fa-solid fa-box"></i>
+            <i class="fa-solid fa-user-gear"></i>
             <span class="texto-menu">Mantenimiento Usuarios</span>
           </a>
         </li>

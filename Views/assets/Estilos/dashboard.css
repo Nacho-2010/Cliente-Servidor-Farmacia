@@ -1,7 +1,7 @@
 /* Fondo para esta página */
 body{
   min-height: 100vh;
-  background: url('/Cliente-Servidor-Farmacia/Views/assets/Imagenes/FondoImagen.jpg')
+  background: url('/Cliente-Servidor-Farmacia/Views/assets/Imagenes/fondodash.jpg')
               center center / cover no-repeat fixed;
 }
 
