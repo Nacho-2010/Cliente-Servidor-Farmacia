@@ -1,22 +1,81 @@
-* Centrar el contenido de la página */
-.consultar-container{max-width:1100px;margin:0 auto;}
-
-/* Encabezado*/
-.page-header{text-align:center;margin:6px auto 18px;}
-.page-title{
-  margin:0;
-  font-weight:700;
-  letter-spacing:.4px;
-  font-size:clamp(1.25rem,2.2vw + .5rem,1.75rem);
+/* Fondo para esta página */
+body{
+  min-height: 100vh;
+  background: url('/Cliente-Servidor-Farmacia/Views/assets/Imagenes/FondoImagen.jpg')
+              center center / cover no-repeat fixed;
 }
-.page-subtitle{margin:.25rem 0 0;color:#6c757d;font-size:.95rem}
 
-/* Icono en caja suave */
-.title-icon{
-  width:56px;height:56px;margin:0 auto .5rem;
-  display:grid;place-items:center;border-radius:14px;
-  background:linear-gradient(135deg,#e8f0fe,#e6f4ea);
-  box-shadow:0 6px 14px rgba(0,0,0,.08);
+/* Contenedor ancho tipo tarjeta */
+.main-content{
+  max-width: 1200px;
+  width: 95%;
+  margin: 90px auto 32px;
+  padding: 20px 28px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,.2);
 }
-.title-icon i{font-size:1.25rem;color:#0d6efd}
 
+h2 {
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/*-----------------------------------*/
+/* ====== DataTables: paginación bonita ====== */
+.dataTables_wrapper .dataTables_paginate{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .25rem;
+  padding: .5rem .25rem;
+  flex-wrap: wrap;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #0d6efd !important;       /* color primario */
+  border-radius: 999px;
+  padding: .35rem .7rem;
+  margin: 0 .125rem;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  transition: all .15s ease;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+  background: #f3f6ff;
+  border-color: #cfe0ff;
+  color: #0a58ca !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current{
+  background: #0d6efd !important;
+  color: #fff !important;
+  border-color: #0d6efd !important;
+  box-shadow: 0 4px 10px rgba(13,110,253,.25);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled{
+  opacity: .5;
+  cursor: not-allowed;
+  background: #f8f9fa !important;
+  color: #9ca3af !important;
+  border-color: #e5e7eb !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .ellipsis{
+  border: 0;
+  background: transparent;
+  color: #9ca3af !important;
+  padding: .35rem .25rem;
+}
+
+/* Opcional: quitar borde/outline feo al hacer click */
+.dataTables_wrapper .dataTables_paginate .paginate_button:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13,110,253,.15);
+}

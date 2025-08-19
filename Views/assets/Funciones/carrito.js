@@ -1,8 +1,44 @@
+/***********************
+ * Controles de cantidad
+ ***********************/
+function incQty(btn, max) {
+  const input = btn.parentElement.querySelector('.qty-input');
+  let v = parseInt(input.value || 1, 10);
+  v = isNaN(v) ? 1 : v + 1;
+  if (typeof max === 'number' && v > max) v = max;
+  input.value = v;
+}
+
+function decQty(btn) {
+  const input = btn.parentElement.querySelector('.qty-input');
+  let v = parseInt(input.value || 1, 10);
+  v = isNaN(v) ? 1 : v - 1;
+  if (v < 1) v = 1;
+  input.value = v;
+}
+
+function agregarDesdeCard(btn, codigoProducto, stockMax) {
+  const input = btn.closest('.card').querySelector('.qty-input');
+  let cantidad = parseInt(input?.value || 1, 10);
+  if (isNaN(cantidad) || cantidad < 1) cantidad = 1;
+  if (typeof stockMax === 'number' && cantidad > stockMax) {
+    Swal.fire("Cantidad inválida", `Solo hay ${stockMax} disponibles.`, "warning");
+    input.value = stockMax;
+    return;
+  }
+  AgregarCarrito(codigoProducto, cantidad);
+}
+
+
 //Añade al carrito
-function AgregarCarrito(codigoProducto) {
-  const body = `Accion=AgregarCarrito&IdProducto=${encodeURIComponent(
-    codigoProducto
-  )}&Cantidad=1`;
+function AgregarCarrito(codigoProducto, cantidad = 1) {
+  cantidad = parseInt(cantidad, 10);
+  if (!cantidad || cantidad < 1) {
+    Swal.fire("Cantidad inválida", "La cantidad debe ser mayor a 0.", "warning");
+    return;
+  }
+
+  const body = `Accion=AgregarCarrito&IdProducto=${encodeURIComponent(codigoProducto)}&Cantidad=${encodeURIComponent(cantidad)}`;
 
   fetch("/Cliente-Servidor-Farmacia/Controllers/carritoController.php", {
     method: "POST",
@@ -12,17 +48,13 @@ function AgregarCarrito(codigoProducto) {
   })
     .then((r) => r.text())
     .then((t) => {
-      if (t.trim() === "OK") {
+      if ((t || "").trim() === "OK") {
         Swal.fire("Agregado", "El producto se agregó al carrito.", "success");
       } else {
-        Swal.fire(
-          "Error",
-          t || "El producto no fue agregado a su carrito.",
-          "error"
-        );
+        Swal.fire("Error", t || "El producto no fue agregado a su carrito.", "error");
       }
     })
-    .catch((err) => Swal.fire("Error", "Error al agregar producto", "error"));
+    .catch(() => Swal.fire("Error", "Error al agregar producto", "error"));
 }
 
 // Actualiza la cantidad de un producto en el carrito
@@ -67,7 +99,7 @@ function quitarProducto(idProducto) {
     fetch("/Cliente-Servidor-Farmacia/Controllers/carritoController.php", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `Accion=EliminarDelCarrito&IdProducto=${encodeURIComponent(idProducto)}`, // <-- Accion y nombre correctos
+      body: `Accion=EliminarDelCarrito&IdProducto=${encodeURIComponent(idProducto)}`, 
     })
       .then((res) => res.text())   // <-- tu controller devuelve TEXTO
       .then((t) => {

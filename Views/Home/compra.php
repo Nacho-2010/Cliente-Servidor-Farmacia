@@ -72,13 +72,27 @@ if (!empty($filtroNombre) || !empty($filtroCategoria)) {
                       Disponibles: <?= ($stockTotal > 0) ? $stockTotal : 'Producto agotado' ?>
                     </p>
                     <div class="mt-auto text-center">
-                      <?php if ($stockTotal > 0): ?>
-                        <button class="btn btn-primary" onclick="AgregarCarrito('<?= $fila["CODIGO"] ?>')">Agregar al
-                          carrito</button>
-                      <?php else: ?>
-                        <span class="text-danger">Producto agotado</span>
-                      <?php endif; ?>
-                    </div>
+                        <?php if ($stockTotal > 0): ?>
+                          <!-- Control de cantidad -->
+                          <div class="d-inline-flex align-items-center mb-2" style="gap:.5rem">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="decQty(this)">−</button>
+                            <input
+                              type="number"
+                              class="form-control form-control-sm qty-input"
+                              value="1" min="1" max="<?= (int)$stockTotal ?>"
+                              style="width:80px;text-align:center">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="incQty(this, <?= (int)$stockTotal ?>)">+</button>
+                          </div>
+
+                          <!-- Botón que usa la cantidad del input de ESTA card -->
+                          <button class="btn btn-primary"
+                                  onclick="agregarDesdeCard(this, '<?= $fila['CODIGO'] ?>', <?= (int)$stockTotal ?>)">
+                            Agregar al carrito
+                          </button>
+                        <?php else: ?>
+                          <span class="text-danger">Producto agotado</span>
+                        <?php endif; ?>
+                     </div>
                   </div>
                 </div>
               </div>
