@@ -6,8 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
-
 $resultado = ConsultarCarrito();
 $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
 ?>
@@ -20,10 +18,7 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
     <?php verheader(); ?>
     <?php sidebar(); ?>
 
-    <!-- Usamos el mismo patrón de Home: main con margin-left -->
     <main style="margin-left: 11%">
-
-        <!-- Sección contenedora estilo "menu" de tu Home -->
         <section class="menu">
             <div class="menu__container">
 
@@ -100,12 +95,32 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
 
             </div>
         </section>
-
     </main>
 
-    <!-- Footer fuera del main, como en tu Home -->
     <?php verfooter(); ?>
+
+    <!-- Modal Gracias -->
+    <div class="modal fade" id="modalGracias" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title w-100">¡Gracias por su compra!</h5>
+          </div>
+          <div class="modal-body">
+            <i class="fa fa-check-circle" style="font-size:4em; color:green;"></i>
+            <p class="mt-3" style="font-size: 16pt;">Su pago fue procesado con éxito.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS (para que funcione el modal) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <?php añadirScripts(); ?>
     <script>
@@ -116,7 +131,6 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
                 });
             }
 
-            // Cargar datos al abrir el modal
             $(document).on('click', '.btnEliminar', function (e) {
                 e.preventDefault();
                 const idProducto = $(this).data('id');
@@ -132,11 +146,10 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
                 dataType: 'text',
                 data: { Accion: "EliminarDelCarrito", IdProducto: idProducto },
                 success: function (response) {
-                    const r = (response || '').trim();
-                    if (r === "OK") {
+                    if ((response || '').trim() === "OK") {
                         window.location.reload();
                     } else {
-                        alert(r);
+                        alert(response);
                     }
                 },
                 error: function (xhr) {
@@ -152,12 +165,19 @@ $totalSesion = isset($_SESSION["Total"]) ? (float) $_SESSION["Total"] : 0.00;
                 dataType: 'text',
                 data: { Accion: "ProcesarPagoCarrito" },
                 success: function (response) {
-                    if (response === "OK") { window.location.reload(); }
-                    else { alert(response); }
+                    if ((response || '').trim() === "OK") {
+                        // Mostrar modal en vez de mostrar "OK"
+                        var modal = new bootstrap.Modal(document.getElementById('modalGracias'));
+                        modal.show();
+
+                        // Opcional: limpiar carrito o redirigir después de 3 seg.
+                        setTimeout(() => { window.location.href = "/Cliente-Servidor-Farmacia/Views/Home/principal.php"; }, 3000);
+                    } else {
+                        alert(response);
+                    }
                 }
             });
         }
     </script>
 </body>
-
 </html>

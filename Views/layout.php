@@ -171,10 +171,7 @@ function sidebar()
     <nav class="sidebar__nav">
       <ul>
         <li>
-          <a href="#">
-            <i class="fa-solid fa-user-gear"></i>
-            <span class="texto-menu">Manejo de Usuario</span>
-          </a>
+         
         </li>';
 
   // Opciones solo para ADMIN
